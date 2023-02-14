@@ -1,13 +1,48 @@
 /*
-Observações:
+----------------------------------------------------------------------
+LEMBRETES:
+1) editar a Logo para diminuir o espaço vazio dela 
+
+
+------------------------------------------------------------------------
+Orientações ao adicionar código HTML/CSS:
+
 1) Quando codar coloque um comentário
  '@autor:nome' no trecho de código para sabermos o autor
-*/
-/*
-lembretes: editar a logo para diminuir o espaço vazio dela
+
+2) Ao estilizar um elemento, verifique se já existe um elemento geral
+por exemplo, button,input,form, tente padronizar de acordo com isso
+
+3) para situações específicas e elementos único (ex: botão numa cor diferente,
+defina uma classe para eles)
+
+4) Ao definir o nome de uma classe use o padrão:
+.container-element{} (quando for referente a um elemento que contém vários outros)
+.cancel-button{} (um botão específico)
+
+5) Caso tenha dúvida do espaço que um elemento está ocupando adicione:
+	outline: solid 2px red;
+
+6) Já existem alguns flex criados, caso precise criar outros siga o padrão:
+.flex-row-center (alinhamento em linha, elementos concentrados no centro)
+.flex-row-between (alinhamento em linha, elementos com espaçamento entre eles)
+
+7) Ao criar um elemento container(div por exemplo), lembre-se de verificar
+os limites dele, sempre procurando usar porcentagem  (%), vh, vw ou rem;
+
+8) Antes de atribuir a dimensão de um elemento, veja se já não existe uma variável 
+relacionada aquele elemento
+
+	--------------------------------------------------------------------------
 */
 
-/*Imports */
+/***************************************************
+		IMPORTS
+ ***************************************************/
+
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+/*font-family: 'MedievalSharp', cursive;*/
+
 @font-face {
 	font-family: "Bluu Bold";
 	src: url("../assets/fonts/bluu-next/BluuNext-Bold.otf") format("opentype");
@@ -26,6 +61,12 @@ lembretes: editar a logo para diminuir o espaço vazio dela
  /************************************************
 		STYLING GLOBAL
 ************************************************/
+/*Mantenha aqui sempre 10px*/
+html {
+	font-size: 10px;
+  }
+
+
 
 :root{
 	/**/
@@ -33,12 +74,12 @@ lembretes: editar a logo para diminuir o espaço vazio dela
 	--color-black:#000000;
 	/*Background colors*/
 	--color-bg-header:#140a3db8; /*add opacity: 0.72*/
-	--color-bg-forms:#1B0E4E;/*used in the forms*/
-	--color-bg-button:#1B0E4E; /*used in the buttons of 'atualizar','confirmar', etc*/
+	--color-bg-forms-emphasis:#140A3D;/*used in the forms emphasis*/
+	--color-bg-button:#140A3D; /*used in the buttons of 'atualizar','confirmar', etc*/
 	--color-bg-button-hover:#2f1a83; /*'atualizar','confirmar', etc with hover effect*/
 	
 	--color-bg-cancel:#931212;/*used in the buttons of 'cancelar'*/
-	--color-bg-cancel:#b11616;/*used in the buttons of 'cancelar'*/
+	--color-bg-cancel-hover:#b11616;/*used in the buttons of 'cancelar'*/
 	
 	--color-bg-arrow-:#ffffff;/*used in arrow categories */
 	--color-bg-arrow-hover:#ff8e01;/*used in arrow categories with hover*/
@@ -58,7 +99,7 @@ lembretes: editar a logo para diminuir o espaço vazio dela
 	
 	--color-bg-category-5-100p:#6C0000; /*food 100% */
 	--color-bg-category-5-70p:#6C0000b3; /*food 70% */
-	--color-bg-input:#1b0e4ecc;
+	--color-bg-input:#1b0e4ee6;
 	--color-bg-backInput: #d9d9d94d ;/*backInput 30% */
 	
 	/*Font colors*/
@@ -66,45 +107,56 @@ lembretes: editar a logo para diminuir o espaço vazio dela
 	--color-font-placeholder:#696767;
 
 	/*Fonts sizes*/
-	--size-font-biggest:150px;
-	--size-font-t1:95px;
-	--size-font-t2:50px; /*tittle card*/
-	--size-font-t3:45px; /*subtittle card*/
-	--size-font-t4:40px; /*inputs emphasis, ex. 'selecionar categoria', subsubtittle card*/
-	--size-font-t5:35px; /*inputs e botoes*/
-	--size-font-t6:30px; 
-	--size-font-t7:25px; /*Description card*/
-	--size-font-t8:20px; /*text card*/
+	/* 1 rem = 10px */
+	--size-font-biggest:15.0rem;
+	--size-font-t1:9.0rem;
+	--size-font-t2:5.0rem; /*tittle card*/
+	--size-font-t3:4.5rem; /*subtittle card*/
+	--size-font-t4:4.0rem; /*inputs emphasis, ex. 'selecionar categoria', subsubtittle card*/
+	--size-font-t5:3.5rem; /*inputs e botoes*/
+	--size-font-t6:3.0rem; 
+	--size-font-t7:2.5rem; /*Description card*/
+	--size-font-t8:2.0rem; /*text card god's description*/
+	--size-font-t9:1.6rem; /*text card god's description*/
+	
 	
 	/*Icons height*/
-	--size-icon-bigger:125px;
-	--size-icon-medium:50px; /*table, perfil*/
-	--size-icon-small:35px; /*search*/
+	--size-icon-bigger:12.5rem;
+	--size-icon-medium:5.0rem; /*table, perfil*/
+	--size-icon-small:3.5rem; /*search*/
+	--size-icon-smallest:2.0rem; /*search*/
+	
 	
 	/*button dimension*/
-	--height-button: 82px
-	--width-button:280px;
-	--radius-button:15px;
+	--height-button: 8.2rem;
+	--width-button:28.0rem;
+	--radius-button:1.5rem;
 
 	/*forms dimensions*/
-	--height-form-bigger:700px;/*mayse we should use % instead px*/
-	--width-form-bigger:1200px;/*mayse we should use % instead px*/
-	--height-form-smaller:500px;/*mayse we should use % instead px*/
-	--width-form-smaller:700px;/*mayse we should use % instead px*/
+	--height-form-bigger:70.0rem;/*maybe we should use % instead px*/
+	--width-form-bigger:120.0rem;/*maybe we should use % instead px*/
+	--height-form-smaller:50.0rem;/*maybe we should use % instead px*/
+	--width-form-smaller:70.0rem;/*maybe we should use % instead px*/
+	
+	/*input forms dimensions*/
+	--height-input-bigger:60.0rem;/*maybe we should use % instead px*/
+	--width-input-bigger:50.0rem;/*maybe we should use % instead px*/
+	--height-input-smaller:7.8rem;/*maybe we should use % instead px*/
+	--width-input-smaller:23.0rem;/*maybe we should use % instead px*/
 	
 	/*Images height*/
-	--height-img-god-bigger:500px;/*cards with descriptions*/
-	--width-img-god-bigger:312px;/*cards with descriptions*/
-	--height-img-god-smaller:300px;/*cards with descriptions*/
-	--width-img-god-smaller:185px;/*cards with descriptions*/
+	--height-img-god-bigger:50.0rem;/*cards with descriptions*/
+	--width-img-god-bigger:31.2rem;/*cards with descriptions*/
+	--height-img-god-smaller:30.0rem;/*categories page (4 images)*/
+	--width-img-god-smaller:18.5rem;/*categories page (4 images)*/
 	
-	--height-img-building-bigger:600px;/*cards with descriptions*/
-	--width-img-building-bigger:540px;/*cards with descriptions*/
-	--height-img-building-smaller:400px;/*cards with descriptions*/
-	--width-img-building-smaller:360px;/*cards with descriptions*/
+	--height-img-building-bigger:60.0rem;/*image of temple with category name*/
+	--width-img-building-bigger:54.0rem;/*image of temple with category name*/
+	--height-img-building-smaller:40.0rem;/*image of temple with category name*/
+	--width-img-building-smaller:36.0rem;/*image of temple with category name*/
 	
 	/*header height*/
-	--height-header:100px;/**/
+	--height-header:10.0rem;/**/
 	--width-header:100%;/**/
 }
 
@@ -115,8 +167,11 @@ lembretes: editar a logo para diminuir o espaço vazio dela
 	box-sizing: border-box;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	color:var(--color-fonts);
+	font-size: 1.0rem;
 	
 }
+
+
 body {
 	display: flex;
 	justify-content: center;
@@ -125,10 +180,29 @@ body {
 	height: 100vh;
 }
 
+
+/************************************************
+		STYLING TAGS BY NAME
+************************************************/
+input{
+	background-color: var(--color-bg-input);
+	border-radius: 1.5rem;
+	height: var(--height-input-smaller);
+}
+
+button{
+	height: var(--height-button);
+	width: var(--width-button);
+	border-radius: var(--radius-button);
+	background-color: var(--color-bg-button);
+}
+
+button:hover{
+	background-color: var(--color-bg-button-hover);
+}
 /************************************************
 		STYLING GENERAL CLASSES
 ************************************************/
-
 .flex-col-center{
 	display: flex;
 	flex-direction: column;
@@ -151,11 +225,16 @@ body {
 	justify-content: center;
 	align-items: center;
 }
-
+.cancel-button{
+	background-color: var(--color-bg-cancel);
+}
+.cancel-button:hover{
+	background-color: var(--color-bg-cancel-hover);
+}
 
 
 h1{
-	font-family: 'Courier New', Courier, monospace;
+	font-family: 'Bluu Bold', Courier, monospace;
 	font-size: var(--size-font-t1);
 	color:var(--color-fonts);
 }
@@ -192,28 +271,29 @@ img{
 }
 .container-search{
 	background-color: var(--color-bg-arrow-);
-	border-radius: 50px;
-	height: 60px;
-	border: solid 3px var(--color-black);
-	margin-left: 65px;
-	padding: 0 20px 0 20px;
+	border-radius: 5.0rem;
+	height: 4.0rem;
+	border: solid .3rem var(--color-black);
+	margin-left: 3.5rem;
+	padding: 0 2.0rem 0 2.0rem;
 	
 }
 .search-input{
-	padding: 10px 10px 10px 10px;
+	padding: 1.0rem;
 	color:var(--color-black);
-	font-size: var(--size-font-t8);
-	
+	font-size: var(--size-font-t9);
+	width: var(--width-input-smaller);
 }
 .search-icon{
-	height: var(--size-icon-small);
+	height: var(--size-icon-smallest);
 }
 #profile-icon{
-	margin-right: 25px;
+	margin-right: 2.5rem;
+	height: 4.5rem;
 }
 #menu-icon{
-	margin-left: 25px;
-	margin-right: 25px;
+	margin-left: 2.5rem;
+	margin-right: 2.5rem;
 }
 
 /************************************************
@@ -229,6 +309,7 @@ main{
 }
 .container-carousel{
 	width: 100%;
+	height: 100%;
 }
 
 .carousel{
@@ -236,7 +317,7 @@ main{
 }
 .container-arrow{
 	width: 15%;
-	height: 70px;
+	height: 7.0rem;
 }
 /*fazer arrows*/
 .category-arrow:hover,.category-arrow:active{
@@ -248,27 +329,29 @@ background-color: var(--color-bg-arrow-hover);
 	position: relative;
 	display: flex;
 	align-items: center;
-	margin-top: 20px;
+	margin-top: 5.0rem;
 }
 .temple{
 	position: absolute;
 	left: 0;
 }
 .temple-legend{
-	max-width: 60%;
+	max-width: 62%; /*change this*/
 	position:absolute;
 	right: 0;
-	margin-right: 50px;
+	margin-right: 5.0rem;
 }
-
+/* outline: .2rem solid red; */
 
 .container-circles{
-	width: 250px;
-	margin: 50px 0px;
+	width: 25.0rem;
+	margin: 4.0rem .0rem;
+	
 }
 .circle{
 	height: var(--size-icon-small);
 	width:  var(--size-icon-small);
+	background-color: var(--color-white);
 	border-radius: 50%;
 	border: none;
 }
