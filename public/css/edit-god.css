@@ -1,0 +1,395 @@
+/*
+----------------------------------------------------------------------
+LEMBRETES:
+1) editar a Logo para diminuir o espaço vazio dela 
+
+
+------------------------------------------------------------------------
+Orientações ao adicionar código HTML/CSS:
+
+1) Quando codar coloque um comentário
+ '@autor:nome' no trecho de código para sabermos o autor
+
+2) Ao estilizar um elemento, verifique se já existe um elemento geral
+por exemplo, button,input,form, tente padronizar de acordo com isso
+
+3) para situações específicas e elementos único (ex: botão numa cor diferente,
+defina uma classe para eles)
+
+4) Ao definir o nome de uma classe use o padrão:
+.container-element{} (quando for referente a um elemento que contém vários outros)
+.cancel-button{} (um botão específico)
+
+5) Caso tenha dúvida do espaço que um elemento está ocupando adicione:
+	outline: solid 2px red;
+
+6) Já existem alguns flex criados, caso precise criar outros siga o padrão:
+.flex-row-center (alinhamento em linha, elementos concentrados no centro)
+.flex-row-between (alinhamento em linha, elementos com espaçamento entre eles)
+
+7) Ao criar um elemento container(div por exemplo), lembre-se de verificar
+os limites dele, sempre procurando usar porcentagem  (%), vh, vw ou rem;
+
+8) Antes de atribuir a dimensão de um elemento, veja se já não existe uma variável 
+relacionada aquele elemento
+
+	--------------------------------------------------------------------------
+*/
+
+/***************************************************
+		IMPORTS
+ ***************************************************/
+
+ @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+ /*font-family: 'MedievalSharp', cursive;*/
+ 
+ @font-face {
+     font-family: "Bluu Bold";
+     src: url("../assets/fonts/bluu-next/BluuNext-Bold.otf") format("opentype");
+   }
+ 
+ @font-face {
+     font-family: "Bluu Bolditalic";
+     src: url("../assets/fonts/bluu-next/BluuNext-Bolditalic.otf") format("opentype");
+   }
+ 
+   @font-face {
+     font-family: "Bluu Titling";
+     src: url("../assets/fonts/bluu-next/BluuNext-Titling.otf") format("opentype");
+   }
+ 
+  /************************************************
+         STYLING GLOBAL
+ ************************************************/
+ /*Mantenha aqui sempre 10px*/
+ html {
+     font-size: 10px;
+   }
+ 
+ 
+ 
+ :root{
+     /**/
+     --color-white:#ffffff;
+     --color-black:#000000;
+     /*Background colors*/
+     --color-bg-header:#140a3db8; /*add opacity: 0.72*/
+     --color-bg-forms-emphasis:#140A3D;/*used in the forms emphasis*/
+     --color-bg-button:#140A3D; /*used in the buttons of 'atualizar','confirmar', etc*/
+     --color-bg-button-hover:#2f1a83; /*'atualizar','confirmar', etc with hover effect*/
+     
+     --color-bg-cancel:#931212;/*used in the buttons of 'cancelar'*/
+     --color-bg-cancel-hover:#b11616;/*used in the buttons of 'cancelar'*/
+     
+     --color-bg-arrow-:#ffffff;/*used in arrow categories */
+     --color-bg-arrow-hover:#ff8e01;/*used in arrow categories with hover*/
+ 
+     --color-bg-category-1-100p:#815604; /*nature 100% */
+     --color-bg-category-1-70p: #815604b3; /*nature 70% */
+     --color-bg-category-1-40p: #81560466; /*nature 40% */
+     
+     --color-bg-category-2-100p:#0B264F; /*technology 100% */
+     --color-bg-category-2-70p:#0b264fb3; /*technology 70% */
+     
+     --color-bg-category-3-100p:#024324 ; /*health 100% */
+     --color-bg-category-3-70p: #024324b3 ; /*health 70% */
+     
+     --color-bg-category-4-100p:#43064E; /*chaos 100 - 70% */
+     --color-bg-category-4-70p:#43064Eb3; /*chaos 70% */
+     
+     --color-bg-category-5-100p:#6C0000; /*food 100% */
+     --color-bg-category-5-70p:#6C0000b3; /*food 70% */
+     --color-bg-input:#1b0e4ee6;
+     --color-bg-backInput: #d9d9d94d ;/*backInput 30% */
+     
+     /*Font colors*/
+     --color-fonts:#ffffff;
+     --color-font-placeholder:#696767;
+ 
+     /*Fonts sizes*/
+     /* 1 rem = 10px */
+     --size-font-biggest:15.0rem;
+     --size-font-t1:9.0rem;
+     --size-font-t2:5.0rem; /*tittle card*/
+     --size-font-t3:4.5rem; /*subtittle card*/
+     --size-font-t4:4.0rem; /*inputs emphasis, ex. 'selecionar categoria', subsubtittle card*/
+     --size-font-t5:1.8rem; /*inputs e botoes MODIFIQUEI PQ ESTAVA MT GRANDE*/
+     --size-font-t6:3.0rem; 
+     --size-font-t7:2.5rem; /*Description card*/
+     --size-font-t8:2.0rem; /*text card god's description*/
+     --size-font-t9:1.6rem; /*text card god's description*/
+     
+     
+     /*Icons height*/
+     --size-icon-bigger:12.5rem;
+     --size-icon-medium:5.0rem; /*table, perfil*/
+     --size-icon-small:3.5rem; /*search*/
+     --size-icon-smallest:2.0rem; /*search*/
+     
+     /* @author: Gabriela - modifiquei porque estavam muito grandes */
+     /*button dimension*/
+     --height-button: 6.2rem; /*MODIFIQUEI PQ ESTAVA MT GRANDE*/
+     --width-button:18.0rem; /*MODIFIQUEI PQ ESTAVA MT GRANDE*/
+     --radius-button:1.5rem;
+ 
+     /* @author: Gabriela - modifiquei porque estavam muito grandes */
+     /*forms dimensions CHECK HEREE*/
+     --height-form-bigger:55.0rem;/*maybe we should use % instead px MODIFIQUEI PQ ESTAVA MT GRANDE*/
+     --width-form-bigger:95.0rem;/*maybe we should use % instead px MODIFIQUEI PQ ESTAVA MT GRANDE*/
+     --height-form-smaller:50.0rem;/*maybe we should use % instead px*/
+     --width-form-smaller:70.0rem;/*maybe we should use % instead px*/
+     
+     /*@autor:letonio (esses valores de width-input estavam muito grandes, modifiquei)*/
+     /*input forms dimensions*/
+     --height-input-bigger:5.0rem;/*maybe we should use % instead px  MODIFIQUEI PQ ESTAVA MT PEQUENO*/
+     --width-input-bigger:51.0rem;/*maybe we should use % instead px MODIFIQUEI PQ ESTAVA MT PEQUENO*/
+     --height-input-biggest:17.0rem;/*maybe we should use % instead px ADICIONEI  */
+     --height-input-smaller:2.0rem;/*maybe we should use % instead px*/
+     --width-input-smaller:23.0rem;/*maybe we should use % instead px*/
+     
+     /*Images height*/
+     --height-img-god-bigger:50.0rem;/*cards with descriptions*/
+     --width-img-god-bigger:31.2rem;/*cards with descriptions*/
+     --height-img-god-smaller:30.0rem;/*categories page (4 images)*/
+     --width-img-god-smaller:18.5rem;/*categories page (4 images)*/
+     
+     --height-img-building-bigger:60.0rem;/*image of temple with category name*/
+     --width-img-building-bigger:54.0rem;/*image of temple with category name*/
+     --height-img-building-smaller:40.0rem;/*image of temple with category name*/
+     --width-img-building-smaller:36.0rem;/*image of temple with category name*/
+     
+     /*header height*/
+     --height-header:10.0rem;/**/
+     --width-header:100%;/**/
+ }
+ 
+ 
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: Verdana, Geneva, Tahoma, sans-serif;
+     color:var(--color-fonts);
+     font-size: 1.0rem;
+     
+ }
+ 
+ 
+ body {
+     display: flex;
+     justify-content: center;
+     background-image: url('../assets/images/background-space.jpg');
+     width: 100%;
+     height: 100vh;
+ }
+ 
+ 
+ /************************************************
+         STYLING TAGS BY NAME
+ ************************************************/
+ /* @author Gabriela*/
+ input{
+     background-color: var(--color-bg-input);
+     border-radius: 1.0rem;
+     height: var(--height-input-smaller);
+     
+ }
+/* Adicionei placeholder */
+ input::placeholder{
+    font-size: var(--size-font-t5);
+    color: var(--color-white);
+    font-weight: 500;
+}
+ 
+ button{
+     height: var(--height-button);
+     width: var(--width-button);
+     border-radius: var(--radius-button);
+     background-color: var(--color-bg-button);
+     font-size: var(--size-font-t5);
+     border-style: none;
+     box-shadow: 0.2rem 0.2rem 0.5rem 0.4rem #00000040;
+     transition: background-color 0.3s ease;
+ }
+ 
+ button:hover{
+     background-color: var(--color-bg-button-hover);
+ }
+ /************************************************
+         STYLING GENERAL CLASSES
+ ************************************************/
+ .flex-col-center{
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: flex-start;
+ }
+ .flex-row-center{
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+ }
+ .flex-row-between{
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     align-items: center;
+ }
+ .flex-center-center{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+ .cancel-button{
+     background-color: var(--color-bg-cancel);
+ }
+ .cancel-button:hover{
+     background-color: var(--color-bg-cancel-hover);
+ }
+ 
+ 
+ h1{
+     font-family: 'Bluu Bold', Courier, monospace;
+     font-size: var(--size-font-t1);
+     color:var(--color-fonts);
+ }
+ 
+ h2{
+     font-family: 'Bluu Bold', Times, serif;
+     font-size: var(--size-font-t2);
+ }
+ h3{
+     font-family: 'Bluu Bolditalic', Times, serif;
+     font-size: var(--size-font-t3);
+ }
+ h4{
+     font-family: 'Bluu Titling', Times, serif;
+     font-size: var(--size-font-t4);
+ }
+ 
+ /************************************************
+         STYLING HEADER COMPONENTS
+ ************************************************/
+ 
+ header{
+     height: var(--height-header);
+     width: var(--width-header);
+     background-color: var(--color-bg-header)
+ }
+ 
+ 
+ img{
+     height: var(--size-icon-medium);
+ }
+ #logo{
+     height: var(--size-icon-bigger);
+ }
+ .container-search{
+     background-color: var(--color-bg-arrow-);
+     border-radius: 5.0rem;
+     height: 4.0rem;
+     border: solid .3rem var(--color-black);
+     margin-left: 3.5rem;
+     padding: 0 2.0rem 0 2.0rem;
+     
+ }
+ .search-input{
+     padding: 1.0rem;
+     color:var(--color-black);
+     font-size: var(--size-font-t9);
+     width: var(--width-input-smaller);
+     /*autor@letonio: para corrigir problema que a barra de 
+     pesquisa estava azul e grande (herdou caracteristicas
+     do seletor "input" da linha 187)*/
+     background-color: var(--color-white);
+     border-radius: 0.0rem;
+     height: var(--height-input-smaller);
+ }
+ .search-icon{
+     height: var(--size-icon-smallest);
+ }
+ #profile-icon{
+     margin-right: 2.5rem;
+     height: 4.5rem;
+ }
+ #menu-icon{
+     margin-left: 2.5rem;
+     margin-right: 2.5rem;
+ }
+ 
+ /************************************************
+         STYLING MAIN COMPONENTS
+ ************************************************/
+/* @author: Gabriela */
+ main{
+     height: calc(100vh - var(--height-header));
+     width: 100%;
+ }
+
+ #container-edit-god{
+    width: var(--width-form-bigger);
+    height: var(--height-form-bigger);
+    background-color: var(--color-bg-backInput);
+    justify-content: center;
+    border-radius: 2rem;
+ }
+
+
+ #box-img-god{
+    width: 30%;
+    height: 90%;
+    padding-top: 2%;
+ }
+
+ #box-img-god div{
+    width: 22rem;
+    height: 32rem;
+    border: 1.8rem solid #d9d9d9b3;
+    border-radius: 2rem;
+    margin-bottom: 2rem;
+    overflow: hidden;    
+ }
+
+ #box-img-god div img{
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
+ }
+
+ form{
+    width: 60%;
+    height: 90%;
+    margin-top: 2%;
+ }
+
+ #box-inputs{
+    height: 70%;
+    justify-content: space-evenly;
+ }
+
+ .input{
+    width: var(--width-input-bigger);
+    height: var(--height-input-bigger);
+    justify-content: space-between;
+    padding-left: 1.5rem;
+ }
+
+ #input-resume{
+    height: var(--height-input-biggest);
+    padding-bottom: 10rem;
+ }
+
+ #input-resume::placeholder{
+    padding-bottom: 5rem;
+ }
+ 
+ #box-buttons{
+    width: 70%;
+    height: 28%;
+    justify-content: space-between;
+ }
+ 
+ /************************************************
+         STYLING FOOTER COMPONENTS
+ ************************************************/
+
