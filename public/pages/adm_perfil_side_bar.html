@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GODpedia</title>
     <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/adm_perfil_side_bar.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!--Link font deuses-->
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
@@ -29,27 +29,22 @@
         </div>
     </header>
     <main>
-        <div class="container-carousel flex-col-center">
-            <div class="carousel flex-row-between">
-                <div class="container-arrow flex-center-center">
-                    <img class="category-arrow" src="../assets/icons/arrow-left-white.svg" alt="">
-                </div>
-                <figure class="container-temples">
-                    <img class="temple" id="temple"src="../assets/images/temples/templo_tecnologia.jpg" alt="">
-                    <h1 class="temple-legend">DEUSES DA TECNOLOGIA</h1>
+        <div class="container-content-page flex-row-between">
+            <aside class="sidebar-menu-adm flex-col-between">
+                <figure class="flex-col-center">
+                    <img id="profile-adm-icon" src="../assets/icons/profile.svg" alt="profile icon">
+                    <h2 id="adm-name">Administrador</h2>
                 </figure>
-                <div class="container-arrow flex-center-center">
-                    <img class="category-arrow" src="../assets/icons/arrow-right-orange.svg" alt="">
-                </div>
-                
-            </div>
-            <div class="container-circles flex-row-between">
-                <button class="circle"></button>
-                <button class="circle"></button>
-                <button class="circle circle-orange"></button>
-                <button class="circle"></button>
-                <button class="circle"></button>
-            </di>
+                <ul class="sidebar-options">
+                    <li><img src="../assets/icons/edit-profile-v1-white.svg" alt="">Editar perfil</li>
+                    <li><img src="../assets/icons/padlock-v2-white.svg" alt="">Mudar senha</li>
+                    <li><img src="../assets/icons/cards-bold-v1-white.svg" alt="">Editar Categorias</li>
+                    <li><img src="../assets/icons/icons8-thor.svg" alt="">Editar deuses</li>
+                    <li><img src="../assets/icons/logout-white.svg" alt="">Sair</li>
+
+                </ul>
+            </aside>
+           
         </div>
         
 

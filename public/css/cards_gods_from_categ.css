@@ -88,6 +88,9 @@ html {
 	--color-bg-category-1-70p: #815604b3; /*nature 70% */
 	--color-bg-category-1-40p: #81560466; /*nature 40% */
 	
+	/*@autor:letonio (add another color to test about title category)*/
+	--color-bg-category-1-dark-40p:rgba(139, 102, 5, 0.4);
+
 	--color-bg-category-2-100p:#0B264F; /*technology 100% */
 	--color-bg-category-2-70p:#0b264fb3; /*technology 70% */
 	
@@ -148,6 +151,9 @@ html {
 	/*Images height*/
 	--height-img-god-bigger:50.0rem;/*cards with descriptions*/
 	--width-img-god-bigger:31.2rem;/*cards with descriptions*/
+	
+	--height-img-god-middle:25.0rem;/*@autor:letonio (add intermediate measure)*/
+
 	--height-img-god-smaller:30.0rem;/*categories page (4 images)*/
 	--width-img-god-smaller:18.5rem;/*categories page (4 images)*/
 	
@@ -375,3 +381,103 @@ main{
 /************************************************
 		STYLING FOOTER COMPONENTS
 ************************************************/
+
+/************************************************
+		STYLING BY LETONIO
+************************************************/
+.container-page-gods{
+	width: 100%;
+	height: 100%;
+}
+h2{
+	font-size: var(--size-font-t2);
+}
+/*@autor:letonio (estilizando cartoes de deuses na pagina com categoria especifica)*/
+
+.left-zone,.middle-zone,.right-zone{
+	height: 100%;
+	padding: 2.0rem 1.0rem;
+	/*: solid 2px red;*/
+	position: relative;
+}
+.left-zone,.right-zone{
+	width: 36%;
+}
+.middle-zone{
+	width: 28%;
+}
+
+.cards-gods{
+	height: var(--height-img-god-middle);
+	border: solid 2.0rem var(--color-bg-category-1-dark-40p);
+	border-radius: 2.0rem;
+}
+.card1{
+	position: absolute;
+	right: 7.0rem;
+	top:15.0rem;
+}
+.card2{
+	position: absolute;
+	right: 7.0rem;
+	top:2.0rem;
+}
+.card3{
+	position: absolute;
+	left: 3.0rem;
+	bottom:2.0rem;
+}
+
+.card4{
+	position: absolute;
+	left: 2.0rem;
+	bottom:6.0rem;
+}
+
+.phrase{
+	background-color: var(--color-bg-category-1-dark-40p);
+	padding: 3.0rem;
+	border-radius: 2.0rem;
+	position: absolute;
+	top: 4.0rem;
+	right: 2.0rem;
+	text-align: center;
+	width: 80%;
+}
+.phrase span{
+	display: block;
+}
+
+/*
+.cartoes {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	grid-gap: 20px;
+	outline: solid 2px red;
+  }
+
+  .cartoes img {
+	object-fit: cover;
+  }
+
+  .cartoes img:nth-child(1) {
+	grid-row: 1 / span 2;
+	grid-column: 1 / span 2;
+	outline: solid 2px red;
+  }
+  
+  .cartoes img:nth-child(2) {
+	grid-row: 2 / span 2;
+	grid-column: 2 / span 2;
+  }
+  
+  .cartoes img:nth-child(3) {
+	grid-row: 1;
+	grid-column: 3;
+  }
+  
+  .cartoes img:nth-child(4) {
+	grid-row: 1;
+	grid-column: 4;
+  }
+  */

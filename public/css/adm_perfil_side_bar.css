@@ -106,6 +106,10 @@ html {
 	--color-fonts:#ffffff;
 	--color-font-placeholder:#696767;
 
+	/*Lateral menu  colors*/
+	--color-bg-lateral-menu:#140A3D;
+
+
 	/*Fonts sizes*/
 	/* 1 rem = 10px */
 	--size-font-biggest:15.0rem;
@@ -122,6 +126,7 @@ html {
 	
 	/*Icons height*/
 	--size-icon-bigger:12.5rem;
+	--size-icon-big:6.0rem;
 	--size-icon-medium:5.0rem; /*table, perfil*/
 	--size-icon-small:3.5rem; /*search*/
 	--size-icon-smallest:2.0rem; /*search*/
@@ -159,6 +164,9 @@ html {
 	/*header height*/
 	--height-header:10.0rem;/**/
 	--width-header:100%;/**/
+
+	/*lateral menu dimensions*/
+	--width-lateral-menu:46.0rem; 
 }
 
 
@@ -210,6 +218,14 @@ button:hover{
 	align-items: center;
 	justify-content: flex-start;
 }
+
+.flex-col-between{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+}
+
 .flex-row-center{
 	display: flex;
 	flex-direction: row;
@@ -375,3 +391,59 @@ main{
 /************************************************
 		STYLING FOOTER COMPONENTS
 ************************************************/
+
+/************************************************
+		STYLING BY LETONIO
+************************************************/
+.container-content-page{
+	width: 100%;
+	height: 100%;
+}
+/*@autor: letonio (essa logica abaixo é uma tentativa de manter
+o menu com uma proporção agradável)*/
+.sidebar-menu-adm{
+	width: 30vw; /* Permite que a largura do aside seja ajustada automaticamente de acordo com o conteúdo */
+	height: 99.6%;/*na minha tela criava-se um scroll se height:100%*/
+	background-color: var(--color-bg-lateral-menu);
+	color:var(--color-white);
+}
+aside > figure{
+	height: 35%;
+	width: 100%;
+	padding: 2.0rem;
+}
+aside > figure > h2{
+	width: 80%;
+	padding: 2.0rem 0.0rem 2.0rem;
+	border-bottom: solid 0.5rem var(--color-white);
+}
+#profile-adm-icon{
+	height:var(--size-icon-bigger);
+}
+
+#adm-name{
+	font-size: var(--size-font-t5);
+	text-align: center;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+.sidebar-options{
+	height: 65%;
+	width: 100%;
+	padding: 2.0rem 4.0rem;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-around;
+}
+.sidebar-options > li{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	font-size: var(--size-font-t8);
+	cursor: pointer;
+}
+.sidebar-options img {
+	height: var(--size-icon-small);
+	margin-right: 2.0rem;
+}
