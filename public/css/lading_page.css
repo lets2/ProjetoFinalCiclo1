@@ -176,7 +176,8 @@ html {
 body {
 	display: flex;
 	justify-content: center;
-	background-image: url('../assets/images/background-space.jpg');
+	background-image: url('../assets/images/landing-background-temporario.png');
+	background-size: cover;
 	width: 100%;
 	height: 100vh;
 }
@@ -375,3 +376,29 @@ main{
 /************************************************
 		STYLING FOOTER COMPONENTS
 ************************************************/
+
+/************************************************
+		STYLING BY LETONIO
+************************************************/
+
+.main-lading-page,.container-total{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+#main-title{
+	font-weight: bold;
+	font-size: var(--size-font-biggest);
+	text-shadow: 1rem 1rem 0rem var(--color-black);
+}
+#button-explore{
+	font-size: var(--size-font-t2);
+	border:none;
+	width: auto;
+	height: auto;
+	padding: 2.0rem;
+	position: absolute;
+	bottom:10.0rem;
+	box-shadow: 2rem 2rem 2rem var(--color-black);
+	cursor:pointer;
+}

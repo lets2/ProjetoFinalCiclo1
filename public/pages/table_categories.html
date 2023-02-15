@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GODpedia</title>
     <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/table_gods.css">
+    <link rel="stylesheet" href="../css/table_categories.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!--Link font deuses-->
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
@@ -30,76 +30,45 @@
     </header>
     <main class="flex-center-center">
         <div class="container-content flex-col-center">
-            <div class="container-filters flex-row-around">
-               <select name="filter-category" id="filter-category">
-                    <option value="1">Escolha uma categoria</option>
-                    <option value="2">Deuses da Tecnologia</option>
-                    <option value="3">Deuses da Alimentação</option>
-                    <option value="4">Deuses do Caos</option>
-                    <option value="5">Health</option>
-               </select>
-               <button id="create-new-god">Criar um novo Deus</button>
-            </div>
+               
+            <button id="create-new-category">Criar um nova categoria</button>
+
             <div class="container-table">
-                <table id="table-gods">
+                <table id="table-categories">
                     <thead>
                         <tr>
-                            <th>NAME</th>
-                            <th>STATUS</th>
-                            <th>CATEGORY</th>
+                            <th>CATEGORIA</th>
+                            <th>EDITAR</th>
+                            <th>APAGAR</th>
                         </tr>
                     </thead>
-                    <tbody id="thead-gods">
+                    <tbody id="thead-categories">
                         <tr>
-                            <td>LUAN GAMEPLAY</td>
-                            <td>DEUS DOS JOGOS</td>
                             <td>TECNOLOGIA</td>
+                            <td><img src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
+                            <td><img src="../assets/icons/trash-black.svg" alt="trash icon"></td>
                         </tr>
                         <tr>
                             <td>LOREM LOREM</td>
-                            <td>DEUS IPSUM</td>
-                            <td>TECNOLOGIA</td>
+                            <td><img src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
+                            <td><img src="../assets/icons/trash-black.svg" alt="trash icon"></td>
                         </tr>
                         <tr>
-                            <td>CARAMELO</td>
-                            <td>TRANSFORMATION</td>
-                            <td>VIDA</td>
-                        </tr>
-                        <tr>
-                            <td>LOREM LOREM</td>
-                            <td>DEUS IPSUM</td>
                             <td>TECNOLOGIA</td>
+                            <td><img src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
+                            <td><img src="../assets/icons/trash-black.svg" alt="trash icon"></td>
                         </tr>
                         <tr>
                             <td>LOREM LOREM</td>
-                            <td>DEUS IPSUM</td>
-                            <td>TECNOLOGIA</td>
+                            <td><img src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
+                            <td><img src="../assets/icons/trash-black.svg" alt="trash icon"></td>
                         </tr>
                         <tr>
                             <td>LOREM LOREM</td>
-                            <td>DEUS IPSUM</td>
-                            <td>TECNOLOGIA</td>
+                            <td><img src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
+                            <td><img src="../assets/icons/trash-black.svg" alt="trash icon"></td>
                         </tr>
-                        <tr>
-                            <td>LOREM LOREM</td>
-                            <td>DEUS IPSUM</td>
-                            <td>TECNOLOGIA</td>
-                        </tr>
-                        <tr>
-                            <td>LOREM LOREM</td>
-                            <td>DEUS IPSUM</td>
-                            <td>TECNOLOGIA</td>
-                        </tr>
-                        <tr>
-                            <td>LOREM LOREM</td>
-                            <td>DEUS IPSUM</td>
-                            <td>TECNOLOGIA</td>
-                        </tr>
-                        <tr>
-                            <td>LOREM LOREM</td>
-                            <td>DEUS IPSUM</td>
-                            <td>TECNOLOGIA</td>
-                        </tr>
+                       
                         
                     </tbody>
                 </table>

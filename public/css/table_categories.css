@@ -413,7 +413,7 @@ select,option{
 	text-align: center;
 	font-size: var(--size-font-t5);
 }
-#create-new-god{
+#create-new-category{
 	font-size: var(--size-font-t5);
 	width: auto;
 	padding: 1.0rem 2.0rem;
@@ -460,5 +460,9 @@ td {
 	padding-top: 1.5rem;
 	padding-bottom: 1.5rem;
 	font-size: var(--size-font-t8);
+	vertical-align: middle; 
 }
 
+td > img{
+	height: var(--size-icon-small);
+}
