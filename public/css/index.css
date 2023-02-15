@@ -327,8 +327,14 @@ main{
 	height: 7.0rem;
 }
 /*fazer arrows*/
+/*@autor:letonio (mudei a dimensão da seta e adicionei cursor:pointer)*/
+.category-arrow{
+	height: 10.0rem;
+}
 .category-arrow:hover,.category-arrow:active{
-background-color: var(--color-bg-arrow-hover);
+	/*background-color: var(--color-bg-arrow-hover);*/
+	background-color: none;
+	cursor: pointer;
 }
 .container-temples{
 	width: 70%;
