@@ -138,11 +138,10 @@ html {
 	--height-form-smaller:50.0rem;/*maybe we should use % instead px*/
 	--width-form-smaller:70.0rem;/*maybe we should use % instead px*/
 	
-	/*@autor:letonio (esses valores de width-input estavam muito grandes, modifiquei)*/
 	/*input forms dimensions*/
-	--height-input-bigger:3.0rem;/*maybe we should use % instead px*/
+	--height-input-bigger:60.0rem;/*maybe we should use % instead px*/
 	--width-input-bigger:50.0rem;/*maybe we should use % instead px*/
-	--height-input-smaller:2.0rem;/*maybe we should use % instead px*/
+	--height-input-smaller:7.8rem;/*maybe we should use % instead px*/
 	--width-input-smaller:23.0rem;/*maybe we should use % instead px*/
 	
 	/*Images height*/
@@ -284,12 +283,6 @@ img{
 	color:var(--color-black);
 	font-size: var(--size-font-t9);
 	width: var(--width-input-smaller);
-	/*autor@letonio: para corrigir problema que a barra de 
-	pesquisa estava azul e grande (herdou caracteristicas
-	do seletor "input" da linha 187)*/
-	background-color: var(--color-white);
-	border-radius: 0.0rem;
-	height: var(--height-input-smaller);
 }
 .search-icon{
 	height: var(--size-icon-smallest);
