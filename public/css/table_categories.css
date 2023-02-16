@@ -388,10 +388,10 @@ relacionada aquele elemento
  ************************************************/
 
 .container-content{
-	width: 90%;
-	height: 90%;
+	width: 63.5%;
+	height: 89.4%;
 	background-color: var(--color-bg-backInput);
-	border-radius: 1.0rem;
+	border-radius: 2.0rem;
 	padding: 5.0rem;
 }
 .container-filters{
@@ -414,7 +414,7 @@ select,option{
 	font-size: var(--size-font-t5);
 }
 #create-new-category{
-	font-size: var(--size-font-t5);
+	font-size: var(--size-font-t7);
 	width: auto;
 	padding: 1.0rem 2.0rem;
 	font-weight: bold;

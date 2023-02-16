@@ -388,19 +388,21 @@ relacionada aquele elemento
  ************************************************/
 
 .container-content{
-	width: 90%;
-	height: 90%;
+	width: 63.5%; /* Gabriela alterei aqui*/
+	height: 89.4%; /* Gabriela alterei aqui ambos eram 90%*/
 	background-color: var(--color-bg-backInput);
-	border-radius: 1.0rem;
+	border-radius: 2.0rem;
 	padding: 5.0rem;
 }
 .container-filters{
 	width: 100%;
-	font-size: var(--size-font-t5);
+	font-size: var(--size-font-t6);
 	text-align: center;
+	justify-content: space-between;
 	font-weight: bold;
 }
 select{
+	width: 38rem; /* Gabriela: adicionei aqui*/
 	border-radius: 1.0rem;
 	padding: 1.0rem 2.0rem;
 	font-weight: bold;
@@ -411,11 +413,11 @@ select,option{
 	background-color: var(--color-bg-button);
 	padding: 1.0rem;
 	text-align: center;
-	font-size: var(--size-font-t5);
+	font-size: var(--size-font-t7); /* Gabriela: adicionei aqui*/
 }
 #create-new-god{
-	font-size: var(--size-font-t5);
-	width: auto;
+	font-size: var(--size-font-t7); /* Gabriela: adicionei aqui*/
+	width: 38rem; /* Gabriela: adicionei aqui*/
 	padding: 1.0rem 2.0rem;
 	font-weight: bold;
 	border: none;

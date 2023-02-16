@@ -402,7 +402,7 @@ main{
 /*@autor: letonio (essa logica abaixo é uma tentativa de manter
 o menu com uma proporção agradável)*/
 .sidebar-menu-adm{
-	width: 30vw; /* Permite que a largura do aside seja ajustada automaticamente de acordo com o conteúdo */
+	width: 25vw; /* Permite que a largura do aside seja ajustada automaticamente de acordo com o conteúdo */
 	height: 99.6%;/*na minha tela criava-se um scroll se height:100%*/
 	background-color: var(--color-bg-lateral-menu);
 	color:var(--color-white);
