@@ -370,6 +370,7 @@ background-image: url("../assets/icons/arrow-left-white.svg");
 	position:absolute;
 	right: 0;
 	margin-right: 5.0rem;
+	font-family: 'MedievalSharp', cursive;
 }
 /* outline: .2rem solid red; */
 
