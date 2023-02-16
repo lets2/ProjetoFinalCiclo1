@@ -1,5 +1,5 @@
 import CriaEventStateChange from "./event-url.js";
-import { addEventsToPrincipal } from "../index.js";
+
 const objPages = [
     { label: "Brigadeiros", handle: redirectToBrigadeiros },
     { label: "Cupcakes", handle: redirectToCupcakes },
@@ -27,7 +27,7 @@ export default function Principal() {
 
 /*@autor:letonio - Tentando criar o primeiro SPA*/
 
-export function Principal() {
+export function TableGods() {
     const div = document.createElement("div");
 
     div.innerHTML = `
@@ -44,28 +44,83 @@ export function Principal() {
 		<img id="menu-icon" src="../assets/icons/menu.svg" alt="">
 	</div>
 </header>
-<main>
-	<div class="container-carousel flex-col-center">
-		<div class="carousel flex-row-between">
-			<div class="container-arrow flex-center-center">
-				<img class="category-arrow category-arrow-left" src="../assets/icons/arrow-left-white.svg" alt="">
-			</div>
-			<figure class="container-temples">
-				<img class="temple" id="temple"src="../assets/images/temples/templo_tecnologia.jpg" alt="">
-				<h1 class="temple-legend">DEUSES DA TECNOLOGIA</h1>
-			</figure>
-			<div class="container-arrow flex-center-center">
-				<img class="category-arrow category-arrow-right" src="../assets/icons/arrow-right-white.svg" alt="">
-			</div>
-			
+<main class="flex-center-center">
+	<div class="container-content flex-col-center">
+		<div class="container-filters flex-row-around">
+		   <select name="filter-category" id="filter-category">
+				<option value="1">Escolha uma categoria</option>
+				<option value="2">Deuses da Tecnologia</option>
+				<option value="3">Deuses da Alimentação</option>
+				<option value="4">Deuses do Caos</option>
+				<option value="5">Health</option>
+		   </select>
+		   <button id="create-new-god">Criar um novo Deus</button>
 		</div>
-		<div class="container-circles flex-row-between">
-			<button class="circle"></button>
-			<button class="circle"></button>
-			<button class="circle circle-orange"></button>
-			<button class="circle"></button>
-			<button class="circle"></button>
-		</di>
+		<div class="container-table">
+			<table id="table-gods">
+				<thead>
+					<tr>
+						<th>NAME</th>
+						<th>STATUS</th>
+						<th>CATEGORY</th>
+					</tr>
+				</thead>
+				<tbody id="thead-gods">
+					<tr id="line00">
+					<td>LUAN GAMEPLAY</td>
+					<td>DEUS DOS JOGOS</td>
+					<td>TECNOLOGIA</td>
+					</tr>
+					<tr id="line01">
+						<td>LOREM LOREM</td>
+						<td>DEUS IPSUM</td>
+						<td>TECNOLOGIA</td>
+					</tr>
+					<tr id="line02">
+						<td>CARAMELO</td>
+						<td>TRANSFORMATION</td>
+						<td>VIDA</td>
+					</tr>
+					<tr id="line03">
+						<td>LOREM LOREM</td>
+						<td>DEUS IPSUM</td>
+						<td>TECNOLOGIA</td>
+					</tr>
+					<tr id="line04">
+						<td>LOREM LOREM</td>
+						<td>DEUS IPSUM</td>
+						<td>TECNOLOGIA</td>
+					</tr>
+					<tr id="line05">
+						<td>LOREM LOREM</td>
+						<td>DEUS IPSUM</td>
+						<td>TECNOLOGIA</td>
+					</tr>
+					<tr id="line06">
+						<td>LOREM LOREM</td>
+						<td>DEUS IPSUM</td>
+						<td>TECNOLOGIA</td>
+					</tr>
+					<tr id="line07">
+						<td>LOREM LOREM</td>
+						<td>DEUS IPSUM</td>
+						<td>TECNOLOGIA</td>
+					</tr>
+					<tr id="line08">
+						<td>LOREM LOREM</td>
+						<td>DEUS IPSUM</td>
+						<td>TECNOLOGIA</td>
+					</tr>
+					<tr id="line10">
+						<td>LOREM LOREM</td>
+						<td>DEUS IPSUM</td>
+						<td>TECNOLOGIA</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+	  
 	</div>
 	
 
@@ -73,10 +128,17 @@ export function Principal() {
 <footer></footer>
 	`;
 
+    /*
     document.addEventListener("DOMContentLoaded", () => {
-        console.log("entrou no evento externo da main");
-        addEventsToPrincipal();
+        const logo = document.querySelector("#logo");
+        console.log("ENTROU AQUI externo category!!!");
+        console.log("existe:", logo);
+        logo.addEventListener("click", () => {
+            console.log("entrou no interno da categoria!");
+            redirectToMyPrincipal();
+        });
     });
+	*/
 
     /*
 
@@ -119,47 +181,7 @@ function redirectToDoces() {
     window.dispatchEvent(eventStateChange);
 }
 
-export function redirectToCategoryChoosed() {
-    const eventStateChange = CriaEventStateChange("/category");
-    window.dispatchEvent(eventStateChange);
-}
-
-export function redirectToLoginAdmPage() {
-    const eventStateChange = CriaEventStateChange("/login");
-    window.dispatchEvent(eventStateChange);
-}
-
-export function redirectToGodDetailsPage() {
-    const eventStateChange = CriaEventStateChange("/category/d1");
-    window.dispatchEvent(eventStateChange);
-}
-
-export function redirectToMenuAdmPage() {
-    const eventStateChange = CriaEventStateChange("/adm/a1");
-    window.dispatchEvent(eventStateChange);
-}
-
-export function redirectToTableEditCategories() {
-    const eventStateChange = CriaEventStateChange("/tableCategories");
-    window.dispatchEvent(eventStateChange);
-}
-
-export function redirectToTableEditGods() {
-    const eventStateChange = CriaEventStateChange("/tableGods");
-    window.dispatchEvent(eventStateChange);
-}
-
-export function redirectToAddGodPage() {
-    const eventStateChange = CriaEventStateChange("/addGod");
-    window.dispatchEvent(eventStateChange);
-}
-
-export function redirectToGodInfoPage(id) {
-    const eventStateChange = CriaEventStateChange("/godInfo/g1");
-    window.dispatchEvent(eventStateChange);
-}
-
-export function redirectToEditGodPage() {
-    const eventStateChange = CriaEventStateChange("/editGod/g1");
+export function redirectToMyPrincipal() {
+    const eventStateChange = CriaEventStateChange("/");
     window.dispatchEvent(eventStateChange);
 }

@@ -1,5 +1,5 @@
 import CriaEventStateChange from "./event-url.js";
-import { addEventsToPrincipal } from "../index.js";
+
 const objPages = [
     { label: "Brigadeiros", handle: redirectToBrigadeiros },
     { label: "Cupcakes", handle: redirectToCupcakes },
@@ -27,7 +27,7 @@ export default function Principal() {
 
 /*@autor:letonio - Tentando criar o primeiro SPA*/
 
-export function Principal() {
+export function GodChoosed() {
     const div = document.createElement("div");
 
     div.innerHTML = `
@@ -44,39 +44,46 @@ export function Principal() {
 		<img id="menu-icon" src="../assets/icons/menu.svg" alt="">
 	</div>
 </header>
-<main>
-	<div class="container-carousel flex-col-center">
-		<div class="carousel flex-row-between">
-			<div class="container-arrow flex-center-center">
-				<img class="category-arrow category-arrow-left" src="../assets/icons/arrow-left-white.svg" alt="">
+<main class="flex-center-center">
+	<!-- @author: Gabriela-->
+	<div class="flex-row-center" id="container-see-god">
+		<div class="flex-col-center" id="box-img-god">
+			<div id="img-god">
+				<img src="../assets/images/games-god.jpg" alt="">
 			</div>
-			<figure class="container-temples">
-				<img class="temple" id="temple"src="../assets/images/temples/templo_tecnologia.jpg" alt="">
-				<h1 class="temple-legend">DEUSES DA TECNOLOGIA</h1>
-			</figure>
-			<div class="container-arrow flex-center-center">
-				<img class="category-arrow category-arrow-right" src="../assets/icons/arrow-right-white.svg" alt="">
+			<div id="box-btns" class="flex-row-between">
+				<button class="buttons"><img src="../assets/icons/edit.svg" alt=""></button>
+				<button class="buttons"><img src="../assets/icons/mdi_trash.svg" alt=""></button>
 			</div>
-			
 		</div>
-		<div class="container-circles flex-row-between">
-			<button class="circle"></button>
-			<button class="circle"></button>
-			<button class="circle circle-orange"></button>
-			<button class="circle"></button>
-			<button class="circle"></button>
-		</di>
+		<form action="" class="flex-col-center">
+			<div class="flex-col-center" id="box-inputs">
+				<div id="box-tittle" class="flex-col-center">
+					<h2>Fulano</h2>
+					<h4>Deus dos jogos</h4>
+				</div>
+				<div>
+					<h5>Resumo</h5>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam eius minima eum non, soluta a beatae qui libero molestiae fugit. Voluptatem explicabo vel quaerat iusto? Praesentium aperiam officiis voluptates. Ut!</p>
+				</div>
+			</div>
+		</form>
 	</div>
-	
-
 </main>
 <footer></footer>
 	`;
 
+    /*
     document.addEventListener("DOMContentLoaded", () => {
-        console.log("entrou no evento externo da main");
-        addEventsToPrincipal();
+        const logo = document.querySelector("#logo");
+        console.log("ENTROU AQUI externo category!!!");
+        console.log("existe:", logo);
+        logo.addEventListener("click", () => {
+            console.log("entrou no interno da categoria!");
+            redirectToMyPrincipal();
+        });
     });
+	*/
 
     /*
 
@@ -119,47 +126,7 @@ function redirectToDoces() {
     window.dispatchEvent(eventStateChange);
 }
 
-export function redirectToCategoryChoosed() {
-    const eventStateChange = CriaEventStateChange("/category");
-    window.dispatchEvent(eventStateChange);
-}
-
-export function redirectToLoginAdmPage() {
-    const eventStateChange = CriaEventStateChange("/login");
-    window.dispatchEvent(eventStateChange);
-}
-
-export function redirectToGodDetailsPage() {
-    const eventStateChange = CriaEventStateChange("/category/d1");
-    window.dispatchEvent(eventStateChange);
-}
-
-export function redirectToMenuAdmPage() {
-    const eventStateChange = CriaEventStateChange("/adm/a1");
-    window.dispatchEvent(eventStateChange);
-}
-
-export function redirectToTableEditCategories() {
-    const eventStateChange = CriaEventStateChange("/tableCategories");
-    window.dispatchEvent(eventStateChange);
-}
-
-export function redirectToTableEditGods() {
-    const eventStateChange = CriaEventStateChange("/tableGods");
-    window.dispatchEvent(eventStateChange);
-}
-
-export function redirectToAddGodPage() {
-    const eventStateChange = CriaEventStateChange("/addGod");
-    window.dispatchEvent(eventStateChange);
-}
-
-export function redirectToGodInfoPage(id) {
-    const eventStateChange = CriaEventStateChange("/godInfo/g1");
-    window.dispatchEvent(eventStateChange);
-}
-
-export function redirectToEditGodPage() {
-    const eventStateChange = CriaEventStateChange("/editGod/g1");
+export function redirectToMyPrincipal() {
+    const eventStateChange = CriaEventStateChange("/");
     window.dispatchEvent(eventStateChange);
 }

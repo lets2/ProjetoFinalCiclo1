@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GODpedia</title>
     <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/adm_perfil_side_bar.css">
+    <link rel="stylesheet" href="../css/edit-god.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!--Link font deuses-->
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
@@ -28,26 +28,27 @@
             <img id="menu-icon" src="../assets/icons/menu.svg" alt="">
         </div>
     </header>
-    <main>
-        <div class="container-content-page flex-row-between">
-            <aside class="sidebar-menu-adm flex-col-between">
-                <figure class="flex-col-center">
-                    <img id="profile-adm-icon" src="../assets/icons/profile.svg" alt="profile icon">
-                    <h2 id="adm-name">Administrador</h2>
-                </figure>
-                <ul class="sidebar-options">
-                    <li id="edit-profile"><img src="../assets/icons/edit-profile-v1-white.svg" alt="">Editar perfil</li>
-                    <li id="change-password"><img src="../assets/icons/padlock-v2-white.svg" alt="">Mudar senha</li>
-                    <li id="edit-categories"><img src="../assets/icons/cards-bold-v1-white.svg" alt="">Editar Categorias</li>
-                    <li id="edit-gods"><img src="../assets/icons/icons8-thor.svg" alt="">Editar deuses</li>
-                    <li id="logout"><img src="../assets/icons/logout-white.svg" alt="">Sair</li>
-
-                </ul>
-            </aside>
-           
+    <main class="flex-center-center">
+        <!-- @author: Gabriela-->
+        <div class="flex-row-center" id="container-edit-god">
+            <div class="flex-col-center" id="box-img-god">
+                <div>
+                    <img src="../assets/images/games-god.jpg" alt="">
+                </div>
+                <button>Mudar imagem</button>
+            </div>
+            <form action="" class="flex-col-center">
+                <div class="flex-col-center" id="box-inputs">
+                    <input class="input" type="text" placeholder="Nome">
+                    <input class="input" type="text" placeholder="Status">
+                    <input class="input" id="input-resume"type="text" placeholder="Resumo">
+                </div>
+                <div class="flex-row-between" id="box-buttons">
+                    <button class="cancel-button">Cancelar</button>
+                    <button id="add-god-button">Adicionar</button>
+                </div>
+            </form>
         </div>
-        
-
     </main>
     <footer></footer>
     
