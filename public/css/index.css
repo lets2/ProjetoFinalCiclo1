@@ -269,6 +269,7 @@ img{
 }
 #logo{
 	height: var(--size-icon-bigger);
+	cursor: pointer;
 }
 .container-search{
 	background-color: var(--color-bg-arrow-);
@@ -297,6 +298,7 @@ img{
 #profile-icon{
 	margin-right: 2.5rem;
 	height: 4.5rem;
+	cursor: pointer;
 }
 #menu-icon{
 	margin-left: 2.5rem;
@@ -330,12 +332,26 @@ main{
 /*@autor:letonio (mudei a dimensão da seta e adicionei cursor:pointer)*/
 .category-arrow{
 	height: 10.0rem;
+	cursor: pointer;
 }
+/*
 .category-arrow:hover,.category-arrow:active{
-	/*background-color: var(--color-bg-arrow-hover);*/
+	background-color: var(--color-bg-arrow-hover);
 	background-color: none;
 	cursor: pointer;
 }
+
+*/
+
+/*@autor:letonio precisei criar categorias separadas para cada seta*/
+.category-arrow-left{
+background-image: url("../assets/icons/arrow-left-white.svg");
+}
+.category-arrow-left:hover{
+	background-image: url("../assets/icons/arrow-left-orange.svg");
+	}
+	
+
 .container-temples{
 	width: 70%;
 	height: var(--height-img-building-smaller);
@@ -343,6 +359,7 @@ main{
 	display: flex;
 	align-items: center;
 	margin-top: 5.0rem;
+	cursor: pointer;
 }
 .temple{
 	position: absolute;
