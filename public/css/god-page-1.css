@@ -1,0 +1,66 @@
+/* @author: Daniel */
+
+#container-god-img {
+  width: 1144px;
+  height: 569px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+#div-img-god div {
+  display: flex;
+  justify-content: center;
+  background-color: rgba(47, 4, 61, 0.7);;
+  box-shadow: 15px 15px 15px 5px rgba(16, 77, 44, 0.25);
+  border-radius: 10px;
+}
+
+#div-img-god div img {
+  width: 322px;
+  height: 499px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 42px 41px 28px 41px;
+}
+
+.container-god-text {
+  width: 705px;
+  height: 525px;
+  background: rgba(47, 4, 61, 0.7);
+  box-shadow: 15px 15px 15px 5px rgba(47, 4, 61, 0.5);
+  border-radius: 10px;
+  margin-left: 50px;
+  padding: 22px 46px 61px 40px;
+  transform: rotate(0.3deg);
+}
+
+.god-text-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 61px;
+  margin-bottom: 30px;
+  color: #D4D4D4;
+}
+
+.god-text-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 45px;
+  line-height: 54px;
+  margin-bottom: 60px;
+  color: #D4D4D4;
+}
+
+.god-text-description {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 30px;
+  text-align: justify;
+  color: #fff;
+}
