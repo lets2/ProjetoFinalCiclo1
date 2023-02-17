@@ -49,9 +49,32 @@ export function addExternalResourcesTo(url, index) {
         case "/category":
             console.log("PRECISO ADICIONAR RECURSOS NO INDEX:", index);
             addResourcesToCategoryChoosed(index);
+        case "/tableCategories":
+        /*criar uma função que adiciona n-linhas no elemento tbody;
+                depende do tamanho do array de objetos que estiver na funcao
+                */
+        /*function addRecursoNaTabelaDeCategorias(){
+                const arrayCategorias=[{id:"d1",name:"Caos"},{id:"d2",name:"saude"}];
+                criar uma funcao que percorre esse array, acessa o campo name, e adciona
+                uma linha na tabela com o name.
+               }*/
+        case "/godInfo/g1":
+            /* criar uma funcao que acessa o array procura o god com aquele index
+                e adiciona as informacoes dele, por exemplo
+                */
             break;
     }
 }
+
+/*funçao falsa de addRecusre prineicpal*/
+function addRecPrincipal() {
+    const conteudo = { img: "lets.jpg", name: "deustal" };
+
+    //pra chegar nisso eu preciso de um objeto conteudo = {}, ou um array = []
+    adicionaConteudoNoHTML(conteudo);
+}
+
+/*apagar esse codigo acima depois!!!*/
 
 /*Usando fetch para pegar as imagens da página;*/
 async function addResourcesToPrincipal() {
@@ -60,7 +83,10 @@ async function addResourcesToPrincipal() {
         console.log("STATUS:", response.status);
         if (response.status !== 200 && response.status !== 201)
             throw "[erro] Houve um problema durante a busca das categorias!";
-
+        const vetordedeuses = [
+            { nome: "fulano", status: "zap" },
+            { nome: "fulano", status: "zap" },
+        ];
         const objContent = await response.json();
         renderCategoriesOnMainPage(objContent.data);
     } catch (error) {
@@ -333,13 +359,13 @@ function adicionaEventosNaPaginaDaTabelaCategorias() {
     eventosAdicionadosNoHeader();
     /*insere evento no botao de add categoria*/
     const btnAddCategory = document.querySelector("#create-new-category");
-    btnAddCategory.addEventListener("click", ()=> {
-        redirectToAddCategory()
-    })
+    btnAddCategory.addEventListener("click", () => {
+        redirectToAddCategory();
+    });
     const btnEditCategory = document.querySelector(".edit-btn");
-    btnEditCategory.addEventListener("click", ()=> {
-        redirectToEditCategory()
-    })
+    btnEditCategory.addEventListener("click", () => {
+        redirectToEditCategory();
+    });
 }
 
 /*Adicionando eventos na página que tem uma tabela de deuses*/
@@ -399,8 +425,8 @@ function adicionarEventosNaPaginaDeEdicaoDeDeus() {
 }
 
 // Add eventos no menu lateral
-function adicionarEventosNoMenu(){
-    eventosAdicionadosNoHeader()
+function adicionarEventosNoMenu() {
+    eventosAdicionadosNoHeader();
     const pageIcon = document.querySelector("#home-page");
     pageIcon.addEventListener("click", () => {
         ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
@@ -418,33 +444,30 @@ function adicionarEventosNoMenu(){
         ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
         redirectToMyPrincipal();
     });
-
-
 }
 // Add eventos na página de adicionar categoria
-function adicionarEventosAddCateg(){
+function adicionarEventosAddCateg() {
     eventosAdicionadosNoHeader();
     const btnCancel = document.querySelector("#Cancelar");
     btnCancel.addEventListener("click", () => {
-        redirectToTableEditCategories()
+        redirectToTableEditCategories();
     });
     const btnAddCategory = document.querySelector("#Adicionar");
     btnAddCategory.addEventListener("click", () => {
-        redirectToTableEditCategories()
+        redirectToTableEditCategories();
     });
-
 }
 
 // Add eventos na página de editar categoria
-function adicionarEventosEditCateg(){
+function adicionarEventosEditCateg() {
     eventosAdicionadosNoHeader();
     const btnCancel = document.querySelector("#Cancelar");
     btnCancel.addEventListener("click", () => {
-        redirectToTableEditCategories()
+        redirectToTableEditCategories();
     });
     const btnEditCategory = document.querySelector("#Adicionar");
     btnEditCategory.addEventListener("click", () => {
-        redirectToTableEditCategories()
+        redirectToTableEditCategories();
     });
 }
 /*********************************************/
