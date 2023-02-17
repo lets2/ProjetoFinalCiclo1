@@ -57,7 +57,7 @@ export function GodInfo() {
 			</div>
 		</div>
 		<form action="" class="flex-col-center">
-			<div class="flex-col-center" id="box-inputs">
+			<div class="flex-col-center" id="box-inputs-see-god">
 				<div id="box-tittle" class="flex-col-center">
 					<h2>Fulano</h2>
 					<h4>Deus dos jogos</h4>

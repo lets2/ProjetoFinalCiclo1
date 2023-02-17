@@ -32,69 +32,69 @@ export function TableCategories() {
 
     div.innerHTML = `
 	<header class="flex-row-between">
-	<div class="header-items flex-row-between">
-		<img id="logo" src="../assets/icons/logo-godpedia.png" alt="">
-		<div class="container-search flex-row-center">
-		   <input class="search-input" type="text"> 
-		   <img class="search-icon" src="../assets/icons/search.svg" alt="">
-		</div>
-	</div>
-	<div class="header-items flex-row-between">
-		<img id="profile-icon" src="../assets/icons/profile.svg" alt="">
-		<img id="menu-icon" src="../assets/icons/menu.svg" alt="">
-	</div>
-</header>
-<main class="flex-center-center">
-	<div class="container-content flex-col-center">
-		   
-		<button id="create-new-category">Criar um nova categoria</button>
+        <div class="header-items flex-row-between">
+            <img id="logo" src="../assets/icons/logo-godpedia.png" alt="">
+            <div class="container-search flex-row-center">
+               <input class="search-input" type="text"> 
+               <img class="search-icon" src="../assets/icons/search.svg" alt="">
+            </div>
+        </div>
+        <div class="header-items flex-row-between">
+            <img id="profile-icon" src="../assets/icons/profile.svg" alt="">
+            <img id="menu-icon" src="../assets/icons/menu.svg" alt="">
+        </div>
+    </header>
+    <main class="flex-center-center">
+        <div class="container-content flex-col-center">
+               
+            <button id="create-new-category">Criar categoria</button>
 
-		<div class="container-table">
-			<table id="table-categories">
-				<thead>
-					<tr>
-						<th>CATEGORIA</th>
-						<th>EDITAR</th>
-						<th>APAGAR</th>
-					</tr>
-				</thead>
-				<tbody id="thead-categories">
-					<tr>
-						<td>TECNOLOGIA</td>
-						<td><img src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
-						<td><img src="../assets/icons/trash-black.svg" alt="trash icon"></td>
-					</tr>
-					<tr>
-						<td>LOREM LOREM</td>
-						<td><img src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
-						<td><img src="../assets/icons/trash-black.svg" alt="trash icon"></td>
-					</tr>
-					<tr>
-						<td>TECNOLOGIA</td>
-						<td><img src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
-						<td><img src="../assets/icons/trash-black.svg" alt="trash icon"></td>
-					</tr>
-					<tr>
-						<td>LOREM LOREM</td>
-						<td><img src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
-						<td><img src="../assets/icons/trash-black.svg" alt="trash icon"></td>
-					</tr>
-					<tr>
-						<td>LOREM LOREM</td>
-						<td><img src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
-						<td><img src="../assets/icons/trash-black.svg" alt="trash icon"></td>
-					</tr>
-				   
-					
-				</tbody>
-			</table>
-		</div>
-	  
-	</div>
-	
+            <div class="container-table">
+                <table id="table-categories">
+                    <thead>
+                        <tr>
+                            <th>CATEGORIA</th>
+                            <th>EDITAR</th>
+                            <th>APAGAR</th>
+                        </tr>
+                    </thead>
+                    <tbody id="thead-categories">
+                        <tr>
+                            <td>TECNOLOGIA</td>
+                            <td><img class="edit-btn" src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
+                            <td><img class="delete-btn" src="../assets/icons/trash-black.svg" alt="trash icon"></td>
+                        </tr>
+                        <tr>
+                            <td>LOREM LOREM</td>
+                            <td><img class="edit-btn" src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
+                            <td><img class="delete-btn" src="../assets/icons/trash-black.svg" alt="trash icon"></td>
+                        </tr>
+                        <tr>
+                            <td>TECNOLOGIA</td>
+                            <td><img class="edit-btn" src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
+                            <td><img class="delete-btn" src="../assets/icons/trash-black.svg" alt="trash icon"></td>
+                        </tr>
+                        <tr>
+                            <td>LOREM LOREM</td>
+                            <td><img class="edit-btn" src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
+                            <td><img class="delete-btn" src="../assets/icons/trash-black.svg" alt="trash icon"></td>
+                        </tr>
+                        <tr>
+                            <td>LOREM LOREM</td>
+                            <td><img class="edit-btn" src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
+                            <td><img class="delete-btn" src="../assets/icons/trash-black.svg" alt="trash icon"></td>
+                        </tr>
+                       
+                        
+                    </tbody>
+                </table>
+            </div>
+          
+        </div>
+        
 
-</main>
-<footer></footer>
+    </main>
+    <footer></footer>
 	`;
 
     /*

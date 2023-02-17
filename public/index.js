@@ -8,6 +8,9 @@ import {
     redirectToAddGodPage,
     redirectToGodInfoPage,
     redirectToEditGodPage,
+    redirectToMenu,
+    redirectToAddCategory,
+    redirectToEditCategory,
 } from "./pages/main-page.js";
 import { redirectToMyPrincipal } from "./pages/category-page.js";
 
@@ -59,6 +62,12 @@ function addEventsRelatedTo(url) {
             adicionarEventosNaPaginaDeGodInfo();
         case "/editGod/g1":
             adicionarEventosNaPaginaDeEdicaoDeDeus();
+        case "/menu":
+            adicionarEventosNoMenu();
+        case "/addCategory":
+            adicionarEventosAddCateg();
+        case "/editCategory":
+            adicionarEventosEditCateg();
             break;
     }
 }
@@ -163,6 +172,14 @@ function eventosDoMenuDeAdm() {
 function adicionaEventosNaPaginaDaTabelaCategorias() {
     eventosAdicionadosNoHeader();
     /*insere evento no botao de add categoria*/
+    const btnAddCategory = document.querySelector("#create-new-category");
+    btnAddCategory.addEventListener("click", ()=> {
+        redirectToAddCategory()
+    })
+    const btnEditCategory = document.querySelector(".edit-btn");
+    btnEditCategory.addEventListener("click", ()=> {
+        redirectToEditCategory()
+    })
 }
 
 /*Adicionando eventos na página que tem uma tabela de deuses*/
@@ -220,6 +237,56 @@ function adicionarEventosNaPaginaDeGodInfo() {
 function adicionarEventosNaPaginaDeEdicaoDeDeus() {
     eventosAdicionadosNoHeader();
 }
+
+// Add eventos no menu lateral
+function adicionarEventosNoMenu(){
+    eventosAdicionadosNoHeader()
+    const pageIcon = document.querySelector("#home-page");
+    pageIcon.addEventListener("click", () => {
+        ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
+        redirectToMyPrincipal();
+    });
+
+    const godIcon = document.querySelector("#gods-page");
+    godIcon.addEventListener("click", () => {
+        ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
+        redirectToGodDetailsPage();
+    });
+
+    const categoriesIcon = document.querySelector("#categories-page");
+    categoriesIcon.addEventListener("click", () => {
+        ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
+        redirectToMyPrincipal();
+    });
+
+
+}
+// Add eventos na página de adicionar categoria
+function adicionarEventosAddCateg(){
+    eventosAdicionadosNoHeader();
+    const btnCancel = document.querySelector("#Cancelar");
+    btnCancel.addEventListener("click", () => {
+        redirectToTableEditCategories()
+    });
+    const btnAddCategory = document.querySelector("#Adicionar");
+    btnAddCategory.addEventListener("click", () => {
+        redirectToTableEditCategories()
+    });
+
+}
+
+// Add eventos na página de editar categoria
+function adicionarEventosEditCateg(){
+    eventosAdicionadosNoHeader();
+    const btnCancel = document.querySelector("#Cancelar");
+    btnCancel.addEventListener("click", () => {
+        redirectToTableEditCategories()
+    });
+    const btnEditCategory = document.querySelector("#Adicionar");
+    btnEditCategory.addEventListener("click", () => {
+        redirectToTableEditCategories()
+    });
+}
 /*********************************************/
 /*eventos que são adicionados em todo header*/
 /*********************************************/
@@ -238,5 +305,11 @@ function eventosAdicionadosNoHeader() {
     profileIcon.addEventListener("click", () => {
         ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
         redirectToLoginAdmPage();
+    });
+
+    const menuIcon = document.querySelector("#menu-icon");
+    menuIcon.addEventListener("click", () => {
+        ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
+        redirectToMenu();
     });
 }

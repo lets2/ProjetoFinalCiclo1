@@ -54,10 +54,10 @@ export function EditGod() {
 			<button>Mudar imagem</button>
 		</div>
 		<form action="" class="flex-col-center">
-			<div class="flex-col-center" id="box-inputs">
-				<input class="input" type="text" placeholder="Nome">
-				<input class="input" type="text" placeholder="Status">
-				<input class="input" id="input-resume"type="text" placeholder="Resumo">
+			<div class="flex-col-center" id="box-inputs-edit-god">
+				<input class="input-edit-god" type="text" placeholder="Nome">
+				<input class="input-edit-god" type="text" placeholder="Status">
+				<input class="input-edit-god" id="input-resume-edit-god"type="text" placeholder="Resumo">
 			</div>
 			<div class="flex-row-between" id="box-buttons">
 				<button class="cancel-button">Cancelar</button>

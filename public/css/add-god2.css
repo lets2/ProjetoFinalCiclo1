@@ -312,13 +312,11 @@ relacionada aquele elemento
      margin-right: 2.5rem;
      height: 4.5rem;
  }
-
  #menu-icon{
      margin-left: 2.5rem;
      margin-right: 2.5rem;
  }
  
-
  /************************************************
          STYLING MAIN COMPONENTS
  ************************************************/
@@ -329,20 +327,20 @@ relacionada aquele elemento
  }
 
  #container-edit-god{
-    width: 95rem;
-    height: 55rem;
+    width: var(--width-form-bigger);
+    height: var(--height-form-bigger);
     background-color: var(--color-bg-backInput);
     justify-content: center;
     border-radius: 2rem;
  }
- 
- 
+
+
  #box-img-god{
     width: 30%;
     height: 90%;
     padding-top: 2%;
  }
- 
+
  #box-img-god div{
     width: 22rem;
     height: 32rem;
@@ -351,43 +349,37 @@ relacionada aquele elemento
     margin-bottom: 2rem;
     overflow: hidden;    
  }
- 
+
  #box-img-god div img{
     width: 100%;
     height: 100%;
     border-radius: 2rem;
  }
- 
+
  form{
     width: 60%;
     height: 90%;
     margin-top: 2%;
  }
- 
- #box-inputs-edit-god{
+
+ #box-inputs{
     height: 70%;
     justify-content: space-evenly;
  }
- 
- .input-edit-god{
-    width: 51rem;
-    height: 5rem;
+
+ .input{
+    width: var(--width-input-bigger);
+    height: var(--height-input-bigger);
     justify-content: space-between;
     padding-left: 1.5rem;
-    font-size: 2rem;
  }
- 
- .input-edit-god::placeholder{
-     color: var(--color-white);
-     font-weight: 500;
- }
- 
- #input-resume-edit-god{
-    height: 17rem;
+
+ #input-resume{
+    height: var(--height-input-biggest);
     padding-bottom: 10rem;
  }
- 
- #input-resume-edit-god::placeholder{
+
+ #input-resume::placeholder{
     padding-bottom: 5rem;
  }
  
@@ -395,16 +387,6 @@ relacionada aquele elemento
     width: 70%;
     height: 28%;
     justify-content: space-between;
- }
- 
- .btns-edit-god{
-     height: 6.2rem;
-     width: 18rem;
-     border-radius: var(--radius-button);
-     background-color: var(--color-bg-button);
-     font-size: 2rem;
-     border-style: none;
-     box-shadow: 0.2rem 0.2rem 0.5rem 0.4rem #00000040;
  }
  
  /************************************************
