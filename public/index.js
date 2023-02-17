@@ -415,6 +415,7 @@ function adicionarEventosNaPaginaDeAdicaoDeDeus() {
     });
 }
 
+/*@author:Gabriela - coauthor: Letônio*/
 /*Add eventos na página que mostra infos sobre deuses (inclusive editar/excluir)*/
 function adicionarEventosNaPaginaDeGodInfo() {
     eventosAdicionadosNoHeader();
@@ -425,9 +426,24 @@ function adicionarEventosNaPaginaDeGodInfo() {
     });
 }
 
+/*@author:Gabriela - coauthor: Letônio*/
 /* Add eventos na página que mostra as informacoes para editar deuses*/
 function adicionarEventosNaPaginaDeEdicaoDeDeus() {
     eventosAdicionadosNoHeader();
+    
+    const changeImg = document.querySelector("#change-img-btn");
+    changeImg.addEventListener("click", ()=>{
+        redirectToTableEditGods();
+    } )
+
+    const cancelGodBtn = document.querySelector("#cancel-edit-god");
+    cancelGodBtn.addEventListener("click", ()=>{
+        redirectToTableEditGods();
+    } ) 
+    const updateGodBtn = document.querySelector("#update-god-button");
+    updateGodBtn.addEventListener("click", ()=>{
+        redirectToTableEditGods();
+    } )
 }
 
 /*@author:Gabriela - coauthor: Letônio*/

@@ -25,7 +25,7 @@ export default function Principal() {
 }
 */
 
-/*@autor:letonio - Tentando criar o primeiro SPA*/
+/*@author:Gabriela - coauthor: Letônio*/
 
 export function EditGod() {
     const div = document.createElement("div");
@@ -51,7 +51,7 @@ export function EditGod() {
 			<div>
 				<img src="../assets/images/games-god.jpg" alt="">
 			</div>
-			<button class="btns-edit-god">Mudar imagem</button>
+			<button class="btns-edit-god" id="change-img-btn">Mudar imagem</button>
 		</div>
 		<form action="" class="flex-col-center">
 			<div class="flex-col-center" id="box-inputs-edit-god">
@@ -60,7 +60,7 @@ export function EditGod() {
 				<input class="input-edit-god" id="input-resume-edit-god"type="text" placeholder="Resumo">
 			</div>
 			<div class="flex-row-between" id="box-buttons">
-				<button class="cancel-button btns-edit-god">Cancelar</button>
+				<button class="cancel-button btns-edit-god" id="cancel-edit-god">Cancelar</button>
 				<button class="btns-edit-god" id="update-god-button">Atualizar</button>
 			</div>
 		</form>
