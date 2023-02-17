@@ -66,13 +66,96 @@ export function addExternalResourcesTo(url, index) {
     }
 }
 
-/*funçao falsa de addRecusre prineicpal*/
-function addRecPrincipal() {
+// author: Gabriela
+function addLinesCategoryTable(){
+    const data= [
+        {
+            id_category: 1,
+            nome: "tecnologia", 
+        },
+        {
+            id_category: 2,
+            nome: "saúde",
+        },
+        {
+            id_category: 3,
+            nome: "natureza",
+        },
+        {
+            id_category: 4,
+            nome: "primordiais",
+        },
+        {
+            id_category: 5,
+            nome: "comida",
+        },
+    ];
+
+    const thead = document.querySelector("#thead-categories")
+    thead.innerHTML = "";
+
+    for (let i = 0; i < data.length; i++) {
+        thead.innerHTML += 
+                `<tr>
+                    <td>${data[i].nome}</td>
+                    <td><img class="edit-btn" src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
+                    <td><img class="delete-btn" src="../assets/icons/trash-black.svg" alt="trash icon"></td>
+                </tr>` ;
+    }
+    return thead;  
+}
+// author: Gabriela
+function addLinesGodTable(){
+    const data= [
+        {
+            nome: "Zapilson",
+            status: "Deus da comunicação", 
+            category: "tecnologia", 
+        },
+        {
+            nome: "Zefa",
+            status: "Deusa da coxinha", 
+            category: "comida", 
+        },
+        {
+            nome: "Juninho play",
+            status: "Deus do estilo", 
+            category: "primordiais", 
+        },
+        {
+            nome: "Manoel Gomes",
+            status: "Deus da música", 
+            category: "primordiais", 
+        },
+        {
+            nome: "Zapilson",
+            status: "Deus da comunicação", 
+            category: "tecnologia", 
+        },
+    ];
+
+    const thead = document.querySelector("#thead-gods");
+    thead.innerHTML = "";
+
+    for (let i = 0; i < data.length; i++) {
+        thead.innerHTML += 
+                `<tr id="line0${data[i]}">
+                    <td>${data[i].nome}</td>
+                    <td>${data[i].status}</td>
+                    <td>${data[i].category}</td>
+                </tr>` ;
+    }
+    console.log(thead, "esse")
+    return thead;  
+}
+
+/*{ /*funçao falsa de addRecusre prineicpal }*/
+/*{ function addRecPrincipal() {
     const conteudo = { img: "lets.jpg", name: "deustal" };
 
     //pra chegar nisso eu preciso de um objeto conteudo = {}, ou um array = []
     adicionaConteudoNoHTML(conteudo);
-}
+}*/
 
 /*apagar esse codigo acima depois!!!*/
 
@@ -356,25 +439,32 @@ function eventosDoMenuDeAdm() {
     });
 }
 
-/*@author:filipe - coauthor: Letônio*/
+/*@author:filipe - coauthor: gabriela*/
 /*Adicionando eventos na página que tem uma tabela de categorias*/
 function adicionaEventosNaPaginaDaTabelaCategorias() {
     eventosAdicionadosNoHeader();
+    addLinesCategoryTable();
     /*insere evento no botao de add categoria*/
     const btnAddCategory = document.querySelector("#create-new-category");
     btnAddCategory.addEventListener("click", () => {
         redirectToAddCategory();
     });
-    const btnEditCategory = document.querySelector(".edit-btn");
-    btnEditCategory.addEventListener("click", () => {
-        redirectToEditCategory();
-    });
+
+    const btnEditCategory = document.querySelectorAll(".edit-btn");
+    for (let i = 0; i < btnEditCategory.length; i++) {
+        btnEditCategory[i].addEventListener("click", () => {
+            redirectToEditCategory();
+        });
+        
+    }
+
 }
 
 /*@author:filipe - coauthor: Letônio*/
 /*Adicionando eventos na página que tem uma tabela de deuses*/
 function adicionaEventosNaPaginaDaTabelaGods() {
     eventosAdicionadosNoHeader();
+    addLinesGodTable();
     /*insere evento no botão de adicionar um novo deus*/
     const buttonAddGod = document.querySelector("#create-new-god");
     buttonAddGod.addEventListener("click", () => {
@@ -521,4 +611,5 @@ function eventosAdicionadosNoHeader() {
         ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
         redirectToMenu();
     });
+    
 }

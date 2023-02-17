@@ -66,56 +66,6 @@ export function TableGods() {
 					</tr>
 				</thead>
 				<tbody id="thead-gods">
-					<tr id="line00">
-					<td>LUAN GAMEPLAY</td>
-					<td>DEUS DOS JOGOS</td>
-					<td>TECNOLOGIA</td>
-					</tr>
-					<tr id="line01">
-						<td>LOREM LOREM</td>
-						<td>DEUS IPSUM</td>
-						<td>TECNOLOGIA</td>
-					</tr>
-					<tr id="line02">
-						<td>CARAMELO</td>
-						<td>TRANSFORMATION</td>
-						<td>VIDA</td>
-					</tr>
-					<tr id="line03">
-						<td>LOREM LOREM</td>
-						<td>DEUS IPSUM</td>
-						<td>TECNOLOGIA</td>
-					</tr>
-					<tr id="line04">
-						<td>LOREM LOREM</td>
-						<td>DEUS IPSUM</td>
-						<td>TECNOLOGIA</td>
-					</tr>
-					<tr id="line05">
-						<td>LOREM LOREM</td>
-						<td>DEUS IPSUM</td>
-						<td>TECNOLOGIA</td>
-					</tr>
-					<tr id="line06">
-						<td>LOREM LOREM</td>
-						<td>DEUS IPSUM</td>
-						<td>TECNOLOGIA</td>
-					</tr>
-					<tr id="line07">
-						<td>LOREM LOREM</td>
-						<td>DEUS IPSUM</td>
-						<td>TECNOLOGIA</td>
-					</tr>
-					<tr id="line08">
-						<td>LOREM LOREM</td>
-						<td>DEUS IPSUM</td>
-						<td>TECNOLOGIA</td>
-					</tr>
-					<tr id="line10">
-						<td>LOREM LOREM</td>
-						<td>DEUS IPSUM</td>
-						<td>TECNOLOGIA</td>
-					</tr>
 					
 				</tbody>
 			</table>

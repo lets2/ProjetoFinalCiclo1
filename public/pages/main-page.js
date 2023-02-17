@@ -98,11 +98,11 @@ export function Principal() {
     return div;
 }
 
-/* function redirectToAnotherPage(event) {
-	const path = "/" + event.target.textContent.toLowerCase();
-	const eventStateChange = CriaEventStateChange(path);
-	window.dispatchEvent(eventStateChange);
-} */
+// function redirectToAnotherPage(event) {
+// 	const path = "/" + event.target.textContent.toLowerCase();
+// 	const eventStateChange = CriaEventStateChange(path);
+// 	window.dispatchEvent(eventStateChange);
+// } 
 
 /*--------------------------------------------*/
 /*@author:Letônio*/
