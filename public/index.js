@@ -289,6 +289,7 @@ function adicionaEventoNoBotaoDeLogin() {
     });
 }
 
+/*@author:filipe - coauthor: Letônio*/
 /*eventos relacionados a página com a descrição dos deuses*/
 function eventosDosDetalhesDoDeus() {
     eventosAdicionadosNoHeader();
@@ -305,6 +306,7 @@ function eventosAdicionadosEmCadaCartao() {
     }
 }
 
+/*@author:filipe - coauthor: Letônio*/
 /*Eventos adicionados no menu do administrador*/
 function eventosDoMenuDeAdm() {
     eventosAdicionadosNoHeader();
@@ -328,6 +330,7 @@ function eventosDoMenuDeAdm() {
     });
 }
 
+/*@author:filipe - coauthor: Letônio*/
 /*Adicionando eventos na página que tem uma tabela de categorias*/
 function adicionaEventosNaPaginaDaTabelaCategorias() {
     eventosAdicionadosNoHeader();
@@ -342,6 +345,7 @@ function adicionaEventosNaPaginaDaTabelaCategorias() {
     })
 }
 
+/*@author:filipe - coauthor: Letônio*/
 /*Adicionando eventos na página que tem uma tabela de deuses*/
 function adicionaEventosNaPaginaDaTabelaGods() {
     eventosAdicionadosNoHeader();
@@ -370,6 +374,7 @@ function adicionaEventosNaPaginaDaTabelaGods() {
     });
 }
 
+/*@author:Gabriela - coauthor: Letônio*/
 /*Add eventos na página que tem a opcao de adicionar um novo deus*/
 function adicionarEventosNaPaginaDeAdicaoDeDeus() {
     eventosAdicionadosNoHeader();
@@ -383,6 +388,7 @@ function adicionarEventosNaPaginaDeAdicaoDeDeus() {
         redirectToTableEditGods();
     });
 }
+
 /*Add eventos na página que mostra infos sobre deuses (inclusive editar/excluir)*/
 function adicionarEventosNaPaginaDeGodInfo() {
     eventosAdicionadosNoHeader();
@@ -398,6 +404,7 @@ function adicionarEventosNaPaginaDeEdicaoDeDeus() {
     eventosAdicionadosNoHeader();
 }
 
+/*@author:Gabriela - coauthor: Letônio*/
 // Add eventos no menu lateral
 function adicionarEventosNoMenu(){
     eventosAdicionadosNoHeader()
@@ -421,6 +428,8 @@ function adicionarEventosNoMenu(){
 
 
 }
+
+/*@author:Gabriela - coauthor: Letônio*/
 // Add eventos na página de adicionar categoria
 function adicionarEventosAddCateg(){
     eventosAdicionadosNoHeader();
@@ -435,6 +444,7 @@ function adicionarEventosAddCateg(){
 
 }
 
+/*@author:Gabriela - coauthor: Letônio*/
 // Add eventos na página de editar categoria
 function adicionarEventosEditCateg(){
     eventosAdicionadosNoHeader();

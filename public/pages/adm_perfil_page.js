@@ -25,7 +25,7 @@ export default function Principal() {
 }
 */
 
-/*@autor:letonio - Tentando criar o primeiro SPA*/
+/*@author:filipe - coauthor: Letônio*/
 
 export function MenuAdm() {
     const div = document.createElement("div");
@@ -62,8 +62,7 @@ export function MenuAdm() {
             </aside>
            
         </div>
-        
-
+    
     </main>
     <footer></footer>
 	`;

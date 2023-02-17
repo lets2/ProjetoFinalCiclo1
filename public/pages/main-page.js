@@ -105,73 +105,77 @@ export function Principal() {
 } */
 
 /*--------------------------------------------*/
+/*@author:Letônio*/
 function redirectToBrigadeiros() {
     const eventStateChange = CriaEventStateChange("/brigadeiros");
     window.dispatchEvent(eventStateChange);
 }
-
+/*@author: Letônio*/
 function redirectToCupcakes() {
     const eventStateChange = CriaEventStateChange("/cupcakes");
     window.dispatchEvent(eventStateChange);
 }
-
+/*@author:Letônio*/
 function redirectToDoces() {
     const eventStateChange = CriaEventStateChange("/doces");
     window.dispatchEvent(eventStateChange);
 }
-
+/*@author:Letônio*/
 export function redirectToCategoryChoosed(index) {
     const eventStateChange = CriaEventStateChange("/category", index);
     window.dispatchEvent(eventStateChange);
 }
-
+/*@author: Letônio*/
 export function redirectToLoginAdmPage() {
     const eventStateChange = CriaEventStateChange("/login");
     window.dispatchEvent(eventStateChange);
 }
-
+/*@author:Filipe - coauthor: Letônio*/
 export function redirectToGodDetailsPage() {
     const eventStateChange = CriaEventStateChange("/category/d1");
     window.dispatchEvent(eventStateChange);
 }
-
+/*@author:Filipe - coauthor: Letônio*/
 export function redirectToMenuAdmPage() {
     const eventStateChange = CriaEventStateChange("/adm/a1");
     window.dispatchEvent(eventStateChange);
 }
-
+/*@author:Filipe - coauthor: Letônio*/
 export function redirectToTableEditCategories() {
     const eventStateChange = CriaEventStateChange("/tableCategories");
     window.dispatchEvent(eventStateChange);
 }
-
+/*@author:Filipe - coauthor: Letônio*/
 export function redirectToTableEditGods() {
     const eventStateChange = CriaEventStateChange("/tableGods");
     window.dispatchEvent(eventStateChange);
 }
-
+/*@author:Gabriela - coauthor: Letônio*/
 export function redirectToAddGodPage() {
     const eventStateChange = CriaEventStateChange("/addGod");
     window.dispatchEvent(eventStateChange);
 }
-
+/*@author:Gabriela - coauthor: Letônio*/
 export function redirectToGodInfoPage(id) {
     const eventStateChange = CriaEventStateChange("/godInfo/g1");
     window.dispatchEvent(eventStateChange);
 }
-
+/*@author:Gabriela - coauthor: Letônio*/
 export function redirectToEditGodPage() {
     const eventStateChange = CriaEventStateChange("/editGod/g1");
     window.dispatchEvent(eventStateChange);
 }
+/*@author:Gabriela - coauthor: Letônio*/
 export function redirectToMenu() {
     const eventStateChange = CriaEventStateChange("/menu");
     window.dispatchEvent(eventStateChange);
 }
+/*@author:Gabriela - coauthor: Letônio*/
 export function redirectToAddCategory() {
     const eventStateChange = CriaEventStateChange("/addCategory");
     window.dispatchEvent(eventStateChange);
 }
+/*@author:Gabriela - coauthor: Letônio*/
 export function redirectToEditCategory() {
     const eventStateChange = CriaEventStateChange("/editCategory");
     window.dispatchEvent(eventStateChange);

@@ -25,7 +25,7 @@ export default function Principal() {
 }
 */
 
-/*@autor:letonio - Tentando criar o primeiro SPA*/
+/*@author:gabriela - coauthor: Letônio*/
 
 export function AddGod() {
     const div = document.createElement("div");

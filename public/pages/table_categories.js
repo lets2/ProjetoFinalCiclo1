@@ -25,7 +25,7 @@ export default function Principal() {
 }
 */
 
-/*@autor:letonio - Tentando criar o primeiro SPA*/
+/*@author:filipe - coauthor: Letônio*/
 
 export function TableCategories() {
     const div = document.createElement("div");
