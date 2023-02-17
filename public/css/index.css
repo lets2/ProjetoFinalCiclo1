@@ -291,6 +291,7 @@ img{
 	background-color: var(--color-white);
 	border-radius: 0.0rem;
 	height: var(--height-input-smaller);
+	border: none;
 }
 .search-icon{
 	height: var(--size-icon-smallest);
