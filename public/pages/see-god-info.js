@@ -47,7 +47,7 @@ export function GodInfo() {
 <main class="flex-center-center">
 	<!-- @author: Gabriela-->
 	<div class="flex-row-center" id="container-see-god">
-		<div class="flex-col-center" id="box-img-god">
+		<div class="flex-col-center" id="box-img-see-god">
 			<div id="img-god">
 				<img src="../assets/images/games-god.jpg" alt="">
 			</div>
@@ -63,7 +63,7 @@ export function GodInfo() {
 					<h4>Deus dos jogos</h4>
 				</div>
 				<div>
-					<h5>Resumo</h5>
+					<h5 id="tittle-description">Resumo</h5>
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam eius minima eum non, soluta a beatae qui libero molestiae fugit. Voluptatem explicabo vel quaerat iusto? Praesentium aperiam officiis voluptates. Ut!</p>
 				</div>
 			</div>
