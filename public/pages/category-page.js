@@ -45,17 +45,17 @@ export function Category() {
 	</div>
 </header>
 <main>
-	<div class="container-page-gods flex-row-between">
+	<div class="container-page-gods hidden flex-row-between">
 		<div class="left-zone">
-			<img class="cards-gods card1" src="../assets/images/gods/god-ex-01.png" alt="Cartão 1">
+			<img class="cards-gods card1"  alt="Cartão 1">
 		</div>
 		<div class="middle-zone">
-			<img class="cards-gods card2"src="../assets/images/gods/god-ex-02.png" alt="Cartão 2">
-			<img class="cards-gods card3"src="../assets/images/gods/god-ex-03.png" alt="Cartão 3">
+			<img class="cards-gods card2"  alt="Cartão 2">
+			<img class="cards-gods card3"  alt="Cartão 3">
 		</div>
 		<div class="right-zone">
 			<h2 class="phrase"><span>Deuses da tecnologia</span></h2>
-			<img class="cards-gods card4" src="../assets/images/gods/god-ex-04.png" alt="Cartão 4">
+			<img class="cards-gods card4" alt="Cartão 4">
 		</div>
 
 	</div>

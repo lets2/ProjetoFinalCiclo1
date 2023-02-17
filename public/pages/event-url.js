@@ -1,7 +1,10 @@
-export default function CriaEventStateChange(urlParameter) {
-	const eventStateChange = new CustomEvent("onstatechange", {
-		detail: { url: urlParameter },
-	});
+export default function CriaEventStateChange(
+    urlParameter,
+    indexParameter = null
+) {
+    const eventStateChange = new CustomEvent("onstatechange", {
+        detail: { url: urlParameter, index: indexParameter },
+    });
 
-	return eventStateChange;
+    return eventStateChange;
 }

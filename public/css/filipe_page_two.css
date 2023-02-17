@@ -402,9 +402,7 @@ relacionada aquele elemento
      height: 7.0rem;
  }
  /*fazer arrows*/
- .category-arrow:hover,.category-arrow:active{
- background-color: var(--color-bg-arrow-hover);
- }
+
  .container-temples{
      width: 70%;
      height: var(--height-img-building-smaller);
