@@ -163,3 +163,15 @@ export function redirectToEditGodPage() {
     const eventStateChange = CriaEventStateChange("/editGod/g1");
     window.dispatchEvent(eventStateChange);
 }
+export function redirectToMenu() {
+    const eventStateChange = CriaEventStateChange("/menu");
+    window.dispatchEvent(eventStateChange);
+}
+export function redirectToAddCategory() {
+    const eventStateChange = CriaEventStateChange("/addCategory");
+    window.dispatchEvent(eventStateChange);
+}
+export function redirectToEditCategory() {
+    const eventStateChange = CriaEventStateChange("/editCategory");
+    window.dispatchEvent(eventStateChange);
+}

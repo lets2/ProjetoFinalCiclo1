@@ -382,7 +382,7 @@ form{
     margin-top: 11%;
 }
 
- #box-inputs{
+ #box-inputs-see-god{
     width: 90%;
     height: 70%;
     justify-content: space-between;
@@ -403,27 +403,6 @@ form{
  }
 
 
- /* .input{
-    width: var(--width-input-bigger);
-    height: var(--height-input-bigger);
-    justify-content: space-between;
-    padding-left: 1.5rem;
- }
-
- #input-resume{
-    height: var(--height-input-biggest);
-    padding-bottom: 10rem;
- }
-
- #input-resume::placeholder{
-    padding-bottom: 5rem;
- }
- 
- #box-buttons{
-    width: 70%;
-    height: 28%;
-    justify-content: space-between;
- }  */
  
  /************************************************
          STYLING FOOTER COMPONENTS
