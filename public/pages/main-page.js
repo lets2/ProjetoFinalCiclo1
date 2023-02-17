@@ -1,5 +1,5 @@
 import CriaEventStateChange from "./event-url.js";
-import { addEventsToPrincipal } from "../index.js";
+import { addExternalResourcesTo, addEventsToPrincipal } from "../index.js";
 const objPages = [
     { label: "Brigadeiros", handle: redirectToBrigadeiros },
     { label: "Cupcakes", handle: redirectToCupcakes },
@@ -51,8 +51,8 @@ export function Principal() {
 				<img class="category-arrow category-arrow-left" src="../assets/icons/arrow-left-white.svg" alt="">
 			</div>
 			<figure class="container-temples">
-				<img class="temple" id="temple"src="../assets/images/temples/templo_tecnologia.jpg" alt="">
-				<h1 class="temple-legend">DEUSES DA TECNOLOGIA</h1>
+				<img class="temple" id="temple"src="../assets/images/temples/templo_natureza.jpg" alt="">
+				<h1 class="temple-legend">Deuses da natureza</h1>
 			</figure>
 			<div class="container-arrow flex-center-center">
 				<img class="category-arrow category-arrow-right" src="../assets/icons/arrow-right-white.svg" alt="">
@@ -75,6 +75,7 @@ export function Principal() {
 
     document.addEventListener("DOMContentLoaded", () => {
         console.log("entrou no evento externo da main");
+        addExternalResourcesTo("/");
         addEventsToPrincipal();
     });
 
@@ -119,8 +120,8 @@ function redirectToDoces() {
     window.dispatchEvent(eventStateChange);
 }
 
-export function redirectToCategoryChoosed() {
-    const eventStateChange = CriaEventStateChange("/category");
+export function redirectToCategoryChoosed(index) {
+    const eventStateChange = CriaEventStateChange("/category", index);
     window.dispatchEvent(eventStateChange);
 }
 
