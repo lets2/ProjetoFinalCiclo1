@@ -25,7 +25,7 @@ export default function Principal() {
 }
 */
 
-/*@autor:letonio - Tentando criar o primeiro SPA*/
+/*@author:Gabriela - coauthor: Letônio*/
 
 export function AddCategory() {
     const div = document.createElement("div");

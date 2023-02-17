@@ -25,7 +25,7 @@ export default function Principal() {
 }
 */
 
-/*@autor:letonio - Tentando criar o primeiro SPA*/
+/*@autor:filipe - Tentando criar o primeiro SPA*/
 
 export function GodChoosed() {
     const div = document.createElement("div");

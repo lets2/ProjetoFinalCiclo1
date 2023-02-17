@@ -25,7 +25,7 @@ export default function Principal() {
 }
 */
 
-/*@autor:letonio - Tentando criar o primeiro SPA*/
+/*@author:letonio - Tentando criar o primeiro SPA*/
 
 export function GodInfo() {
     const div = document.createElement("div");
