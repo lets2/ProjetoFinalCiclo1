@@ -59,32 +59,6 @@ export function TableCategories() {
                         </tr>
                     </thead>
                     <tbody id="thead-categories">
-                        <tr>
-                            <td>TECNOLOGIA</td>
-                            <td><img class="edit-btn" src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
-                            <td><img class="delete-btn" src="../assets/icons/trash-black.svg" alt="trash icon"></td>
-                        </tr>
-                        <tr>
-                            <td>LOREM LOREM</td>
-                            <td><img class="edit-btn" src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
-                            <td><img class="delete-btn" src="../assets/icons/trash-black.svg" alt="trash icon"></td>
-                        </tr>
-                        <tr>
-                            <td>TECNOLOGIA</td>
-                            <td><img class="edit-btn" src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
-                            <td><img class="delete-btn" src="../assets/icons/trash-black.svg" alt="trash icon"></td>
-                        </tr>
-                        <tr>
-                            <td>LOREM LOREM</td>
-                            <td><img class="edit-btn" src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
-                            <td><img class="delete-btn" src="../assets/icons/trash-black.svg" alt="trash icon"></td>
-                        </tr>
-                        <tr>
-                            <td>LOREM LOREM</td>
-                            <td><img class="edit-btn" src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
-                            <td><img class="delete-btn" src="../assets/icons/trash-black.svg" alt="trash icon"></td>
-                        </tr>
-                       
                         
                     </tbody>
                 </table>
