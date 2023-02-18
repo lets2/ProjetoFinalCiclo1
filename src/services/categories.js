@@ -11,9 +11,9 @@ exports.getAll = async () => {
     }
 };
 
-exports.getByIndex = async (index) => {
+exports.getByIndex = async (id) => {
     try {
-        const resp = await categoriesRepository.getByIndex(index);
+        const resp = await categoriesRepository.getByIndex(id);
         return resp;
     } catch (error) {
         console.log(TAG, "ERROR caught");

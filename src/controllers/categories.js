@@ -6,7 +6,9 @@ const TAG = "categories controller: ";
 exports.getAll = async (req, res) => {
     //determinar o IP de quem fez a requisição
     //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
-    console.time("getAll()");
+    const now = new Date(); // cria uma nova instância de Date com a data atual
+    const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
+    console.time(`getAll()${milliseconds}`);
 
     //padronizando o formato da resposta
     //fica mais fácil para o front-end
@@ -23,7 +25,7 @@ exports.getAll = async (req, res) => {
         // console.log("CONTROLLER RECEBEU:", response);
         //response.data = serviceResponse.rows;
         res.status(200).json(response);
-        console.timeEnd("getAll()");
+        console.timeEnd(`getAll()${milliseconds}`);
     } catch (error) {
         console.log(TAG, error);
 
@@ -32,14 +34,16 @@ exports.getAll = async (req, res) => {
         response.error = "Erro interno do servidor";
 
         res.status(500).json(response);
-        console.timeEnd("getAll()");
+        console.timeEnd(`getAll()${milliseconds}`);
     }
 };
 
 exports.getByIndex = async (req, res) => {
     //determinar o IP de quem fez a requisição
     //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
-    console.time("getByIndex()");
+    const now = new Date(); // cria uma nova instância de Date com a data atual
+    const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
+    console.time(`getByIndex()${milliseconds}`);
     //precisa tratar algum parâmetro?
     const id = req.params.id; //get index from url
     //padronizando o formato da resposta
@@ -58,7 +62,7 @@ exports.getByIndex = async (req, res) => {
         response.data = serviceResponse; //this return just one object {name:,url:}
 
         res.status(200).json(response);
-        console.timeEnd("getByIndex()");
+        console.timeEnd(`getByIndex()${milliseconds}`);
     } catch (error) {
         console.log(TAG, error);
 
@@ -67,7 +71,7 @@ exports.getByIndex = async (req, res) => {
         response.error = "Erro interno do servidor";
 
         res.status(500).json(response);
-        console.timeEnd("getByIndex()");
+        console.timeEnd(`getByIndex()${milliseconds}`);
     }
 };
 
@@ -76,7 +80,9 @@ exports.getByIndex = async (req, res) => {
 exports.getAllGodsByIndex = async (req, res) => {
     //determinar o IP de quem fez a requisição
     //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
-    console.time("getAllGodsByIndex()");
+    const now = new Date(); // cria uma nova instância de Date com a data atual
+    const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
+    console.time(`getAllGodsByIndex()${milliseconds}`);
     const id = req.params.id; //get index from url
     //padronizando o formato da resposta
     //fica mais fácil para o front-end
@@ -94,7 +100,7 @@ exports.getAllGodsByIndex = async (req, res) => {
         response.data = serviceResponse; //this return just one object {name:,url:}
 
         res.status(200).json(response);
-        console.timeEnd("getAllGodsByIndex()");
+        console.timeEnd(`getAllGodsByIndex()${milliseconds}`);
     } catch (error) {
         console.log(TAG, error);
 
@@ -103,6 +109,6 @@ exports.getAllGodsByIndex = async (req, res) => {
         response.error = "Erro interno do servidor";
 
         res.status(500).json(response);
-        console.timeEnd("getAllGodsByIndex()");
+        console.timeEnd(`getAllGodsByIndex()${milliseconds}`);
     }
 };

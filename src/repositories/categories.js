@@ -23,15 +23,21 @@ exports.getAll = async () => {
 
 
 */
-const pool = require("./db-pool");
+const pool = require("./db-pool.js");
 
 const TAG = "categories Repository: ";
 
 exports.getAll = async () => {
+    //VOU TENTAR USAR O CONNECT
+    let client; //declarando client
+
     //Cria array de objetos simuladosapenas para testes:
     const arrayRows = getRows();
     //Realiza a requisição
     try {
+        //fazendo conexão usando um elemento da pool
+        // client = await pool.connect(); //faz a conexão usando um client diponível na pool
+        // const { rows } = await client.query('SELECT * FROM sua-tabela');
         const query = await pool.query(
             "SELECT id,name,src_img as src FROM categories;"
         );
@@ -46,6 +52,42 @@ exports.getAll = async () => {
         throw error;
     }
 };
+
+/*
+exports.getAll = async () => {
+    //VOU TENTAR USAR O CONNECT
+    let client; //declarando client
+
+    //Cria array de objetos simuladosapenas para testes:
+    const arrayRows = getRows();
+    //Realiza a requisição
+    try {
+        //fazendo conexão usando um elemento da pool
+       // client = await pool.connect(); //faz a conexão usando um client diponível na pool
+       // const { rows } = await client.query('SELECT * FROM sua-tabela');
+
+
+
+        const query = await pool.query(
+            "SELECT id,name,src_img as src FROM categories;"
+        );
+        //Se a requisição deu certo existe pelo menos um row
+        if (query.rows[0]) return query.rows;
+        throw new Error("No rows returned");
+        //se a condição anterior for falsa, implica que
+        //nenhuma coluna foi retornada, sendo que
+        //o front end esta esperado uma resposta com rows
+    } catch (error) {
+        console.log(TAG, error);
+        throw error;
+    } finally {
+        if (query) {
+            query.release();
+        }
+    }
+};
+
+*/
 
 /*
 const TAG = "categories Repository: ";

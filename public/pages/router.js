@@ -1,28 +1,26 @@
-import { Principal } from "./main-page.js";
-import Brigadeiros from "./brigadeiros-page.js";
-import Cupcakes from "./cupcakes-page.js";
-import Doces from "./doces-page.js";
-import { Category } from "./category-page.js";
+//import { Principal } from "./main-page.js";
+import { Categories } from "./main-page.js";
+import { Category } from "./categories-page.js";
 import { Login } from "./login-page.js";
 import { GodChoosed } from "./god-card-details-page.js";
 import { MenuAdm } from "./adm_perfil_page.js";
 import { TableCategories } from "./table_categories.js";
 import { TableGods } from "./table_gods.js";
 import { AddGod } from "./add-god.js";
-import { GodInfo } from "./see-god-info.js";
+import { GodInfo } from "./adm-god-info.js";
 import { EditGod } from "./edit-god.js";
 import { Menu } from "./menu.js";
 import { AddCategory } from "./add-cat-model_filipe_page_2.js";
 import { EditCategory } from "./edit-cat-model_filipe_page_3.js";
+import { PrincipalTeste } from "./principal-teste.js";
 export default function GeraObjComRotas() {
     const objRotas = {
-        "/": Principal(),
-        "/brigadeiros": Brigadeiros(),
-        "/cupcakes": Cupcakes(),
-        "/doces": Doces(),
-        "/category/:id": Category(),
+        /*"/": Principal(),*/
+        "/": PrincipalTeste(),
+        "/categories": Categories(),
+        "/categories/:id": Category(),
         "/login": Login(),
-        "/category/d1": GodChoosed(),
+        "/categories/d1": GodChoosed(),
         "/adm/a1": MenuAdm(),
         "/tableCategories": TableCategories(),
         "/tableGods": TableGods(),

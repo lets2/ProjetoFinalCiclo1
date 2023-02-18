@@ -8,7 +8,7 @@ LEMBRETES:
 Orientações ao adicionar código HTML/CSS:
 
 1) Quando codar coloque um comentário
- '@autor:nome' no trecho de código para sabermos o autor
+ '@author:nome' no trecho de código para sabermos o autor
 
 2) Ao estilizar um elemento, verifique se já existe um elemento geral
 por exemplo, button,input,form, tente padronizar de acordo com isso
@@ -197,6 +197,7 @@ button{
 	width: var(--width-button);
 	border-radius: var(--radius-button);
 	background-color: var(--color-bg-button);
+	cursor: pointer;
 }
 
 button:hover{

@@ -49,11 +49,11 @@ exports.getAll = async () => {
 function getRows() {
     const arrayRows = {
         rows: [
-            { name: "Deuses da tecnologia", src: "templo_tecnologia.JPG" },
-            { name: "Deuses da saúde", src: "templo_saude.JPG" },
-            { name: "Deuses da natureza", src: "templo_natureza.JPG" },
-            { name: "Deuses da comida", src: "templo_comida.JPG" },
-            { name: "Deuses do caos", src: "templo_caos.JPG" },
+            { name: "Deuses da Tecnologia", src: "templo_tecnologia.JPG" },
+            { name: "Deuses da Saúde", src: "templo_saude.JPG" },
+            { name: "Deuses da Natureza", src: "templo_natureza.JPG" },
+            { name: "Deuses da Comida", src: "templo_comida.JPG" },
+            { name: "Deuses do Caos", src: "templo_caos.JPG" },
         ],
     };
     return arrayRows;
