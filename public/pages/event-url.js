@@ -1,9 +1,9 @@
 export default function CriaEventStateChange(
     urlParameter,
-    indexParameter = null
+    criteriaParameter = {}
 ) {
     const eventStateChange = new CustomEvent("onstatechange", {
-        detail: { url: urlParameter, index: indexParameter },
+        detail: { url: urlParameter, criteria: criteriaParameter },
     });
 
     return eventStateChange;
