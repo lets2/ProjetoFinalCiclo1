@@ -276,7 +276,7 @@ relacionada aquele elemento
     position: relative;
     width: 100vw;
     height: 100vh;
-    z-index: 1;
+    z-index: 1;/*tem que ter cuidado ao usar z-index-não estava dando apra clicar no botao*/
 }
 
 #main-tittle{
@@ -308,4 +308,5 @@ relacionada aquele elemento
     font-weight: 600;
     height: 6.2rem;
     width: 16rem;
+	z-index: 2;/*@author:letonio - adicionei um z-index maior para poder clicar no botao*/
 }

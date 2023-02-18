@@ -23,6 +23,7 @@ const pool = new Pool({
     database: "ledlgubw",
     password: "pGF4Zmy1gMMan86NcyXPhViSepLgJSsm",
     port: "5432",
+    max: 20,
 });
 
 module.exports = pool;

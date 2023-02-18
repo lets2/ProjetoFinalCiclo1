@@ -1,33 +1,9 @@
 import CriaEventStateChange from "./event-url.js";
-import { addExternalResourcesTo, addEventsToPrincipal } from "../index.js";
-const objPages = [
-    { label: "Brigadeiros", handle: redirectToBrigadeiros },
-    { label: "Cupcakes", handle: redirectToCupcakes },
-    { label: "Doces", handle: redirectToDoces },
-];
-/*
-export default function Principal() {
-	const div = document.createElement("div");
-	const h1 = document.createElement("h1");
-
-	h1.textContent = "Alpha Doceria";
-	div.appendChild(h1);
-
-	objPages.forEach((element) => {
-		const btn = document.createElement("button");
-		btn.type = "button";
-		btn.textContent = element.label;
-		btn.onclick = element.handle; //btn.onclick = redirectToAnotherPage;
-		div.appendChild(btn);
-	});
-
-	return div;
-}
-*/
+//import { addExternalResourcesTo, addEventsToPrincipal } from "../index.js";
 
 /*@autor:letonio - Tentando criar o primeiro SPA*/
 
-export function Principal() {
+export function Categories() {
     const div = document.createElement("div");
 
     div.innerHTML = `
@@ -52,7 +28,7 @@ export function Principal() {
 			</div>
 			<figure class="container-temples">
 				<img class="temple" id="temple"src="../assets/images/temples/templo_natureza.jpg" alt="">
-				<h1 class="temple-legend">Deuses da natureza</h1>
+				<h1 class="temple-legend">Deuses da Natureza</h1>
 			</figure>
 			<div class="container-arrow flex-center-center">
 				<img class="category-arrow category-arrow-right" src="../assets/icons/arrow-right-white.svg" alt="">
@@ -75,54 +51,23 @@ export function Principal() {
 
     document.addEventListener("DOMContentLoaded", () => {
         console.log("entrou no evento externo da main");
-        addExternalResourcesTo("/");
-        addEventsToPrincipal();
+        //addExternalResourcesTo("/");
+        //addEventsToPrincipal();
+        //addExternalResourcesTo("/categories");
+        //addEventsRelatedTo("/categories");
     });
 
-    /*
-
-	const div = document.createElement("div");
-	const h1 = document.createElement("h1");
-
-	h1.textContent = "Alpha Doceria";
-	div.appendChild(h1);
-
-	objPages.forEach((element) => {
-		const btn = document.createElement("button");
-		btn.type = "button";
-		btn.textContent = element.label;
-		btn.onclick = element.handle; //btn.onclick = redirectToAnotherPage;
-		div.appendChild(btn);
-	});
-*/
     return div;
 }
+/******************************************
+All redirect functions were add to below
+*****************************************/
 
-// function redirectToAnotherPage(event) {
-// 	const path = "/" + event.target.textContent.toLowerCase();
-// 	const eventStateChange = CriaEventStateChange(path);
-// 	window.dispatchEvent(eventStateChange);
-// }
-
-/*--------------------------------------------*/
-/*@author:Letônio*/
-function redirectToBrigadeiros() {
-    const eventStateChange = CriaEventStateChange("/brigadeiros");
-    window.dispatchEvent(eventStateChange);
-}
-/*@author: Letônio*/
-function redirectToCupcakes() {
-    const eventStateChange = CriaEventStateChange("/cupcakes");
-    window.dispatchEvent(eventStateChange);
-}
-/*@author:Letônio*/
-function redirectToDoces() {
-    const eventStateChange = CriaEventStateChange("/doces");
-    window.dispatchEvent(eventStateChange);
-}
 /*@author:Letônio*/
 export function redirectToCategoryChoosed(id) {
-    const eventStateChange = CriaEventStateChange("/category/:id", { id: id });
+    const eventStateChange = CriaEventStateChange("/categories/:id", {
+        id: id,
+    });
     window.dispatchEvent(eventStateChange);
 }
 /*@author: Letônio*/
@@ -132,7 +77,7 @@ export function redirectToLoginAdmPage() {
 }
 /*@author:Filipe - coauthor: Letônio*/
 export function redirectToGodDetailsPage() {
-    const eventStateChange = CriaEventStateChange("/category/d1");
+    const eventStateChange = CriaEventStateChange("/categories/d1");
     window.dispatchEvent(eventStateChange);
 }
 /*@author:Filipe - coauthor: Letônio*/

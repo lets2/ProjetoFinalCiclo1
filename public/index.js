@@ -12,7 +12,7 @@ import {
     redirectToAddCategory,
     redirectToEditCategory,
 } from "./pages/main-page.js";
-import { redirectToMyPrincipal } from "./pages/category-page.js";
+import { redirectToAllCategories } from "./pages/categories-page.js";
 
 import GeraObjComRotas from "./pages/router.js";
 
@@ -23,7 +23,8 @@ const objRotas = GeraObjComRotas();
 const page = objRotas.getPage("/");
 root.innerHTML = "";
 root.appendChild(page);
-
+addExternalResourcesTo("/");
+addEventsRelatedTo("/"); //chama os eventos relacionados aquela página
 //ouvir evento de "onstatechange"
 window.addEventListener("onstatechange", (event) => {
     const url = event.detail.url;
@@ -45,10 +46,17 @@ window.addEventListener("onstatechange", (event) => {
 /*index ou é nulo ou é um valor que aponta pra algo como a categoria*/
 export function addExternalResourcesTo(url, criteria) {
     switch (url) {
-        case "/":
+        /*case "/":
             addResourcesToPrincipal();
             break;
-        case "/category/:id":
+            */
+        case "/categories":
+            addResourcesToCategoriesPage();
+            break;
+        case "principalteste":
+            //não precisa adicionar recurso nela
+            break;
+        case "/categories/:id":
             console.log("PRECISO ADICIONAR RECURSOS NO ID", criteria.id);
             addResourcesToCategoryChoosed(criteria.id);
             break;
@@ -161,7 +169,7 @@ function addLinesGodTable() {
 /*apagar esse codigo acima depois!!!*/
 
 /*Usando fetch para pegar as imagens da página;*/
-async function addResourcesToPrincipal() {
+async function addResourcesToCategoriesPage() {
     try {
         const response = await fetch("http://localhost:8080/categories");
         console.log("STATUS:", response.status);
@@ -172,20 +180,21 @@ async function addResourcesToPrincipal() {
             { nome: "fulano", status: "zap" },
         ];
         const objContent = await response.json();
-        renderCategoriesOnMainPage(objContent.data);
+        // renderCategoriesOnMainPage(objContent.data);
+        renderCurrentCategoryOnCategoriesPage(objContent.data);
     } catch (error) {
         console.log("Erro durante o fetch:", error);
     }
 }
 
-function renderCategoriesOnMainPage(categories) {
+function renderCurrentCategoryOnCategoriesPage(categories) {
     console.log("Pegou tudo que eu queria:", categories);
     let index;
     const quantify = categories.length;
     if (quantify % 2) {
         index = Math.floor(quantify / 2);
     } else Math.floor(quantify / 2) - 1;
-    index = 2;
+    index = 2; /*@author:letonio - posteriormente, retirar essa linha!!*/
     renderImgCategory(
         index,
         quantify,
@@ -282,16 +291,23 @@ function insertCategoryName(nameCategory) {
 function addEventsRelatedTo(url) {
     console.log("vamos ver a url:", url);
     switch (url) {
-        case "/":
+        /*case "/":
             addEventsToPrincipal();
+            break;*/
+        case "/":
+            eventosDaPrincipalTeste();
             break;
-        case "/category/:id":
+        case "/categories":
+            //addEventsToCategoriesPage() === addEventsToPrincipal();
+            addEventsToCategoriesPage();
+            break;
+        case "/categories/:id":
             eventosDaCategoriaEscolhida();
             break;
         case "/login":
             eventosDoLoginDeAdm();
             break;
-        case "/category/d1":
+        case "/categories/d1":
             eventosDosDetalhesDoDeus();
             break;
         case "/adm/a1":
@@ -324,8 +340,8 @@ function addEventsRelatedTo(url) {
     }
 }
 
-/*Eventos relacionados a página principal*/
-export function addEventsToPrincipal() {
+/*Eventos relacionados a página de categorias < [] >  */
+export function addEventsToCategoriesPage() {
     /////console.log("ADICIONA LISTENER NO BOTÃO GIGANTE!");
 
     /*Adiciona evento ao templo que está sendo mostrad nesse momento*/
@@ -392,6 +408,18 @@ export function addEventsToPrincipal() {
     });
 
     eventosAdicionadosNoHeader();
+}
+
+/*@author:letonio - criando uma página principal de teste*/
+function eventosDaPrincipalTeste() {
+    eventosAdicionadosNoHeader(); //estou colocando com header para testar
+    const seeMoreButton = document.querySelector(".button-see-more");
+    console.log("Criou o evento");
+    seeMoreButton.addEventListener("click", () => {
+        //redirectToMyPrincipal();//antigo
+        console.log("Entrou no evento de click no botão!");
+        redirectToAllCategories();
+    });
 }
 
 async function updateTempleContent(newIndex) {
@@ -584,7 +612,8 @@ function adicionarEventosNoMenu() {
     const pageIcon = document.querySelector("#home-page");
     pageIcon.addEventListener("click", () => {
         ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
-        redirectToMyPrincipal();
+        ///redirectToMyPrincipal();
+        redirectToAllCategories();
     });
 
     const godIcon = document.querySelector("#gods-page");
@@ -596,7 +625,8 @@ function adicionarEventosNoMenu() {
     const categoriesIcon = document.querySelector("#categories-page");
     categoriesIcon.addEventListener("click", () => {
         ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
-        redirectToMyPrincipal();
+        //redirectToMyPrincipal();
+        redirectToAllCategories();
     });
 }
 
@@ -637,7 +667,8 @@ function eventosAdicionadosNoHeader() {
     const logo = document.querySelector("#logo");
     logo.addEventListener("click", () => {
         ///////console.log("ATIVOU EVENTO E VA RENDERIZAR a principal");
-        redirectToMyPrincipal();
+        //redirectToMyPrincipal();
+        redirectToAllCategories();
     });
     /*adiciona evento para ir para página de login*/
     /*Adiciona evento para o PROFILE ICON PERFIL*/
