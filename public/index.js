@@ -27,13 +27,14 @@ root.appendChild(page);
 //ouvir evento de "onstatechange"
 window.addEventListener("onstatechange", (event) => {
     const url = event.detail.url;
-    const index = event.detail.index; //o valor padrão de index=null, se diferente de null implia q
+    const criteria = event.detail.criteria; //o valor padrão de criteria={}, se diferente de null implia q
     console.log("DISPAROU E A URL EH", url);
     const page = objRotas.getPage(url);
     history.pushState({}, "", url);
     root.innerHTML = "";
     root.appendChild(page);
-    addExternalResourcesTo(url, index);
+    console.log("criteria:", criteria);
+    addExternalResourcesTo(url, criteria);
     addEventsRelatedTo(url); //chama os eventos relacionados aquela página
 });
 
@@ -42,13 +43,15 @@ window.addEventListener("onstatechange", (event) => {
 ***************************************************
 */
 /*index ou é nulo ou é um valor que aponta pra algo como a categoria*/
-export function addExternalResourcesTo(url, index) {
+export function addExternalResourcesTo(url, criteria) {
     switch (url) {
         case "/":
             addResourcesToPrincipal();
-        case "/category":
-            console.log("PRECISO ADICIONAR RECURSOS NO INDEX:", index);
-            addResourcesToCategoryChoosed(index);
+            break;
+        case "/category/:id":
+            console.log("PRECISO ADICIONAR RECURSOS NO ID", criteria.id);
+            addResourcesToCategoryChoosed(criteria.id);
+            break;
         case "/tableCategories":
         /*criar uma função que adiciona n-linhas no elemento tbody;
                 depende do tamanho do array de objetos que estiver na funcao
@@ -67,11 +70,11 @@ export function addExternalResourcesTo(url, index) {
 }
 
 // author: Gabriela
-function addLinesCategoryTable(){
-    const data= [
+function addLinesCategoryTable() {
+    const data = [
         {
             id_category: 1,
-            nome: "tecnologia", 
+            nome: "tecnologia",
         },
         {
             id_category: 2,
@@ -91,46 +94,45 @@ function addLinesCategoryTable(){
         },
     ];
 
-    const thead = document.querySelector("#thead-categories")
+    const thead = document.querySelector("#thead-categories");
     thead.innerHTML = "";
 
     for (let i = 0; i < data.length; i++) {
-        thead.innerHTML += 
-                `<tr>
+        thead.innerHTML += `<tr>
                     <td>${data[i].nome}</td>
                     <td><img class="edit-btn" src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
                     <td><img class="delete-btn" src="../assets/icons/trash-black.svg" alt="trash icon"></td>
-                </tr>` ;
+                </tr>`;
     }
-    return thead;  
+    return thead;
 }
 // author: Gabriela
-function addLinesGodTable(){
-    const data= [
+function addLinesGodTable() {
+    const data = [
         {
             nome: "Zapilson",
-            status: "Deus da comunicação", 
-            category: "tecnologia", 
+            status: "Deus da comunicação",
+            category: "tecnologia",
         },
         {
             nome: "Zefa",
-            status: "Deusa da coxinha", 
-            category: "comida", 
+            status: "Deusa da coxinha",
+            category: "comida",
         },
         {
             nome: "Juninho play",
-            status: "Deus do estilo", 
-            category: "primordiais", 
+            status: "Deus do estilo",
+            category: "primordiais",
         },
         {
             nome: "Manoel Gomes",
-            status: "Deus da música", 
-            category: "primordiais", 
+            status: "Deus da música",
+            category: "primordiais",
         },
         {
             nome: "Zapilson",
-            status: "Deus da comunicação", 
-            category: "tecnologia", 
+            status: "Deus da comunicação",
+            category: "tecnologia",
         },
     ];
 
@@ -138,15 +140,14 @@ function addLinesGodTable(){
     thead.innerHTML = "";
 
     for (let i = 0; i < data.length; i++) {
-        thead.innerHTML += 
-                `<tr id="line0${data[i]}">
+        thead.innerHTML += `<tr id="line0${data[i]}">
                     <td>${data[i].nome}</td>
                     <td>${data[i].status}</td>
                     <td>${data[i].category}</td>
-                </tr>` ;
+                </tr>`;
     }
-    console.log(thead, "esse")
-    return thead;  
+    console.log(thead, "esse");
+    return thead;
 }
 
 /*{ /*funçao falsa de addRecusre prineicpal }*/
@@ -179,19 +180,37 @@ async function addResourcesToPrincipal() {
 
 function renderCategoriesOnMainPage(categories) {
     console.log("Pegou tudo que eu queria:", categories);
-    const index = 2; //
-
-    renderImgCategory(index, categories[index].name, categories[index].src);
-
+    let index;
     const quantify = categories.length;
+    if (quantify % 2) {
+        index = Math.floor(quantify / 2);
+    } else Math.floor(quantify / 2) - 1;
+    index = 2;
+    renderImgCategory(
+        index,
+        quantify,
+        categories[index].id,
+        categories[index].name,
+        categories[index].src
+    );
+
     renderBallsBelowImg(index, quantify);
 }
 
-function renderImgCategory(index, categoryName, categorySrc) {
+function renderImgCategory(
+    categoryIndex,
+    categoryQuantify,
+    categoryId,
+    categoryName,
+    categorySrc
+) {
     const imagem = document.querySelector("#temple");
     const categoryTitle = document.querySelector(".temple-legend");
     imagem.setAttribute("src", `./assets/images/temples/${categorySrc}`);
-    imagem.dataset.index = index; //adiciona um atributo personalizado dataset a imagem
+    imagem.dataset.index = categoryIndex; //adiciona um atributo personalizado dataset a imagem
+    imagem.dataset.quantify = categoryQuantify; //adiciona um atributo personalizado dataset a imagem
+    imagem.dataset.id = categoryId; //adiciona um atributo personalizado dataset a imagem
+
     //dessa forma é possível manter no elemento a posicao daquele elemento no array
     categoryTitle.innerText = categoryName;
 }
@@ -211,10 +230,10 @@ function renderBallsBelowImg(index, quantify) {
 }
 
 /*add resource as páginas escolhdas*/
-async function addResourcesToCategoryChoosed(index) {
+async function addResourcesToCategoryChoosed(id) {
     try {
         const response = await fetch(
-            `http://localhost:8080/categories/${index}/all`
+            `http://localhost:8080/categories/${id}/all`
         );
         console.log("STATUS DA RESPOSTA DO FETCH:", response.status);
         if (response.status !== 200 && response.status !== 201)
@@ -223,12 +242,9 @@ async function addResourcesToCategoryChoosed(index) {
         const objContent = await response.json();
         console.log("Esse é o resultado vindo do backend:", objContent);
         console.log("Esse é o resultado vindo do backend:", objContent.data);
-        console.log(
-            "Esse é o resultado vindo do backend:",
-            Object.keys(objContent["data"])[0]
-        );
-        const nameCategory = Object.keys(objContent["data"])[0];
-        const arrayGods = objContent["data"][nameCategory];
+
+        const nameCategory = objContent.data[0].name_category;
+        const arrayGods = objContent.data;
         console.log("Meu array de deuses:", arrayGods);
         insertImages(arrayGods);
         insertCategoryName(nameCategory);
@@ -249,7 +265,7 @@ function insertImages(arrayGods) {
     cardsGods.forEach((element, index) => {
         element.setAttribute(
             "src",
-            `./assets/images/gods/${arrayGods[index].src}`
+            `../assets/images/gods/${arrayGods[index].src_img}`
         );
     });
 }
@@ -268,28 +284,40 @@ function addEventsRelatedTo(url) {
     switch (url) {
         case "/":
             addEventsToPrincipal();
-        case "/category":
+            break;
+        case "/category/:id":
             eventosDaCategoriaEscolhida();
+            break;
         case "/login":
             eventosDoLoginDeAdm();
+            break;
         case "/category/d1":
             eventosDosDetalhesDoDeus();
+            break;
         case "/adm/a1":
             eventosDoMenuDeAdm();
+            break;
         case "/tableCategories":
             adicionaEventosNaPaginaDaTabelaCategorias();
+            break;
         case "/tableGods":
             adicionaEventosNaPaginaDaTabelaGods();
+            break;
         case "/addGod":
             adicionarEventosNaPaginaDeAdicaoDeDeus();
+            break;
         case "/godInfo/g1":
             adicionarEventosNaPaginaDeGodInfo();
+            break;
         case "/editGod/g1":
             adicionarEventosNaPaginaDeEdicaoDeDeus();
+            break;
         case "/menu":
             adicionarEventosNoMenu();
+            break;
         case "/addCategory":
             adicionarEventosAddCateg();
+            break;
         case "/editCategory":
             adicionarEventosEditCateg();
             break;
@@ -305,11 +333,14 @@ export function addEventsToPrincipal() {
     containerTemples.addEventListener("click", (event) => {
         //// console.log("ATIVOU EVENTO E VA RENDERIZARNOVA PAGINA");
         console.log(
-            "Quando clica no container, pega o index que está em dataset.index:"
+            "Quando clica no container, pega o index que está em dataset.id:"
         );
-        console.log(containerTemples.childNodes[1].dataset.index);
-        const index = containerTemples.childNodes[1].dataset.index;
-        redirectToCategoryChoosed(index);
+        console.log(
+            "Olha o valor do index quando clica no container",
+            containerTemples.childNodes[1].dataset.id
+        );
+        const id = containerTemples.childNodes[1].dataset.id;
+        redirectToCategoryChoosed(id);
     });
 
     /*add evento para mudar imagem das setas*/
@@ -327,9 +358,10 @@ export function addEventsToPrincipal() {
 
     arrowLeft.addEventListener("click", () => {
         const templeImage = document.querySelector("#temple");
-        const newIndex = parseInt(templeImage.dataset.index) - 1;
-        if (newIndex >= 0) {
-            checkIfThereIsCorrespondingImage(newIndex);
+        console.log("Olha o valor de dataset:", templeImage.dataset.id);
+        if (parseInt(templeImage.dataset.index) > 0) {
+            const newIndex = parseInt(templeImage.dataset.index) - 1;
+            updateTempleContent(newIndex);
         }
     });
 
@@ -350,30 +382,41 @@ export function addEventsToPrincipal() {
 
     arrowRight.addEventListener("click", () => {
         const templeImage = document.querySelector("#temple");
-        const newIndex = parseInt(templeImage.dataset.index) + 1;
-        if (newIndex >= 0) {
-            checkIfThereIsCorrespondingImage(newIndex);
+        if (
+            parseInt(templeImage.dataset.index) <
+            parseInt(templeImage.dataset.quantify) - 1
+        ) {
+            const newIndex = parseInt(templeImage.dataset.index) + 1;
+            updateTempleContent(newIndex);
         }
     });
 
     eventosAdicionadosNoHeader();
 }
 
-async function checkIfThereIsCorrespondingImage(newIndex) {
+async function updateTempleContent(newIndex) {
+    console.log("valor de newIndex", newIndex);
     try {
-        const response = await fetch(
-            `http://localhost:8080/categories/${newIndex}`
-        );
+        const response = await fetch(`http://localhost:8080/categories/`);
         console.log("STATUS:", response.status);
         if (response.status !== 200 && response.status !== 201)
             throw "[erro] Houve um problema durante o cadastro! Tente novamente!";
 
         const objContent = await response.json();
         console.log("Olha o resultado de clicar com uma seta:", objContent);
+        const categories = objContent.data;
         /// renderCategoriesOnMainPage(objContent.data);
-        renderImgCategory(newIndex, objContent.data.name, objContent.data.src);
+        const quantify = categories.length;
+        renderImgCategory(
+            newIndex,
+            quantify,
+            categories[newIndex].id,
+            categories[newIndex].name,
+            categories[newIndex].src
+        );
+        //renderImgCategory(newclId, objContent.data.name, objContent.data.src);
         //found-out total balls
-        const quantify = document.querySelectorAll(".circle").length;
+        //const quantify = document.querySelectorAll(".circle").length;
         console.log("QUantidade", quantify);
         renderBallsBelowImg(newIndex, quantify);
     } catch (error) {
@@ -455,9 +498,7 @@ function adicionaEventosNaPaginaDaTabelaCategorias() {
         btnEditCategory[i].addEventListener("click", () => {
             redirectToEditCategory();
         });
-        
     }
-
 }
 
 /*@author:filipe - coauthor: Letônio*/
@@ -520,20 +561,20 @@ function adicionarEventosNaPaginaDeGodInfo() {
 /* Add eventos na página que mostra as informacoes para editar deuses*/
 function adicionarEventosNaPaginaDeEdicaoDeDeus() {
     eventosAdicionadosNoHeader();
-    
+
     const changeImg = document.querySelector("#change-img-btn");
-    changeImg.addEventListener("click", ()=>{
+    changeImg.addEventListener("click", () => {
         redirectToTableEditGods();
-    } )
+    });
 
     const cancelGodBtn = document.querySelector("#cancel-edit-god");
-    cancelGodBtn.addEventListener("click", ()=>{
+    cancelGodBtn.addEventListener("click", () => {
         redirectToTableEditGods();
-    } ) 
+    });
     const updateGodBtn = document.querySelector("#update-god-button");
-    updateGodBtn.addEventListener("click", ()=>{
+    updateGodBtn.addEventListener("click", () => {
         redirectToTableEditGods();
-    } )
+    });
 }
 
 /*@author:Gabriela - coauthor: Letônio*/
@@ -611,5 +652,4 @@ function eventosAdicionadosNoHeader() {
         ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
         redirectToMenu();
     });
-    
 }

@@ -7,8 +7,8 @@ router.get("/categories", categoriesController.getAll);
 
 //Rotas com parâmetro mas sem corpo para categorias
 //pega uma categoria especifica e sua url
-router.get("/categories/:index", categoriesController.getByIndex);
+router.get("/categories/:id", categoriesController.getByIndex);
 
 //pega todos os deuses de uma categoria informada
-router.get("/categories/:index/all", categoriesController.getAllGodsByIndex);
+router.get("/categories/:id/all", categoriesController.getAllGodsByIndex);
 module.exports = router;

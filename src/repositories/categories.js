@@ -23,6 +23,7 @@ exports.getAll = async () => {
 
 
 */
+const pool = require("./db-pool");
 
 const TAG = "categories Repository: ";
 
@@ -31,10 +32,11 @@ exports.getAll = async () => {
     const arrayRows = getRows();
     //Realiza a requisição
     try {
-        const query = await new Promise((resolve) => setTimeout(resolve, 1000));
+        const query = await pool.query(
+            "SELECT id,name,src_img as src FROM categories;"
+        );
         //Se a requisição deu certo existe pelo menos um row
-        const deuCerto = true;
-        if (deuCerto) return Promise.resolve(arrayRows);
+        if (query.rows[0]) return query.rows;
         throw new Error("No rows returned");
         //se a condição anterior for falsa, implica que
         //nenhuma coluna foi retornada, sendo que
@@ -45,18 +47,43 @@ exports.getAll = async () => {
     }
 };
 
-exports.getByIndex = async (index) => {
+/*
+const TAG = "categories Repository: ";
+
+exports.getAll = async () => {
     //Cria array de objetos simuladosapenas para testes:
     const arrayRows = getRows();
     //Realiza a requisição
     try {
-        if (index >= arrayRows.rows.length)
-            throw new Error("There's not element with index informado");
-
-        const query = await new Promise((resolve) => setTimeout(resolve, 5));
+        const query = await new Promise((resolve) => setTimeout(resolve, 1000));
         //Se a requisição deu certo existe pelo menos um row
         const deuCerto = true;
-        if (deuCerto) return Promise.resolve(arrayRows.rows[index]);
+        if (deuCerto) return Promise.resolve(arrayRows.rows);
+        throw new Error("No rows returned");
+        //se a condição anterior for falsa, implica que
+        //nenhuma coluna foi retornada, sendo que
+        //o front end esta esperado uma resposta com rows
+    } catch (error) {
+        console.log(TAG, error);
+        throw error;
+    }
+};
+
+
+
+
+ */
+
+exports.getByIndex = async (id) => {
+    //Cria array de objetos simuladosapenas para testes:
+    ////const arrayRows = getRows();
+    //Realiza a requisição
+    try {
+        const query = await pool.query("SELECT ");
+        //Se a requisição deu certo existe pelo menos um row
+        const deuCerto = true;
+        console.log("Deu certo e o resultado é", arrayRows.rows, id);
+        if (deuCerto) return Promise.resolve(arrayRows.rows[id]);
         throw new Error("No rows returned");
         //se a condição anterior for falsa, implica que
         //nenhuma coluna foi retornada, sendo que
@@ -81,20 +108,23 @@ function getRows() {
     return arrayRows;
 }
 
-exports.getAllGodsByIndex = async (index) => {
+exports.getAllGodsByIndex = async (id) => {
     //Cria array de objetos simuladosapenas para testes:
-    const comprimento = 5; //comprimento do array de dados
-    const arrayRows = getGodsByIndexCategory(index);
+    // const comprimento = 5; //comprimento do array de dados
+    // const arrayRows = getGodsByIndexCategory(index);
     //Realiza a requisição
     try {
-        if (index >= comprimento)
-            throw new Error("There's not element with index informado");
-
-        const query = await new Promise((resolve) => setTimeout(resolve, 5));
-        //Se a requisição deu certo existe pelo menos um row
-        const deuCerto = true;
-        if (deuCerto) return Promise.resolve(arrayRows); //retorna um objeto com um array dentro
+        const query = await pool.query(
+            "SELECT gods.id, gods.name, gods.status, gods.resume, gods.category_id, categories.name AS name_category, gods.src_img FROM gods JOIN categories ON categories.id = gods.category_id WHERE gods.category_id = $1;",
+            [id]
+        );
+        if (query.rows[0]) return query.rows;
         throw new Error("No rows returned");
+        //Se a requisição deu certo existe pelo menos um row
+        // const deuCerto = true;
+        //console.log("Deu certo e o resultado é", query.rows, id);
+        //if (deuCerto) return Promise.resolve(arrayRows.rows[id]);
+        //throw new Error("No rows returned");
         //se a condição anterior for falsa, implica que
         //nenhuma coluna foi retornada, sendo que
         //o front end esta esperado uma resposta com rows
@@ -170,7 +200,7 @@ function getGodsByIndexCategory(index) {
                 {
                     godName: "god-22",
                     status: "status-22",
-                    src: "cat03--god03-natu.jpeg",
+                    src: "cat03--god03-natu.jpg",
                 },
                 {
                     godName: "god-23",

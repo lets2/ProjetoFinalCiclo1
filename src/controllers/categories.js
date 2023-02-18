@@ -19,8 +19,9 @@ exports.getAll = async (req, res) => {
     try {
         const serviceResponse = await categoriesService.getAll();
         response.message = "Success";
-        response.data = serviceResponse.rows;
-
+        response.data = serviceResponse;
+        // console.log("CONTROLLER RECEBEU:", response);
+        //response.data = serviceResponse.rows;
         res.status(200).json(response);
         console.timeEnd("getAll()");
     } catch (error) {
@@ -39,7 +40,8 @@ exports.getByIndex = async (req, res) => {
     //determinar o IP de quem fez a requisição
     //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
     console.time("getByIndex()");
-    const index = req.params.index; //get index from url
+    //precisa tratar algum parâmetro?
+    const id = req.params.id; //get index from url
     //padronizando o formato da resposta
     //fica mais fácil para o front-end
     //saber o que esperar
@@ -49,8 +51,8 @@ exports.getByIndex = async (req, res) => {
         error: null,
     };
     try {
-        const serviceResponse = await categoriesService.getByIndex(index);
-
+        const serviceResponse = await categoriesService.getByIndex(id);
+        console.log("Olha o que vem:", serviceResponse);
         response.message = "Success";
         //response.data = serviceResponse.rows;
         response.data = serviceResponse; //this return just one object {name:,url:}
@@ -75,7 +77,7 @@ exports.getAllGodsByIndex = async (req, res) => {
     //determinar o IP de quem fez a requisição
     //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
     console.time("getAllGodsByIndex()");
-    const index = req.params.index; //get index from url
+    const id = req.params.id; //get index from url
     //padronizando o formato da resposta
     //fica mais fácil para o front-end
     //saber o que esperar
@@ -85,9 +87,7 @@ exports.getAllGodsByIndex = async (req, res) => {
         error: null,
     };
     try {
-        const serviceResponse = await categoriesService.getAllGodsByIndex(
-            index
-        );
+        const serviceResponse = await categoriesService.getAllGodsByIndex(id);
 
         response.message = "Success";
         //response.data = serviceResponse.rows;

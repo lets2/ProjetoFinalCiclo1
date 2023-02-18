@@ -102,7 +102,7 @@ export function Principal() {
 // 	const path = "/" + event.target.textContent.toLowerCase();
 // 	const eventStateChange = CriaEventStateChange(path);
 // 	window.dispatchEvent(eventStateChange);
-// } 
+// }
 
 /*--------------------------------------------*/
 /*@author:Letônio*/
@@ -121,8 +121,8 @@ function redirectToDoces() {
     window.dispatchEvent(eventStateChange);
 }
 /*@author:Letônio*/
-export function redirectToCategoryChoosed(index) {
-    const eventStateChange = CriaEventStateChange("/category", index);
+export function redirectToCategoryChoosed(id) {
+    const eventStateChange = CriaEventStateChange("/category/:id", { id: id });
     window.dispatchEvent(eventStateChange);
 }
 /*@author: Letônio*/
