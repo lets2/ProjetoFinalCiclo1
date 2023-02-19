@@ -30,9 +30,9 @@ export function AddGod() {
             </div>
             <form action="" class="flex-col-center">
                 <div class="flex-col-center" id="box-inputs-add-god">
-                    <input class="input-add-god" type="text" placeholder="Nome">
-                    <input class="input-add-god" type="text" placeholder="Status">
-                    <input class="input-add-god" id="input-resume-add-god"type="text" placeholder="Resumo">
+                    <input id="new-name-god" class="input-add-god" type="text" placeholder="Nome">
+                    <input id="new-status-god" class="input-add-god" type="text" placeholder="Status">
+                    <input id="new-resume-god" class="input-add-god" id="input-resume-add-god"type="text" placeholder="Resumo">
                 </div>
                 <div class="flex-row-between" id="box-buttons">
                     <button class="cancel-button btns-add-god">Cancelar</button>

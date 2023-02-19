@@ -243,7 +243,7 @@ exports.createCategory = async (req, res) => {
         response.error = "[400] Bad request! Some fields are UNDEFINED/NULL";
 
         res.status(400).json(response);
-        console.timeEnd("createCategory()");
+        console.timeEnd(`createCategory()${milliseconds}`);
         return; //If dont use return, the function  will continue
     }
 
@@ -254,7 +254,7 @@ exports.createCategory = async (req, res) => {
         response.error = "[400] Bad request! Some fields are EMPTY";
 
         res.status(400).json(response);
-        console.timeEnd("createCategory()");
+        console.timeEnd(`createCategory()${milliseconds}`);
         return;
     }
 
@@ -266,7 +266,7 @@ exports.createCategory = async (req, res) => {
         response.error = "[400] Bad request! Some fields are not STRING";
 
         res.status(400).json(response);
-        console.timeEnd("createCategory()");
+        console.timeEnd(`createCategory()${milliseconds}`);
         return;
     }
     //Field "name" is not in a valid format. Example of valid data: "#a00f9b"
@@ -279,7 +279,7 @@ exports.createCategory = async (req, res) => {
             "[400] Bad request! hexColor is not a hexadecimal string";
 
         res.status(400).json(response);
-        console.timeEnd("createCategory()");
+        console.timeEnd(`createCategory()${milliseconds}`);
         return;
     }
 
@@ -296,7 +296,7 @@ exports.createCategory = async (req, res) => {
         response.data = serviceResponse;
 
         res.status(200).json(response);
-        console.timeEnd("createCategory()");
+        console.timeEnd(`createCategory()${milliseconds}`);
     } catch (error) {
         console.log(TAG, error);
 
@@ -305,7 +305,7 @@ exports.createCategory = async (req, res) => {
         response.error = "Erro interno do Servidor";
 
         res.status(500).json(response);
-        console.timeEnd("createTodo()");
+        console.timeEnd(`createCategory()${milliseconds}`);
     }
 };
 /*PUT/UPDATE METHOD*/
@@ -334,7 +334,7 @@ exports.updateCategory = async (req, res) => {
         response.error = "[400] Bad request! Some fields are UNDEFINED/NULL";
 
         res.status(400).json(response);
-        console.timeEnd("updateCategory()");
+        console.timeEnd(`updateCategory()${milliseconds}`);
         return; //If dont use return, the function  will continue
     }
 
@@ -346,7 +346,7 @@ exports.updateCategory = async (req, res) => {
         response.error = "[400] Bad request! Some fields are EMPTY";
 
         res.status(400).json(response);
-        console.timeEnd("updateCategory()");
+        console.timeEnd(`updateCategory()${milliseconds}`);
         return;
     }
 
@@ -363,7 +363,7 @@ exports.updateCategory = async (req, res) => {
         response.error = "[400] Bad request! Some fields are not STRING";
 
         res.status(400).json(response);
-        console.timeEnd("updateCategory()");
+        console.timeEnd(`updateCategory()${milliseconds}`);
         return;
     }
     //Field "name" is not in a valid format. Example of valid data: "#a00f9b"
@@ -376,7 +376,7 @@ exports.updateCategory = async (req, res) => {
             "[400] Bad request! hexColor is not a hexadecimal string";
 
         res.status(400).json(response);
-        console.timeEnd("updateCategory()");
+        console.timeEnd(`updateCategory()${milliseconds}`);
         return;
     }
 
@@ -394,7 +394,7 @@ exports.updateCategory = async (req, res) => {
         response.data = serviceResponse;
 
         res.status(200).json(response);
-        console.timeEnd("updateCategory()");
+        console.timeEnd(`updateCategory()${milliseconds}`);
     } catch (error) {
         console.log(TAG, error);
 
@@ -403,7 +403,7 @@ exports.updateCategory = async (req, res) => {
         response.error = "Erro interno do Servidor";
 
         res.status(500).json(response);
-        console.timeEnd("updateCategory()");
+        console.timeEnd(`updateCategory()${milliseconds}`);
     }
 };
 
