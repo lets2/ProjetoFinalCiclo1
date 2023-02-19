@@ -388,6 +388,7 @@ background-image: url("../assets/icons/arrow-left-white.svg");
 	background-color: var(--color-white);
 	border-radius: 50%;
 	border: none;
+	pointer-events: none;
 }
 .circle-orange{
 	background-color: var(--color-bg-arrow-hover);

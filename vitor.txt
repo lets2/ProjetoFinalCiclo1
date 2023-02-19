@@ -54,12 +54,13 @@ Gods
 
 
 proxs passos: 
-    - criar o banco => converter o back pra usar o banco
+    - criar o banco => converter o back pra usar o banco (OKAY)
     - edição de admin (POST, PUT, DELETE) (pode ser sem autenticacao pra comecar)
     - autenticacao
         - vai ser assim: route.get("/xxx", authenticate, controller.getXXX())
         - e cookie no frontend
 
 *ATE SEGUNDA:
-CRIAR BANCO-> FAZER O BANCO FUNCIONAR COM AS ROTAS Q JA teMOS
+-> CRIAR BANCO (OKAY)
+-> FAZER O BANCO FUNCIONAR COM AS ROTAS Q JA teMOS
 Add novas rotas!!!!! GET

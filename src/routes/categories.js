@@ -2,13 +2,32 @@ const express = require("express");
 const router = express.Router();
 const categoriesController = require("../controllers/categories.js");
 
-//Rotas sem parâmetros ou corpo para categorias
+//-------------------------------------------------------------------
+/*Routes related to the "Categories" entity, AVAILABLE TO ANY USER.*/
+//-------------------------------------------------------------------
+
+//-------------------------------------------------
+//Routes without parameters or body for Categories
 router.get("/categories", categoriesController.getAll);
 
-//Rotas com parâmetro mas sem corpo para categorias
-//pega uma categoria especifica e sua url
-router.get("/categories/:id", categoriesController.getByIndex);
+//-------------------------------------------------
+//Routes with parameters but without body for Categories
+router.get("/categories/:id", categoriesController.getById);
 
-//pega todos os deuses de uma categoria informada
-router.get("/categories/:id/all", categoriesController.getAllGodsByIndex);
+//Get all the gods that belong to a specific category
+router.get("/categories/:id/all", categoriesController.getAllGodsById);
+
+//Get a god according to its ID from a specified category
+router.get("/categories/gods/:godId", categoriesController.getGodById);
+
+//-------------------------------------------------------------------
+/*Routes related to the "Categories" entity, AVAILABLE TO ADMS ONLY.*/
+//-------------------------------------------------------------------
+
+//-------------------------------------------------
+//Routes without parameters or body for Categories
+router.get("/categoriestable", categoriesController.getTable);
+//Routes with parameters but without body for Categories
+router.get("/categoriestable/:id", categoriesController.getFromTableById);
+
 module.exports = router;

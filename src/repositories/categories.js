@@ -1,47 +1,15 @@
-/*
-TRUE DATABASE WILL BE INSERTED NEXT WEEK
-Use this code:
-const pool = require("./db-pool");
-
-const TAG = "All Repository: ";
-
-exports.getAll = async () => {
-    //Realiza a requisição
-    try {
-        const query = await pool.query("SELECT * FROM users");
-        //Se a requisição deu certo existe pelo menos um row
-        if (query.rows[0]) return query.rows;
-        throw new Error("No rows returned");
-        //se a condição anterior for falsa, implica que
-        //nenhuma coluna foi retornada, sendo que
-        //o front end esta esperado uma resposta com rows
-    } catch (error) {
-        console.log("TAG,error");
-        throw error;
-    }
-};
-
-
-*/
 const pool = require("./db-pool.js");
 
 const TAG = "categories Repository: ";
 
 exports.getAll = async () => {
     //VOU TENTAR USAR O CONNECT
-    let client; //declarando client
-
-    //Cria array de objetos simuladosapenas para testes:
-    const arrayRows = getRows();
-    //Realiza a requisição
+    //Realiza a consulta
     try {
-        //fazendo conexão usando um elemento da pool
-        // client = await pool.connect(); //faz a conexão usando um client diponível na pool
-        // const { rows } = await client.query('SELECT * FROM sua-tabela');
         const query = await pool.query(
             "SELECT id,name,src_img as src FROM categories;"
         );
-        //Se a requisição deu certo existe pelo menos um row
+        //Se a consulta deu certo existe pelo menos um row
         if (query.rows[0]) return query.rows;
         throw new Error("No rows returned");
         //se a condição anterior for falsa, implica que
@@ -53,108 +21,23 @@ exports.getAll = async () => {
     }
 };
 
-/*
-exports.getAll = async () => {
-    //VOU TENTAR USAR O CONNECT
-    let client; //declarando client
-
-    //Cria array de objetos simuladosapenas para testes:
-    const arrayRows = getRows();
-    //Realiza a requisição
+exports.getById = async (id) => {
+    //Realiza a consulta
     try {
-        //fazendo conexão usando um elemento da pool
-       // client = await pool.connect(); //faz a conexão usando um client diponível na pool
-       // const { rows } = await client.query('SELECT * FROM sua-tabela');
-
-
-
         const query = await pool.query(
-            "SELECT id,name,src_img as src FROM categories;"
+            "SELECT id,name,src_img as src, hex_color FROM categories WHERE id=$1;",
+            [id]
         );
-        //Se a requisição deu certo existe pelo menos um row
         if (query.rows[0]) return query.rows;
         throw new Error("No rows returned");
-        //se a condição anterior for falsa, implica que
-        //nenhuma coluna foi retornada, sendo que
-        //o front end esta esperado uma resposta com rows
-    } catch (error) {
-        console.log(TAG, error);
-        throw error;
-    } finally {
-        if (query) {
-            query.release();
-        }
-    }
-};
-
-*/
-
-/*
-const TAG = "categories Repository: ";
-
-exports.getAll = async () => {
-    //Cria array de objetos simuladosapenas para testes:
-    const arrayRows = getRows();
-    //Realiza a requisição
-    try {
-        const query = await new Promise((resolve) => setTimeout(resolve, 1000));
-        //Se a requisição deu certo existe pelo menos um row
-        const deuCerto = true;
-        if (deuCerto) return Promise.resolve(arrayRows.rows);
-        throw new Error("No rows returned");
-        //se a condição anterior for falsa, implica que
-        //nenhuma coluna foi retornada, sendo que
-        //o front end esta esperado uma resposta com rows
     } catch (error) {
         console.log(TAG, error);
         throw error;
     }
 };
 
-
-
-
- */
-
-exports.getByIndex = async (id) => {
-    //Cria array de objetos simuladosapenas para testes:
-    ////const arrayRows = getRows();
-    //Realiza a requisição
-    try {
-        const query = await pool.query("SELECT ");
-        //Se a requisição deu certo existe pelo menos um row
-        const deuCerto = true;
-        console.log("Deu certo e o resultado é", arrayRows.rows, id);
-        if (deuCerto) return Promise.resolve(arrayRows.rows[id]);
-        throw new Error("No rows returned");
-        //se a condição anterior for falsa, implica que
-        //nenhuma coluna foi retornada, sendo que
-        //o front end esta esperado uma resposta com rows
-    } catch (error) {
-        console.log(TAG, error);
-        throw error;
-    }
-};
-
-// função que contém o objeto com informações
-function getRows() {
-    const arrayRows = {
-        rows: [
-            { name: "Deuses da tecnologia", src: "templo_tecnologia.jpg" },
-            { name: "Deuses da saúde", src: "templo_saude.jpg" },
-            { name: "Deuses da natureza", src: "templo_natureza.jpg" },
-            { name: "Deuses da comida", src: "templo_comida.jpg" },
-            { name: "Deuses do caos", src: "templo_caos.jpg" },
-        ],
-    };
-    return arrayRows;
-}
-
-exports.getAllGodsByIndex = async (id) => {
-    //Cria array de objetos simuladosapenas para testes:
-    // const comprimento = 5; //comprimento do array de dados
-    // const arrayRows = getGodsByIndexCategory(index);
-    //Realiza a requisição
+exports.getAllGodsById = async (id) => {
+    //Realiza a consulta
     try {
         const query = await pool.query(
             "SELECT gods.id, gods.name, gods.status, gods.resume, gods.category_id, categories.name AS name_category, gods.src_img FROM gods JOIN categories ON categories.id = gods.category_id WHERE gods.category_id = $1;",
@@ -162,11 +45,44 @@ exports.getAllGodsByIndex = async (id) => {
         );
         if (query.rows[0]) return query.rows;
         throw new Error("No rows returned");
+        //Se a consulta deu certo existe pelo menos um row
+
+        //o front end esta esperado uma resposta com rows
+    } catch (error) {
+        console.log(TAG, error);
+        throw error;
+    }
+};
+
+exports.getGodById = async (godId) => {
+    try {
+        const query = await pool.query(
+            "SELECT gods.id, gods.name, gods.status, gods.resume, gods.category_id, categories.name AS name_category, gods.src_img FROM gods JOIN categories ON categories.id = gods.category_id WHERE gods.id = $1;",
+            [godId]
+        );
+        if (query.rows[0]) return query.rows;
+        throw new Error("No rows returned");
+    } catch (error) {
+        console.log(TAG, error);
+        throw error;
+    }
+};
+
+//----------------------------------------
+//Routes related to ADM PERMISSIONS
+//----------------------------------------
+
+exports.getTable = async () => {
+    //VOU TENTAR USAR O CONNECT
+    //Realiza a requisição
+    try {
+        const query = await pool.query(
+            "SELECT id,name,src_img as src, hex_color FROM categories;"
+        );
+
         //Se a requisição deu certo existe pelo menos um row
-        // const deuCerto = true;
-        //console.log("Deu certo e o resultado é", query.rows, id);
-        //if (deuCerto) return Promise.resolve(arrayRows.rows[id]);
-        //throw new Error("No rows returned");
+        if (query.rows[0]) return query.rows;
+        throw new Error("No rows returned");
         //se a condição anterior for falsa, implica que
         //nenhuma coluna foi retornada, sendo que
         //o front end esta esperado uma resposta com rows
@@ -176,10 +92,31 @@ exports.getAllGodsByIndex = async (id) => {
     }
 };
 
-function getGodsByIndexCategory(index) {
+exports.getFromTableById = async (id) => {
+    //Realiza a consulta
+    try {
+        const query = await pool.query(
+            "SELECT id,name,src_img as src, hex_color FROM categories WHERE id=$1;",
+            [id]
+        );
+        if (query.rows[0]) return query.rows;
+        throw new Error("No rows returned");
+    } catch (error) {
+        console.log(TAG, error);
+        throw error;
+    }
+};
+
+//
+//
+//
+/*OBJET THAT I HAS BEEN USED TO DO REQUEST*/
+
+function getGodsByIdCategory(index) {
     const allData = [
         {
-            "Deuses da tecnologia": [
+            name: "Deuses da tecnologia",
+            data: [
                 {
                     godName: "god-10",
                     status: "status-10",
@@ -203,7 +140,8 @@ function getGodsByIndexCategory(index) {
             ],
         },
         {
-            "Deuses da saúde": [
+            name: "Deuses da saúde",
+            data: [
                 {
                     godName: "god-00",
                     status: "status-00",
@@ -228,7 +166,8 @@ function getGodsByIndexCategory(index) {
         },
 
         {
-            "Deuses da natureza": [
+            name: "Deuses da natureza",
+            data: [
                 {
                     godName: "god-20",
                     status: "status-20",
@@ -252,7 +191,8 @@ function getGodsByIndexCategory(index) {
             ],
         },
         {
-            "Deuses da comida": [
+            name: "Deuses da comida",
+            data: [
                 {
                     godName: "god-30",
                     status: "status-30",
@@ -276,7 +216,8 @@ function getGodsByIndexCategory(index) {
             ],
         },
         {
-            "Deuses do caos": [
+            name: "Deuses do caos",
+            data: [
                 {
                     godName: "god-40",
                     status: "status-40",
@@ -301,18 +242,5 @@ function getGodsByIndexCategory(index) {
         },
     ];
 
-    /*
-
-
-    const arrayRows = {
-        rows: [
-            { name: "Deuses do caos", src: "templo_caos.jpg" },
-            { name: "Deuses da tecnologia", src: "templo_tecnologia.jpg" },
-            { name: "Deuses da saúde", src: "templo_saude.jpg" },
-            { name: "Deuses da natureza", src: "templo_natureza.jpg" },
-            { name: "Deuses da comida", src: "templo_comida.jpg" },
-        ],
-    };
-*/
     return allData[index];
 }
