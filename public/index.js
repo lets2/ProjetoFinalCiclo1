@@ -641,6 +641,8 @@ function addEventsToAddNewGodPage() {
         redirectToTableEditGods();
     });
     addGodButton.addEventListener("click", () => {
+        addNewGodInDatabase();
+        //Antes de redirecionar devemos adicionar o novo deus
         redirectToTableEditGods();
     });
 }
@@ -710,9 +712,92 @@ function addEventsToAddCategoryPage() {
         redirectToTableEditCategories();
     });
     const btnAddCategory = document.querySelector("#Adicionar");
-    btnAddCategory.addEventListener("click", () => {
+    btnAddCategory.addEventListener("click", async () => {
+        await addNewCategoryInDatabase();
         redirectToTableEditCategories();
     });
+}
+
+async function addNewGodInDatabase() {
+    const newNameGod = document.querySelector("#new-name-god").value;
+    const newStatusGod = document.querySelector("#new-status-god").value;
+    const newResumeGod = document.querySelector("#new-name-god").value;
+
+    const srcExample = "exampleGod.png";
+    const categoryId = "4"; //Precisamos modificar a página para receber categoria também
+
+    const newGod = {
+        name: newNameGod,
+        status: newStatusGod,
+        resume: newResumeGod,
+        categoryId: categoryId,
+        src: srcExample,
+    };
+
+    try {
+        const response = await fetch("http://localhost:8080/godstablecreate", {
+            method: "POST",
+            body: JSON.stringify(newGod),
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+        });
+        console.log("RESPOSTA DA REQUISIÇÃO ADD GOD:", response.status);
+
+        if (response.status !== 200 && response.status !== 201) {
+            const resJson = await response.json();
+            const { message, error } = resJson;
+            displayWarning(resJson.error);
+            throw `${error}`;
+        }
+        const resJson = await response.json();
+        console.log("Requisição de ADD GOD deu certo:", resJson);
+        displayWarning(resJson.message); //deu tudo  certo
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+/*@author:letonio - Adiciona no Banco de dados o novo Deus*/
+
+async function addNewCategoryInDatabase() {
+    const newCategoryName = document.querySelector("#new-name-category").value;
+    const newColorHexFormat = document.querySelector(
+        "#new-color-category"
+    ).value;
+    const srcExample = "exampleTemple.png";
+
+    const newCategory = {
+        name: newCategoryName,
+        src: srcExample,
+        hexColor: newColorHexFormat,
+    };
+
+    try {
+        const response = await fetch(
+            "http://localhost:8080/categoriestablecreate",
+            {
+                method: "POST",
+                body: JSON.stringify(newCategory),
+                headers: { "Content-type": "application/json; charset=UTF-8" },
+            }
+        );
+        console.log("Olha a resposta response:", response);
+
+        if (response.status !== 200 && response.status !== 201) {
+            const resJson = await response.json();
+            const { message, error } = resJson;
+            displayWarning(resJson.error);
+            throw `${error}`;
+        }
+        const resJson = await response.json();
+        console.log("olha o JSON:", resJson);
+        displayWarning(resJson.message); //deu tudo  certo
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function displayWarning(_message) {
+    alert(_message);
 }
 
 /*@author:Gabriela - coauthor: Letônio*/
