@@ -23,3 +23,65 @@ exports.getById = async (id) => {
         console.log(TAG, "ERROR caught");
     }
 };
+
+/*POST/CREATE METHOD*/
+
+exports.createGod = async (_name, _status, _categoryId, _resume, _src) => {
+    // Need to calculate something with the inputs?     No
+    // Don't need to do anything
+
+    // Do you need to ask the Database for something?   Yes
+    try {
+        // Need to filter/organize?               Yes
+        const resp = await godsRepository.createGod(
+            _name,
+            _status,
+            _categoryId,
+            _resume,
+            _src
+        );
+        // Need to do something internally with this data?     No
+        //Don't need to do anything, just return the information
+        return resp;
+    } catch (error) {
+        console.log(TAG, "error caught");
+        throw error;
+    }
+};
+
+/*PUT/UPDATE METHOD*/
+
+exports.updateGod = async (_id, _name, _status, _categoryId, _resume, _src) => {
+    // Need to calculate something with the inputs?     No
+    // Don't need to do anything
+
+    // Do you need to ask the Database for something?   Yes
+    try {
+        // Need to filter/organize?               Yes
+        const resp = await godsRepository.updateGod(
+            _id,
+            _name,
+            _status,
+            _categoryId,
+            _resume,
+            _src
+        );
+        // Need to do something internally with this data?     No
+        //Don't need to do anything, just return the information
+        return resp;
+    } catch (error) {
+        console.log(TAG, "error caught");
+        throw error;
+    }
+};
+
+/* DELETE METHOD */
+
+exports.deleteGodById = async (id) => {
+    try {
+        const resp = await godsRepository.deleteGodById(id);
+        return resp;
+    } catch (error) {
+        console.log(TAG, "ERROR caught");
+    }
+};

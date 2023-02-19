@@ -191,9 +191,8 @@ exports.getFromTableById = async (req, res) => {
     console.time(`getFromTableById()${milliseconds}`);
     //precisa tratar algum parâmetro?
     const id = req.params.id; //get index from url
-    //padronizando o formato da resposta
-    //fica mais fácil para o front-end
-    //saber o que esperar
+
+    //Standardizing the response that the frontend will receive.
     const response = {
         message: "",
         data: null,
@@ -219,3 +218,248 @@ exports.getFromTableById = async (req, res) => {
         console.timeEnd(`getFromTableById()${milliseconds}`);
     }
 };
+/*POST/CREATE METHOD*/
+exports.createCategory = async (req, res) => {
+    //determinar o IP de quem fez a requisição
+    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    const now = new Date(); // cria uma nova instância de Date com a data atual
+    const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
+    console.time(`createCategory()${milliseconds}`);
+
+    // TTRY TO GET PARAMETERS FROM REQ.BODY E VERIFY IF ARE OKAY
+    const { name, src, hexColor } = req.body;
+
+    //Standardizing the response that the frontend will receive.
+    const response = {
+        message: "",
+        data: null,
+        error: null,
+    };
+
+    if (!name || !src || !hexColor) {
+        console.log(TAG, "NAME,SRC or HEXCOLOR is UNDEFINED/NULL");
+        response.message = "Request need to have {name,src,hexColor})";
+        response.data = null;
+        response.error = "[400] Bad request! Some fields are UNDEFINED/NULL";
+
+        res.status(400).json(response);
+        console.timeEnd("createCategory()");
+        return; //If dont use return, the function  will continue
+    }
+
+    if (name === "" || src === "" || hexColor === "") {
+        console.log(TAG, "NAME,SRC or HEXCOLOR is EMPTY");
+        response.message = "These fields cannot be empty: name,src,hexColor})";
+        response.data = null;
+        response.error = "[400] Bad request! Some fields are EMPTY";
+
+        res.status(400).json(response);
+        console.timeEnd("createCategory()");
+        return;
+    }
+
+    if (IsNotString(name) || IsNotString(src) || IsNotString(hexColor)) {
+        console.log(TAG, "NAME,SRC or HEXCOLOR is not STRING");
+        response.message =
+            "These fields should be STRING TYPE:name,src,hexColor)";
+        response.data = null;
+        response.error = "[400] Bad request! Some fields are not STRING";
+
+        res.status(400).json(response);
+        console.timeEnd("createCategory()");
+        return;
+    }
+    //Field "name" is not in a valid format. Example of valid data: "#a00f9b"
+    if (colorIsNotHex(hexColor)) {
+        console.log(TAG, "HEXCOLOR is not a VALID FORMAT");
+        response.message =
+            "hexColor need to be #[0-9A-Fa-f]{6} format, ex: #0abf59";
+        response.data = null;
+        response.error =
+            "[400] Bad request! hexColor is not a hexadecimal string";
+
+        res.status(400).json(response);
+        console.timeEnd("createCategory()");
+        return;
+    }
+
+    try {
+        // Call Service method
+        const serviceResponse = await categoriesService.createCategory(
+            name,
+            src,
+            hexColor
+        );
+
+        // Retornar com sucesso
+        response.message = "Success";
+        response.data = serviceResponse;
+
+        res.status(200).json(response);
+        console.timeEnd("createCategory()");
+    } catch (error) {
+        console.log(TAG, error);
+
+        response.message = "Erro interno do Servidor";
+        response.data = null;
+        response.error = "Erro interno do Servidor";
+
+        res.status(500).json(response);
+        console.timeEnd("createTodo()");
+    }
+};
+/*PUT/UPDATE METHOD*/
+exports.updateCategory = async (req, res) => {
+    //determinar o IP de quem fez a requisição
+    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    const now = new Date(); // cria uma nova instância de Date com a data atual
+    const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
+    console.time(`updateCategory()${milliseconds}`);
+
+    const id = req.params.id; //get index from url
+    // TTRY TO GET PARAMETERS FROM REQ.BODY E VERIFY IF ARE OKAY
+    const { name, src, hexColor } = req.body;
+
+    //Standardizing the response that the frontend will receive.
+    const response = {
+        message: "",
+        data: null,
+        error: null,
+    };
+
+    if (!id || !name || !src || !hexColor) {
+        console.log(TAG, "ID,NAME,SRC or HEXCOLOR is UNDEFINED/NULL");
+        response.message = "Request need to have {id,name,src,hexColor})";
+        response.data = null;
+        response.error = "[400] Bad request! Some fields are UNDEFINED/NULL";
+
+        res.status(400).json(response);
+        console.timeEnd("updateCategory()");
+        return; //If dont use return, the function  will continue
+    }
+
+    if (id === "" || name === "" || src === "" || hexColor === "") {
+        console.log(TAG, "ID, NAME,SRC or HEXCOLOR is EMPTY");
+        response.message =
+            "These fields cannot be empty: id,name,src,hexColor})";
+        response.data = null;
+        response.error = "[400] Bad request! Some fields are EMPTY";
+
+        res.status(400).json(response);
+        console.timeEnd("updateCategory()");
+        return;
+    }
+
+    if (
+        IsNotString(id) ||
+        IsNotString(name) ||
+        IsNotString(src) ||
+        IsNotString(hexColor)
+    ) {
+        console.log(TAG, "ID,NAME,SRC or HEXCOLOR is not STRING");
+        response.message =
+            "These fields should be STRING TYPE:id,name,src,hexColor)";
+        response.data = null;
+        response.error = "[400] Bad request! Some fields are not STRING";
+
+        res.status(400).json(response);
+        console.timeEnd("updateCategory()");
+        return;
+    }
+    //Field "name" is not in a valid format. Example of valid data: "#a00f9b"
+    if (colorIsNotHex(hexColor)) {
+        console.log(TAG, "HEXCOLOR is not a VALID FORMAT");
+        response.message =
+            "hexColor need to be #[0-9A-Fa-f]{6} format, ex: #0abf59";
+        response.data = null;
+        response.error =
+            "[400] Bad request! hexColor is not a hexadecimal string";
+
+        res.status(400).json(response);
+        console.timeEnd("updateCategory()");
+        return;
+    }
+
+    try {
+        // Call Service method
+        const serviceResponse = await categoriesService.updateCategory(
+            id,
+            name,
+            src,
+            hexColor
+        );
+
+        // Retornar com sucesso
+        response.message = "Success";
+        response.data = serviceResponse;
+
+        res.status(200).json(response);
+        console.timeEnd("updateCategory()");
+    } catch (error) {
+        console.log(TAG, error);
+
+        response.message = "Erro interno do Servidor";
+        response.data = null;
+        response.error = "Erro interno do Servidor";
+
+        res.status(500).json(response);
+        console.timeEnd("updateCategory()");
+    }
+};
+
+/*DELETE CATEGORY BY ID*/
+
+exports.deleteCategoryById = async (req, res) => {
+    //determinar o IP de quem fez a requisição
+    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    const now = new Date(); // cria uma nova instância de Date com a data atual
+    const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
+    console.time(`deleteCategoryById()${milliseconds}`);
+    //precisa tratar algum parâmetro?
+    const id = req.params.id; //get index from url
+
+    //Standardizing the response that the frontend will receive.
+    const response = {
+        message: "",
+        data: null,
+        error: null,
+    };
+    try {
+        const serviceResponse = await categoriesService.deleteCategoryById(id);
+        console.log("Olha o que vem:", serviceResponse);
+        response.message = "Success";
+        //response.data = serviceResponse.rows;
+        response.data = serviceResponse; //this return just one object {name:,url:}
+
+        res.status(200).json(response);
+        console.timeEnd(`deleteCategoryById()${milliseconds}`);
+    } catch (error) {
+        console.log(TAG, error);
+
+        response.message = "Erro interno do servidor";
+        response.data = null;
+        response.error = "Erro interno do servidor";
+
+        res.status(500).json(response);
+        console.timeEnd(`deleteCategoryById()${milliseconds}`);
+    }
+};
+
+/*check if is not valid HEXADECIMAL STRING*/
+function colorIsNotHex(_hexColorString) {
+    const hexColorRegex = /^#[0-9A-Fa-f]{6}$/; //valid ex:#a0090f
+
+    if (hexColorRegex.test(_hexColorString)) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/*check if is not string type*/
+function IsNotString(_data) {
+    if (typeof _data !== "string") {
+        return true;
+    }
+    return false;
+}
