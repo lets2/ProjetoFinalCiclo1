@@ -107,6 +107,64 @@ exports.getFromTableById = async (id) => {
     }
 };
 
+exports.createCategory = async (_name, _src, _hexColor) => {
+    // Performs the query with filtering/sorting
+    try {
+        const query = await pool.query(
+            "INSERT INTO categories (name, src_img,hex_color,author_id) VALUES ($1,$2,$3,'2') RETURNING *",
+            [_name, _src, _hexColor]
+        );
+        return query.rows;
+        // Vou tentar esse de cima, caso dê errado uso o de baixo
+        //if (query.rows[0]) return query.rows;
+        //throw new Error("No rows returned");
+    } catch (error) {
+        console.log(TAG, "error caught");
+        throw error;
+    }
+};
+
+exports.updateCategory = async (_id, _name, _src, _hexColor) => {
+    // Performs the query with filtering/sorting
+    try {
+        const query = await pool.query(
+            "UPDATE categories set name=$2, src_img=$3,hex_color=$4,author_id='3',updated_at=now() WHERE id=$1 RETURNING *",
+            [_id, _name, _src, _hexColor]
+        );
+        return query.rows;
+        // Vou tentar esse de cima, caso dê errado uso o de baixo
+        //if (query.rows[0]) return query.rows;
+        //throw new Error("No rows returned");
+    } catch (error) {
+        console.log(TAG, "error caught");
+        throw error;
+    }
+};
+
+exports.deleteCategoryById = async (_id) => {
+    //Realiza a consulta
+    try {
+        //hard delete
+        const query = await pool.query(
+            "DELETE FROM categories WHERE  id=$1 RETURNING *;",
+            [_id]
+        );
+        //soft delete
+        /*
+        const query = await pool.query(
+            "UPDATE categories SET deleted_at=now(),deleted='TRUE' WHERE  id=$1 RETURNING *;",
+            [_id]
+        );
+        */
+
+        if (query.rows[0]) return query.rows;
+        throw new Error("No rows returned");
+    } catch (error) {
+        console.log(TAG, error);
+        throw error;
+    }
+};
+
 //
 //
 //
