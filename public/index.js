@@ -75,10 +75,11 @@ export function addExternalResourcesTo(url, criteria) {
         case "/tableGods":
             addResourcesToTableOfGods();
             break;
+        case "/categories/d1":
+            addResourcesToGodChoosed();
+            break;
         case "/godInfo/g1":
-            /* criar uma funcao que acessa o array procura o god com aquele index
-                e adiciona as informacoes dele, por exemplo
-                */
+            addResourcesToGodInfo();
             break;
     }
 }
@@ -360,6 +361,64 @@ function insertImages(arrayGods) {
 function insertCategoryName(nameCategory) {
     console.log(nameCategory);
     document.querySelector(".phrase").innerHTML = nameCategory;
+}
+
+//@author:filipe
+function addResourcesToGodChoosed(){
+    //CRIAR UM OBJETO COM OS DADOS DO DEUS
+    const gods = {"id":"01","name":"Zoo","src":"../images/gods/cat03--god04-natu.jpg","resume":"O deus da transformação",
+    "category_name":"Deuses da natureza", "description": "Há muito tempo, no reino dos deuses, existia um deus chamado Zoo, o Deus da Transformação. Ele era um deus muito poderoso, mas também muito solitário, pois ninguém queria se aproximar dele com medo de ser transformado em uma criatura."};
+
+    //INSERIR OS DADOS DO DEUS NA PÁGINA
+    const container_data = document.querySelector("#container-god-img");
+    container_data.innerHTML = "";
+    container_data.innerHTML = `
+    <div id="container-god-img">
+    <div class="flex-col-center" id="div-img-god">
+        <div>
+            <img src="../assets/images/${gods.src}" alt="" />
+        </div>
+    </div>
+    <div class="flex-col-center container-god-text">
+        <h1 class="god-text-title">${gods.name}</h1>
+        <h2 class="god-text-subtitle">${gods.resume}</h2>
+        <p class="god-text-description">
+          ${gods.description}
+        </p>
+    </div>`;
+}
+//@author:filipe
+function addResourcesToGodInfo(){
+    //CRIAR UM OBJETO COM OS DADOS DO DEUS
+    const gods = {"id":"01","name":"Zoo","src":"../images/gods/cat03--god04-natu.jpg","resume":"O deus da transformação",
+    "category_name":"Deuses da natureza", "description": "Há muito tempo, no reino dos deuses, existia um deus chamado Zoo, o Deus da Transformação. Ele era um deus muito poderoso, mas também muito solitário, pois ninguém queria se aproximar dele com medo de ser transformado em uma criatura."};
+
+    //INSERIR OS DADOS DO DEUS NA PÁGINA
+    const container_data = document.querySelector("#container-see-god");
+    container_data.innerHTML = "";
+    container_data.innerHTML = `
+        <div class="flex-col-center" id="box-img-see-god">
+			<div id="img-god">
+                <img src="../assets/images/${gods.src}" alt="" />
+			</div>
+			<div id="box-btns" class="flex-row-between">
+				<button id="edit-god-button" class="buttons"><img src="../assets/icons/edit.svg" alt=""></button>
+				<button id="delete-god-button" class="buttons"><img src="../assets/icons/mdi_trash.svg" alt=""></button>
+			</div>
+		</div>
+		<form action="" class="flex-col-center">
+			<div class="flex-col-center" id="box-inputs-see-god">
+				<div id="box-tittle" class="flex-col-center">
+					<h2>${gods.name}</h2>
+					<h4>${gods.resume}</h4>
+				</div>
+				<div>
+					<h5 id="tittle-description">Resumo</h5>
+					<p>${gods.description}</p>
+				</div>
+			</div>
+		</form>
+`
 }
 
 //------------------------------------------------------------------------
