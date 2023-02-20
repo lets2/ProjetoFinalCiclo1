@@ -76,10 +76,10 @@ export function addExternalResourcesTo(url, criteria) {
             addResourcesToTableOfGods();
             break;
         case "/categories/d1":
-            addResourcesToGodChoosed();
+            addResourcesToGodChoosed(criteria.godId);
             break;
         case "/godInfo/g1":
-            addResourcesToGodInfo();
+            addResourcesToGodInfo(criteria.godId);
             break;
     }
 }
@@ -122,41 +122,7 @@ function addLinesCategoryTable(data) {
 }
 
 async function addResourcesToTableOfGods() {
-    /*
-    const dataGods = [
-        {
-            id: "0",
-            name: "Zapilson",
-            status: "Deus da comunicação",
-            category: "tecnologia",
-        },
-        {
-            id: "1",
-            name: "Zefa",
-            status: "Deusa da coxinha",
-            category: "comida",
-        },
-        {
-            id: "2",
-            name: "Juninho play",
-            status: "Deus do estilo",
-            category: "primordiais",
-        },
-        {
-            id: "3",
-            name: "Manoel Gomes",
-            status: "Deus da música",
-            category: "primordiais",
-        },
-        {
-            id: "4",
-            name: "Zapilson",
-            status: "Deus da comunicação",
-            category: "tecnologia",
-        },
-    ];
-
-    */
+    //
     try {
         const responseCategories = await fetch(
             `http://localhost:8080/categories/`
@@ -212,7 +178,7 @@ function addLinesGodTable(data) {
                     <td>${data[i].name_category}</td>
                 </tr>`;
         const lineTable = document.querySelector(`#line0${i}`); //get line by #id
-        lineTable.dataset.id = data[i].id;
+        lineTable.dataset.godId = data[i].id;
         //it is important to save the identifier for future queries
     }
     console.log(thead, "esse");
@@ -355,6 +321,8 @@ function insertImages(arrayGods) {
             "src",
             `../assets/images/gods/${arrayGods[index].src_img}`
         );
+        //save in img god a dataset with god id
+        element.dataset.godId = arrayGods[index].id;
     });
 }
 
@@ -364,61 +332,106 @@ function insertCategoryName(nameCategory) {
 }
 
 //@author:filipe
-function addResourcesToGodChoosed(){
+async function addResourcesToGodChoosed(godId) {
     //CRIAR UM OBJETO COM OS DADOS DO DEUS
-    const gods = {"id":"01","name":"Zoo","src":"../images/gods/cat03--god04-natu.jpg","resume":"O deus da transformação",
-    "category_name":"Deuses da natureza", "description": "Há muito tempo, no reino dos deuses, existia um deus chamado Zoo, o Deus da Transformação. Ele era um deus muito poderoso, mas também muito solitário, pois ninguém queria se aproximar dele com medo de ser transformado em uma criatura."};
+    /* const godObj = {
+        id: "3",
+        name: "Zoo",
+        src: "../images/gods/cat03--god04-natu.jpg",
+        status: "O deus da transformação",
+        category_name: "Deuses da natureza",
+        resume: "Há muito tempo, no reino dos deuses, existia um deus chamado Zoo, o Deus da Transformação. Ele era um deus muito poderoso, mas também muito solitário, pois ninguém queria se aproximar dele com medo de ser transformado em uma criatura.",
+    };
+*/
+    /*Fetch request*/
+    try {
+        const response = await fetch(
+            `http://localhost:8080/godstable/${godId}/`
+        );
+        console.log("STATUS:", response.status);
+        if (response.status !== 200 && response.status !== 201)
+            throw "[erro] Houve um problema na requisicao!";
 
-    //INSERIR OS DADOS DO DEUS NA PÁGINA
-    const container_data = document.querySelector("#container-god-img");
-    container_data.innerHTML = "";
-    container_data.innerHTML = `
-    <div id="container-god-img">
-    <div class="flex-col-center" id="div-img-god">
-        <div>
-            <img src="../assets/images/${gods.src}" alt="" />
-        </div>
-    </div>
-    <div class="flex-col-center container-god-text">
-        <h1 class="god-text-title">${gods.name}</h1>
-        <h2 class="god-text-subtitle">${gods.resume}</h2>
-        <p class="god-text-description">
-          ${gods.description}
-        </p>
-    </div>`;
+        const objContent = await response.json();
+        console.log("Resultado da requisição VER GOD DETAILS:", objContent);
+        const godInformation = objContent.data[0];
+        /// renderCategoriesOnMainPage(objContent.data);
+        // const quantify = categories.length;
+
+        //INSERIR OS DADOS DO DEUS NA PÁGINA
+        const container_data = document.querySelector("#container-god-img");
+        container_data.innerHTML = "";
+        container_data.innerHTML = `
+            <div id="container-god-img">
+            <div class="flex-col-center" id="div-img-god">
+                <div>
+                    <img src="../assets/images/gods/${godInformation.src_img}" alt="" />
+                </div>
+            </div>
+            <div class="flex-col-center container-god-text">
+                <h1 class="god-text-title">${godInformation.name}</h1>
+                <h2 class="god-text-subtitle">${godInformation.status}</h2>
+                <p class="god-text-description">
+                ${godInformation.resume}
+                </p>
+            </div>`;
+    } catch (error) {
+        console.log("Erro durante o fetch:", error);
+    }
 }
 //@author:filipe
-function addResourcesToGodInfo(){
+async function addResourcesToGodInfo(godId) {
     //CRIAR UM OBJETO COM OS DADOS DO DEUS
-    const gods = {"id":"01","name":"Zoo","src":"../images/gods/cat03--god04-natu.jpg","resume":"O deus da transformação",
-    "category_name":"Deuses da natureza", "description": "Há muito tempo, no reino dos deuses, existia um deus chamado Zoo, o Deus da Transformação. Ele era um deus muito poderoso, mas também muito solitário, pois ninguém queria se aproximar dele com medo de ser transformado em uma criatura."};
+    /*Fetch request*/
+    try {
+        const response = await fetch(
+            `http://localhost:8080/godstable/${godId}/`
+        );
+        console.log("STATUS:", response.status);
+        if (response.status !== 200 && response.status !== 201)
+            throw "[erro] Houve um problema na requisicao!";
 
-    //INSERIR OS DADOS DO DEUS NA PÁGINA
-    const container_data = document.querySelector("#container-see-god");
-    container_data.innerHTML = "";
-    container_data.innerHTML = `
-        <div class="flex-col-center" id="box-img-see-god">
-			<div id="img-god">
-                <img src="../assets/images/${gods.src}" alt="" />
-			</div>
-			<div id="box-btns" class="flex-row-between">
-				<button id="edit-god-button" class="buttons"><img src="../assets/icons/edit.svg" alt=""></button>
-				<button id="delete-god-button" class="buttons"><img src="../assets/icons/mdi_trash.svg" alt=""></button>
-			</div>
-		</div>
-		<form action="" class="flex-col-center">
-			<div class="flex-col-center" id="box-inputs-see-god">
-				<div id="box-tittle" class="flex-col-center">
-					<h2>${gods.name}</h2>
-					<h4>${gods.resume}</h4>
-				</div>
-				<div>
-					<h5 id="tittle-description">Resumo</h5>
-					<p>${gods.description}</p>
-				</div>
-			</div>
-		</form>
-`
+        const objContent = await response.json();
+        console.log("Resultado da requisição VER GOD INFO:", objContent);
+        const godInformation = objContent.data[0];
+        /// renderCategoriesOnMainPage(objContent.data);
+        // const quantify = categories.length;
+
+        //INSERIR OS DADOS DO DEUS NA PÁGINA
+        //INSERIR OS DADOS DO DEUS NA PÁGINA
+
+        const container_data = document.querySelector("#container-see-god");
+        container_data.innerHTML = "";
+        container_data.innerHTML = `
+            <div class="flex-col-center" id="box-img-see-god">
+                <div id="img-god">
+                    <img src="../assets/images/gods/${godInformation.src_img}" alt="" />
+                </div>
+                <div id="box-btns" class="flex-row-between">
+                    <button id="edit-god-button" class="buttons"><img src="../assets/icons/edit.svg" alt=""></button>
+                    <button id="delete-god-button" class="buttons"><img src="../assets/icons/mdi_trash.svg" alt=""></button>
+                    <button id="back-god-button" class="buttons"><img id="testeDaImg"src="../assets/icons/back-arrow-icon-white.svg" alt=""></button>
+                    
+                </div>
+            </div>
+            <form action="" class="flex-col-center">
+                <div class="flex-col-center" id="box-inputs-see-god">
+                    <div id="box-tittle" class="flex-col-center">
+                        <h2>${godInformation.name}</h2>
+                        <h4>${godInformation.status}</h4>
+                    </div>
+                    <div>
+                        <h5 id="tittle-description">Resumo</h5>
+                        <p>${godInformation.resume}</p>
+                    </div>
+                </div>
+            </form>
+            `;
+    } catch (error) {
+        console.log("Erro durante o fetch:", error);
+    }
+
+    //GOD INFO IS THE PAGE WITH PENCIL AND TRASH DO EDIT AND DELETE GOD
 }
 
 //------------------------------------------------------------------------
@@ -613,7 +626,7 @@ function eventosAdicionadosEmCadaCartao() {
         let godCard = document.querySelector(`.card${i.toString()}`);
 
         godCard.addEventListener("click", () => {
-            redirectToGodDetailsPage();
+            redirectToGodDetailsPage(godCard.dataset.godId);
         });
     }
 }
@@ -673,20 +686,24 @@ function addEventsToGodTablePage() {
     /*Insere evento na tabela, caso o usuario clique numa linha da tabela
 	de deuses aparece uma página para detalhamento e edicao
 	referente aquele elemento*/
-    const trList = document.querySelectorAll("tbody tr");
-    trList.forEach((trElement) => {
-        trElement.addEventListener("click", (event) => {
-            const tdElement = event.target;
-            console.log("essse eh o alvo:", tdElement);
-            console.log("tag do parent:", tdElement.parentNode.tagName);
 
-            if (tdElement.parentNode.tagName === "TR") {
-                const rowIdGod = tdElement.parentNode.id;
-                console.log("Olha a ID dessa linha:", rowIdGod);
-                redirectToGodInfoPage("idDoDeus"); /*posteriormente isso sera*/
-            }
-        });
+    const tbodyElement = document.querySelector("tbody");
+    tbodyElement.addEventListener("click", (event) => {
+        console.log("TARGET:", event.target.parentNode);
+        const rowElement = event.target.parentNode;
+        if (event.target.parentNode.tagName === "TR") {
+            console.log(
+                "OLHA O DATASET DESSA LINHA:",
+                rowElement.dataset.godId
+            );
+            const godId = rowElement.dataset.godId;
+            redirectToGodInfoPage(godId);
+        }
     });
+
+    /*
+Testando
+*/
 }
 
 /*@author:Gabriela - coauthor: Letônio*/
@@ -714,6 +731,15 @@ function addEventsToAdmGodInfoPage() {
     const editGodButton = document.querySelector("#edit-god-button");
     editGodButton.addEventListener("click", () => {
         redirectToEditGodPage();
+    });
+
+    //back-god-button
+    //add eventos para voltar pra página anterior, caso não queira editar
+    const backGodButton = document.querySelector("#back-god-button");
+    console.log("BOTÃO DE VOLTAR:", backGodButton);
+    backGodButton.addEventListener("click", () => {
+        console.log("CLICOU!!");
+        redirectToTableEditGods();
     });
 }
 

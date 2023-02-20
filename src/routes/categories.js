@@ -57,16 +57,6 @@ router.put("/categoriestableEdit/:id", categoriesController.updateCategory);
 
 module.exports = router;
 
-/*
-
-router.delete('/todos/:id/:userId', todoController.deleteTodo);
-
-// Rotas com 'req.body'
-
-router.put('/todos/', todoController.updateTodo);
-    // {
-    //     id: int,
-    //     name: String,
-    //     priority: int
-    // }
-*/
+//authentication.js
+//Posteriormente, quando tiver autenticação:
+//router.post("/categoriestablecreate/", authenticate,categoriesController.createCategory);

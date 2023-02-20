@@ -84,8 +84,8 @@ p {
 	align-items: center;
 	background-color: blue;
 	border-radius: 2rem;
-	z-index: 4;
 }
 .modal p{
 	margin: 4rem;
 }
+

@@ -76,8 +76,10 @@ export function redirectToLoginAdmPage() {
     window.dispatchEvent(eventStateChange);
 }
 /*@author:Filipe - coauthor: Letônio*/
-export function redirectToGodDetailsPage() {
-    const eventStateChange = CriaEventStateChange("/categories/d1");
+export function redirectToGodDetailsPage(godId) {
+    const eventStateChange = CriaEventStateChange("/categories/d1", {
+        godId: godId,
+    });
     window.dispatchEvent(eventStateChange);
 }
 /*@author:Filipe - coauthor: Letônio*/
@@ -101,8 +103,10 @@ export function redirectToAddGodPage() {
     window.dispatchEvent(eventStateChange);
 }
 /*@author:Gabriela - coauthor: Letônio*/
-export function redirectToGodInfoPage(id) {
-    const eventStateChange = CriaEventStateChange("/godInfo/g1");
+export function redirectToGodInfoPage(godId) {
+    const eventStateChange = CriaEventStateChange("/godInfo/g1", {
+        godId: godId,
+    });
     window.dispatchEvent(eventStateChange);
 }
 /*@author:Gabriela - coauthor: Letônio*/
