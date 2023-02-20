@@ -411,10 +411,11 @@ relacionada aquele elemento
      color:var(--color-white);
      justify-content: space-around;
  }
- aside > figure{
+ #box-menu{
      width: 100%;
      padding: 2.0rem;
      padding-top: 5rem;
+     justify-content: center;
  }
  aside > figure > h2{
      width: 80%;

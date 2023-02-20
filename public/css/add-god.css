@@ -366,12 +366,12 @@ form{
     font-weight: 500;
 }
 
-#input-resume-add-god{
+#new-resume-god{
    height: 17rem;
    padding-bottom: 10rem;
 }
 
-#input-resume-add-god::placeholder{
+#new-resume-god::placeholder{
    padding-bottom: 5rem;
 }
 
