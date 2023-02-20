@@ -1,3 +1,7 @@
+//NOVOS IMPORTS E DIVISÃO DAS PÁGINAS
+
+import { addExternalResourcesTo } from "./api/routerFetch.js";
+
 //-------------------------------------------------------------
 // IMPORTS
 //--------------------------------------------------------------
@@ -36,7 +40,7 @@ addEventsRelatedTo("/"); //call relateds events to page/url
 // LISTENER TO HEAR WHEN ONSTATECHANGE CUSTOM EVENT IS DISPATCH
 //-----------------------------------------------------------------------
 
-window.addEventListener("onstatechange", (event) => {
+window.addEventListener("onstatechange", async (event) => {
     const url = event.detail.url;
     const criteria = event.detail.criteria; //o valor padrão de criteria={}, se diferente de null implia q
 
@@ -45,20 +49,39 @@ window.addEventListener("onstatechange", (event) => {
     root.innerHTML = "";
     root.appendChild(page);
     console.log("URL:", url, "Criteria:", criteria);
-    addExternalResourcesTo(url, criteria);
+    const respostaIndex = await addExternalResourcesTo(url, criteria);
+
+    console.log("RESPOSTA VINDO DO FETCH", respostaIndex);
+    chamaFuncaoEspecificaPelaUrl(url, respostaIndex);
+
+    // addLinesCategoryTable(respostaIndex);
     addEventsRelatedTo(url); //call relateds events to page/url
 });
+
+function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
+    switch (url) {
+        case "/categories":
+            renderCurrentCategoryOnCategoriesPage(respostaIndex);
+            break;
+        case "/categories/:id":
+            insertImages(respostaIndex.arrayGods);
+            insertCategoryName(respostaIndex.nameCategory);
+            break;
+        case "/categories/d1":
+            break;
+    }
+}
 
 //------------------------------------------------------------------------
 // ADDS RESOURCES TO THE PAGE THA WAS RENDERED ACCORDING URL
 //-----------------------------------------------------------------------
-
+/*
 export async function addExternalResourcesTo(url, criteria) {
     switch (url) {
-        /*case "/":
-            addResourcesToPrincipal();
-            break;
-            */
+        ////case "/":
+         ///   addResourcesToPrincipal();
+          ///  break;
+           // /
         case "/categories":
             addResourcesToCategoriesPage();
             break;
@@ -90,8 +113,9 @@ export async function addExternalResourcesTo(url, criteria) {
             break;
     }
 }
-
-async function addResourcesToTableOfCategories() {
+*/
+/*
+export async function addResourcesToTableOfCategories() {
     try {
         const response = await fetch(`http://localhost:8080/categories/`);
         console.log("STATUS:", response.status);
@@ -108,7 +132,7 @@ async function addResourcesToTableOfCategories() {
         console.log("Erro durante o fetch:", error);
     }
 }
-
+*/
 // author: Gabriela
 function addLinesCategoryTable(data) {
     const thead = document.querySelector("#thead-categories");
@@ -181,7 +205,7 @@ async function deleteCategoryFromDatabase(id) {
     }
 }
 
-async function addResourcesToTableOfGods() {
+export async function addResourcesToTableOfGods() {
     //
     try {
         const responseCategories = await fetch(
@@ -270,7 +294,8 @@ function addOptionToSelect(_select, _paramOption) {
 }
 
 /*Usando fetch para pegar as imagens da página;*/
-async function addResourcesToCategoriesPage() {
+/*
+export async function addResourcesToCategoriesPage() {
     try {
         const response = await fetch("http://localhost:8080/categories");
         console.log("STATUS:", response.status);
@@ -287,6 +312,8 @@ async function addResourcesToCategoriesPage() {
         console.log("Erro durante o fetch:", error);
     }
 }
+
+*/
 
 function renderCurrentCategoryOnCategoriesPage(categories) {
     console.log("Pegou tudo que eu queria:", categories);
@@ -340,7 +367,8 @@ function renderBallsBelowImg(index, quantify) {
 }
 
 /*add resource as páginas escolhdas*/
-async function addResourcesToCategoryChoosed(id) {
+/*
+export async function addResourcesToCategoryChoosed(id) {
     try {
         const response = await fetch(
             `http://localhost:8080/categories/${id}/all`
@@ -369,6 +397,7 @@ async function addResourcesToCategoryChoosed(id) {
     }
 }
 
+*/
 function insertImages(arrayGods) {
     console.log(arrayGods);
     const cardsGods = document.querySelectorAll(".cards-gods");
@@ -386,21 +415,13 @@ function insertCategoryName(nameCategory) {
     console.log(nameCategory);
     document.querySelector(".phrase").innerHTML = nameCategory;
 }
-
+/*
 //@author:filipe
-async function addResourcesToGodChoosed(godId) {
+export async function addResourcesToGodChoosed(godId) {
     //CRIAR UM OBJETO COM OS DADOS DO DEUS
-    /* const godObj = {
-        id: "3",
-        name: "Zoo",
-        src: "../images/gods/cat03--god04-natu.jpg",
-        status: "O deus da transformação",
-        category_name: "Deuses da natureza",
-        resume: "Há muito tempo, no reino dos deuses, existia um deus chamado Zoo, o Deus da Transformação. Ele era um deus muito poderoso, mas também muito solitário, pois ninguém queria se aproximar dele com medo de ser transformado em uma criatura.",
-    };
-*/
+  
     /*Fetch request*/
-    try {
+/*  try {
         const response = await fetch(
             `http://localhost:8080/godstable/${godId}/`
         );
@@ -435,8 +456,11 @@ async function addResourcesToGodChoosed(godId) {
         console.log("Erro durante o fetch:", error);
     }
 }
+
+*/
+
 //@author:filipe
-async function addResourcesToGodInfo(godId) {
+export async function addResourcesToGodInfo(godId) {
     //CRIAR UM OBJETO COM OS DADOS DO DEUS
     /*Fetch request*/
     try {
@@ -500,7 +524,7 @@ async function addResourcesToGodInfo(godId) {
     //GOD INFO IS THE PAGE WITH PENCIL AND TRASH DO EDIT AND DELETE GOD
 }
 
-async function addResourcesToEditGodPage(godId) {
+export async function addResourcesToEditGodPage(godId) {
     try {
         const response = await fetch(
             `http://localhost:8080/godstable/${godId}/`
@@ -624,7 +648,7 @@ async function deleteGodFromDatabase(godId) {
 }
 
 //#input-cat-edit-name//cat
-async function addResourcesToEditCategoryPage(id) {
+export async function addResourcesToEditCategoryPage(id) {
     try {
         const response = await fetch(
             `http://localhost:8080/categoriestable/${id}/`
