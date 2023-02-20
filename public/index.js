@@ -86,7 +86,7 @@ export async function addExternalResourcesTo(url, criteria) {
             addResourcesToEditGodPage(criteria.godId);
             break;
         case "/editCategory":
-            /////// addResourcesToEditCategoryPage(criteria.godId);
+            addResourcesToEditCategoryPage(criteria.id);
             break;
     }
 }
@@ -623,6 +623,62 @@ async function deleteGodFromDatabase(godId) {
     }
 }
 
+//#input-cat-edit-name//cat
+async function addResourcesToEditCategoryPage(id) {
+    try {
+        const response = await fetch(
+            `http://localhost:8080/categoriestable/${id}/`
+        );
+        console.log("STATUS EDIT:", response.status);
+        if (response.status !== 200 && response.status !== 201)
+            throw "[erro] Houve um problema na requisicao!";
+
+        const objContent = await response.json();
+        console.log(
+            "Resultado da requisição GET CATEGORY INFOMRATION BY ID:",
+            objContent
+        );
+        /*
+        const godInformation = {
+            id: "9",
+            name: "FULANO DE TAL",
+            status: "GOD",
+            resume: "QQQQQAQAQ",
+            src_img: "exampleGod.png",
+        };
+        */
+        const catInformation = objContent.data[0];
+        /// renderCategoriesOnMainPage(objContent.data);
+        // const quantify = categories.length;
+
+        //INSERIR OS DADOS DO DEUS NA PÁGINA
+        //INSERIR OS DADOS DO DEUS NA PÁGINA
+
+        //const container_data = document.querySelector("#container-see-god");
+        testInserirElementosNaEditCategoryPage(catInformation);
+        //testAddElements(godInformation);
+    } catch (error) {
+        console.log("Erro durante o fetch:", error);
+    }
+}
+
+function testInserirElementosNaEditCategoryPage(catInformation) {
+    const inputCatEditName = document.querySelector("#input-cat-edit-name");
+    const inputCatEditColor = document.querySelector("#input-cat-edit-color");
+    inputCatEditName.value = catInformation.name;
+    inputCatEditColor.value = catInformation.hex_color;
+    //
+    const containerEditCategory = document.querySelector(
+        "#container-edit-category"
+    );
+    containerEditCategory.dataset.id = catInformation.id; //add-set
+}
+
+//input-cat-edit-name
+//input-cat-edit-color
+
+/////----------------------------------------------------------SONA DE TESTES
+
 //ZONA DE TESTES
 
 //------------------------------------------------------------------------
@@ -1035,6 +1091,24 @@ async function addNewGodInDatabase() {
         console.log(error);
     }
 }
+//
+
+function getCategoryInputInformations(id) {
+    let obj = {};
+
+    const inputNameUpdate = document.querySelector("#input-cat-edit-name");
+    obj.name = inputNameUpdate.value;
+
+    const inputColorUpdate = document.querySelector("#input-cat-edit-color");
+    obj.hexColor = inputColorUpdate.value;
+
+    obj.src = "ExampleTemple.png";
+
+    console.log("CRIADO CERTINHO DO CATEGORI:", obj);
+    return obj;
+}
+
+//
 
 async function updateGodInformationInDatabase(godId) {
     const objUpdateGod = getGodInputInformations(godId);
@@ -1065,6 +1139,10 @@ async function updateGodInformationInDatabase(godId) {
         console.log(error);
     }
 }
+
+///
+
+///
 
 function getGodInputInformations(godId) {
     let obj = {};
@@ -1140,11 +1218,124 @@ function addEventsToEditCategoryPage() {
     btnCancel.addEventListener("click", () => {
         redirectToTableEditCategories();
     });
-    const btnEditCategory = document.querySelector("#Adicionar");
+    //
+    // #Adicionar;
+    const btnEditCategory = document.querySelector("#Atualizar");
     btnEditCategory.addEventListener("click", () => {
+        // Adicionar aquia função que faz o fetch pra adicionar
+        //
+        //
+        //pegar o id que está armazenado num data-set
+        const id = document.querySelector("#container-edit-category").dataset
+            .id;
+        updateCategoryInformationInDatabase(id);
+
+        //////
         redirectToTableEditCategories();
     });
 }
+//
+
+async function updateCategoryInformationInDatabase(id) {
+    const objUpdateCategory = getCategoryInputInformations(id);
+    //FAZER O FETCH
+
+    try {
+        const response = await fetch(
+            `http://localhost:8080/categoriestableEdit/${id}`,
+            {
+                method: "PUT",
+                body: JSON.stringify(objUpdateCategory),
+                headers: { "Content-type": "application/json; charset=UTF-8" },
+            }
+        );
+        console.log("RESPOSTA DA REQUISIÇÃO EDIT CATEGORY:", response.status);
+
+        if (response.status !== 200 && response.status !== 201) {
+            const resJson = await response.json();
+            const { message, error } = resJson;
+            displayWarning(resJson.error);
+            throw `${error}`;
+        }
+        const resJson = await response.json();
+        console.log("Requisição de EDIT CATEGORY deu certo:", resJson);
+        displayWarning(resJson.message); //deu tudo  certo
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//
+/*
+async function updateCategoryInformationInDatabase(godId) {
+    const objUpdateGod = getCategoryInputInformations(godId);
+
+    //FAZER O FETCH
+
+    try {
+        const response = await fetch(
+            `http://localhost:8080/godstableEdit/${godId}`,
+            {
+                method: "PUT",
+                body: JSON.stringify(objUpdateGod),
+                headers: { "Content-type": "application/json; charset=UTF-8" },
+            }
+        );
+        console.log("RESPOSTA DA REQUISIÇÃO ADD GOD:", response.status);
+
+        if (response.status !== 200 && response.status !== 201) {
+            const resJson = await response.json();
+            const { message, error } = resJson;
+            displayWarning(resJson.error);
+            throw `${error}`;
+        }
+        const resJson = await response.json();
+        console.log("Requisição de EDIT GOD deu certo:", resJson);
+        displayWarning(resJson.message); //deu tudo  certo
+    } catch (error) {
+        console.log(error);
+    }
+}
+*/
+//
+/*
+async function updateGodInformationInDatabase(godId) {
+    const objUpdateGod = getGodInputInformations(godId);
+
+    //FAZER O FETCH
+
+    try {
+        const response = await fetch(
+            `http://localhost:8080/godstableEdit/${godId}`,
+            {
+                method: "PUT",
+                body: JSON.stringify(objUpdateGod),
+                headers: { "Content-type": "application/json; charset=UTF-8" },
+            }
+        );
+        console.log("RESPOSTA DA REQUISIÇÃO ADD GOD:", response.status);
+
+        if (response.status !== 200 && response.status !== 201) {
+            const resJson = await response.json();
+            const { message, error } = resJson;
+            displayWarning(resJson.error);
+            throw `${error}`;
+        }
+        const resJson = await response.json();
+        console.log("Requisição de EDIT GOD deu certo:", resJson);
+        displayWarning(resJson.message); //deu tudo  certo
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+*/
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+//FIM DA ZONA DE EDICOES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+//--------------------------------------------------------------------------
+
 /*********************************************/
 /*eventos que são adicionados em todo header*/
 /*********************************************/
