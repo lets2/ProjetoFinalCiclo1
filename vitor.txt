@@ -62,5 +62,5 @@ proxs passos:
 
 *ATE SEGUNDA:
 -> CRIAR BANCO (OKAY)
--> FAZER O BANCO FUNCIONAR COM AS ROTAS Q JA teMOS
-Add novas rotas!!!!! GET
+-> FAZER O BANCO FUNCIONAR COM AS ROTAS Q JA teMOS (OKAY)
+Add novas rotas!!!!! GET, Adicionei também POST,PUT e DELETE

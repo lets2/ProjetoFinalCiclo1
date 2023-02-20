@@ -50,7 +50,7 @@ export function Categories() {
 	`;
 
     document.addEventListener("DOMContentLoaded", () => {
-        console.log("entrou no evento externo da main");
+        // console.log("entrou no evento externo da main");
         //addExternalResourcesTo("/");
         //addEventsToPrincipal();
         //addExternalResourcesTo("/categories");
@@ -110,8 +110,10 @@ export function redirectToGodInfoPage(godId) {
     window.dispatchEvent(eventStateChange);
 }
 /*@author:Gabriela - coauthor: Letônio*/
-export function redirectToEditGodPage() {
-    const eventStateChange = CriaEventStateChange("/editGod/g1");
+export function redirectToEditGodPage(godId) {
+    const eventStateChange = CriaEventStateChange("/editGod/g1", {
+        godId: godId,
+    });
     window.dispatchEvent(eventStateChange);
 }
 /*@author:Gabriela - coauthor: Letônio*/
@@ -125,7 +127,7 @@ export function redirectToAddCategory() {
     window.dispatchEvent(eventStateChange);
 }
 /*@author:Gabriela - coauthor: Letônio*/
-export function redirectToEditCategory() {
-    const eventStateChange = CriaEventStateChange("/editCategory");
+export function redirectToEditCategory(id) {
+    const eventStateChange = CriaEventStateChange("/editCategory", { id: id });
     window.dispatchEvent(eventStateChange);
 }
