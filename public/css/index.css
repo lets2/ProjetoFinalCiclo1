@@ -378,7 +378,7 @@ background-image: url("../assets/icons/arrow-left-white.svg");
 /* outline: .2rem solid red; */
 
 .container-circles{
-	width: 25.0rem;
+	width: auto;
 	margin: 4.0rem .0rem;
 	
 }
@@ -389,6 +389,7 @@ background-image: url("../assets/icons/arrow-left-white.svg");
 	border-radius: 50%;
 	border: none;
 	pointer-events: none;
+	margin: 0rem 1rem; 
 }
 .circle-orange{
 	background-color: var(--color-bg-arrow-hover);

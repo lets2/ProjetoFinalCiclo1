@@ -415,16 +415,16 @@ select,option{
 }
 #create-new-category{
 	font-size: var(--size-font-t7);
-	width: auto;
-	padding: 1.0rem 2.0rem;
-	font-weight: bold;
-	border: none;
-	cursor: pointer;
+    width: 35rem;
+    padding: 2.2rem 2rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
 }
-.container-table{
+.div-table-categories{
 	overflow-y: auto;
 	width: 100%;
-	margin-top: 5.0rem;
+	margin-top: 3.0rem;
 }
 
 table {

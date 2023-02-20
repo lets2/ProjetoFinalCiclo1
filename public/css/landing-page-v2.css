@@ -281,7 +281,7 @@ relacionada aquele elemento
 
 #main-tittle{
     position: absolute;
-    top: 10.5rem;
+    top: 15rem;
     left: 17rem;
     font-family: 'MedievalSharp', cursive;
     font-weight:700;
@@ -290,7 +290,7 @@ relacionada aquele elemento
 
 #subtittle{
     position: absolute;
-    top: 22rem;
+    top: 25rem;
     left: 33rem;
     font-size: 3.8rem;
     font-family: 'MedievalSharp', cursive;
@@ -299,8 +299,8 @@ relacionada aquele elemento
 
 #button{
     position: absolute;
-    bottom: 30rem;
-    left: 60rem;
+    bottom: 26rem;
+    left: 55rem;
     background-color: #d9d9d91a ;
     border: 3px solid var(--color-white);
     border-radius: 1rem;

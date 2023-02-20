@@ -23,7 +23,7 @@ export function Menu() {
         <!-- @author: Letônio, co-author: Gabriela -- só troquei os ícones e o texto do menu --> 
         <div class="container-content-page flex-row-between">
             <aside class="sidebar-menu-adm flex-col-between">
-                <figure class="flex-col-center">
+                <figure class="flex-col-center" id="box-menu">
                     <h2 id="adm-name">Menu</h2>
                 </figure>
                 <ul class="sidebar-options">
