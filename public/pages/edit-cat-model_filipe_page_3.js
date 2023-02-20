@@ -25,19 +25,19 @@ export function EditCategory() {
             <div class="retangulo">
             </div>
 
-            <div class="p3-background flex-col-justify-center"> 
+            <div id="container-edit-category" class="p3-background flex-col-justify-center"> 
 
                 <div class="nome-categoria cor-categoria flex-col-center">
 
-                    <input type="text" placeholder="Nome da categoria">
-                    <input type="text" placeholder="Cor da categoria">
+                    <input id="input-cat-edit-name" type="text" placeholder="Nome da categoria">
+                    <input id="input-cat-edit-color" type="text" placeholder="Cor da categoria">
 
                 </div>
 
                 <div class="button-cancelar button-adicionar flex-row-between">
 
                     <button id="Cancelar" type="submit">Cancelar</button>
-                    <button id="Adicionar" type="submit">Atualizar</button>
+                    <button id="Atualizar" type="submit">Atualizar</button>
 
                 </div>
             </div>
