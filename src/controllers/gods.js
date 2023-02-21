@@ -79,6 +79,9 @@ exports.getById = async (req, res) => {
     }
 };
 
+//precisei do path aqui:
+const path = require("path");
+
 /*POST/CREATE METHOD*/
 exports.createGod = async (req, res) => {
     //determinar o IP de quem fez a requisição
@@ -88,7 +91,25 @@ exports.createGod = async (req, res) => {
     console.time(`createGod()${milliseconds}`);
 
     // TTRY TO GET PARAMETERS FROM REQ.BODY E VERIFY IF ARE OKAY
-    const { name, status, categoryId, resume, src } = req.body;
+    ////////const { name, status, categoryId, resume, src } = req.body;
+
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    //FAZENDO O MULTER pegando os dados;
+
+    const filename = req.file.filename;
+    const mimetype = req.file.mimetype;
+    const extension = path.extname(req.file.originalname);
+    const nameWithExtension = filename + extension;
+
+    const name = req.body.name;
+    const status = req.body.status;
+    const resume = req.body.resume;
+    const categoryId = req.body.categoryId;
+
+    //const src = nameWithExtension;
+    const src = filename; //Não precisa de extensão, é so o codigo mesmo!
+    const fileName = nameWithExtension;
+    //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
     //Standardizing the response that the frontend will receive.
     const response = {

@@ -27,7 +27,7 @@ export function Categories() {
 				<img class="category-arrow category-arrow-left" src="../assets/icons/arrow-left-white.svg" alt="">
 			</div>
 			<figure class="container-temples">
-				<img class="temple" id="temple"src="../assets/images/temples/templo_natureza.jpg" alt="">
+				<img class="temple" id="temple"src="../assets/uploads/templo_natureza.jpg" alt="">
 				<h1 class="temple-legend"></h1>
 			</figure>
 			<div class="container-arrow flex-center-center">

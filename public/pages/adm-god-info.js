@@ -24,7 +24,7 @@ export function GodInfo() {
 	<div class="flex-row-center" id="container-see-god">
 		<div class="flex-col-center" id="box-img-see-god">
 			<div id="img-god">
-				<img src="../assets/images/games-god.jpg" alt="">
+				<img src="../assets/uploads/games-god.jpg" alt="">
 			</div>
 			<div id="box-btns" class="flex-row-between">
 				<button id="edit-god-button" class="buttons"><img src="../assets/icons/edit.svg" alt=""></button>

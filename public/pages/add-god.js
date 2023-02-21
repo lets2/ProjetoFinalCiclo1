@@ -27,6 +27,10 @@ export function AddGod() {
                     <img src="../assets/images/games-god.jpg" alt="">
                 </div>
                 <button class="btns-add-god">Mudar imagem</button>
+                <label>
+                    Arquivo:
+                    <input type="file" name="file" accept="image/png, image/jpeg, image/jpg">
+                </label>
             </div>
             <form action="" class="flex-col-center">
                 <div class="flex-col-center" id="box-inputs-add-god">

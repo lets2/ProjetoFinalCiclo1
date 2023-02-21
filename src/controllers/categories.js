@@ -244,7 +244,9 @@ exports.createCategory = async (req, res) => {
 
     const name = req.body.name;
     const hexColor = req.body.hexColor;
-    const src = nameWithExtension;
+    //const src = nameWithExtension;
+    const src = filename; //Não precisa de extensão, é so o codigo mesmo!
+
     const fileName = nameWithExtension;
 
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

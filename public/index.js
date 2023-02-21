@@ -256,7 +256,7 @@ function renderImgCategory(
 ) {
     const imagem = document.querySelector("#temple");
     const categoryTitle = document.querySelector(".temple-legend");
-    imagem.setAttribute("src", `./assets/images/temples/${categorySrc}`);
+    imagem.setAttribute("src", `./assets/uploads/${categorySrc}`);
     ////imagem.dataset.index = categoryIndex; //adiciona um atributo personalizado dataset a imagem
     ///// imagem.dataset.quantify = categoryQuantify; //adiciona um atributo personalizado dataset a imagem
     ////imagem.dataset.id = categoryId; //adiciona um atributo personalizado dataset a imagem
@@ -285,7 +285,7 @@ function insertImages(arrayGods) {
     cardsGods.forEach((element, index) => {
         element.setAttribute(
             "src",
-            `../assets/images/gods/${arrayGods[index].src_img}`
+            `../assets/uploads/${arrayGods[index].src_img}`
         );
         //save in img god a dataset with god id
         element.dataset.godId = arrayGods[index].id;
@@ -300,7 +300,7 @@ function insertCategoryName(nameCategory) {
 function testInserirElementosNaEditGodPage(godObj) {
     const containerImgGod = document.querySelector("#edit-page-god-img");
     containerImgGod.innerHTML = `
-    <img src="../assets/images/gods/${godObj.src_img}" alt="">
+    <img src="./public/assets/uploads/${godObj.src_img}" alt="">
     `;
 
     const inputEditGodName = document.querySelector(
@@ -805,11 +805,34 @@ function addEventsToAddCategoryPage() {
 async function addNewGodInDatabase() {
     const newNameGod = document.querySelector("#new-name-god").value;
     const newStatusGod = document.querySelector("#new-status-god").value;
-    const newResumeGod = document.querySelector("#new-name-god").value;
+    const newResumeGod = document.querySelector("#new-resume-god").value;
 
-    const srcExample = "exampleGod.png";
-    const categoryId = "4"; //Precisamos modificar a página para receber categoria também
+    //const srcExample = "exampleGod.png";
+    const categoryId = "1"; //Precisamos modificar a página para receber categoria também
 
+    //--------------------------
+    //
+    //
+
+    //
+    /////////////
+    //Tentando fazer a adicão de arquivo:
+    const formData = new FormData();
+    const fileInput = document.querySelector('input[type="file"]');
+
+    // Adiciona a imagem ao FormData
+    formData.append("file", fileInput.files[0]);
+
+    // Adiciona as 4 strings ao FormData
+    formData.append("name", newNameGod);
+    formData.append("status", newStatusGod);
+    formData.append("resume", newResumeGod);
+    formData.append("categoryId", categoryId);
+
+    ////
+
+    //
+    /*
     const newGod = {
         name: newNameGod,
         status: newStatusGod,
@@ -817,13 +840,24 @@ async function addNewGodInDatabase() {
         categoryId: categoryId,
         src: srcExample,
     };
-
+    */
     try {
         const response = await fetch("http://localhost:8080/godstablecreate", {
             method: "POST",
-            body: JSON.stringify(newGod),
-            headers: { "Content-type": "application/json; charset=UTF-8" },
+            body: formData,
+            //headers: { "Content-type": "application/json; charset=UTF-8" },
         });
+
+        /*
+        const response = await fetch(
+            "http://localhost:8080/godstablecreate",
+            {
+                method: "POST",
+                body: JSON.stringify(newCategory),
+                headers: { "Content-type": "application/json; charset=UTF-8" },
+            }
+        );
+        */
         console.log("RESPOSTA DA REQUISIÇÃO ADD GOD:", response.status);
 
         if (response.status !== 200 && response.status !== 201) {
