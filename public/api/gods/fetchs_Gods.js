@@ -29,12 +29,11 @@ export async function addResourcesToGodChoosed(godId) {
                 ${godInformation.resume}
                 </p>
             </div>`;
-
+        return godInformation;
     } catch (error) {
         console.log("Erro durante o fetch:", error);
     }
 }
-
 
 //@author:filipe
 export async function addResourcesToTableOfGods() {
@@ -61,8 +60,7 @@ export async function addResourcesToTableOfGods() {
         const objContentGods = await responseGods.json();
         const dataGods = objContentGods.data;
 
-        return {dataCategories, dataGods}
-
+        return { dataCategories, dataGods };
     } catch (error) {
         console.log("Erro durante o fetch:", error);
     }
@@ -87,9 +85,9 @@ export async function addResourcesToGodInfo(godId) {
 
         const objContent = await response.json();
         console.log("Resultado da requisição VER GOD INFO:", objContent);
-        
+
         const godInformation = objContent.data[0];
-        
+
         const container_data = document.querySelector("#container-see-god");
         container_data.innerHTML = "";
         container_data.innerHTML = `
@@ -117,7 +115,7 @@ export async function addResourcesToGodInfo(godId) {
                 </div>
             </form>
             `;
-    
+
         return godInformation;
     } catch (error) {
         console.log("Erro durante o fetch:", error);
@@ -137,12 +135,11 @@ export async function addResourcesToEditGodPage(godId) {
 
         const objContent = await response.json();
         console.log("Resultado da requisição EDIT PAGE:", objContent);
-       
-        const godInformation = objContent.data[0];
-        console.log(godInformation, "GOD IN=FOOOO")
-    
-        return godInformation;
 
+        const godInformation = objContent.data[0];
+        console.log(godInformation, "GOD IN=FOOOO");
+
+        return godInformation;
     } catch (error) {
         console.log("Erro durante o fetch:", error);
     }

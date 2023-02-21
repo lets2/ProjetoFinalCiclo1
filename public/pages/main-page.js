@@ -28,7 +28,7 @@ export function Categories() {
 			</div>
 			<figure class="container-temples">
 				<img class="temple" id="temple"src="../assets/images/temples/templo_natureza.jpg" alt="">
-				<h1 class="temple-legend">Deuses da Natureza</h1>
+				<h1 class="temple-legend"></h1>
 			</figure>
 			<div class="container-arrow flex-center-center">
 				<img class="category-arrow category-arrow-right" src="../assets/icons/arrow-right-white.svg" alt="">
@@ -36,11 +36,7 @@ export function Categories() {
 			
 		</div>
 		<div class="container-circles flex-row-between">
-			<button class="circle"></button>
-			<button class="circle"></button>
-			<button class="circle circle-orange"></button>
-			<button class="circle"></button>
-			<button class="circle"></button>
+	
 		</di>
 	</div>
 	

@@ -191,7 +191,8 @@ exports.getFromTableById = async (req, res) => {
     console.time(`getFromTableById()${milliseconds}`);
     //precisa tratar algum parâmetro?
     const id = req.params.id; //get index from url
-
+    console.log("OLHA O ID QUE CHEGOU NO CONTROLER:", id);
+    console.log("---------------------------------");
     //Standardizing the response that the frontend will receive.
     const response = {
         message: "",

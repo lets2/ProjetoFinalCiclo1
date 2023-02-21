@@ -24,15 +24,30 @@ import { redirectToAllCategories } from "./pages/categories-page.js";
 
 import GeraObjComRotas from "./pages/router.js";
 
+//------------------------------------------
+//------------------------------------------
+//------------------------------------------
+//Variveis globais para substituicão do dataset e fetchs
+let catId = "";
+let godId = "";
+let categoriesList = [];
+let currentIndexCategory; //
+let godsOfACategory = [];
+let godsList = [];
+//
+
 //------------------------------------------------------------------------
 // RENDER INITIAL PAGE (LANDING PAGE)
 //------------------------------------------------------------------------
 
 const root = document.querySelector("#root");
+
 const objRotas = GeraObjComRotas();
 const page = objRotas.getPage("/");
+
 root.innerHTML = "";
 root.appendChild(page);
+
 addExternalResourcesTo("/");
 addEventsRelatedTo("/"); //call relateds events to page/url
 
@@ -49,8 +64,8 @@ window.addEventListener("onstatechange", async (event) => {
     root.innerHTML = "";
     root.appendChild(page);
     console.log("URL:", url, "Criteria:", criteria);
-    const respostaIndex = await addExternalResourcesTo(url, criteria);
 
+    const respostaIndex = await addExternalResourcesTo(url, criteria);
     console.log("RESPOSTA VINDO DO FETCH", respostaIndex);
     chamaFuncaoEspecificaPelaUrl(url, respostaIndex);
 
@@ -61,16 +76,19 @@ window.addEventListener("onstatechange", async (event) => {
 function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
     switch (url) {
         case "/categories":
-            renderCurrentCategoryOnCategoriesPage(respostaIndex);
+            categoriesList = respostaIndex; //nesse caso respostaIndex = lista de categorias
+            renderCurrentCategoryOnCategoriesPage(categoriesList);
             break;
         case "/categories/:id":
-            insertImages(respostaIndex.arrayGods);
-            insertCategoryName(respostaIndex.nameCategory);
+            godsOfACategory = respostaIndex; //nesse caso respostaIndex = lista de deuses de cat. especif.
+            insertImages(godsOfACategory);
+            insertCategoryName(godsOfACategory[0].name_category);
             break;
         case "/categories/d1":
             break;
         case "/tableCategories":
-            addLinesCategoryTable(respostaIndex);
+            categoriesList = respostaIndex; //respostaIndex tem a lista de categorias
+            addLinesCategoryTable(categoriesList);
             break;
         case "/tableGods":
             addSelectWithCategories(respostaIndex.dataCategories);
@@ -102,6 +120,7 @@ function addLinesCategoryTable(data) {
                 </tr>`;
         const lineTable = document.querySelector(`#catline0${i}`); //get line by #id
         lineTable.dataset.id = data[i].id;
+
         //it is important to save the identifier for future queries
     }
     //return thead;
@@ -119,7 +138,7 @@ function adicionaEventosNosLapis() {
     listaDeImagensDeLapis.forEach((imgLapis) => {
         imgLapis.addEventListener("click", (event) => {
             const catId = event.target.parentNode.parentNode.dataset.id;
-
+            console.log("ZZZZZZZZ LAPIS OLHA O DATASET DELE:", catId);
             redirectToEditCategory(catId);
         });
     });
@@ -216,15 +235,16 @@ function renderCurrentCategoryOnCategoriesPage(categories) {
         index = Math.floor(quantify / 2);
     } else Math.floor(quantify / 2) - 1;
     index = 2; /*@author:letonio - posteriormente, retirar essa linha!!*/
+    currentIndexCategory = 2; //Variavel global
     renderImgCategory(
-        index,
+        currentIndexCategory,
         quantify,
-        categories[index].id,
-        categories[index].name,
-        categories[index].src
+        categories[currentIndexCategory].id,
+        categories[currentIndexCategory].name,
+        categories[currentIndexCategory].src
     );
 
-    renderBallsBelowImg(index, quantify);
+    renderBallsBelowImg(currentIndexCategory, quantify);
 }
 
 function renderImgCategory(
@@ -237,9 +257,9 @@ function renderImgCategory(
     const imagem = document.querySelector("#temple");
     const categoryTitle = document.querySelector(".temple-legend");
     imagem.setAttribute("src", `./assets/images/temples/${categorySrc}`);
-    imagem.dataset.index = categoryIndex; //adiciona um atributo personalizado dataset a imagem
-    imagem.dataset.quantify = categoryQuantify; //adiciona um atributo personalizado dataset a imagem
-    imagem.dataset.id = categoryId; //adiciona um atributo personalizado dataset a imagem
+    ////imagem.dataset.index = categoryIndex; //adiciona um atributo personalizado dataset a imagem
+    ///// imagem.dataset.quantify = categoryQuantify; //adiciona um atributo personalizado dataset a imagem
+    ////imagem.dataset.id = categoryId; //adiciona um atributo personalizado dataset a imagem
 
     //dessa forma é possível manter no elemento a posicao daquele elemento no array
     categoryTitle.innerText = categoryName;
@@ -276,7 +296,6 @@ function insertCategoryName(nameCategory) {
     console.log(nameCategory);
     document.querySelector(".phrase").innerHTML = nameCategory;
 }
-
 
 function testInserirElementosNaEditGodPage(godObj) {
     const containerImgGod = document.querySelector("#edit-page-god-img");
@@ -446,11 +465,11 @@ export function addEventsToCategoriesPage() {
     const containerTemples = document.querySelector(".container-temples");
     containerTemples.addEventListener("click", () => {
         console.log(
-            "Category id, saved on dataset.id:",
-            containerTemples.childNodes[1].dataset.id
+            "QUER MOSTRAR DADOS DESSA CATEGORIAS:",
+            categoriesList[currentIndexCategory].id
         );
-        const id = containerTemples.childNodes[1].dataset.id;
-        redirectToCategoryChoosed(id);
+        ///const id = containerTemples.childNodes[1].dataset.id;
+        redirectToCategoryChoosed(categoriesList[currentIndexCategory].id);
     });
 
     /*change arrow color on hover*/
@@ -468,10 +487,10 @@ export function addEventsToCategoriesPage() {
 
     arrowLeft.addEventListener("click", () => {
         const templeImage = document.querySelector("#temple");
-        console.log("Olha o valor de dataset:", templeImage.dataset.id);
-        if (parseInt(templeImage.dataset.index) > 0) {
-            const newIndex = parseInt(templeImage.dataset.index) - 1;
-            updateTempleContent(newIndex);
+        console.log("Olha o valor do indiceATUAL:", currentIndexCategory);
+        if (currentIndexCategory > 0) {
+            currentIndexCategory = currentIndexCategory - 1;
+            updateTempleContent(currentIndexCategory);
         }
     });
 
@@ -492,12 +511,11 @@ export function addEventsToCategoriesPage() {
 
     arrowRight.addEventListener("click", () => {
         const templeImage = document.querySelector("#temple");
-        if (
-            parseInt(templeImage.dataset.index) <
-            parseInt(templeImage.dataset.quantify) - 1
-        ) {
-            const newIndex = parseInt(templeImage.dataset.index) + 1;
-            updateTempleContent(newIndex);
+        if (currentIndexCategory < categoriesList.length - 1) {
+            //
+            currentIndexCategory = currentIndexCategory + 1;
+            //
+            updateTempleContent(currentIndexCategory);
         }
     });
 
@@ -514,32 +532,32 @@ function addEventsToMainPageTest() {
     });
 }
 
-async function updateTempleContent(newIndex) {
-    console.log("valor de newIndex", newIndex);
-    try {
-        const response = await fetch(`http://localhost:8080/categories/`);
-        console.log("STATUS:", response.status);
-        if (response.status !== 200 && response.status !== 201)
-            throw "[erro] Houve um problema na requisicao!";
+function updateTempleContent(newIndex) {
+    console.log("valor de newIndex:", newIndex);
+    //try {
+    // const response = await fetch(`http://localhost:8080/categories/`);
+    //   console.log("STATUS:", response.status);
+    //   if (response.status !== 200 && response.status !== 201)
+    //    throw "[erro] Houve um problema na requisicao!";
 
-        const objContent = await response.json();
-        const categories = objContent.data;
-        /// renderCategoriesOnMainPage(objContent.data);
-        const quantify = categories.length;
-        renderImgCategory(
-            newIndex,
-            quantify,
-            categories[newIndex].id,
-            categories[newIndex].name,
-            categories[newIndex].src
-        );
-        //renderImgCategory(newclId, objContent.data.name, objContent.data.src);
-        //found-out total balls
-        //const quantify = document.querySelectorAll(".circle").length;
-        renderBallsBelowImg(newIndex, quantify);
-    } catch (error) {
-        console.log("Erro durante o fetch:", error);
-    }
+    // const objContent = await response.json();
+    //const categories = objContent.data;
+    /// renderCategoriesOnMainPage(objContent.data);
+    const quantify = categoriesList.length;
+    renderImgCategory(
+        newIndex,
+        quantify,
+        categoriesList[newIndex].id,
+        categoriesList[newIndex].name,
+        categoriesList[newIndex].src
+    );
+    //renderImgCategory(newclId, objContent.data.name, objContent.data.src);
+    //found-out total balls
+    //const quantify = document.querySelectorAll(".circle").length;
+    renderBallsBelowImg(newIndex, quantify);
+    //} catch (error) {
+    //    console.log("Erro durante o fetch:", error);
+    //}
 }
 
 /*eevents related to the page of the chosen category*/
@@ -601,10 +619,12 @@ function addEventsToAdmMenuPage() {
 
 /*@author:filipe - coauthor: gabriela*/
 /*Adicionando eventos na página que tem uma tabela de categorias*/
+
 function addEventsToCategoryTablePage() {
     addEventsToHeader();
     //addLinesCategoryTable();
     /*insere evento no botao de add categoria*/
+    /*
     const btnAddCategory = document.querySelector("#create-new-category");
 
     btnAddCategory.addEventListener("click", () => {
@@ -617,9 +637,11 @@ function addEventsToCategoryTablePage() {
     for (let i = 0; i < btnEditCategory.length; i++) {
         btnEditCategory[i].addEventListener("click", () => {
             console.log("ESTÁ FUNCIONANDO O EVENTO");
+
             redirectToEditCategory();
         });
     }
+    */
 }
 
 /*@author:filipe - coauthor: Letônio*/
@@ -643,6 +665,7 @@ function addEventsToGodTablePage() {
         const rowElement = event.target.parentNode;
         if (event.target.parentNode.tagName === "TR") {
             const godId = rowElement.dataset.godId;
+            console.log("LINHA664 - GODEVENT:", godId);
             redirectToGodInfoPage(godId);
         }
     });
@@ -671,9 +694,28 @@ function addEventsToAddNewGodPage() {
 
 /*@author:Gabriela - coauthor: Letônio*/
 /*Add eventos na página que mostra infos sobre deuses (inclusive editar/excluir)*/
+
+/*
+Sobre essa função ai abaixo: Ela foi escrita primiro
+e a ideia era armazenar nela os eventos na pagina de informações sobre um deus
+incluindo evento de editar e excluir.
+No entando, durante o desenvovimento, por algum motivo nao estava
+funcionando os eventos listener, como resultado
+acabou-se sendo criada outra funcao similar, cujo o nome é:
+testAddElements(godObj) linha 326
+Ai ela recebe um objeto contendo todas as informações sobre o deus
+que foi clicado e exibe na tela a tela de info,
+ai acabou que ficou duplicado alguns negocios,
+então para corrigir isso, optu-se por COMENTAR o conteúdo da funcao abaixo!
+e manter apenas a que esta na linha 326
+
+*/
+
 function addEventsToAdmGodInfoPage() {
     addEventsToHeader();
     /*Add eventos para quando clicam em EDITAR E EXCLUIR */
+
+    /*
     const editGodButton = document.querySelector("#edit-god-button");
     console.log(
         "ENTROU NO EVENTO DE ADICIONAR ALGO NO BOTAO DE EDIT",
@@ -681,6 +723,7 @@ function addEventsToAdmGodInfoPage() {
     );
     editGodButton.addEventListener("click", () => {
         console.log("ACESSOU O EVENTO DO BOTÃO DE CLICK");
+        //const godId = 
         redirectToEditGodPage();
     });
 
@@ -692,6 +735,7 @@ function addEventsToAdmGodInfoPage() {
         console.log("Voltamos para a página anterior de edição de deuses");
         redirectToTableEditGods();
     });
+    */
 }
 
 /*@author:Gabriela - coauthor: Letônio*/
