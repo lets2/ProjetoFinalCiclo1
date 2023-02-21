@@ -1,17 +1,17 @@
 //FAZENDO IMPORTS
 import {
+    addResourcesToCategoriesPage,
+    addResourcesToCategoryChoosed,
+    addResourcesToTableOfCategories,
+    addResourcesToEditCategoryPage,
+} from "./categories/fetchs_Categories.js";
+
+import {
+    addResourcesToGodChoosed,
     addResourcesToTableOfGods,
     addResourcesToGodInfo,
     addResourcesToEditGodPage,
-    addResourcesToEditCategoryPage,
-} from "../index.js";
-
-import {
-    addResourcesToCategoriesPage,
-    addResourcesToCategoryChoosed,
-    addResourcesToGodChoosed,
-    addResourcesToTableOfCategories,
-} from "./categories/fetchs_Categories.js";
+} from "./gods/fetchs_Gods.js";
 
 //------------------------------------------------------------------------
 // ADDS RESOURCES TO THE PAGE THA WAS RENDERED ACCORDING URL
@@ -34,26 +34,19 @@ export async function addExternalResourcesTo(url, criteria) {
 
         case "/categories/d1":
             return addResourcesToGodChoosed(criteria.godId);
-        ///
-        //
-        //
-        //
 
         case "/tableCategories":
-            return addResourcesToTableOfCategories();
+            return addResourcesToTableOfCategories(criteria);
         case "/tableGods":
-            addResourcesToTableOfGods();
-            break;
+            return addResourcesToTableOfGods(criteria);
 
         case "/godInfo/g1":
-            await addResourcesToGodInfo(criteria.godId);
-            break;
+            return await addResourcesToGodInfo(criteria.godId);
 
         case "/editGod/g1":
-            addResourcesToEditGodPage(criteria.godId);
-            break;
+            return addResourcesToEditGodPage(criteria.godId);
+
         case "/editCategory":
-            addResourcesToEditCategoryPage(criteria.id);
-            break;
+            return addResourcesToEditCategoryPage(criteria.id);
     }
 }
