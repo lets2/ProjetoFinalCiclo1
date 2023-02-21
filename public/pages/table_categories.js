@@ -24,7 +24,7 @@ export function TableCategories() {
                
             <button id="create-new-category">Criar categoria</button>
 
-            <div class="container-table" id= "div-table-categories">
+            <div class="container-table">
                 <table id="table-categories">
                     <thead>
                         <tr>

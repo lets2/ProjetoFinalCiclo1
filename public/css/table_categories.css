@@ -372,7 +372,6 @@ relacionada aquele elemento
 	 background-color: var(--color-white);
 	 border-radius: 50%;
 	 border: none;
-	 pointer-events: none;
  }
  .circle-orange{
 	 background-color: var(--color-bg-arrow-hover);
@@ -415,16 +414,16 @@ select,option{
 }
 #create-new-category{
 	font-size: var(--size-font-t7);
-    width: 35rem;
-    padding: 2.2rem 2rem;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
+	width: auto;
+	padding: 1.0rem 2.0rem;
+	font-weight: bold;
+	border: none;
+	cursor: pointer;
 }
-.div-table-categories{
+.container-table{
 	overflow-y: auto;
 	width: 100%;
-	margin-top: 3.0rem;
+	margin-top: 5.0rem;
 }
 
 table {

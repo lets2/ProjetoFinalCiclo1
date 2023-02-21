@@ -29,7 +29,6 @@ export function GodInfo() {
 			<div id="box-btns" class="flex-row-between">
 				<button id="edit-god-button" class="buttons"><img src="../assets/icons/edit.svg" alt=""></button>
 				<button id="delete-god-button" class="buttons"><img src="../assets/icons/mdi_trash.svg" alt=""></button>
-				<button id="back-god-button" class="buttons"><img src="../assets/icons/back-arrow-icon-white.svg" alt=""></button>
 			</div>
 		</div>
 		<form action="" class="flex-col-center">

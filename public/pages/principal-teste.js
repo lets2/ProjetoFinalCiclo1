@@ -19,16 +19,15 @@ export function PrincipalTeste() {
 			<img id="menu-icon" src="../assets/icons/menu.svg" alt="">
 		</div>
 	</header>
-	<div id="background-space"></div>
-    <img id="background-temple" src="../assets/images/background-temple2.png">
-
-    <main class="main-landing-page flex-center-center">
-        <div class="container-total flex-center-center">
-            <h2 id="main-tittle">GODPEDIA</h2>
-            <p id="subtittle">novos tempos, novos deuses...</p>
-            <button class="button-see-more" id="button">ver mais</button>
-        </div>
-    </main>  
+	<div id="background-space">
+		<main class="main-landing-page flex-center-center">
+			<div class="container-total flex-center-center">
+				<h2 id="main-tittle">GODPEDIA</h2>
+				<p id="subtittle">novos tempos, novos deuses...</p>
+				<button class="button-see-more" id="button">ver mais</button>
+			</div>
+		</main>
+	</div>
 	`;
 
     return div;

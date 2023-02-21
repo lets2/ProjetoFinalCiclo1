@@ -383,7 +383,6 @@ relacionada aquele elemento
      background-color: var(--color-white);
      border-radius: 50%;
      border: none;
-     pointer-events: none;
  }
  .circle-orange{
      background-color: var(--color-bg-arrow-hover);
@@ -411,11 +410,10 @@ relacionada aquele elemento
      color:var(--color-white);
      justify-content: space-around;
  }
- #box-menu{
+ aside > figure{
      width: 100%;
      padding: 2.0rem;
      padding-top: 5rem;
-     justify-content: center;
  }
  aside > figure > h2{
      width: 80%;

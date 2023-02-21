@@ -364,21 +364,21 @@ background-image: url("../assets/icons/arrow-left-white.svg");
 	margin-top: 5.0rem;
 	cursor: pointer;
 }
-.temple{
+/* .temple{
 	position: absolute;
 	left: 0;
-}
+} */
 .temple-legend{
 	max-width: 62%; /*change this*/
-	position:absolute;
-	right: 0;
+	/* position:absolute;
+	right: 0; */
 	margin-right: 5.0rem;
 	font-family: 'MedievalSharp', cursive;
 }
 /* outline: .2rem solid red; */
 
 .container-circles{
-	width: auto;
+	width: 25.0rem;
 	margin: 4.0rem .0rem;
 	
 }
@@ -388,8 +388,6 @@ background-image: url("../assets/icons/arrow-left-white.svg");
 	background-color: var(--color-white);
 	border-radius: 50%;
 	border: none;
-	pointer-events: none;
-	margin: 0rem 1rem; 
 }
 .circle-orange{
 	background-color: var(--color-bg-arrow-hover);

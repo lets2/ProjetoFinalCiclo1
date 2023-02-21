@@ -23,23 +23,22 @@ export function EditGod() {
 	<!-- @author: Gabriela-->
 	<div class="flex-row-center" id="container-edit-god">
 		<div class="flex-col-center" id="box-img-god">
-			<div id="edit-page-god-img">
+			<div>
 				<img src="../assets/images/games-god.jpg" alt="">
 			</div>
 			<button class="btns-edit-god" id="change-img-btn">Mudar imagem</button>
 		</div>
-		<div action="" class="flex-col-center">
+		<form action="" class="flex-col-center">
 			<div class="flex-col-center" id="box-inputs-edit-god">
-				<input id="edit-page-god-input-name" class="input-edit-god" type="text" placeholder="Nome">
-				<input id="edit-page-god-input-status" class="input-edit-god" type="text" placeholder="Status">
-				<input id="edit-page-god-input-resume" class="input-edit-god" id="input-resume-edit-god"type="text" placeholder="Resumo">
+				<input class="input-edit-god" type="text" placeholder="Nome">
+				<input class="input-edit-god" type="text" placeholder="Status">
+				<input class="input-edit-god" id="input-resume-edit-god"type="text" placeholder="Resumo">
 			</div>
 			<div class="flex-row-between" id="box-buttons">
 				<button class="cancel-button btns-edit-god" id="cancel-edit-god">Cancelar</button>
 				<button class="btns-edit-god" id="update-god-button">Atualizar</button>
-				
 			</div>
-		</div>
+		</form>
 	</div>
 </main>
 <footer></footer>

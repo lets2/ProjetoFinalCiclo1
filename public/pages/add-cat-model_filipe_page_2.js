@@ -29,8 +29,8 @@ export function AddCategory() {
 
                 <div class="nome-categoria cor-categoria flex-col-center">
 
-                    <input id="new-name-category" type="text" placeholder="Nome da categoria">
-                    <input id="new-color-category" type="text" placeholder="Cor da categoria">
+                    <input type="text" placeholder="Nome da categoria">
+                    <input type="text" placeholder="Cor da categoria">
 
                 </div>
 

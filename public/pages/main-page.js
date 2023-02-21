@@ -50,7 +50,7 @@ export function Categories() {
 	`;
 
     document.addEventListener("DOMContentLoaded", () => {
-        // console.log("entrou no evento externo da main");
+        console.log("entrou no evento externo da main");
         //addExternalResourcesTo("/");
         //addEventsToPrincipal();
         //addExternalResourcesTo("/categories");
@@ -76,10 +76,8 @@ export function redirectToLoginAdmPage() {
     window.dispatchEvent(eventStateChange);
 }
 /*@author:Filipe - coauthor: Letônio*/
-export function redirectToGodDetailsPage(godId) {
-    const eventStateChange = CriaEventStateChange("/categories/d1", {
-        godId: godId,
-    });
+export function redirectToGodDetailsPage() {
+    const eventStateChange = CriaEventStateChange("/categories/d1");
     window.dispatchEvent(eventStateChange);
 }
 /*@author:Filipe - coauthor: Letônio*/
@@ -103,17 +101,13 @@ export function redirectToAddGodPage() {
     window.dispatchEvent(eventStateChange);
 }
 /*@author:Gabriela - coauthor: Letônio*/
-export function redirectToGodInfoPage(godId) {
-    const eventStateChange = CriaEventStateChange("/godInfo/g1", {
-        godId: godId,
-    });
+export function redirectToGodInfoPage(id) {
+    const eventStateChange = CriaEventStateChange("/godInfo/g1");
     window.dispatchEvent(eventStateChange);
 }
 /*@author:Gabriela - coauthor: Letônio*/
-export function redirectToEditGodPage(godId) {
-    const eventStateChange = CriaEventStateChange("/editGod/g1", {
-        godId: godId,
-    });
+export function redirectToEditGodPage() {
+    const eventStateChange = CriaEventStateChange("/editGod/g1");
     window.dispatchEvent(eventStateChange);
 }
 /*@author:Gabriela - coauthor: Letônio*/
@@ -127,7 +121,7 @@ export function redirectToAddCategory() {
     window.dispatchEvent(eventStateChange);
 }
 /*@author:Gabriela - coauthor: Letônio*/
-export function redirectToEditCategory(id) {
-    const eventStateChange = CriaEventStateChange("/editCategory", { id: id });
+export function redirectToEditCategory() {
+    const eventStateChange = CriaEventStateChange("/editCategory");
     window.dispatchEvent(eventStateChange);
 }

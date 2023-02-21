@@ -1,7 +1,3 @@
-//-------------------------------------------------------------
-// IMPORTS
-//--------------------------------------------------------------
-
 import {
     redirectToCategoryChoosed,
     redirectToLoginAdmPage,
@@ -20,40 +16,35 @@ import { redirectToAllCategories } from "./pages/categories-page.js";
 
 import GeraObjComRotas from "./pages/router.js";
 
-//------------------------------------------------------------------------
-// RENDER INITIAL PAGE (LANDING PAGE)
-//------------------------------------------------------------------------
-
 const root = document.querySelector("#root");
 const objRotas = GeraObjComRotas();
+
+//inicia
 const page = objRotas.getPage("/");
 root.innerHTML = "";
 root.appendChild(page);
 addExternalResourcesTo("/");
-addEventsRelatedTo("/"); //call relateds events to page/url
-
-//------------------------------------------------------------------------
-// LISTENER TO HEAR WHEN ONSTATECHANGE CUSTOM EVENT IS DISPATCH
-//-----------------------------------------------------------------------
-
+addEventsRelatedTo("/"); //chama os eventos relacionados aquela página
+//ouvir evento de "onstatechange"
 window.addEventListener("onstatechange", (event) => {
     const url = event.detail.url;
     const criteria = event.detail.criteria; //o valor padrão de criteria={}, se diferente de null implia q
-
+    console.log("DISPAROU E A URL EH", url);
     const page = objRotas.getPage(url);
     history.pushState({}, "", url);
     root.innerHTML = "";
     root.appendChild(page);
-    console.log("URL:", url, "Criteria:", criteria);
+    console.log("criteria:", criteria);
     addExternalResourcesTo(url, criteria);
-    addEventsRelatedTo(url); //call relateds events to page/url
+    addEventsRelatedTo(url); //chama os eventos relacionados aquela página
 });
 
-//------------------------------------------------------------------------
-// ADDS RESOURCES TO THE PAGE THA WAS RENDERED ACCORDING URL
-//-----------------------------------------------------------------------
-
-export async function addExternalResourcesTo(url, criteria) {
+/***************************************************
+@AUTHOR:LETONIO VOu adicionar muitos recursos fetch
+***************************************************
+*/
+/*index ou é nulo ou é um valor que aponta pra algo como a categoria*/
+export function addExternalResourcesTo(url, criteria) {
     switch (url) {
         /*case "/":
             addResourcesToPrincipal();
@@ -63,211 +54,119 @@ export async function addExternalResourcesTo(url, criteria) {
             addResourcesToCategoriesPage();
             break;
         case "principalteste":
-            //this page doesnt have dynamic features
+            //não precisa adicionar recurso nela
             break;
         case "/categories/:id":
             console.log("PRECISO ADICIONAR RECURSOS NO ID", criteria.id);
             addResourcesToCategoryChoosed(criteria.id);
             break;
         case "/tableCategories":
-            addResourcesToTableOfCategories();
-            break;
-        case "/tableGods":
-            addResourcesToTableOfGods();
-            break;
-        case "/categories/d1":
-            addResourcesToGodChoosed(criteria.godId);
-            break;
+        /*criar uma função que adiciona n-linhas no elemento tbody;
+                depende do tamanho do array de objetos que estiver na funcao
+                */
+        /*function addRecursoNaTabelaDeCategorias(){
+                const arrayCategorias=[{id:"d1",name:"Caos"},{id:"d2",name:"saude"}];
+                criar uma funcao que percorre esse array, acessa o campo name, e adciona
+                uma linha na tabela com o name.
+               }*/
         case "/godInfo/g1":
-            await addResourcesToGodInfo(criteria.godId);
+            /* criar uma funcao que acessa o array procura o god com aquele index
+                e adiciona as informacoes dele, por exemplo
+                */
             break;
-
-        case "/editGod/g1":
-            addResourcesToEditGodPage(criteria.godId);
-            break;
-        case "/editCategory":
-            addResourcesToEditCategoryPage(criteria.id);
-            break;
-    }
-}
-
-async function addResourcesToTableOfCategories() {
-    try {
-        const response = await fetch(`http://localhost:8080/categories/`);
-        console.log("STATUS:", response.status);
-        if (response.status !== 200 && response.status !== 201)
-            throw "[erro] Houve um problema na requisicao!";
-
-        const objContent = await response.json();
-        const categories = objContent.data;
-        /// renderCategoriesOnMainPage(objContent.data);
-        // const quantify = categories.length;
-
-        addLinesCategoryTable(categories);
-    } catch (error) {
-        console.log("Erro durante o fetch:", error);
     }
 }
 
 // author: Gabriela
-function addLinesCategoryTable(data) {
+function addLinesCategoryTable() {
+    const data = [
+        {
+            id_category: 1,
+            nome: "tecnologia",
+        },
+        {
+            id_category: 2,
+            nome: "saúde",
+        },
+        {
+            id_category: 3,
+            nome: "natureza",
+        },
+        {
+            id_category: 4,
+            nome: "primordiais",
+        },
+        {
+            id_category: 5,
+            nome: "comida",
+        },
+    ];
+
     const thead = document.querySelector("#thead-categories");
     thead.innerHTML = "";
 
     for (let i = 0; i < data.length; i++) {
-        thead.innerHTML += `<tr id="catline0${i}">
-                    <td>${data[i].name}</td>
+        thead.innerHTML += `<tr>
+                    <td>${data[i].nome}</td>
                     <td><img class="edit-btn" src="../assets/icons/pencil-black.svg" alt="pencil icon"></td>
                     <td><img class="delete-btn" src="../assets/icons/trash-black.svg" alt="trash icon"></td>
                 </tr>`;
-        const lineTable = document.querySelector(`#catline0${i}`); //get line by #id
-        lineTable.dataset.id = data[i].id;
-        //it is important to save the identifier for future queries
     }
-    //return thead;
-    //Chama funcao para add eventos nos botoes de LAPIS/PENCIL;
-    adicionaEventosNosLapis();
+    return thead;
 }
+// author: Gabriela
+function addLinesGodTable() {
+    const data = [
+        {
+            nome: "Zapilson",
+            status: "Deus da comunicação",
+            category: "tecnologia",
+        },
+        {
+            nome: "Zefa",
+            status: "Deusa da coxinha",
+            category: "comida",
+        },
+        {
+            nome: "Juninho play",
+            status: "Deus do estilo",
+            category: "primordiais",
+        },
+        {
+            nome: "Manoel Gomes",
+            status: "Deus da música",
+            category: "primordiais",
+        },
+        {
+            nome: "Zapilson",
+            status: "Deus da comunicação",
+            category: "tecnologia",
+        },
+    ];
 
-function adicionaEventosNosLapis() {
-    /*EVENTOS REALCIONADO A EDITAR CATEGORIA BOTAO!!!!!11*/
-    const listaDeImagensDeLapis = document.querySelectorAll(".edit-btn");
-    console.log(
-        "AQUI ESTA A LISTA DE IMAGENS DOS LAPIS DA CATEGORIA",
-        listaDeImagensDeLapis
-    );
-    listaDeImagensDeLapis.forEach((imgLapis) => {
-        imgLapis.addEventListener("click", (event) => {
-            const catId = event.target.parentNode.parentNode.dataset.id;
-
-            redirectToEditCategory(catId);
-        });
-    });
-    /*EVENTOS REALCIONADO A EXCLUIR CATEGORIA BOTAO!!!!!11*/
-    const listaDeImagensDeLixeira = document.querySelectorAll(".delete-btn");
-    console.log(" LISTA DE LIXEIRAS DA CATEGORIA", listaDeImagensDeLixeira);
-    listaDeImagensDeLixeira.forEach((imgLixeira) => {
-        imgLixeira.addEventListener("click", (event) => {
-            const catId = event.target.parentNode.parentNode.dataset.id;
-
-            deleteCategoryFromDatabase(catId);
-            redirectToTableEditCategories();
-        });
-    });
-}
-
-async function deleteCategoryFromDatabase(id) {
-    try {
-        const response = await fetch(
-            `http://localhost:8080/categoriestableDelete/${id}/`,
-            {
-                method: "DELETE",
-            }
-        );
-        console.log("STATUS:", response.status);
-        if (response.status !== 200 && response.status !== 201) {
-            const resJson = await response.json();
-            const { message, error } = resJson;
-            displayWarning(resJson.error);
-            throw `${error}`;
-        }
-        const resJson = await response.json();
-        console.log("DELETE CATEGORY deu certo:", resJson);
-        displayWarning(resJson.message); //deu tudo  certo
-
-        const container_data = document.querySelector("#container-see-god");
-    } catch (error) {
-        console.log("Erro durante o fetch:", error);
-    }
-}
-
-async function addResourcesToTableOfGods() {
-    //
-    try {
-        const responseCategories = await fetch(
-            `http://localhost:8080/categories/`
-        );
-        console.log("STATUS:", responseCategories.status);
-        if (
-            responseCategories.status !== 200 &&
-            responseCategories.status !== 201
-        )
-            throw "[erro] Houve um problema na requisicao das categorias!";
-
-        const objContentCateg = await responseCategories.json();
-
-        const dataCategories = objContentCateg.data;
-        /// renderCategoriesOnMainPage(objContent.data);
-        // const quantify = categories.length;
-
-        /*HTTP REQUEST TO GET ALL THE GODS DATA */
-
-        const responseGods = await fetch(`http://localhost:8080/godstable/`);
-        console.log("STATUS:", responseGods.status);
-        if (responseGods.status !== 200 && responseGods.status !== 201)
-            throw "[erro] Houve um problema na requisicao das categorias!";
-
-        const objContentGods = await responseGods.json();
-        const dataGods = objContentGods.data;
-
-        addSelectWithCategories(dataCategories);
-        addLinesGodTable(dataGods);
-    } catch (error) {
-        console.log("Erro durante o fetch:", error);
-    }
-
-    //There is a Select Tag above the table,
-    //need to be fill with categories
-    //the main idea is later to allow filtering the table
-    //elements by category when the change event is activated
-}
-
-// @author: Gabriela
-function addLinesGodTable(data) {
     const thead = document.querySelector("#thead-gods");
     thead.innerHTML = "";
 
     for (let i = 0; i < data.length; i++) {
-        thead.innerHTML += `<tr id="line0${i}">
-                    <td>${data[i].name}</td>
+        thead.innerHTML += `<tr id="line0${data[i]}">
+                    <td>${data[i].nome}</td>
                     <td>${data[i].status}</td>
-                    <td>${data[i].name_category}</td>
+                    <td>${data[i].category}</td>
                 </tr>`;
-        const lineTable = document.querySelector(`#line0${i}`); //get line by #id
-        lineTable.dataset.godId = data[i].id;
-        //it is important to save the identifier for future queries
     }
     console.log(thead, "esse");
-    //return thead;
+    return thead;
 }
 
-function addSelectWithCategories(dataCategories) {
-    const selectElement = document.querySelector("#filter-category");
-    selectElement.innerHTML = ""; //clear any previous content
+/*{ /*funçao falsa de addRecusre prineicpal }*/
+/*{ function addRecPrincipal() {
+    const conteudo = { img: "lets.jpg", name: "deustal" };
 
-    addOptionToSelect(selectElement, {
-        value: "choose",
-        text: "Escolha uma categoria",
-    });
+    //pra chegar nisso eu preciso de um objeto conteudo = {}, ou um array = []
+    adicionaConteudoNoHTML(conteudo);
+}*/
 
-    dataCategories.forEach((category) => {
-        addOptionToSelect(selectElement, {
-            value: category.id,
-            text: category.name,
-        });
-    });
-    addOptionToSelect(selectElement, {
-        value: "all",
-        text: "Mostrar todas as categorias",
-    });
-}
-
-function addOptionToSelect(_select, _paramOption) {
-    const option = document.createElement("option");
-    option.value = _paramOption.value; //add category id from db
-    option.innerHTML = _paramOption.text;
-    _select.appendChild(option);
-}
+/*apagar esse codigo acima depois!!!*/
 
 /*Usando fetch para pegar as imagens da página;*/
 async function addResourcesToCategoriesPage() {
@@ -377,8 +276,6 @@ function insertImages(arrayGods) {
             "src",
             `../assets/images/gods/${arrayGods[index].src_img}`
         );
-        //save in img god a dataset with god id
-        element.dataset.godId = arrayGods[index].id;
     });
 }
 
@@ -387,371 +284,84 @@ function insertCategoryName(nameCategory) {
     document.querySelector(".phrase").innerHTML = nameCategory;
 }
 
-//@author:filipe
-async function addResourcesToGodChoosed(godId) {
-    //CRIAR UM OBJETO COM OS DADOS DO DEUS
-    /* const godObj = {
-        id: "3",
-        name: "Zoo",
-        src: "../images/gods/cat03--god04-natu.jpg",
-        status: "O deus da transformação",
-        category_name: "Deuses da natureza",
-        resume: "Há muito tempo, no reino dos deuses, existia um deus chamado Zoo, o Deus da Transformação. Ele era um deus muito poderoso, mas também muito solitário, pois ninguém queria se aproximar dele com medo de ser transformado em uma criatura.",
-    };
-*/
-    /*Fetch request*/
-    try {
-        const response = await fetch(
-            `http://localhost:8080/godstable/${godId}/`
-        );
-        console.log("STATUS:", response.status);
-        if (response.status !== 200 && response.status !== 201)
-            throw "[erro] Houve um problema na requisicao!";
-
-        const objContent = await response.json();
-        console.log("Resultado da requisição VER GOD DETAILS:", objContent);
-        const godInformation = objContent.data[0];
-        /// renderCategoriesOnMainPage(objContent.data);
-        // const quantify = categories.length;
-
-        //INSERIR OS DADOS DO DEUS NA PÁGINA
-        const container_data = document.querySelector("#container-god-img");
-        container_data.innerHTML = "";
-        container_data.innerHTML = `
-            <div id="container-god-img">
-            <div class="flex-col-center" id="div-img-god">
-                <div>
-                    <img src="../assets/images/gods/${godInformation.src_img}" alt="" />
-                </div>
-            </div>
-            <div class="flex-col-center container-god-text">
-                <h1 class="god-text-title">${godInformation.name}</h1>
-                <h2 class="god-text-subtitle">${godInformation.status}</h2>
-                <p class="god-text-description">
-                ${godInformation.resume}
-                </p>
-            </div>`;
-    } catch (error) {
-        console.log("Erro durante o fetch:", error);
-    }
-}
-//@author:filipe
-async function addResourcesToGodInfo(godId) {
-    //CRIAR UM OBJETO COM OS DADOS DO DEUS
-    /*Fetch request*/
-    try {
-        const response = await fetch(
-            `http://localhost:8080/godstable/${godId}/`
-        );
-        console.log("STATUS:", response.status);
-        if (response.status !== 200 && response.status !== 201)
-            throw "[erro] Houve um problema na requisicao!";
-
-        const objContent = await response.json();
-        console.log("Resultado da requisição VER GOD INFO:", objContent);
-        /*
-        const godInformation = {
-            id: "9",
-            name: "FULANO DE TAL",
-            status: "GOD",
-            resume: "QQQQQAQAQ",
-            src_img: "exampleGod.png",
-        };
-        */
-        const godInformation = objContent.data[0];
-        /// renderCategoriesOnMainPage(objContent.data);
-        // const quantify = categories.length;
-
-        //INSERIR OS DADOS DO DEUS NA PÁGINA
-        //INSERIR OS DADOS DO DEUS NA PÁGINA
-
-        const container_data = document.querySelector("#container-see-god");
-        container_data.innerHTML = "";
-        container_data.innerHTML = `
-            <div class="flex-col-center" id="box-img-see-god">
-                <div id="img-god">
-                    <img src="../assets/images/gods/${godInformation.src_img}" alt="" />
-                </div>
-                <div id="box-btns" class="flex-row-between">
-                    <button id="edit-god-button" class="buttons"><img src="../assets/icons/edit.svg" alt=""></button>
-                    <button id="delete-god-button" class="buttons"><img src="../assets/icons/mdi_trash.svg" alt=""></button>
-                    <button id="back-god-button" class="buttons"><img id="testeDaImg"src="../assets/icons/back-arrow-icon-white.svg" alt=""></button>
-                    
-                </div>
-            </div>  
-            <form action="" class="flex-col-center">
-                <div class="flex-col-center" id="box-inputs-see-god">
-                    <div id="box-tittle" class="flex-col-center">
-                        <h2>${godInformation.name}</h2>
-                        <h4>${godInformation.status}</h4>
-                    </div>
-                    <div>
-                        <h5 id="tittle-description">Resumo</h5>
-                        <p>${godInformation.resume}</p>
-                    </div>
-                </div>
-            </form>
-            `;
-        testAddElements(godInformation);
-    } catch (error) {
-        console.log("Erro durante o fetch:", error);
-    }
-
-    //GOD INFO IS THE PAGE WITH PENCIL AND TRASH DO EDIT AND DELETE GOD
-}
-
-async function addResourcesToEditGodPage(godId) {
-    try {
-        const response = await fetch(
-            `http://localhost:8080/godstable/${godId}/`
-        );
-        console.log("STATUS EDIT:", response.status);
-        if (response.status !== 200 && response.status !== 201)
-            throw "[erro] Houve um problema na requisicao!";
-
-        const objContent = await response.json();
-        console.log("Resultado da requisição EDIT PAGE:", objContent);
-        /*
-        const godInformation = {
-            id: "9",
-            name: "FULANO DE TAL",
-            status: "GOD",
-            resume: "QQQQQAQAQ",
-            src_img: "exampleGod.png",
-        };
-        */
-        const godInformation = objContent.data[0];
-        /// renderCategoriesOnMainPage(objContent.data);
-        // const quantify = categories.length;
-
-        //INSERIR OS DADOS DO DEUS NA PÁGINA
-        //INSERIR OS DADOS DO DEUS NA PÁGINA
-
-        const container_data = document.querySelector("#container-see-god");
-        testInserirElementosNaEditGodPage(godInformation);
-        //testAddElements(godInformation);
-    } catch (error) {
-        console.log("Erro durante o fetch:", error);
-    }
-}
-
-function testInserirElementosNaEditGodPage(godObj) {
-    const containerImgGod = document.querySelector("#edit-page-god-img");
-    containerImgGod.innerHTML = `
-    <img src="../assets/images/gods/${godObj.src_img}" alt="">
-    `;
-
-    const inputEditGodName = document.querySelector(
-        "#edit-page-god-input-name"
-    );
-    inputEditGodName.value = godObj.name;
-
-    const inputEditGodStatus = document.querySelector(
-        "#edit-page-god-input-status"
-    );
-    inputEditGodStatus.value = godObj.status;
-
-    const inputEditGodResume = document.querySelector(
-        "#edit-page-god-input-resume"
-    );
-    inputEditGodResume.value = godObj.resume;
-
-    //add um dataset com o id do deus para usos futuros;
-    const containerEditGodInformation = document.querySelector(
-        "#container-edit-god"
-    );
-    containerEditGodInformation.dataset.godId = godObj.id;
-}
-
-//ZONA DE TESTES
-
-function testAddElements(godObj) {
-    //esse codigo eh o que bota o evento no botao de edicao
-    const updateGodButton = document.querySelector("#edit-god-button");
-
-    console.log("SELECIONOU O CONTAINER DA IMAGEM:", updateGodButton);
-    updateGodButton.addEventListener("click", () => {
-        console.log("CLICOU DENTRO DO EVENTO DE ATUALIZAR DEUS!");
-        redirectToEditGodPage(godObj.id);
-    });
-
-    ///esse codigo eh o que bota o evento no botao BACK #back-god-button
-    const backGodButton = document.querySelector("#back-god-button");
-
-    console.log("SELECIONOU O CONTAINER DA IMAGEM:", backGodButton);
-    backGodButton.addEventListener("click", () => {
-        console.log("CLICOU DENTRO DO EVENTO DE DELETAR DEUS!");
-        redirectToTableEditGods();
-    });
-
-    // esse codigo que exclui o deus
-    const deleteGodButton = document.querySelector("#delete-god-button");
-
-    console.log("SELECIONOU O CONTAINER DA IMAGEM:", deleteGodButton);
-    deleteGodButton.addEventListener("click", () => {
-        console.log(
-            "CLICOU DENTRO DO EVENTO DE DELETAR DEUS!com essa",
-            godObj.id
-        );
-        deleteGodFromDatabase(godObj.id);
-        redirectToTableEditGods();
-    });
-}
-
-async function deleteGodFromDatabase(godId) {
-    try {
-        const response = await fetch(
-            `http://localhost:8080/godstableDelete/${godId}/`,
-            {
-                method: "DELETE",
-            }
-        );
-        console.log("STATUS:", response.status);
-        if (response.status !== 200 && response.status !== 201) {
-            const resJson = await response.json();
-            const { message, error } = resJson;
-            displayWarning(resJson.error);
-            throw `${error}`;
-        }
-        const resJson = await response.json();
-        console.log("Requisição de DELTE GOD deu certo:", resJson);
-        displayWarning(resJson.message); //deu tudo  certo
-
-        const container_data = document.querySelector("#container-see-god");
-    } catch (error) {
-        console.log("Erro durante o fetch:", error);
-    }
-}
-
-//#input-cat-edit-name//cat
-async function addResourcesToEditCategoryPage(id) {
-    try {
-        const response = await fetch(
-            `http://localhost:8080/categoriestable/${id}/`
-        );
-        console.log("STATUS EDIT:", response.status);
-        if (response.status !== 200 && response.status !== 201)
-            throw "[erro] Houve um problema na requisicao!";
-
-        const objContent = await response.json();
-        console.log(
-            "Resultado da requisição GET CATEGORY INFOMRATION BY ID:",
-            objContent
-        );
-        /*
-        const godInformation = {
-            id: "9",
-            name: "FULANO DE TAL",
-            status: "GOD",
-            resume: "QQQQQAQAQ",
-            src_img: "exampleGod.png",
-        };
-        */
-        const catInformation = objContent.data[0];
-        /// renderCategoriesOnMainPage(objContent.data);
-        // const quantify = categories.length;
-
-        //INSERIR OS DADOS DO DEUS NA PÁGINA
-        //INSERIR OS DADOS DO DEUS NA PÁGINA
-
-        //const container_data = document.querySelector("#container-see-god");
-        testInserirElementosNaEditCategoryPage(catInformation);
-        //testAddElements(godInformation);
-    } catch (error) {
-        console.log("Erro durante o fetch:", error);
-    }
-}
-
-function testInserirElementosNaEditCategoryPage(catInformation) {
-    const inputCatEditName = document.querySelector("#input-cat-edit-name");
-    const inputCatEditColor = document.querySelector("#input-cat-edit-color");
-    inputCatEditName.value = catInformation.name;
-    inputCatEditColor.value = catInformation.hex_color;
-    //
-    const containerEditCategory = document.querySelector(
-        "#container-edit-category"
-    );
-    containerEditCategory.dataset.id = catInformation.id; //add-set
-}
-
-//input-cat-edit-name
-//input-cat-edit-color
-
-/////----------------------------------------------------------SONA DE TESTES
-
-//ZONA DE TESTES
-
-//------------------------------------------------------------------------
-// ADDS EVENTS TO THE PAGE THAT WAS RENDERED ACCORDING URL
-//-----------------------------------------------------------------------
+/************************************************************s
+@AUTHOR:LETONIO VOU ADICIONAR UM MONTE DE EVENTOS AQUI DE ACORDO COM A PÁGINA
+************************************************************/
 
 function addEventsRelatedTo(url) {
+    console.log("vamos ver a url:", url);
     switch (url) {
         /*case "/":
             addEventsToPrincipal();
             break;*/
         case "/":
-            addEventsToMainPageTest();
+            eventosDaPrincipalTeste();
             break;
         case "/categories":
             //addEventsToCategoriesPage() === addEventsToPrincipal();
             addEventsToCategoriesPage();
             break;
         case "/categories/:id":
-            addEventsToCategorySelected();
+            eventosDaCategoriaEscolhida();
             break;
         case "/login":
-            addEventsToAdmLoginPage();
+            eventosDoLoginDeAdm();
             break;
         case "/categories/d1":
-            addEventsToGodDetailsPage();
+            eventosDosDetalhesDoDeus();
             break;
         case "/adm/a1":
-            addEventsToAdmMenuPage();
+            eventosDoMenuDeAdm();
             break;
         case "/tableCategories":
-            addEventsToCategoryTablePage();
+            adicionaEventosNaPaginaDaTabelaCategorias();
             break;
         case "/tableGods":
-            addEventsToGodTablePage();
+            adicionaEventosNaPaginaDaTabelaGods();
             break;
         case "/addGod":
-            addEventsToAddNewGodPage();
+            adicionarEventosNaPaginaDeAdicaoDeDeus();
             break;
         case "/godInfo/g1":
-            addEventsToAdmGodInfoPage();
+            adicionarEventosNaPaginaDeGodInfo();
             break;
         case "/editGod/g1":
-            addEventsToEditGodPages();
+            adicionarEventosNaPaginaDeEdicaoDeDeus();
             break;
         case "/menu":
-            addEventsToMenuPage();
+            adicionarEventosNoMenu();
             break;
         case "/addCategory":
-            addEventsToAddCategoryPage();
+            adicionarEventosAddCateg();
             break;
         case "/editCategory":
-            addEventsToEditCategoryPage();
+            adicionarEventosEditCateg();
             break;
     }
 }
 
-/*Events related to the categories page < [] >  */
+/*Eventos relacionados a página de categorias < [] >  */
 export function addEventsToCategoriesPage() {
-    /*Add event to the current temple displayed on Page*/
+    /////console.log("ADICIONA LISTENER NO BOTÃO GIGANTE!");
+
+    /*Adiciona evento ao templo que está sendo mostrad nesse momento*/
     const containerTemples = document.querySelector(".container-temples");
-    containerTemples.addEventListener("click", () => {
+    containerTemples.addEventListener("click", (event) => {
+        //// console.log("ATIVOU EVENTO E VA RENDERIZARNOVA PAGINA");
         console.log(
-            "Category id, saved on dataset.id:",
+            "Quando clica no container, pega o index que está em dataset.id:"
+        );
+        console.log(
+            "Olha o valor do index quando clica no container",
             containerTemples.childNodes[1].dataset.id
         );
         const id = containerTemples.childNodes[1].dataset.id;
         redirectToCategoryChoosed(id);
     });
 
-    /*change arrow color on hover*/
+    /*add evento para mudar imagem das setas*/
     const arrowLeft = document.querySelector(".category-arrow-left");
-
+    //// console.log("OLHA A SETA", arrowLeft);
     arrowLeft.addEventListener("mouseover", (event) => {
         event.target.setAttribute(
             "src",
@@ -772,7 +382,7 @@ export function addEventsToCategoriesPage() {
     });
 
     const arrowRight = document.querySelector(".category-arrow-right");
-
+    //////console.log("OLHA A SETA", arrowRight);
     arrowRight.addEventListener("mouseover", (event) => {
         event.target.setAttribute(
             "src",
@@ -797,15 +407,17 @@ export function addEventsToCategoriesPage() {
         }
     });
 
-    addEventsToHeader();
+    eventosAdicionadosNoHeader();
 }
 
 /*@author:letonio - criando uma página principal de teste*/
-function addEventsToMainPageTest() {
-    addEventsToHeader(); //estou colocando com header para testar
+function eventosDaPrincipalTeste() {
+    eventosAdicionadosNoHeader(); //estou colocando com header para testar
     const seeMoreButton = document.querySelector(".button-see-more");
+    console.log("Criou o evento");
     seeMoreButton.addEventListener("click", () => {
         //redirectToMyPrincipal();//antigo
+        console.log("Entrou no evento de click no botão!");
         redirectToAllCategories();
     });
 }
@@ -816,9 +428,10 @@ async function updateTempleContent(newIndex) {
         const response = await fetch(`http://localhost:8080/categories/`);
         console.log("STATUS:", response.status);
         if (response.status !== 200 && response.status !== 201)
-            throw "[erro] Houve um problema na requisicao!";
+            throw "[erro] Houve um problema durante o cadastro! Tente novamente!";
 
         const objContent = await response.json();
+        console.log("Olha o resultado de clicar com uma seta:", objContent);
         const categories = objContent.data;
         /// renderCategoriesOnMainPage(objContent.data);
         const quantify = categories.length;
@@ -832,24 +445,23 @@ async function updateTempleContent(newIndex) {
         //renderImgCategory(newclId, objContent.data.name, objContent.data.src);
         //found-out total balls
         //const quantify = document.querySelectorAll(".circle").length;
+        console.log("QUantidade", quantify);
         renderBallsBelowImg(newIndex, quantify);
     } catch (error) {
         console.log("Erro durante o fetch:", error);
     }
 }
 
-/*eevents related to the page of the chosen category*/
-function addEventsToCategorySelected() {
-    addEventsToHeader();
+/*eventos relacionados a pagina da categoria escolhida*/
+function eventosDaCategoriaEscolhida() {
+    eventosAdicionadosNoHeader();
     eventosAdicionadosEmCadaCartao();
 }
-
-/*events related to the adm login page*/
-function addEventsToAdmLoginPage() {
-    addEventsToHeader();
+/*eventos relacionados a pagina de login do adm*/
+function eventosDoLoginDeAdm() {
+    eventosAdicionadosNoHeader();
     adicionaEventoNoBotaoDeLogin();
 }
-
 function adicionaEventoNoBotaoDeLogin() {
     const buttonLogin = document.querySelector("#login-logo-button");
     buttonLogin.addEventListener("click", () => {
@@ -858,26 +470,28 @@ function adicionaEventoNoBotaoDeLogin() {
 }
 
 /*@author:filipe - coauthor: Letônio*/
-/*events related to the Gods description page*/
-function addEventsToGodDetailsPage() {
-    addEventsToHeader();
+/*eventos relacionados a página com a descrição dos deuses*/
+function eventosDosDetalhesDoDeus() {
+    eventosAdicionadosNoHeader();
 }
 
-/*events added on the home page card of the chosen category*/
+/*eventos adicionados em casa cartao da pagina da categoria escolhida*/
 function eventosAdicionadosEmCadaCartao() {
     for (let i = 1; i <= 4; i++) {
         let godCard = document.querySelector(`.card${i.toString()}`);
-
+        //////  console.log("ENtrou no for", godCard);
         godCard.addEventListener("click", () => {
-            redirectToGodDetailsPage(godCard.dataset.godId);
+            redirectToGodDetailsPage();
         });
     }
 }
 
 /*@author:filipe - coauthor: Letônio*/
-/*Events added to the administrator menu*/
-function addEventsToAdmMenuPage() {
-    addEventsToHeader();
+/*Eventos adicionados no menu do administrador*/
+function eventosDoMenuDeAdm() {
+    eventosAdicionadosNoHeader();
+
+    console.log("Entrou na página do menu e esta add evento!");
 
     const objMenuAdm = [
         { label: "#edit-profile", handle: redirectToTableEditCategories },
@@ -889,6 +503,7 @@ function addEventsToAdmMenuPage() {
 
     objMenuAdm.forEach((element) => {
         const menuOption = document.querySelector(element.label);
+        console.log("Pagina do menu, evento procura elemento");
         menuOption.addEventListener("click", () => {
             element.handle();
         });
@@ -897,22 +512,18 @@ function addEventsToAdmMenuPage() {
 
 /*@author:filipe - coauthor: gabriela*/
 /*Adicionando eventos na página que tem uma tabela de categorias*/
-function addEventsToCategoryTablePage() {
-    addEventsToHeader();
-    //addLinesCategoryTable();
+function adicionaEventosNaPaginaDaTabelaCategorias() {
+    eventosAdicionadosNoHeader();
+    addLinesCategoryTable();
     /*insere evento no botao de add categoria*/
     const btnAddCategory = document.querySelector("#create-new-category");
-
     btnAddCategory.addEventListener("click", () => {
         redirectToAddCategory();
     });
 
-    console.log("CHAMOU A FUNCAO DE ADD EVENTOS NO LAPIS");
-
     const btnEditCategory = document.querySelectorAll(".edit-btn");
     for (let i = 0; i < btnEditCategory.length; i++) {
         btnEditCategory[i].addEventListener("click", () => {
-            console.log("ESTÁ FUNCIONANDO O EVENTO");
             redirectToEditCategory();
         });
     }
@@ -920,9 +531,9 @@ function addEventsToCategoryTablePage() {
 
 /*@author:filipe - coauthor: Letônio*/
 /*Adicionando eventos na página que tem uma tabela de deuses*/
-function addEventsToGodTablePage() {
-    addEventsToHeader();
-    //addLinesGodTable();
+function adicionaEventosNaPaginaDaTabelaGods() {
+    eventosAdicionadosNoHeader();
+    addLinesGodTable();
     /*insere evento no botão de adicionar um novo deus*/
     const buttonAddGod = document.querySelector("#create-new-god");
     buttonAddGod.addEventListener("click", () => {
@@ -932,26 +543,26 @@ function addEventsToGodTablePage() {
     /*Insere evento na tabela, caso o usuario clique numa linha da tabela
 	de deuses aparece uma página para detalhamento e edicao
 	referente aquele elemento*/
+    const trList = document.querySelectorAll("tbody tr");
+    trList.forEach((trElement) => {
+        trElement.addEventListener("click", (event) => {
+            const tdElement = event.target;
+            console.log("essse eh o alvo:", tdElement);
+            console.log("tag do parent:", tdElement.parentNode.tagName);
 
-    const tbodyElement = document.querySelector("tbody");
-    tbodyElement.addEventListener("click", (event) => {
-        console.log("TARGET:", event.target.parentNode);
-        const rowElement = event.target.parentNode;
-        if (event.target.parentNode.tagName === "TR") {
-            const godId = rowElement.dataset.godId;
-            redirectToGodInfoPage(godId);
-        }
+            if (tdElement.parentNode.tagName === "TR") {
+                const rowIdGod = tdElement.parentNode.id;
+                console.log("Olha a ID dessa linha:", rowIdGod);
+                redirectToGodInfoPage("idDoDeus"); /*posteriormente isso sera*/
+            }
+        });
     });
-
-    /*
-Testando
-*/
 }
 
 /*@author:Gabriela - coauthor: Letônio*/
 /*Add eventos na página que tem a opcao de adicionar um novo deus*/
-function addEventsToAddNewGodPage() {
-    addEventsToHeader();
+function adicionarEventosNaPaginaDeAdicaoDeDeus() {
+    eventosAdicionadosNoHeader();
     /*evento nos botoes de adicionar e cancelar*/
     const cancelButton = document.querySelector(".cancel-button");
     const addGodButton = document.querySelector("#add-god-button");
@@ -959,41 +570,25 @@ function addEventsToAddNewGodPage() {
         redirectToTableEditGods();
     });
     addGodButton.addEventListener("click", () => {
-        addNewGodInDatabase();
-        //Antes de redirecionar devemos adicionar o novo deus
         redirectToTableEditGods();
     });
 }
 
 /*@author:Gabriela - coauthor: Letônio*/
 /*Add eventos na página que mostra infos sobre deuses (inclusive editar/excluir)*/
-function addEventsToAdmGodInfoPage() {
-    addEventsToHeader();
+function adicionarEventosNaPaginaDeGodInfo() {
+    eventosAdicionadosNoHeader();
     /*Add eventos para quando clicam em EDITAR E EXCLUIR */
     const editGodButton = document.querySelector("#edit-god-button");
-    console.log(
-        "ENTROU NO EVENTO DE ADICIONAR ALGO NO BOTAO DE EDIT",
-        editGodButton
-    );
     editGodButton.addEventListener("click", () => {
-        console.log("ACESSOU O EVENTO DO BOTÃO DE CLICK");
         redirectToEditGodPage();
-    });
-
-    //back-god-button
-    //add eventos para voltar pra página anterior, caso não queira editar
-    const backGodButton = document.querySelector("#back-god-button");
-    console.log("BOTÃO DE VOLTAR:", backGodButton);
-    backGodButton.addEventListener("click", () => {
-        console.log("Voltamos para a página anterior de edição de deuses");
-        redirectToTableEditGods();
     });
 }
 
 /*@author:Gabriela - coauthor: Letônio*/
 /* Add eventos na página que mostra as informacoes para editar deuses*/
-function addEventsToEditGodPages() {
-    addEventsToHeader();
+function adicionarEventosNaPaginaDeEdicaoDeDeus() {
+    eventosAdicionadosNoHeader();
 
     const changeImg = document.querySelector("#change-img-btn");
     changeImg.addEventListener("click", () => {
@@ -1006,18 +601,14 @@ function addEventsToEditGodPages() {
     });
     const updateGodBtn = document.querySelector("#update-god-button");
     updateGodBtn.addEventListener("click", () => {
-        //atualizar informações de um deus;
-        const godId = document.querySelector("#container-edit-god").dataset
-            .godId;
-        updateGodInformationInDatabase(godId);
         redirectToTableEditGods();
     });
 }
 
 /*@author:Gabriela - coauthor: Letônio*/
 // Add eventos no menu lateral
-function addEventsToMenuPage() {
-    addEventsToHeader();
+function adicionarEventosNoMenu() {
+    eventosAdicionadosNoHeader();
     const pageIcon = document.querySelector("#home-page");
     pageIcon.addEventListener("click", () => {
         ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
@@ -1041,325 +632,55 @@ function addEventsToMenuPage() {
 
 /*@author:Gabriela - coauthor: Letônio*/
 // Add eventos na página de adicionar categoria
-function addEventsToAddCategoryPage() {
-    addEventsToHeader();
+function adicionarEventosAddCateg() {
+    eventosAdicionadosNoHeader();
     const btnCancel = document.querySelector("#Cancelar");
     btnCancel.addEventListener("click", () => {
         redirectToTableEditCategories();
     });
     const btnAddCategory = document.querySelector("#Adicionar");
-    btnAddCategory.addEventListener("click", async () => {
-        await addNewCategoryInDatabase();
+    btnAddCategory.addEventListener("click", () => {
         redirectToTableEditCategories();
     });
-}
-
-async function addNewGodInDatabase() {
-    const newNameGod = document.querySelector("#new-name-god").value;
-    const newStatusGod = document.querySelector("#new-status-god").value;
-    const newResumeGod = document.querySelector("#new-name-god").value;
-
-    const srcExample = "exampleGod.png";
-    const categoryId = "4"; //Precisamos modificar a página para receber categoria também
-
-    const newGod = {
-        name: newNameGod,
-        status: newStatusGod,
-        resume: newResumeGod,
-        categoryId: categoryId,
-        src: srcExample,
-    };
-
-    try {
-        const response = await fetch("http://localhost:8080/godstablecreate", {
-            method: "POST",
-            body: JSON.stringify(newGod),
-            headers: { "Content-type": "application/json; charset=UTF-8" },
-        });
-        console.log("RESPOSTA DA REQUISIÇÃO ADD GOD:", response.status);
-
-        if (response.status !== 200 && response.status !== 201) {
-            const resJson = await response.json();
-            const { message, error } = resJson;
-            displayWarning(resJson.error);
-            throw `${error}`;
-        }
-        const resJson = await response.json();
-        console.log("Requisição de ADD GOD deu certo:", resJson);
-        displayWarning(resJson.message); //deu tudo  certo
-    } catch (error) {
-        console.log(error);
-    }
-}
-//
-
-function getCategoryInputInformations(id) {
-    let obj = {};
-
-    const inputNameUpdate = document.querySelector("#input-cat-edit-name");
-    obj.name = inputNameUpdate.value;
-
-    const inputColorUpdate = document.querySelector("#input-cat-edit-color");
-    obj.hexColor = inputColorUpdate.value;
-
-    obj.src = "ExampleTemple.png";
-
-    console.log("CRIADO CERTINHO DO CATEGORI:", obj);
-    return obj;
-}
-
-//
-
-async function updateGodInformationInDatabase(godId) {
-    const objUpdateGod = getGodInputInformations(godId);
-
-    //FAZER O FETCH
-
-    try {
-        const response = await fetch(
-            `http://localhost:8080/godstableEdit/${godId}`,
-            {
-                method: "PUT",
-                body: JSON.stringify(objUpdateGod),
-                headers: { "Content-type": "application/json; charset=UTF-8" },
-            }
-        );
-        console.log("RESPOSTA DA REQUISIÇÃO ADD GOD:", response.status);
-
-        if (response.status !== 200 && response.status !== 201) {
-            const resJson = await response.json();
-            const { message, error } = resJson;
-            displayWarning(resJson.error);
-            throw `${error}`;
-        }
-        const resJson = await response.json();
-        console.log("Requisição de EDIT GOD deu certo:", resJson);
-        displayWarning(resJson.message); //deu tudo  certo
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-///
-
-///
-
-function getGodInputInformations(godId) {
-    let obj = {};
-
-    const inputNameUpdate = document.querySelector("#edit-page-god-input-name");
-    obj.name = inputNameUpdate.value;
-
-    const inputStatusUpdate = document.querySelector(
-        "#edit-page-god-input-status"
-    );
-    obj.status = inputStatusUpdate.value;
-
-    const inputResumeUpdate = document.querySelector(
-        "#edit-page-god-input-resume"
-    );
-    obj.resume = inputResumeUpdate.value;
-
-    obj.src = "ExampleGod.png";
-    obj.categoryId = "1";
-    console.log("CRIADO CERTINHO:", obj);
-    return obj;
-}
-
-/*@author:letonio - Adiciona no Banco de dados a categoria Deus*/
-
-async function addNewCategoryInDatabase() {
-    const newCategoryName = document.querySelector("#new-name-category").value;
-    const newColorHexFormat = document.querySelector(
-        "#new-color-category"
-    ).value;
-    const srcExample = "exampleTemple.png";
-
-    const newCategory = {
-        name: newCategoryName,
-        src: srcExample,
-        hexColor: newColorHexFormat,
-    };
-
-    try {
-        const response = await fetch(
-            "http://localhost:8080/categoriestablecreate",
-            {
-                method: "POST",
-                body: JSON.stringify(newCategory),
-                headers: { "Content-type": "application/json; charset=UTF-8" },
-            }
-        );
-        console.log("Olha a resposta response:", response);
-
-        if (response.status !== 200 && response.status !== 201) {
-            const resJson = await response.json();
-            const { message, error } = resJson;
-            displayWarning(resJson.error);
-            throw `${error}`;
-        }
-        const resJson = await response.json();
-        console.log("olha o JSON:", resJson);
-        displayWarning(resJson.message); //deu tudo  certo
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-function displayWarning(_message) {
-    alert(_message);
 }
 
 /*@author:Gabriela - coauthor: Letônio*/
 // Add eventos na página de editar categoria
-function addEventsToEditCategoryPage() {
-    addEventsToHeader();
+function adicionarEventosEditCateg() {
+    eventosAdicionadosNoHeader();
     const btnCancel = document.querySelector("#Cancelar");
     btnCancel.addEventListener("click", () => {
         redirectToTableEditCategories();
     });
-    //
-    // #Adicionar;
-    const btnEditCategory = document.querySelector("#Atualizar");
+    const btnEditCategory = document.querySelector("#Adicionar");
     btnEditCategory.addEventListener("click", () => {
-        // Adicionar aquia função que faz o fetch pra adicionar
-        //
-        //
-        //pegar o id que está armazenado num data-set
-        const id = document.querySelector("#container-edit-category").dataset
-            .id;
-        updateCategoryInformationInDatabase(id);
-
-        //////
         redirectToTableEditCategories();
     });
 }
-//
-
-async function updateCategoryInformationInDatabase(id) {
-    const objUpdateCategory = getCategoryInputInformations(id);
-    //FAZER O FETCH
-
-    try {
-        const response = await fetch(
-            `http://localhost:8080/categoriestableEdit/${id}`,
-            {
-                method: "PUT",
-                body: JSON.stringify(objUpdateCategory),
-                headers: { "Content-type": "application/json; charset=UTF-8" },
-            }
-        );
-        console.log("RESPOSTA DA REQUISIÇÃO EDIT CATEGORY:", response.status);
-
-        if (response.status !== 200 && response.status !== 201) {
-            const resJson = await response.json();
-            const { message, error } = resJson;
-            displayWarning(resJson.error);
-            throw `${error}`;
-        }
-        const resJson = await response.json();
-        console.log("Requisição de EDIT CATEGORY deu certo:", resJson);
-        displayWarning(resJson.message); //deu tudo  certo
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-//
-/*
-async function updateCategoryInformationInDatabase(godId) {
-    const objUpdateGod = getCategoryInputInformations(godId);
-
-    //FAZER O FETCH
-
-    try {
-        const response = await fetch(
-            `http://localhost:8080/godstableEdit/${godId}`,
-            {
-                method: "PUT",
-                body: JSON.stringify(objUpdateGod),
-                headers: { "Content-type": "application/json; charset=UTF-8" },
-            }
-        );
-        console.log("RESPOSTA DA REQUISIÇÃO ADD GOD:", response.status);
-
-        if (response.status !== 200 && response.status !== 201) {
-            const resJson = await response.json();
-            const { message, error } = resJson;
-            displayWarning(resJson.error);
-            throw `${error}`;
-        }
-        const resJson = await response.json();
-        console.log("Requisição de EDIT GOD deu certo:", resJson);
-        displayWarning(resJson.message); //deu tudo  certo
-    } catch (error) {
-        console.log(error);
-    }
-}
-*/
-//
-/*
-async function updateGodInformationInDatabase(godId) {
-    const objUpdateGod = getGodInputInformations(godId);
-
-    //FAZER O FETCH
-
-    try {
-        const response = await fetch(
-            `http://localhost:8080/godstableEdit/${godId}`,
-            {
-                method: "PUT",
-                body: JSON.stringify(objUpdateGod),
-                headers: { "Content-type": "application/json; charset=UTF-8" },
-            }
-        );
-        console.log("RESPOSTA DA REQUISIÇÃO ADD GOD:", response.status);
-
-        if (response.status !== 200 && response.status !== 201) {
-            const resJson = await response.json();
-            const { message, error } = resJson;
-            displayWarning(resJson.error);
-            throw `${error}`;
-        }
-        const resJson = await response.json();
-        console.log("Requisição de EDIT GOD deu certo:", resJson);
-        displayWarning(resJson.message); //deu tudo  certo
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-
-*/
-
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-//FIM DA ZONA DE EDICOES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-//--------------------------------------------------------------------------
-
 /*********************************************/
 /*eventos que são adicionados em todo header*/
 /*********************************************/
 
-function addEventsToHeader() {
-    /*Click on Logo GodPedia redirect to Categories Page*/
-
+function eventosAdicionadosNoHeader() {
+    /*adiciona evento de clicar na logo e ir para a principal*/
+    ////////console.log("ADICIONA LISTENER NA LOGO!");
     const logo = document.querySelector("#logo");
-
     logo.addEventListener("click", () => {
+        ///////console.log("ATIVOU EVENTO E VA RENDERIZAR a principal");
         //redirectToMyPrincipal();
         redirectToAllCategories();
     });
-
-    /*Add event to PROFILE ICON, redirect to Login Adm Page*/
+    /*adiciona evento para ir para página de login*/
+    /*Adiciona evento para o PROFILE ICON PERFIL*/
     const profileIcon = document.querySelector("#profile-icon");
-
     profileIcon.addEventListener("click", () => {
+        ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
         redirectToLoginAdmPage();
     });
 
     const menuIcon = document.querySelector("#menu-icon");
-
     menuIcon.addEventListener("click", () => {
+        ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
         redirectToMenu();
     });
 }
