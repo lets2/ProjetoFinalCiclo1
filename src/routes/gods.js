@@ -16,8 +16,19 @@ router.get("/godstable/:id", godsController.getById);
 router.delete("/godstableDelete/:id", godsController.deleteGodById);
 //----------------------
 //Routes with req.body for gods
+//usando o multer
+const multer = require("multer");
+
+const upload = multer({
+    dest: "./public/assets/uploads/",
+});
+
 //router.post('/gods/table/create/')
-router.post("/godstablecreate/", godsController.createGod);
+router.post(
+    "/godstablecreate/",
+    upload.single("file"),
+    godsController.createGod
+);
 //req.body:
 // {
 //     name: String,

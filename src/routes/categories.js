@@ -40,7 +40,7 @@ router.delete(
 const multer = require("multer");
 
 const upload = multer({
-    dest: "./assets/uploads/",
+    dest: "./public/assets/uploads/",
 });
 
 router.post(

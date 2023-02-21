@@ -19,7 +19,7 @@ export async function addResourcesToGodChoosed(godId) {
             <div id="container-god-img">
             <div class="flex-col-center" id="div-img-god">
                 <div>
-                    <img src="../assets/images/gods/${godInformation.src_img}" alt="" />
+                    <img src="../assets/uploads/${godInformation.src_img}" alt="" />
                 </div>
             </div>
             <div class="flex-col-center container-god-text">
@@ -93,7 +93,7 @@ export async function addResourcesToGodInfo(godId) {
         container_data.innerHTML = `
             <div class="flex-col-center" id="box-img-see-god">
                 <div id="img-god">
-                    <img src="../assets/images/gods/${godInformation.src_img}" alt="" />
+                    <img src="../assets/uploads/${godInformation.src_img}" alt="" />
                 </div>
                 <div id="box-btns" class="flex-row-between">
                     <button id="edit-god-button" class="buttons"><img src="../assets/icons/edit.svg" alt=""></button>
