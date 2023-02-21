@@ -1,3 +1,7 @@
+//NOVOS IMPORTS E DIVISÃO DAS PÁGINAS
+
+import { addExternalResourcesTo } from "./api/routerFetch.js";
+
 //-------------------------------------------------------------
 // IMPORTS
 //--------------------------------------------------------------
@@ -36,7 +40,7 @@ addEventsRelatedTo("/"); //call relateds events to page/url
 // LISTENER TO HEAR WHEN ONSTATECHANGE CUSTOM EVENT IS DISPATCH
 //-----------------------------------------------------------------------
 
-window.addEventListener("onstatechange", (event) => {
+window.addEventListener("onstatechange", async (event) => {
     const url = event.detail.url;
     const criteria = event.detail.criteria; //o valor padrão de criteria={}, se diferente de null implia q
 
@@ -45,67 +49,43 @@ window.addEventListener("onstatechange", (event) => {
     root.innerHTML = "";
     root.appendChild(page);
     console.log("URL:", url, "Criteria:", criteria);
-    addExternalResourcesTo(url, criteria);
+    const respostaIndex = await addExternalResourcesTo(url, criteria);
+
+    console.log("RESPOSTA VINDO DO FETCH", respostaIndex);
+    chamaFuncaoEspecificaPelaUrl(url, respostaIndex);
+
+    // addLinesCategoryTable(respostaIndex);
     addEventsRelatedTo(url); //call relateds events to page/url
 });
 
-//------------------------------------------------------------------------
-// ADDS RESOURCES TO THE PAGE THA WAS RENDERED ACCORDING URL
-//-----------------------------------------------------------------------
-
-export async function addExternalResourcesTo(url, criteria) {
+function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
     switch (url) {
-        /*case "/":
-            addResourcesToPrincipal();
-            break;
-            */
         case "/categories":
-            addResourcesToCategoriesPage();
-            break;
-        case "principalteste":
-            //this page doesnt have dynamic features
+            renderCurrentCategoryOnCategoriesPage(respostaIndex);
             break;
         case "/categories/:id":
-            console.log("PRECISO ADICIONAR RECURSOS NO ID", criteria.id);
-            addResourcesToCategoryChoosed(criteria.id);
-            break;
-        case "/tableCategories":
-            addResourcesToTableOfCategories();
-            break;
-        case "/tableGods":
-            addResourcesToTableOfGods();
+            insertImages(respostaIndex.arrayGods);
+            insertCategoryName(respostaIndex.nameCategory);
             break;
         case "/categories/d1":
-            addResourcesToGodChoosed(criteria.godId);
+            break;
+        case "/tableCategories":
+            addLinesCategoryTable(respostaIndex);
+            break;
+        case "/tableGods":
+            addSelectWithCategories(respostaIndex.dataCategories);
+            addLinesGodTable(respostaIndex.dataGods);
             break;
         case "/godInfo/g1":
-            await addResourcesToGodInfo(criteria.godId);
+            console.log(respostaIndex, "repo");
+            testAddElements(respostaIndex);
             break;
-
         case "/editGod/g1":
-            addResourcesToEditGodPage(criteria.godId);
+            testInserirElementosNaEditGodPage(respostaIndex);
             break;
         case "/editCategory":
-            addResourcesToEditCategoryPage(criteria.id);
+            testInserirElementosNaEditCategoryPage(respostaIndex);
             break;
-    }
-}
-
-async function addResourcesToTableOfCategories() {
-    try {
-        const response = await fetch(`http://localhost:8080/categories/`);
-        console.log("STATUS:", response.status);
-        if (response.status !== 200 && response.status !== 201)
-            throw "[erro] Houve um problema na requisicao!";
-
-        const objContent = await response.json();
-        const categories = objContent.data;
-        /// renderCategoriesOnMainPage(objContent.data);
-        // const quantify = categories.length;
-
-        addLinesCategoryTable(categories);
-    } catch (error) {
-        console.log("Erro durante o fetch:", error);
     }
 }
 
@@ -181,47 +161,6 @@ async function deleteCategoryFromDatabase(id) {
     }
 }
 
-async function addResourcesToTableOfGods() {
-    //
-    try {
-        const responseCategories = await fetch(
-            `http://localhost:8080/categories/`
-        );
-        console.log("STATUS:", responseCategories.status);
-        if (
-            responseCategories.status !== 200 &&
-            responseCategories.status !== 201
-        )
-            throw "[erro] Houve um problema na requisicao das categorias!";
-
-        const objContentCateg = await responseCategories.json();
-
-        const dataCategories = objContentCateg.data;
-        /// renderCategoriesOnMainPage(objContent.data);
-        // const quantify = categories.length;
-
-        /*HTTP REQUEST TO GET ALL THE GODS DATA */
-
-        const responseGods = await fetch(`http://localhost:8080/godstable/`);
-        console.log("STATUS:", responseGods.status);
-        if (responseGods.status !== 200 && responseGods.status !== 201)
-            throw "[erro] Houve um problema na requisicao das categorias!";
-
-        const objContentGods = await responseGods.json();
-        const dataGods = objContentGods.data;
-
-        addSelectWithCategories(dataCategories);
-        addLinesGodTable(dataGods);
-    } catch (error) {
-        console.log("Erro durante o fetch:", error);
-    }
-
-    //There is a Select Tag above the table,
-    //need to be fill with categories
-    //the main idea is later to allow filtering the table
-    //elements by category when the change event is activated
-}
-
 // @author: Gabriela
 function addLinesGodTable(data) {
     const thead = document.querySelector("#thead-gods");
@@ -267,25 +206,6 @@ function addOptionToSelect(_select, _paramOption) {
     option.value = _paramOption.value; //add category id from db
     option.innerHTML = _paramOption.text;
     _select.appendChild(option);
-}
-
-/*Usando fetch para pegar as imagens da página;*/
-async function addResourcesToCategoriesPage() {
-    try {
-        const response = await fetch("http://localhost:8080/categories");
-        console.log("STATUS:", response.status);
-        if (response.status !== 200 && response.status !== 201)
-            throw "[erro] Houve um problema durante a busca das categorias!";
-        const vetordedeuses = [
-            { nome: "fulano", status: "zap" },
-            { nome: "fulano", status: "zap" },
-        ];
-        const objContent = await response.json();
-        // renderCategoriesOnMainPage(objContent.data);
-        renderCurrentCategoryOnCategoriesPage(objContent.data);
-    } catch (error) {
-        console.log("Erro durante o fetch:", error);
-    }
 }
 
 function renderCurrentCategoryOnCategoriesPage(categories) {
@@ -339,36 +259,6 @@ function renderBallsBelowImg(index, quantify) {
     }
 }
 
-/*add resource as páginas escolhdas*/
-async function addResourcesToCategoryChoosed(id) {
-    try {
-        const response = await fetch(
-            `http://localhost:8080/categories/${id}/all`
-        );
-        console.log("STATUS DA RESPOSTA DO FETCH:", response.status);
-        if (response.status !== 200 && response.status !== 201)
-            throw "[erro] Houve um problema durante a busca das categorias!";
-
-        const objContent = await response.json();
-        console.log("Esse é o resultado vindo do backend:", objContent);
-        console.log("Esse é o resultado vindo do backend:", objContent.data);
-
-        const nameCategory = objContent.data[0].name_category;
-        const arrayGods = objContent.data;
-        console.log("Meu array de deuses:", arrayGods);
-        insertImages(arrayGods);
-        insertCategoryName(nameCategory);
-
-        //apos inserir tudo se esta'tudo okay então faz aparecer a tela
-        document
-            .querySelector(".container-page-gods")
-            .classList.remove("hidden");
-        //// renderCategoriesOnMainPage(objContent.data);
-    } catch (error) {
-        console.log("Erro durante o fetch:", error);
-    }
-}
-
 function insertImages(arrayGods) {
     console.log(arrayGods);
     const cardsGods = document.querySelectorAll(".cards-gods");
@@ -387,153 +277,6 @@ function insertCategoryName(nameCategory) {
     document.querySelector(".phrase").innerHTML = nameCategory;
 }
 
-//@author:filipe
-async function addResourcesToGodChoosed(godId) {
-    //CRIAR UM OBJETO COM OS DADOS DO DEUS
-    /* const godObj = {
-        id: "3",
-        name: "Zoo",
-        src: "../images/gods/cat03--god04-natu.jpg",
-        status: "O deus da transformação",
-        category_name: "Deuses da natureza",
-        resume: "Há muito tempo, no reino dos deuses, existia um deus chamado Zoo, o Deus da Transformação. Ele era um deus muito poderoso, mas também muito solitário, pois ninguém queria se aproximar dele com medo de ser transformado em uma criatura.",
-    };
-*/
-    /*Fetch request*/
-    try {
-        const response = await fetch(
-            `http://localhost:8080/godstable/${godId}/`
-        );
-        console.log("STATUS:", response.status);
-        if (response.status !== 200 && response.status !== 201)
-            throw "[erro] Houve um problema na requisicao!";
-
-        const objContent = await response.json();
-        console.log("Resultado da requisição VER GOD DETAILS:", objContent);
-        const godInformation = objContent.data[0];
-        /// renderCategoriesOnMainPage(objContent.data);
-        // const quantify = categories.length;
-
-        //INSERIR OS DADOS DO DEUS NA PÁGINA
-        const container_data = document.querySelector("#container-god-img");
-        container_data.innerHTML = "";
-        container_data.innerHTML = `
-            <div id="container-god-img">
-            <div class="flex-col-center" id="div-img-god">
-                <div>
-                    <img src="../assets/images/gods/${godInformation.src_img}" alt="" />
-                </div>
-            </div>
-            <div class="flex-col-center container-god-text">
-                <h1 class="god-text-title">${godInformation.name}</h1>
-                <h2 class="god-text-subtitle">${godInformation.status}</h2>
-                <p class="god-text-description">
-                ${godInformation.resume}
-                </p>
-            </div>`;
-    } catch (error) {
-        console.log("Erro durante o fetch:", error);
-    }
-}
-//@author:filipe
-async function addResourcesToGodInfo(godId) {
-    //CRIAR UM OBJETO COM OS DADOS DO DEUS
-    /*Fetch request*/
-    try {
-        const response = await fetch(
-            `http://localhost:8080/godstable/${godId}/`
-        );
-        console.log("STATUS:", response.status);
-        if (response.status !== 200 && response.status !== 201)
-            throw "[erro] Houve um problema na requisicao!";
-
-        const objContent = await response.json();
-        console.log("Resultado da requisição VER GOD INFO:", objContent);
-        /*
-        const godInformation = {
-            id: "9",
-            name: "FULANO DE TAL",
-            status: "GOD",
-            resume: "QQQQQAQAQ",
-            src_img: "exampleGod.png",
-        };
-        */
-        const godInformation = objContent.data[0];
-        /// renderCategoriesOnMainPage(objContent.data);
-        // const quantify = categories.length;
-
-        //INSERIR OS DADOS DO DEUS NA PÁGINA
-        //INSERIR OS DADOS DO DEUS NA PÁGINA
-
-        const container_data = document.querySelector("#container-see-god");
-        container_data.innerHTML = "";
-        container_data.innerHTML = `
-            <div class="flex-col-center" id="box-img-see-god">
-                <div id="img-god">
-                    <img src="../assets/images/gods/${godInformation.src_img}" alt="" />
-                </div>
-                <div id="box-btns" class="flex-row-between">
-                    <button id="edit-god-button" class="buttons"><img src="../assets/icons/edit.svg" alt=""></button>
-                    <button id="delete-god-button" class="buttons"><img src="../assets/icons/mdi_trash.svg" alt=""></button>
-                    <button id="back-god-button" class="buttons"><img id="testeDaImg"src="../assets/icons/back-arrow-icon-white.svg" alt=""></button>
-                    
-                </div>
-            </div>  
-            <form action="" class="flex-col-center">
-                <div class="flex-col-center" id="box-inputs-see-god">
-                    <div id="box-tittle" class="flex-col-center">
-                        <h2>${godInformation.name}</h2>
-                        <h4>${godInformation.status}</h4>
-                    </div>
-                    <div>
-                        <h5 id="tittle-description">Resumo</h5>
-                        <p>${godInformation.resume}</p>
-                    </div>
-                </div>
-            </form>
-            `;
-        testAddElements(godInformation);
-    } catch (error) {
-        console.log("Erro durante o fetch:", error);
-    }
-
-    //GOD INFO IS THE PAGE WITH PENCIL AND TRASH DO EDIT AND DELETE GOD
-}
-
-async function addResourcesToEditGodPage(godId) {
-    try {
-        const response = await fetch(
-            `http://localhost:8080/godstable/${godId}/`
-        );
-        console.log("STATUS EDIT:", response.status);
-        if (response.status !== 200 && response.status !== 201)
-            throw "[erro] Houve um problema na requisicao!";
-
-        const objContent = await response.json();
-        console.log("Resultado da requisição EDIT PAGE:", objContent);
-        /*
-        const godInformation = {
-            id: "9",
-            name: "FULANO DE TAL",
-            status: "GOD",
-            resume: "QQQQQAQAQ",
-            src_img: "exampleGod.png",
-        };
-        */
-        const godInformation = objContent.data[0];
-        /// renderCategoriesOnMainPage(objContent.data);
-        // const quantify = categories.length;
-
-        //INSERIR OS DADOS DO DEUS NA PÁGINA
-        //INSERIR OS DADOS DO DEUS NA PÁGINA
-
-        const container_data = document.querySelector("#container-see-god");
-        testInserirElementosNaEditGodPage(godInformation);
-        //testAddElements(godInformation);
-    } catch (error) {
-        console.log("Erro durante o fetch:", error);
-    }
-}
 
 function testInserirElementosNaEditGodPage(godObj) {
     const containerImgGod = document.querySelector("#edit-page-god-img");
@@ -618,45 +361,6 @@ async function deleteGodFromDatabase(godId) {
         displayWarning(resJson.message); //deu tudo  certo
 
         const container_data = document.querySelector("#container-see-god");
-    } catch (error) {
-        console.log("Erro durante o fetch:", error);
-    }
-}
-
-//#input-cat-edit-name//cat
-async function addResourcesToEditCategoryPage(id) {
-    try {
-        const response = await fetch(
-            `http://localhost:8080/categoriestable/${id}/`
-        );
-        console.log("STATUS EDIT:", response.status);
-        if (response.status !== 200 && response.status !== 201)
-            throw "[erro] Houve um problema na requisicao!";
-
-        const objContent = await response.json();
-        console.log(
-            "Resultado da requisição GET CATEGORY INFOMRATION BY ID:",
-            objContent
-        );
-        /*
-        const godInformation = {
-            id: "9",
-            name: "FULANO DE TAL",
-            status: "GOD",
-            resume: "QQQQQAQAQ",
-            src_img: "exampleGod.png",
-        };
-        */
-        const catInformation = objContent.data[0];
-        /// renderCategoriesOnMainPage(objContent.data);
-        // const quantify = categories.length;
-
-        //INSERIR OS DADOS DO DEUS NA PÁGINA
-        //INSERIR OS DADOS DO DEUS NA PÁGINA
-
-        //const container_data = document.querySelector("#container-see-god");
-        testInserirElementosNaEditCategoryPage(catInformation);
-        //testAddElements(godInformation);
     } catch (error) {
         console.log("Erro durante o fetch:", error);
     }
