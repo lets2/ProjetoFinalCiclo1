@@ -624,13 +624,13 @@ function addEventsToCategoryTablePage() {
     addEventsToHeader();
     //addLinesCategoryTable();
     /*insere evento no botao de add categoria*/
-    /*
+
     const btnAddCategory = document.querySelector("#create-new-category");
 
     btnAddCategory.addEventListener("click", () => {
         redirectToAddCategory();
     });
-
+    /*
     console.log("CHAMOU A FUNCAO DE ADD EVENTOS NO LAPIS");
 
     const btnEditCategory = document.querySelectorAll(".edit-btn");
@@ -921,15 +921,38 @@ async function addNewCategoryInDatabase() {
     const newColorHexFormat = document.querySelector(
         "#new-color-category"
     ).value;
-    const srcExample = "exampleTemple.png";
+    //////const srcExample = "exampleTemple.png";
 
-    const newCategory = {
+    /////////////
+    //Tentando fazer a adicão de arquivo:
+    const formData = new FormData();
+    const fileInput = document.querySelector('input[type="file"]');
+
+    // Adiciona a imagem ao FormData
+    formData.append("file", fileInput.files[0]);
+
+    // Adiciona as 4 strings ao FormData
+    formData.append("name", newCategoryName);
+    formData.append("hexColor", newColorHexFormat);
+
+    ////
+    /*   const newCategory = {
         name: newCategoryName,
         src: srcExample,
         hexColor: newColorHexFormat,
     };
-
+*/
     try {
+        const response = await fetch(
+            "http://localhost:8080/categoriestablecreate",
+            {
+                method: "POST",
+                body: formData,
+                //headers: { "Content-type": "application/json; charset=UTF-8" },
+            }
+        );
+
+        /*
         const response = await fetch(
             "http://localhost:8080/categoriestablecreate",
             {
@@ -938,7 +961,8 @@ async function addNewCategoryInDatabase() {
                 headers: { "Content-type": "application/json; charset=UTF-8" },
             }
         );
-        console.log("Olha a resposta response:", response);
+        */
+        console.log("TESTE RESPOSTA OBTIDA AO ENVIAR CATEGORIA:", response);
 
         if (response.status !== 200 && response.status !== 201) {
             const resJson = await response.json();

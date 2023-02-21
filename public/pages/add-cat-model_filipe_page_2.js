@@ -31,6 +31,10 @@ export function AddCategory() {
 
                     <input id="new-name-category" type="text" placeholder="Nome da categoria">
                     <input id="new-color-category" type="text" placeholder="Cor da categoria">
+                    <label>
+                           Arquivo:
+                           <input type="file" name="file" accept="image/png, image/jpeg, image/jpg">
+                     </label>
 
                 </div>
 
