@@ -47,6 +47,8 @@ export async function addExternalResourcesTo(url, criteria) {
             return addResourcesToEditGodPage(criteria.godId);
 
         case "/editCategory":
-            return addResourcesToEditCategoryPage(criteria.id);
+            return await addResourcesToEditCategoryPage(criteria.id);
+        default:
+            return null;
     }
 }
