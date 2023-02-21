@@ -219,6 +219,9 @@ exports.getFromTableById = async (req, res) => {
         console.timeEnd(`getFromTableById()${milliseconds}`);
     }
 };
+//precisei do path aqui:
+const path = require("path");
+
 /*POST/CREATE METHOD*/
 exports.createCategory = async (req, res) => {
     //determinar o IP de quem fez a requisição
@@ -228,7 +231,24 @@ exports.createCategory = async (req, res) => {
     console.time(`createCategory()${milliseconds}`);
 
     // TTRY TO GET PARAMETERS FROM REQ.BODY E VERIFY IF ARE OKAY
-    const { name, src, hexColor } = req.body;
+    /////////const { name, src, hexColor } = req.body;
+
+    ///-----------------------------------------------------------
+    ///TENTANDO IMPLEMENTAR ADICAO DE ARQUIVO CATEGORIAS!
+    //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+
+    const filename = req.file.filename;
+    const mimetype = req.file.mimetype;
+    const extension = path.extname(req.file.originalname);
+    const nameWithExtension = filename + extension;
+
+    const name = req.body.name;
+    const hexColor = req.body.hexColor;
+    const src = nameWithExtension;
+    const fileName = nameWithExtension;
+
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ///TENTANDO IMPLEMENTAR ADICAO DE ARQUIVO CATEGORIAS!
 
     //Standardizing the response that the frontend will receive.
     const response = {

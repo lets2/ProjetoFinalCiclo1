@@ -37,7 +37,18 @@ router.delete(
 //----------------------
 //Routes with req.body for Categories
 //router.post('/categories/table/create/')
-router.post("/categoriestablecreate/", categoriesController.createCategory);
+const multer = require("multer");
+
+const upload = multer({
+    dest: "./assets/uploads/",
+});
+
+router.post(
+    "/categoriestablecreate/",
+    upload.single("file"),
+    categoriesController.createCategory
+);
+
 //req.body:
 // {
 //     name: String,
