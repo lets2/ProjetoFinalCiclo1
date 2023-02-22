@@ -972,13 +972,6 @@ async function addNewCategoryInDatabase() {
     formData.append("name", newCategoryName);
     formData.append("hexColor", newColorHexFormat);
 
-    ////
-    /*   const newCategory = {
-        name: newCategoryName,
-        src: srcExample,
-        hexColor: newColorHexFormat,
-    };
-*/
     try {
         const response = await fetch("http://localhost:8080/categoriestable", {
             method: "POST",
