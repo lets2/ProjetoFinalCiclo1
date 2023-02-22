@@ -105,6 +105,10 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
         case "/editCategory":
             testInserirElementosNaEditCategoryPage(respostaIndex);
             break;
+        case "/addGod":
+            categoriesList = respostaIndex;
+            insertChoosedGodImg();
+            addSelectWithCategoriesInGodsPage();
     }
 }
 
@@ -410,7 +414,7 @@ function testInserirElementosNaEditCategoryPage(catInformation) {
 // ADDS EVENTS TO THE PAGE THAT WAS RENDERED ACCORDING URL
 //-----------------------------------------------------------------------
 
-function addEventsRelatedTo(url) {
+function addEventsRelatedTo(url, data) {
     switch (url) {
         /*case "/":
             addEventsToPrincipal();
@@ -442,8 +446,8 @@ function addEventsRelatedTo(url) {
             break;
         case "/addGod":
             addEventsToAddNewGodPage();
-            insertChoosedGodImg();
-            addSelectWithCategoriesInGodsPage();
+            // insertChoosedGodImg();
+            // addSelectWithCategoriesInGodsPage();
             break;
         case "/godInfo/g1":
             addEventsToAdmGodInfoPage();
@@ -1070,8 +1074,6 @@ function insertChoosedGodImg(){
     const fileBtn = document.querySelector("#insert-file-btn");
     const previewImg = document.querySelector("#preview-img-god");
     const message = document.querySelector("#message-input-file")
-
-    
 
     addUniqueEventListener(fileBtn, "change", (e)=>{
         if (e.target.files.length > 0) {
