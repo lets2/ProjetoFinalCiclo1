@@ -1,5 +1,6 @@
 import CriaEventStateChange from "./event-url.js";
 //import { addExternalResourcesTo, addEventsToPrincipal } from "../index.js";
+import { addUniqueEventListener } from "../utils/event-listener.js";
 
 /*@autor:letonio - Tentando criar o primeiro SPA*/
 
@@ -45,7 +46,7 @@ export function Categories() {
 <footer></footer>
 	`;
 
-    document.addEventListener("DOMContentLoaded", () => {
+    addUniqueEventListener(document, "DOMContentLoaded", () => {
         // console.log("entrou no evento externo da main");
         //addExternalResourcesTo("/");
         //addEventsToPrincipal();
