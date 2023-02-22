@@ -26,14 +26,20 @@ export function AddGod() {
                 <div>
                     <img src="../assets/images/games-god.jpg" alt="">
                 </div>
-                <button class="btns-add-god">Mudar imagem</button>
-                <label>
-                    Arquivo:
-                    <input type="file" name="file" accept="image/png, image/jpeg, image/jpg">
-                </label>
+                <input id="insert-file-btn" type="file" name="file" accept="image/png, image/jpeg, image/jpg">
+                <label for="insert-file-btn" class="custom-file-upload">Escolha um arquivo</label>
             </div>
-            <form action="" class="flex-col-center">
+            <form action="" class="flex-col-center" id="form-add-god">
                 <div class="flex-col-center" id="box-inputs-add-god">
+
+                    <select name="filter-category" id="select-filter-category"  class="input-add-god">
+                        <option value="1">Escolha uma categoria</option>
+                        <option value="2">Deuses da Tecnologia</option>
+                        <option value="3">Deuses da Alimentação</option>
+                        <option value="4">Deuses do Caos</option>
+                        <option value="5">Health</option>
+                    </select>
+
                     <input id="new-name-god" class="input-add-god" type="text" placeholder="Nome">
                     <input id="new-status-god" class="input-add-god" type="text" placeholder="Status">
                     <input id="new-resume-god" class="input-add-god" id="input-resume-add-god"type="text" placeholder="Resumo">
