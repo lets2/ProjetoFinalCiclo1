@@ -34,14 +34,24 @@ async function testPasswordIsCorrect(username, plainTextPassword) {
 /**
  
 - prox passos:
+
     - menos importante:
+
         - especificar categoria do deus ao criar (em vez de uma categoria pré-definida)
         - fazer uma prévia da imagem escolhida pelo usuário
         - upload de imagem nas páginas de edição (de deus e categoria). Cuidar para não deletar a imagem antiga se o usuário não escolheu uma nova
         - cursor:pointer no hover do deus + efeito visual
+
     - mais importante (fazer nessa ordem):
+
         - rotas de login/logout no backend (funcionando com usuários pré-registrados manualmente, guardando hash da senha no banco de dados)
         - middleware de autenticação nas rotas privilegiadas (POST, PATCH, DELETE)
         - implementar login corretamente no frontend (ou seja, fazer fetch e redirecionar para pagina de admin somente se login foi bem sucedido)
 
  */
+
+/*- Ir na páginas de adicionar novo deus e colocar um select que armazena
+        as opcoes de categorias disponíveis baseado no vetor global de categorias (FELIPE)
+        - fazer uma prévia da imagem escolhida pelo usuário (GABI)
+        - upload de imagem nas páginas de edição (de deus e categoria). Cuidar para não deletar a imagem antiga se o usuário não escolheu uma nova
+        - cursor:pointer no hover do deus + efeito visual (DANIEL VAI FAZER)*/
