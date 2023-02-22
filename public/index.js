@@ -1,6 +1,7 @@
 //NOVOS IMPORTS E DIVISÃO DAS PÁGINAS
 
 import { addExternalResourcesTo } from "./api/routerFetch.js";
+import { addUniqueEventListener } from "./utils/event-listener.js";
 
 //-------------------------------------------------------------
 // IMPORTS
@@ -55,7 +56,7 @@ addEventsRelatedTo("/"); //call relateds events to page/url
 // LISTENER TO HEAR WHEN ONSTATECHANGE CUSTOM EVENT IS DISPATCH
 //-----------------------------------------------------------------------
 
-window.addEventListener("onstatechange", async (event) => {
+addUniqueEventListener(window, "onstatechange", async (event) => {
     const url = event.detail.url;
     const criteria = event.detail.criteria; //o valor padrão de criteria={}, se diferente de null implia q
 
@@ -136,7 +137,7 @@ function adicionaEventosNosLapis() {
         listaDeImagensDeLapis
     );
     listaDeImagensDeLapis.forEach((imgLapis) => {
-        imgLapis.addEventListener("click", (event) => {
+        addUniqueEventListener(imgLapis, "click", (event) => {
             const catId = event.target.parentNode.parentNode.dataset.id;
             console.log("ZZZZZZZZ LAPIS OLHA O DATASET DELE:", catId);
             redirectToEditCategory(catId);
@@ -146,7 +147,7 @@ function adicionaEventosNosLapis() {
     const listaDeImagensDeLixeira = document.querySelectorAll(".delete-btn");
     console.log(" LISTA DE LIXEIRAS DA CATEGORIA", listaDeImagensDeLixeira);
     listaDeImagensDeLixeira.forEach((imgLixeira) => {
-        imgLixeira.addEventListener("click", (event) => {
+        addUniqueEventListener(imgLixeira, "click", (event) => {
             const catId = event.target.parentNode.parentNode.dataset.id;
 
             deleteCategoryFromDatabase(catId);
@@ -158,7 +159,7 @@ function adicionaEventosNosLapis() {
 async function deleteCategoryFromDatabase(id) {
     try {
         const response = await fetch(
-            `http://localhost:8080/categoriestableDelete/${id}/`,
+            `http://localhost:8080/categoriestable/${id}/`,
             {
                 method: "DELETE",
             }
@@ -332,7 +333,7 @@ function testAddElements(godObj) {
     const updateGodButton = document.querySelector("#edit-god-button");
 
     console.log("SELECIONOU O CONTAINER DA IMAGEM:", updateGodButton);
-    updateGodButton.addEventListener("click", () => {
+    addUniqueEventListener(updateGodButton, "click", () => {
         console.log("CLICOU DENTRO DO EVENTO DE ATUALIZAR DEUS!");
         redirectToEditGodPage(godObj.id);
     });
@@ -341,7 +342,8 @@ function testAddElements(godObj) {
     const backGodButton = document.querySelector("#back-god-button");
 
     console.log("SELECIONOU O CONTAINER DA IMAGEM:", backGodButton);
-    backGodButton.addEventListener("click", () => {
+
+    addUniqueEventListener(backGodButton, "click", () => {
         console.log("CLICOU DENTRO DO EVENTO DE DELETAR DEUS!");
         redirectToTableEditGods();
     });
@@ -350,7 +352,7 @@ function testAddElements(godObj) {
     const deleteGodButton = document.querySelector("#delete-god-button");
 
     console.log("SELECIONOU O CONTAINER DA IMAGEM:", deleteGodButton);
-    deleteGodButton.addEventListener("click", () => {
+    addUniqueEventListener(deleteGodButton, "click", () => {
         console.log(
             "CLICOU DENTRO DO EVENTO DE DELETAR DEUS!com essa",
             godObj.id
@@ -363,7 +365,7 @@ function testAddElements(godObj) {
 async function deleteGodFromDatabase(godId) {
     try {
         const response = await fetch(
-            `http://localhost:8080/godstableDelete/${godId}/`,
+            `http://localhost:8080/godstable/${godId}/`,
             {
                 method: "DELETE",
             }
@@ -463,7 +465,7 @@ function addEventsRelatedTo(url) {
 export function addEventsToCategoriesPage() {
     /*Add event to the current temple displayed on Page*/
     const containerTemples = document.querySelector(".container-temples");
-    containerTemples.addEventListener("click", () => {
+    addUniqueEventListener(containerTemples, "click", () => {
         console.log(
             "QUER MOSTRAR DADOS DESSA CATEGORIAS:",
             categoriesList[currentIndexCategory].id
@@ -473,19 +475,20 @@ export function addEventsToCategoriesPage() {
     });
 
     /*change arrow color on hover*/
-    const arrowLeft = document.querySelector(".category-arrow-left");
+    let arrowLeft = document.querySelector(".category-arrow-left");
 
-    arrowLeft.addEventListener("mouseover", (event) => {
+    addUniqueEventListener(arrowLeft, "mouseenter", (event) => {
+        console.log("arrowLeft mouseenter");
         event.target.setAttribute(
             "src",
             "./assets/icons/arrow-left-orange.svg"
         );
     });
-    arrowLeft.addEventListener("mouseout", (event) => {
+    addUniqueEventListener(arrowLeft, "mouseout", (event) => {
         event.target.setAttribute("src", "./assets/icons/arrow-left-white.svg");
     });
 
-    arrowLeft.addEventListener("click", () => {
+    addUniqueEventListener(arrowLeft, "click", () => {
         const templeImage = document.querySelector("#temple");
         console.log("Olha o valor do indiceATUAL:", currentIndexCategory);
         if (currentIndexCategory > 0) {
@@ -496,20 +499,20 @@ export function addEventsToCategoriesPage() {
 
     const arrowRight = document.querySelector(".category-arrow-right");
 
-    arrowRight.addEventListener("mouseover", (event) => {
+    addUniqueEventListener(arrowRight, "mouseover", (event) => {
         event.target.setAttribute(
             "src",
             "./assets/icons/arrow-right-orange.svg"
         );
     });
-    arrowRight.addEventListener("mouseout", (event) => {
+    addUniqueEventListener(arrowRight, "mouseout", (event) => {
         event.target.setAttribute(
             "src",
             "./assets/icons/arrow-right-white.svg"
         );
     });
 
-    arrowRight.addEventListener("click", () => {
+    addUniqueEventListener(arrowRight, "click", () => {
         const templeImage = document.querySelector("#temple");
         if (currentIndexCategory < categoriesList.length - 1) {
             //
@@ -526,7 +529,7 @@ export function addEventsToCategoriesPage() {
 function addEventsToMainPageTest() {
     addEventsToHeader(); //estou colocando com header para testar
     const seeMoreButton = document.querySelector(".button-see-more");
-    seeMoreButton.addEventListener("click", () => {
+    addUniqueEventListener(seeMoreButton, "click", () => {
         //redirectToMyPrincipal();//antigo
         redirectToAllCategories();
     });
@@ -574,7 +577,7 @@ function addEventsToAdmLoginPage() {
 
 function adicionaEventoNoBotaoDeLogin() {
     const buttonLogin = document.querySelector("#login-logo-button");
-    buttonLogin.addEventListener("click", () => {
+    addUniqueEventListener(buttonLogin, "click", () => {
         redirectToMenuAdmPage();
     });
 }
@@ -590,7 +593,7 @@ function eventosAdicionadosEmCadaCartao() {
     for (let i = 1; i <= 4; i++) {
         let godCard = document.querySelector(`.card${i.toString()}`);
 
-        godCard.addEventListener("click", () => {
+        addUniqueEventListener(godCard, "click", () => {
             redirectToGodDetailsPage(godCard.dataset.godId);
         });
     }
@@ -611,7 +614,7 @@ function addEventsToAdmMenuPage() {
 
     objMenuAdm.forEach((element) => {
         const menuOption = document.querySelector(element.label);
-        menuOption.addEventListener("click", () => {
+        addUniqueEventListener(menuOption, "click", () => {
             element.handle();
         });
     });
@@ -627,7 +630,7 @@ function addEventsToCategoryTablePage() {
 
     const btnAddCategory = document.querySelector("#create-new-category");
 
-    btnAddCategory.addEventListener("click", () => {
+    addUniqueEventListener(btnAddCategory, "click", () => {
         redirectToAddCategory();
     });
     /*
@@ -651,7 +654,7 @@ function addEventsToGodTablePage() {
     //addLinesGodTable();
     /*insere evento no botão de adicionar um novo deus*/
     const buttonAddGod = document.querySelector("#create-new-god");
-    buttonAddGod.addEventListener("click", () => {
+    addUniqueEventListener(buttonAddGod, "click", () => {
         redirectToAddGodPage();
     });
 
@@ -660,7 +663,7 @@ function addEventsToGodTablePage() {
 	referente aquele elemento*/
 
     const tbodyElement = document.querySelector("tbody");
-    tbodyElement.addEventListener("click", (event) => {
+    addUniqueEventListener(tbodyElement, "click", (event) => {
         console.log("TARGET:", event.target.parentNode);
         const rowElement = event.target.parentNode;
         if (event.target.parentNode.tagName === "TR") {
@@ -682,10 +685,10 @@ function addEventsToAddNewGodPage() {
     /*evento nos botoes de adicionar e cancelar*/
     const cancelButton = document.querySelector(".cancel-button");
     const addGodButton = document.querySelector("#add-god-button");
-    cancelButton.addEventListener("click", () => {
+    addUniqueEventListener(cancelButton, "click", () => {
         redirectToTableEditGods();
     });
-    addGodButton.addEventListener("click", () => {
+    addUniqueEventListener(addGodButton, "click", () => {
         addNewGodInDatabase();
         //Antes de redirecionar devemos adicionar o novo deus
         redirectToTableEditGods();
@@ -721,7 +724,7 @@ function addEventsToAdmGodInfoPage() {
         "ENTROU NO EVENTO DE ADICIONAR ALGO NO BOTAO DE EDIT",
         editGodButton
     );
-    editGodButton.addEventListener("click", () => {
+    addUniqueEventListener(editGodButton,"click", () => {
         console.log("ACESSOU O EVENTO DO BOTÃO DE CLICK");
         //const godId = 
         redirectToEditGodPage();
@@ -731,7 +734,7 @@ function addEventsToAdmGodInfoPage() {
     //add eventos para voltar pra página anterior, caso não queira editar
     const backGodButton = document.querySelector("#back-god-button");
     console.log("BOTÃO DE VOLTAR:", backGodButton);
-    backGodButton.addEventListener("click", () => {
+    addUniqueEventListener(backGodButton,"click", () => {
         console.log("Voltamos para a página anterior de edição de deuses");
         redirectToTableEditGods();
     });
@@ -744,16 +747,16 @@ function addEventsToEditGodPages() {
     addEventsToHeader();
 
     const changeImg = document.querySelector("#change-img-btn");
-    changeImg.addEventListener("click", () => {
+    addUniqueEventListener(changeImg, "click", () => {
         redirectToTableEditGods();
     });
 
     const cancelGodBtn = document.querySelector("#cancel-edit-god");
-    cancelGodBtn.addEventListener("click", () => {
+    addUniqueEventListener(cancelGodBtn, "click", () => {
         redirectToTableEditGods();
     });
     const updateGodBtn = document.querySelector("#update-god-button");
-    updateGodBtn.addEventListener("click", () => {
+    addUniqueEventListener(updateGodBtn, "click", () => {
         //atualizar informações de um deus;
         const godId = document.querySelector("#container-edit-god").dataset
             .godId;
@@ -767,20 +770,20 @@ function addEventsToEditGodPages() {
 function addEventsToMenuPage() {
     addEventsToHeader();
     const pageIcon = document.querySelector("#home-page");
-    pageIcon.addEventListener("click", () => {
+    addUniqueEventListener(pageIcon, "click", () => {
         ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
         ///redirectToMyPrincipal();
         redirectToAllCategories();
     });
 
     const godIcon = document.querySelector("#gods-page");
-    godIcon.addEventListener("click", () => {
+    addUniqueEventListener(godIcon, "click", () => {
         ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
         redirectToGodDetailsPage();
     });
 
     const categoriesIcon = document.querySelector("#categories-page");
-    categoriesIcon.addEventListener("click", () => {
+    addUniqueEventListener(categoriesIcon, "click", () => {
         ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
         //redirectToMyPrincipal();
         redirectToAllCategories();
@@ -792,11 +795,11 @@ function addEventsToMenuPage() {
 function addEventsToAddCategoryPage() {
     addEventsToHeader();
     const btnCancel = document.querySelector("#Cancelar");
-    btnCancel.addEventListener("click", () => {
+    addUniqueEventListener(btnCancel, "click", () => {
         redirectToTableEditCategories();
     });
     const btnAddCategory = document.querySelector("#Adicionar");
-    btnAddCategory.addEventListener("click", async () => {
+    addUniqueEventListener(btnAddCategory, "click", async () => {
         await addNewCategoryInDatabase();
         redirectToTableEditCategories();
     });
@@ -842,7 +845,7 @@ async function addNewGodInDatabase() {
     };
     */
     try {
-        const response = await fetch("http://localhost:8080/godstablecreate", {
+        const response = await fetch("http://localhost:8080/godstable", {
             method: "POST",
             body: formData,
             //headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -850,7 +853,7 @@ async function addNewGodInDatabase() {
 
         /*
         const response = await fetch(
-            "http://localhost:8080/godstablecreate",
+            "http://localhost:8080/godstable",
             {
                 method: "POST",
                 body: JSON.stringify(newCategory),
@@ -899,7 +902,7 @@ async function updateGodInformationInDatabase(godId) {
 
     try {
         const response = await fetch(
-            `http://localhost:8080/godstableEdit/${godId}`,
+            `http://localhost:8080/godstable/${godId}`,
             {
                 method: "PUT",
                 body: JSON.stringify(objUpdateGod),
@@ -977,18 +980,15 @@ async function addNewCategoryInDatabase() {
     };
 */
     try {
-        const response = await fetch(
-            "http://localhost:8080/categoriestablecreate",
-            {
-                method: "POST",
-                body: formData,
-                //headers: { "Content-type": "application/json; charset=UTF-8" },
-            }
-        );
+        const response = await fetch("http://localhost:8080/categoriestable", {
+            method: "POST",
+            body: formData,
+            //headers: { "Content-type": "application/json; charset=UTF-8" },
+        });
 
         /*
         const response = await fetch(
-            "http://localhost:8080/categoriestablecreate",
+            "http://localhost:8080/categoriestable",
             {
                 method: "POST",
                 body: JSON.stringify(newCategory),
@@ -1021,13 +1021,13 @@ function displayWarning(_message) {
 function addEventsToEditCategoryPage() {
     addEventsToHeader();
     const btnCancel = document.querySelector("#Cancelar");
-    btnCancel.addEventListener("click", () => {
+    addUniqueEventListener(btnCancel, "click", () => {
         redirectToTableEditCategories();
     });
     //
     // #Adicionar;
     const btnEditCategory = document.querySelector("#Atualizar");
-    btnEditCategory.addEventListener("click", () => {
+    addUniqueEventListener(btnEditCategory, "click", () => {
         // Adicionar aquia função que faz o fetch pra adicionar
         //
         //
@@ -1048,7 +1048,7 @@ async function updateCategoryInformationInDatabase(id) {
 
     try {
         const response = await fetch(
-            `http://localhost:8080/categoriestableEdit/${id}`,
+            `http://localhost:8080/categoriestable/${id}`,
             {
                 method: "PUT",
                 body: JSON.stringify(objUpdateCategory),
@@ -1080,7 +1080,7 @@ async function updateCategoryInformationInDatabase(godId) {
 
     try {
         const response = await fetch(
-            `http://localhost:8080/godstableEdit/${godId}`,
+            `http://localhost:8080/godstable/${godId}`,
             {
                 method: "PUT",
                 body: JSON.stringify(objUpdateGod),
@@ -1112,7 +1112,7 @@ async function updateGodInformationInDatabase(godId) {
 
     try {
         const response = await fetch(
-            `http://localhost:8080/godstableEdit/${godId}`,
+            `http://localhost:8080/godstable/${godId}`,
             {
                 method: "PUT",
                 body: JSON.stringify(objUpdateGod),
@@ -1151,7 +1151,7 @@ function addEventsToHeader() {
 
     const logo = document.querySelector("#logo");
 
-    logo.addEventListener("click", () => {
+    addUniqueEventListener(logo, "click", () => {
         //redirectToMyPrincipal();
         redirectToAllCategories();
     });
@@ -1159,13 +1159,13 @@ function addEventsToHeader() {
     /*Add event to PROFILE ICON, redirect to Login Adm Page*/
     const profileIcon = document.querySelector("#profile-icon");
 
-    profileIcon.addEventListener("click", () => {
+    addUniqueEventListener(profileIcon, "click", () => {
         redirectToLoginAdmPage();
     });
 
     const menuIcon = document.querySelector("#menu-icon");
 
-    menuIcon.addEventListener("click", () => {
+    addUniqueEventListener(menuIcon, "click", () => {
         redirectToMenu();
     });
 }

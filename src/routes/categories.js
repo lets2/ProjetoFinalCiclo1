@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const categoriesController = require("../controllers/categories.js");
+const upload = require("./multer.js");
 
 //-------------------------------------------------------------------
 /*Routes related to the "Categories" entity, AVAILABLE TO ANY USER.*/
@@ -30,21 +31,13 @@ router.get("/categoriestable", categoriesController.getTable);
 
 //Routes with parameters but without body for Categories
 router.get("/categoriestable/:id", categoriesController.getFromTableById);
-router.delete(
-    "/categoriestableDelete/:id",
-    categoriesController.deleteCategoryById
-);
+router.delete("/categoriestable/:id", categoriesController.deleteCategoryById);
 //----------------------
 //Routes with req.body for Categories
 //router.post('/categories/table/create/')
-const multer = require("multer");
-
-const upload = multer({
-    dest: "./public/assets/uploads/",
-});
 
 router.post(
-    "/categoriestablecreate/",
+    "/categoriestable/",
     upload.single("file"),
     categoriesController.createCategory
 );
@@ -57,7 +50,7 @@ router.post(
 // }
 
 //router.put("/categories/table/Edit/:id"
-router.put("/categoriestableEdit/:id", categoriesController.updateCategory);
+router.put("/categoriestable/:id", categoriesController.updateCategory);
 //id=req.params.id
 //req.body:
 // {
@@ -70,4 +63,4 @@ module.exports = router;
 
 //authentication.js
 //Posteriormente, quando tiver autenticação:
-//router.post("/categoriestablecreate/", authenticate,categoriesController.createCategory);
+//router.post("/categoriestable/", authenticate,categoriesController.createCategory);
