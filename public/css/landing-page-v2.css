@@ -334,7 +334,7 @@ relacionada aquele elemento
 }
 
 #main-tittle {
-    animation: tittle 7s;
+    animation: tittle 2s;
 }
 
 @keyframes tittle  {
@@ -358,7 +358,7 @@ relacionada aquele elemento
 }
 
 #subtittle {
-    animation: subtittle 10s;
+    animation: subtittle 2.5s;
 }
 
 @keyframes subtittle  {

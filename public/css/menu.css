@@ -412,11 +412,12 @@ relacionada aquele elemento
      justify-content: space-around;
  }
  #box-menu{
-     width: 100%;
-     padding: 2.0rem;
-     padding-top: 5rem;
-     justify-content: center;
+    width: 100%;
+    padding: 7.0rem 2rem 0;
+    height: revert;
+    justify-content: center;
  }
+ 
  aside > figure > h2{
      width: 80%;
      padding: 2.0rem 0.0rem 2.0rem;
@@ -435,12 +436,12 @@ relacionada aquele elemento
  .sidebar-options{
      height: 65%;
      width: 100%;
-     padding: 2.0rem 4.0rem;
+     padding: 0 4rem 2rem;
      display: flex;
      flex-direction: column;
      align-items: flex-start;
      justify-content: space-around;
-     margin-bottom: 3rem;
+     margin: 0 auto 3rem;
  }
  .sidebar-options > li{
      display: flex;
