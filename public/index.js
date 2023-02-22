@@ -305,7 +305,7 @@ function insertCategoryName(nameCategory) {
 function testInserirElementosNaEditGodPage(godObj) {
     const containerImgGod = document.querySelector("#edit-page-god-img");
     containerImgGod.innerHTML = `
-    <img src="./public/assets/uploads/${godObj.src_img}" alt="">
+    <img src="../assets/uploads/${godObj.src_img}" alt="">
     `;
 
     const inputEditGodName = document.querySelector(
@@ -414,7 +414,7 @@ function testInserirElementosNaEditCategoryPage(catInformation) {
 // ADDS EVENTS TO THE PAGE THAT WAS RENDERED ACCORDING URL
 //-----------------------------------------------------------------------
 
-function addEventsRelatedTo(url, data) {
+function addEventsRelatedTo(url) {
     switch (url) {
         /*case "/":
             addEventsToPrincipal();
