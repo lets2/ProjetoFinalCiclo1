@@ -412,6 +412,13 @@ h2{
 	height: var(--height-img-god-middle);
 	border: solid 2.0rem var(--color-bg-category-1-dark-40p);
 	border-radius: 2.0rem;
+	transition: transform .9s;
+	cursor: pointer;
+}
+
+.cards-gods:hover{
+	transform: scale(1.1);
+    filter: brightness(130%);
 }
 
 .hidden{
