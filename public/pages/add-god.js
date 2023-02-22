@@ -24,10 +24,11 @@ export function AddGod() {
         <div class="flex-row-center" id="container-edit-god">
             <div class="flex-col-center" id="box-img-god">
                 <div>
-                    <img src="../assets/images/games-god.jpg" alt="">
+                    <img id="preview-img-god" src="../assets/images/games-god.jpg" alt="">
                 </div>
                 <input id="insert-file-btn" type="file" name="file" accept="image/png, image/jpeg, image/jpg">
                 <label for="insert-file-btn" class="custom-file-upload">Escolha um arquivo</label>
+                <p id="message-input-file"></p>
             </div>
             <form action="" class="flex-col-center" id="form-add-god">
                 <div class="flex-col-center" id="box-inputs-add-god">

@@ -442,6 +442,8 @@ function addEventsRelatedTo(url) {
             break;
         case "/addGod":
             addEventsToAddNewGodPage();
+            insertChoosedGodImg();
+            addSelectWithCategoriesInGodsPage();
             break;
         case "/godInfo/g1":
             addEventsToAdmGodInfoPage();
@@ -1064,6 +1066,50 @@ async function updateCategoryInformationInDatabase(id) {
     }
 }
 
+function insertChoosedGodImg(){
+    const fileBtn = document.querySelector("#insert-file-btn");
+    const previewImg = document.querySelector("#preview-img-god");
+    const message = document.querySelector("#message-input-file")
+
+    
+
+    addUniqueEventListener(fileBtn, "change", (e)=>{
+        if (e.target.files.length > 0) {
+            const file = e.target.files[0];
+            const url = URL.createObjectURL(file);
+            previewImg.src = url;
+            message.innerHTML = file.name
+            console.log("fileBTN", file.name)
+        }else{
+            message.innerHTML = "Nenhum arquivo escolhido" 
+        }
+    })
+}
+
+function addSelectWithCategoriesInGodsPage() {
+    const selectElement = document.querySelector("#select-filter-category");
+    selectElement.innerHTML = ""; //clear any previous content
+    console.log("ENTROU SELECT CARA", categoriesList)
+ 
+    addOptionToSelectInGodsPage(selectElement, {
+        value: "choose",
+        text: "Escolha uma categoria",
+    });
+
+    categoriesList.forEach((category) => {
+        addOptionToSelectInGodsPage(selectElement, {
+            value: category.id,
+            text: category.name,
+        });
+    });
+}
+
+function addOptionToSelectInGodsPage(_select, _paramOption) {
+    const option = document.createElement("option");
+    option.value = _paramOption.value; //add category id from db
+    option.innerHTML = _paramOption.text;
+    _select.appendChild(option);
+}
 //
 /*
 async function updateCategoryInformationInDatabase(godId) {
