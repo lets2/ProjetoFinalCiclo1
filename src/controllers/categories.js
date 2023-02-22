@@ -238,16 +238,16 @@ exports.createCategory = async (req, res) => {
     //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
 
     const filename = req.file.filename;
-    const mimetype = req.file.mimetype;
-    const extension = path.extname(req.file.originalname);
-    const nameWithExtension = filename + extension;
+    //const mimetype = req.file.mimetype;
+    //const extension = path.extname(req.file.originalname);
+    // const nameWithExtension = filename + extension;
 
     const name = req.body.name;
     const hexColor = req.body.hexColor;
     //const src = nameWithExtension;
     const src = filename; //Não precisa de extensão, é so o codigo mesmo!
 
-    const fileName = nameWithExtension;
+    //const fileName = nameWithExtension;
 
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     ///TENTANDO IMPLEMENTAR ADICAO DE ARQUIVO CATEGORIAS!

@@ -12,6 +12,8 @@ const HOSTNAME = process.env.PG_HOST;
 const app = express();
 
 app.use(cors());
+//app.use(cors({ origin: "http://localhost/" }));
+
 app.use(bodyParser.json());
 app.use(express.static("./public"));
 

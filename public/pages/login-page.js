@@ -29,13 +29,13 @@ export function Login() {
                         <div class="back-email flex-center-center">
                             <img id="Vector-user" src="../assets/icons/Vector-user.svg" alt="">
                         </div>
-                            <input type="text" placeholder="Email" >
+                            <input id="input-username" type="text" placeholder="Email" >
                     </div>
                     <div class="password">
                         <div class="back-password flex-center-center">
                             <img id="cadeado" src="../assets/icons/cadeado.svg" alt="">
                         </div>
-                        <input type="text" placeholder="Password">
+                        <input id="input-password" type="text" placeholder="Password">
                     </div>
                 </div>
     

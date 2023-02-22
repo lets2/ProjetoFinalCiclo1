@@ -11,6 +11,7 @@ import {
     redirectToCategoryChoosed,
     redirectToLoginAdmPage,
     redirectToGodDetailsPage,
+    redirectToLogoutPage,
     redirectToMenuAdmPage,
     redirectToTableEditCategories,
     redirectToTableEditGods,
@@ -583,9 +584,36 @@ function addEventsToAdmLoginPage() {
 
 function adicionaEventoNoBotaoDeLogin() {
     const buttonLogin = document.querySelector("#login-logo-button");
-    addUniqueEventListener(buttonLogin, "click", () => {
-        redirectToMenuAdmPage();
+    addUniqueEventListener(buttonLogin, "click", async () => {
+        try {
+            const username = document.querySelector("#input-username").value;
+            const password = document.querySelector("#input-password").value;
+            await tentaFazerLogin(username, password);
+            redirectToMenuAdmPage();
+        } catch (error) {
+            alert("Houve esse problema", error);
+        }
+        //redirectToMenuAdmPage();
     });
+}
+
+// FAZENDO LOGICA FETCH PARA FAZER A REQUISIÇÃO DO COOKIE E
+// FAZER LOGIN
+async function tentaFazerLogin(_username, _password) {
+    const objBody = {
+        name: _username,
+        password: _password,
+    };
+    const response = await fetch("http://localhost:8080/login", {
+        method: "POST",
+        body: JSON.stringify(objBody),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+    });
+    if (response.status !== 200 && response.status !== 201) {
+        throw "[erro] ao tentar fazer login!";
+    }
+    const jsonData = await response.json();
+    console.log("LOGIN - JSON OBTIDO:", jsonData);
 }
 
 /*@author:filipe - coauthor: Letônio*/
@@ -615,7 +643,8 @@ function addEventsToAdmMenuPage() {
         { label: "#change-password", handle: redirectToTableEditCategories },
         { label: "#edit-categories", handle: redirectToTableEditCategories },
         { label: "#edit-gods", handle: redirectToTableEditGods },
-        { label: "#logout", handle: redirectToLoginAdmPage },
+        //{ label: "#logout", handle: redirectToLoginAdmPage },//vou modificar o redirect
+        { label: "#logout", handle: redirectToLogoutPage },
     ];
 
     objMenuAdm.forEach((element) => {

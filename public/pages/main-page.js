@@ -72,6 +72,14 @@ export function redirectToLoginAdmPage() {
     const eventStateChange = CriaEventStateChange("/login");
     window.dispatchEvent(eventStateChange);
 }
+/*@author: Letônio*/
+export function redirectToLogoutPage() {
+    const eventStateChange = CriaEventStateChange("/login", {
+        releaseCookie: true,
+    });
+    window.dispatchEvent(eventStateChange);
+}
+
 /*@author:Filipe - coauthor: Letônio*/
 export function redirectToGodDetailsPage(godId) {
     const eventStateChange = CriaEventStateChange("/categories/d1", {
