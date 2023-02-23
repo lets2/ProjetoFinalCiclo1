@@ -1,7 +1,7 @@
 import CriaEventStateChange from "./event-url.js";
 
 /*@author:Gabriela - coauthor: Letônio*/
-
+//
 export function EditCategory() {
     const div = document.createElement("div");
 
