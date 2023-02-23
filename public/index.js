@@ -85,6 +85,7 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
             godsOfACategory = respostaIndex; //nesse caso respostaIndex = lista de deuses de cat. especif.
             insertImages(godsOfACategory);
             insertCategoryName(godsOfACategory[0].name_category);
+            
             break;
         case "/categories/d1":
             break;
@@ -286,16 +287,28 @@ function renderBallsBelowImg(index, quantify) {
 }
 
 function insertImages(arrayGods) {
-    console.log(arrayGods);
-    const cardsGods = document.querySelectorAll(".cards-gods");
-    cardsGods.forEach((element, index) => {
-        element.setAttribute(
-            "src",
-            `../assets/uploads/${arrayGods[index].src_img}`
-        );
-        //save in img god a dataset with god id
-        element.dataset.godId = arrayGods[index].id;
-    });
+    console.log(arrayGods, "estearray");
+    const cardsGods = document.querySelector("#box-cards-gods-overflow");
+    let div = "";
+    cardsGods.innerHTML  = "";
+    for (let i = 0; i < arrayGods.length; i++) {
+        div= `<div class="flex-center-center">
+            <img class="cards-gods" id = "god-${arrayGods[i].id}"  src = "../assets/uploads/${arrayGods[i].src_img}"  alt="Cartão 2">
+        </div>
+        `
+        cardsGods.innerHTML += div;
+        console.log(cardsGods, "cardsgods")
+    }
+    // console.log(arrayGods);
+    // const cardsGods = document.querySelectorAll(".cards-gods");
+    // cardsGods.forEach((element, index) => {
+    //     element.setAttribute(
+    //         "src",
+    //         `../assets/uploads/${arrayGods[index].src_img}`
+    //     );
+    //     //save in img god a dataset with god id
+    //     element.dataset.godId = arrayGods[index].id;
+    // });
 
     //COmo deveria ser
     //com query selector, capturar o #container-page-gods
@@ -581,8 +594,9 @@ function updateTempleContent(newIndex) {
 
 /*eevents related to the page of the chosen category*/
 function addEventsToCategorySelected() {
+    console.log(godsOfACategory, "GODSOF")
     addEventsToHeader();
-    eventosAdicionadosEmCadaCartao();
+    eventosAdicionadosEmCadaCartao(godsOfACategory);
 }
 
 /*events related to the adm login page*/
@@ -632,12 +646,14 @@ function addEventsToGodDetailsPage() {
 }
 
 /*events added on the home page card of the chosen category*/
-function eventosAdicionadosEmCadaCartao() {
-    for (let i = 1; i <= 4; i++) {
-        let godCard = document.querySelector(`.card${i.toString()}`);
-
+function eventosAdicionadosEmCadaCartao(godsOfCategory) {
+   
+    for (let i = 0; i < godsOfCategory.length; i++) {
+        
+        let godCard = document.querySelector(`#god-${godsOfCategory[i].id}`);
+        console.log(godCard.id, "AAAA")
         addUniqueEventListener(godCard, "click", () => {
-            redirectToGodDetailsPage(godCard.dataset.godId);
+            redirectToGodDetailsPage(godCard.id);
         });
     }
 }
