@@ -104,7 +104,11 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
             testInserirElementosNaEditGodPage(respostaIndex);
             break;
         case "/editCategory":
+            insertChoosedCategoryTempleImg(); //function to show preview
             testInserirElementosNaEditCategoryPage(respostaIndex);
+            break;
+        case "/addCategory":
+            insertChoosedCategoryTempleImg(); //function to show preview
             break;
         case "/addGod":
             categoriesList = respostaIndex;
@@ -1144,6 +1148,25 @@ async function updateCategoryInformationInDatabase(id) {
 }
 
 function insertChoosedGodImg() {
+    const fileBtn = document.querySelector("#insert-file-btn");
+    const previewImg = document.querySelector("#preview-img-god");
+    const message = document.querySelector("#message-input-file");
+
+    addUniqueEventListener(fileBtn, "change", (e) => {
+        if (e.target.files.length > 0) {
+            const file = e.target.files[0];
+            const url = URL.createObjectURL(file);
+            previewImg.src = url;
+            message.innerHTML = file.name;
+            console.log("fileBTN", file.name);
+        } else {
+            message.innerHTML = "Nenhum arquivo escolhido";
+        }
+    });
+}
+
+/*CATEGORY IMAGE PREVIEW */
+function insertChoosedCategoryTempleImg() {
     const fileBtn = document.querySelector("#insert-file-btn");
     const previewImg = document.querySelector("#preview-img-god");
     const message = document.querySelector("#message-input-file");
