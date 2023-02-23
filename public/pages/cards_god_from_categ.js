@@ -20,19 +20,15 @@ export function Category() {
 		</div>
 	</header>
 	<main>
-		<div class="container-page-gods hidden flex-row-between">
-			<div class="left-zone">
-				<img class="cards-gods card1"  alt="Cartão 1">
-			</div>
-			<div class="middle-zone">
-				<img class="cards-gods card2"  alt="Cartão 2">
-				<img class="cards-gods card3"  alt="Cartão 3">
-			</div>
-			<div class="right-zone">
-				<h2 class="phrase"><span>Deuses da Natureza</span></h2>
-				<img class="cards-gods card4" alt="Cartão 4">
-			</div>
-
+		<div class="container-page-gods flex-row-between">
+            <div id="box-cards-gods">
+                <div id="box-cards-gods-overflow">
+                                    
+                </div>
+            </div>
+            <div  class="phrase">
+                <h2><span>Deuses da Natureza</span></h2>
+            </div>
 		</div>
 	</main>
 	<footer></footer>
