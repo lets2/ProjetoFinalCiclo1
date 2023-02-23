@@ -22,7 +22,7 @@ import {
     redirectToAddCategory,
     redirectToEditCategory,
 } from "./pages/main-page.js";
-import { redirectToAllCategories } from "./pages/categories-page.js";
+import { redirectToAllCategories } from "./pages/cards_god_from_categ.js";
 
 import GeraObjComRotas from "./pages/router.js";
 
