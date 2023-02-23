@@ -3,6 +3,10 @@ const router = express.Router();
 const categoriesController = require("../controllers/categories.js");
 const upload = require("./multer.js");
 
+//COLOCANDO O MIDDLEWARE DE AUTENTICAÇÃO:
+
+const authenticate = require("../middlewares/authentication.js");
+
 //-------------------------------------------------------------------
 /*Routes related to the "Categories" entity, AVAILABLE TO ANY USER.*/
 //-------------------------------------------------------------------
@@ -31,13 +35,18 @@ router.get("/categoriestable", categoriesController.getTable);
 
 //Routes with parameters but without body for Categories
 router.get("/categoriestable/:id", categoriesController.getFromTableById);
-router.delete("/categoriestable/:id", categoriesController.deleteCategoryById);
+router.delete(
+    "/categoriestable/:id",
+    authenticate,
+    categoriesController.deleteCategoryById
+);
 //----------------------
 //Routes with req.body for Categories
 //router.post('/categories/table/create/')
-
+//dúvida:autheticate vem antes do upload?
 router.post(
     "/categoriestable/",
+    authenticate,
     upload.single("file"),
     categoriesController.createCategory
 );
@@ -50,7 +59,11 @@ router.post(
 // }
 
 //router.put("/categories/table/Edit/:id"
-router.put("/categoriestable/:id", categoriesController.updateCategory);
+router.put(
+    "/categoriestable/:id",
+    authenticate,
+    categoriesController.updateCategory
+);
 //id=req.params.id
 //req.body:
 // {
