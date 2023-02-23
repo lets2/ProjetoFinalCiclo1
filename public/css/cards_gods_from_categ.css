@@ -328,10 +328,6 @@ main{
 	height: 100%;
 	position: relative;
 } 
-
-h2{
-	font-size: var(--size-font-t2);
-}
 /*@autor:letonio (estilizando cartoes de deuses na pagina com categoria especifica)*/
 
   /* Define o estilo da caixa de cartões e seu overflow */
@@ -354,7 +350,6 @@ h2{
 	max-height: 100%;
 	justify-content: center;
 	align-items: center;
-
   }
 
 /* Define o tamanho dos cartões e adiciona margens */
@@ -385,12 +380,17 @@ h2{
 	right: 2.5rem;
 	text-align: center;
 	width: 25%;
+	font-size: var(--size-font-t5);
+	font-family: 'MedievalSharp', cursive;
+	font-weight: 400;
 }
 .phrase span{
 	display: block;
-	font-size: var(--size-font-t4);
+	
 }
 
-
+::-webkit-scrollbar {
+    width: 0px;
+}
   
  

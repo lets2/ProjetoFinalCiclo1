@@ -94,6 +94,7 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
             addLinesCategoryTable(categoriesList);
             break;
         case "/tableGods":
+            categoriesList = respostaIndex.dataCategories;
             addSelectWithCategories(respostaIndex.dataCategories);
             addLinesGodTable(respostaIndex.dataGods);
             break;
@@ -103,6 +104,7 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
             break;
         case "/editGod/g1":
             testInserirElementosNaEditGodPage(respostaIndex);
+            addSelectWithCategoriesInGodsPage();
             break;
         case "/editCategory":
             insertChoosedCategoryTempleImg(); //function to show preview
@@ -112,7 +114,6 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
             insertChoosedCategoryTempleImg(); //function to show preview
             break;
         case "/addGod":
-            categoriesList = respostaIndex;
             insertChoosedGodImg();
             addSelectWithCategoriesInGodsPage();
     }
@@ -297,8 +298,9 @@ function insertImages(arrayGods) {
     cardsGods.innerHTML  = "";
     for (let i = 0; i < arrayGods.length; i++) {
         div= `<div class="flex-center-center">
-            <img class="cards-gods" id = "god-${arrayGods[i].id}"  src = "../assets/uploads/${arrayGods[i].src_img}"  alt="Cartão 2">
-        </div>
+
+                    <img class="cards-gods" id = "god-${arrayGods[i].id}"  data-god-id=${arrayGods[i].id}  src = "../assets/uploads/${arrayGods[i].src_img}"  alt="Cartão 2">
+            </div>
         `
         cardsGods.innerHTML += div;
         console.log(cardsGods, "cardsgods")
@@ -655,9 +657,9 @@ function eventosAdicionadosEmCadaCartao(godsOfCategory) {
     for (let i = 0; i < godsOfCategory.length; i++) {
         
         let godCard = document.querySelector(`#god-${godsOfCategory[i].id}`);
-        console.log(godCard.id, "AAAA")
+
         addUniqueEventListener(godCard, "click", () => {
-            redirectToGodDetailsPage(godCard.id);
+            redirectToGodDetailsPage(godCard.dataset.godId);
         });
     }
 }
@@ -809,11 +811,6 @@ function addEventsToAdmGodInfoPage() {
 /* Add eventos na página que mostra as informacoes para editar deuses*/
 function addEventsToEditGodPages() {
     addEventsToHeader();
-
-    const changeImg = document.querySelector("#change-img-btn");
-    addUniqueEventListener(changeImg, "click", () => {
-        redirectToTableEditGods();
-    });
 
     const cancelGodBtn = document.querySelector("#cancel-edit-god");
     addUniqueEventListener(cancelGodBtn, "click", () => {
@@ -1017,7 +1014,7 @@ async function updateGodInformationInDatabase(godId) {
 
 function getGodInputInformations(godId) {
     let obj = {};
-
+    
     const inputNameUpdate = document.querySelector(
         "#edit-page-god-input-name"
     ).value;
@@ -1036,7 +1033,7 @@ function getGodInputInformations(godId) {
     // Adiciona a imagem ao FormData
     formData.append("file", fileInput.files[0]);
 
-    const categoryId = "1"; //por enquanto considera cateogry fixada
+    const categoryId = "78"; //por enquanto considera cateogry fixada
 
     // Adiciona as 4 strings ao FormData
     formData.append("name", inputNameUpdate);
@@ -1322,3 +1319,14 @@ function addEventsToHeader() {
         redirectToMenu();
     });
 }
+
+
+// TESTANDO FUNCIOONALIDADE DO SCROLL
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'PageDown' || event.key === 'PageUp') {
+      event.preventDefault();
+      window.scrollBy(0, event.key === 'ArrowDown' || event.key === 'PageDown' ? 100 : -100);
+    }
+  });
+  

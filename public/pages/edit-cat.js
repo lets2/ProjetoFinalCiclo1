@@ -30,7 +30,6 @@ export function EditCategory() {
                 <div class="nome-categoria cor-categoria flex-col-center">
 
                     <input id="input-cat-edit-name" type="text" placeholder="Nome da categoria">
-                    <input id="input-cat-edit-color" type="text" placeholder="Cor da categoria">
                     <div>
                         <img id="preview-img-god" src="../assets/images/exampleTemple.png" alt="">
                     </div>
