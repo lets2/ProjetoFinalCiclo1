@@ -31,6 +31,18 @@ export function EditCategory() {
 
                     <input id="input-cat-edit-name" type="text" placeholder="Nome da categoria">
                     <input id="input-cat-edit-color" type="text" placeholder="Cor da categoria">
+                    <select name="select-color-category" id="select-color-category">
+                        <option value="#140A3D" selected disabled>Cor:</option>
+                        <option value="#140A3D">Azul escuro</option>
+                        <option value="#0B264F">Azul claro</option>
+                        <option value="#024324">Verde</option>
+                        <option value="#ff8e01">Laranja</option>
+                        <option value="#815604">Amarelo</option>
+                        <option value="#931212">Vermelho</option>   
+                        <option value="#6C0000">Vinho</option>
+                        <option value="#43064E">Roxo</option>
+                        <option value="#000000">Preto</option>
+                    </select>
                     <div>
                         <img id="preview-img-god" src="../assets/images/exampleTemple.png" alt="">
                     </div>

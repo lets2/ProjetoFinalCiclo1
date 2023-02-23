@@ -84,8 +84,12 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
         case "/categories/:id":
             godsOfACategory = respostaIndex; //nesse caso respostaIndex = lista de deuses de cat. especif.
             insertImages(godsOfACategory);
-            insertCategoryName(godsOfACategory[0].name_category);
-            
+            if (godsOfACategory) {
+                insertCategoryName(godsOfACategory[0].name_category);
+            } else {
+                insertCategoryName("Essa categoria não possui deuses ainda!");
+            }
+
             break;
         case "/categories/d1":
             break;
@@ -294,14 +298,16 @@ function insertImages(arrayGods) {
     console.log(arrayGods, "estearray");
     const cardsGods = document.querySelector("#box-cards-gods-overflow");
     let div = "";
-    cardsGods.innerHTML  = "";
-    for (let i = 0; i < arrayGods.length; i++) {
-        div= `<div class="flex-center-center">
-            <img class="cards-gods" id = "god-${arrayGods[i].id}"  src = "../assets/uploads/${arrayGods[i].src_img}"  alt="Cartão 2">
-        </div>
-        `
-        cardsGods.innerHTML += div;
-        console.log(cardsGods, "cardsgods")
+    cardsGods.innerHTML = "";
+    if (arrayGods) {
+        for (let i = 0; i < arrayGods.length; i++) {
+            div = `<div class="flex-center-center">
+                <img class="cards-gods" id = "god-${arrayGods[i].id}"  src = "../assets/uploads/${arrayGods[i].src_img}"  alt="Cartão 2">
+            </div>
+            `;
+            cardsGods.innerHTML += div;
+            console.log(cardsGods, "cardsgods");
+        }
     }
     // console.log(arrayGods);
     // const cardsGods = document.querySelectorAll(".cards-gods");
@@ -598,7 +604,7 @@ function updateTempleContent(newIndex) {
 
 /*eevents related to the page of the chosen category*/
 function addEventsToCategorySelected() {
-    console.log(godsOfACategory, "GODSOF")
+    console.log(godsOfACategory, "GODSOF");
     addEventsToHeader();
     eventosAdicionadosEmCadaCartao(godsOfACategory);
 }
@@ -651,14 +657,16 @@ function addEventsToGodDetailsPage() {
 
 /*events added on the home page card of the chosen category*/
 function eventosAdicionadosEmCadaCartao(godsOfCategory) {
-   
-    for (let i = 0; i < godsOfCategory.length; i++) {
-        
-        let godCard = document.querySelector(`#god-${godsOfCategory[i].id}`);
-        console.log(godCard.id, "AAAA")
-        addUniqueEventListener(godCard, "click", () => {
-            redirectToGodDetailsPage(godCard.id);
-        });
+    if (godsOfCategory) {
+        for (let i = 0; i < godsOfCategory.length; i++) {
+            let godCard = document.querySelector(
+                `#god-${godsOfCategory[i].id}`
+            );
+            console.log(godCard.id, "AAAA");
+            addUniqueEventListener(godCard, "click", () => {
+                redirectToGodDetailsPage(godCard.id);
+            });
+        }
     }
 }
 
@@ -956,8 +964,12 @@ function getCategoryInputInformations(id) {
         "#input-cat-edit-name"
     ).value;
 
+    // const inputColorUpdate = document.querySelector(
+    //     "#input-cat-edit-color"
+    // ).value;
+
     const inputColorUpdate = document.querySelector(
-        "#input-cat-edit-color"
+        "#select-color-category"
     ).value;
 
     obj.src = "ExampleTemple.png";
@@ -1052,10 +1064,16 @@ function getGodInputInformations(godId) {
 
 async function addNewCategoryInDatabase() {
     const newCategoryName = document.querySelector("#new-name-category").value;
-    const newColorHexFormat = document.querySelector(
-        "#new-color-category"
-    ).value;
+    /// const newColorHexFormat = document.querySelector(
+    ///  "#new-color-category"
+    /// ).value;
     //////const srcExample = "exampleTemple.png";
+
+    const newColorHexFormat = document.querySelector(
+        "#select-color-category"
+    ).value;
+
+    console.log("SELECT COR CODIGO:", newColorHexFormat);
 
     /////////////
     //Tentando fazer a adicão de arquivo:
