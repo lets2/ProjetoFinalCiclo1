@@ -1,17 +1,17 @@
 //import { Principal } from "./main-page.js";
 import { Categories } from "./main-page.js";
-import { Category } from "./categories-page.js";
+import { Category } from "./cards_god_from_categ.js";
 import { Login } from "./login-page.js";
-import { GodChoosed } from "./god-card-details-page.js";
-import { MenuAdm } from "./adm_perfil_page.js";
+import { GodChoosed } from "./god-card-details.js";
+import { MenuAdm } from "./adm_perfil_sidebar.js";
 import { TableCategories } from "./table_categories.js";
 import { TableGods } from "./table_gods.js";
 import { AddGod } from "./add-god.js";
 import { GodInfo } from "./adm-god-info.js";
 import { EditGod } from "./edit-god.js";
 import { Menu } from "./menu.js";
-import { AddCategory } from "./add-cat-model_filipe_page_2.js";
-import { EditCategory } from "./edit-cat-model_filipe_page_3.js";
+import { AddCategory } from "./add-category.js";
+import { EditCategory } from "./edit-cat.js";
 import { PrincipalTeste } from "./principal-teste.js";
 export default function GeraObjComRotas() {
     const objRotas = {
