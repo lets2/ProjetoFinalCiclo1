@@ -59,7 +59,7 @@ export async function addResourcesToTableOfGods() {
 
         const objContentGods = await responseGods.json();
         const dataGods = objContentGods.data;
-
+        
         return { dataCategories, dataGods };
     } catch (error) {
         console.log("Erro durante o fetch:", error);
