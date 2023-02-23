@@ -296,6 +296,15 @@ function insertImages(arrayGods) {
         //save in img god a dataset with god id
         element.dataset.godId = arrayGods[index].id;
     });
+
+    //COmo deveria ser
+    //com query selector, capturar o #container-page-gods
+    //fazer um FOR percorrendo o array de deuses (array.length)
+    //  crie um elemento filho <div>
+    //         <>img</>
+    //      </div
+
+    /// appendchild(elementofilho)
 }
 
 function insertCategoryName(nameCategory) {
@@ -1099,29 +1108,29 @@ async function updateCategoryInformationInDatabase(id) {
     }
 }
 
-function insertChoosedGodImg(){
+function insertChoosedGodImg() {
     const fileBtn = document.querySelector("#insert-file-btn");
     const previewImg = document.querySelector("#preview-img-god");
-    const message = document.querySelector("#message-input-file")
+    const message = document.querySelector("#message-input-file");
 
-    addUniqueEventListener(fileBtn, "change", (e)=>{
+    addUniqueEventListener(fileBtn, "change", (e) => {
         if (e.target.files.length > 0) {
             const file = e.target.files[0];
             const url = URL.createObjectURL(file);
             previewImg.src = url;
-            message.innerHTML = file.name
-            console.log("fileBTN", file.name)
-        }else{
-            message.innerHTML = "Nenhum arquivo escolhido" 
+            message.innerHTML = file.name;
+            console.log("fileBTN", file.name);
+        } else {
+            message.innerHTML = "Nenhum arquivo escolhido";
         }
-    })
+    });
 }
 
 function addSelectWithCategoriesInGodsPage() {
     const selectElement = document.querySelector("#select-filter-category");
     selectElement.innerHTML = ""; //clear any previous content
-    console.log("ENTROU SELECT CARA", categoriesList)
- 
+    console.log("ENTROU SELECT CARA", categoriesList);
+
     addOptionToSelectInGodsPage(selectElement, {
         value: "choose",
         text: "Escolha uma categoria",

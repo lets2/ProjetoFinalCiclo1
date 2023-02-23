@@ -3,6 +3,9 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
+//tentando colocar um module de parser-cookie
+const cookieParser = require("cookie-parser");
+
 //IMporta o arquivo/modulo de rotas do backend
 const router = require("./src/router.js");
 
@@ -10,6 +13,10 @@ const PORT = process.env.PG_PORT | 8080;
 const HOSTNAME = process.env.PG_HOST;
 
 const app = express();
+
+//
+app.use(cookieParser("minha chave secreta"));
+//
 
 app.use(cors());
 //app.use(cors({ origin: "http://localhost/" }));
