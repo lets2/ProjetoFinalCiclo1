@@ -40,7 +40,12 @@ router.post(
 // }
 
 //router.put("/gods/table/Edit/:id"
-router.put("/godstable/:id", authenticate, godsController.updateGod);
+router.put(
+    "/godstable/:id",
+    authenticate,
+    upload.single("file"),
+    godsController.updateGod
+);
 //id=req.params.id
 //req.body:
 // {

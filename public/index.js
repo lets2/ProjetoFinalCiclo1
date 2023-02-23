@@ -855,7 +855,13 @@ async function addNewGodInDatabase() {
     const newResumeGod = document.querySelector("#new-resume-god").value;
 
     //const srcExample = "exampleGod.png";
-    const categoryId = "1"; //Precisamos modificar a página para receber categoria também
+    // const categoryId = "1"; //Precisamos modificar a página para receber categoria também
+    const categoryId = document.querySelector("#select-filter-category").value;
+    console.log("OLHA O ID DA CATEGORIA QUE ESCOLHI", categoryId);
+    console.log(
+        "OLHA O NOME DA CATEGORIA QUE ESCOLHI",
+        document.querySelector("#select-filter-category").innerText
+    );
 
     //--------------------------
     //
@@ -923,24 +929,40 @@ async function addNewGodInDatabase() {
 //
 
 function getCategoryInputInformations(id) {
+    //provavelmente apagarei esse obj, já qu tudo está sendo armazenado no formdata
     let obj = {};
 
-    const inputNameUpdate = document.querySelector("#input-cat-edit-name");
-    obj.name = inputNameUpdate.value;
+    const inputNameUpdate = document.querySelector(
+        "#input-cat-edit-name"
+    ).value;
 
-    const inputColorUpdate = document.querySelector("#input-cat-edit-color");
-    obj.hexColor = inputColorUpdate.value;
+    const inputColorUpdate = document.querySelector(
+        "#input-cat-edit-color"
+    ).value;
 
     obj.src = "ExampleTemple.png";
 
     console.log("CRIADO CERTINHO DO CATEGORI:", obj);
-    return obj;
+    //MONTANDO FORM DATA!!!!!!!!!!!!1
+
+    //MOntando o formData para fazer a edição de categoria:
+    const formData = new FormData();
+    const fileInput = document.querySelector('input[type="file"]');
+
+    // Adiciona a imagem ao FormData
+    formData.append("file", fileInput.files[0]);
+
+    // Adiciona as 4 strings ao FormData
+    formData.append("name", inputNameUpdate);
+    formData.append("hexColor", inputColorUpdate);
+
+    return formData;
 }
 
 //
 
 async function updateGodInformationInDatabase(godId) {
-    const objUpdateGod = getGodInputInformations(godId);
+    const formData = getGodInputInformations(godId);
 
     //FAZER O FETCH
 
@@ -949,8 +971,8 @@ async function updateGodInformationInDatabase(godId) {
             `http://localhost:8080/godstable/${godId}`,
             {
                 method: "PUT",
-                body: JSON.stringify(objUpdateGod),
-                headers: { "Content-type": "application/json; charset=UTF-8" },
+                body: formData,
+                // headers: { "Content-type": "application/json; charset=UTF-8" },
             }
         );
         console.log("RESPOSTA DA REQUISIÇÃO ADD GOD:", response.status);
@@ -976,23 +998,34 @@ async function updateGodInformationInDatabase(godId) {
 function getGodInputInformations(godId) {
     let obj = {};
 
-    const inputNameUpdate = document.querySelector("#edit-page-god-input-name");
-    obj.name = inputNameUpdate.value;
+    const inputNameUpdate = document.querySelector(
+        "#edit-page-god-input-name"
+    ).value;
 
     const inputStatusUpdate = document.querySelector(
         "#edit-page-god-input-status"
-    );
-    obj.status = inputStatusUpdate.value;
+    ).value;
 
     const inputResumeUpdate = document.querySelector(
         "#edit-page-god-input-resume"
-    );
-    obj.resume = inputResumeUpdate.value;
+    ).value;
 
-    obj.src = "ExampleGod.png";
-    obj.categoryId = "1";
-    console.log("CRIADO CERTINHO:", obj);
-    return obj;
+    const formData = new FormData();
+    const fileInput = document.querySelector('input[type="file"]');
+
+    // Adiciona a imagem ao FormData
+    formData.append("file", fileInput.files[0]);
+
+    const categoryId = "1"; //por enquanto considera cateogry fixada
+
+    // Adiciona as 4 strings ao FormData
+    formData.append("name", inputNameUpdate);
+    formData.append("status", inputStatusUpdate);
+    formData.append("resume", inputResumeUpdate);
+    formData.append("categoryId", categoryId);
+
+    //obj.src = "ExampleGod.png";
+    return formData;
 }
 
 /*@author:letonio - Adiciona no Banco de dados a categoria Deus*/
@@ -1080,7 +1113,9 @@ function addEventsToEditCategoryPage() {
 //
 
 async function updateCategoryInformationInDatabase(id) {
-    const objUpdateCategory = getCategoryInputInformations(id);
+    //const objUpdateCategory = getCategoryInputInformations(id);
+    const formData = getCategoryInputInformations(id);
+
     //FAZER O FETCH
 
     try {
@@ -1088,8 +1123,8 @@ async function updateCategoryInformationInDatabase(id) {
             `http://localhost:8080/categoriestable/${id}`,
             {
                 method: "PUT",
-                body: JSON.stringify(objUpdateCategory),
-                headers: { "Content-type": "application/json; charset=UTF-8" },
+                body: formData,
+                //headers: { "Content-type": "application/json; charset=UTF-8" },
             }
         );
         console.log("RESPOSTA DA REQUISIÇÃO EDIT CATEGORY:", response.status);

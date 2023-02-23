@@ -11,7 +11,7 @@ exports.getAll = async () => {
     //Realiza a consulta
     try {
         const query = await pool.query(
-            "SELECT gods.id, gods.name, gods.status, gods.resume, gods.category_id, categories.name AS name_category, gods.src_img FROM gods JOIN categories ON categories.id = gods.category_id;"
+            "SELECT gods.id, gods.name, gods.status, gods.resume, gods.category_id, categories.name AS name_category, gods.src_img FROM gods JOIN categories ON categories.id = gods.category_id ORDER BY gods.id;"
         );
         //Se a requisição deu certo existe pelo menos um row
         if (query.rows[0]) return query.rows;
@@ -44,7 +44,7 @@ exports.createGod = async (_name, _status, _categoryId, _resume, _src) => {
     // Performs the query with filtering/sorting
     try {
         const query = await pool.query(
-            "INSERT INTO gods (name, status,category_id,resume, src_img,author_id) VALUES ($1,$2,$3,$4,$5,'2') RETURNING *",
+            "INSERT INTO gods (name, status,category_id,resume, src_img,author_id) VALUES ($1,$2,$3,$4,$5,'6') RETURNING *",
             [_name, _status, _categoryId, _resume, _src]
         );
         return query.rows;
@@ -61,7 +61,7 @@ exports.updateGod = async (_id, _name, _status, _categoryId, _resume, _src) => {
     // Performs the query with filtering/sorting
     try {
         const query = await pool.query(
-            "UPDATE gods SET name=$2, status=$3,category_id=$4,resume=$5, src_img=$6,author_id ='3',updated_at=now() WHERE id = $1 RETURNING *",
+            "UPDATE gods SET name=$2, status=$3,category_id=$4,resume=$5, src_img=COALESCE ($6, src_img),author_id ='6',updated_at=now() WHERE id = $1 RETURNING *",
             [_id, _name, _status, _categoryId, _resume, _src]
         );
         return query.rows;

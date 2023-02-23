@@ -26,6 +26,8 @@ export function EditGod() {
 			<div id="edit-page-god-img">
 				<img src="../assets/images/games-god.jpg" alt="">
 			</div>
+			<input id="insert-file-btn" type="file" name="file" accept="image/png, image/jpeg, image/jpg">
+            <label for="insert-file-btn" class="custom-file-upload">Escolha um arquivo</label>
 			<button class="btns-edit-god" id="change-img-btn">Mudar imagem</button>
 		</div>
 		<div action="" class="flex-col-center">
