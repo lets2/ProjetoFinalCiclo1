@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
-console.log("Testando BCRYPT");
-// para cadastrar usuários para testar
+
+// register new users
 async function testRegisterUser(username, plainTextPassword) {
     const passwordHash = await bcrypt.hash(plainTextPassword, 10);
     console.log("FAZENDO TEST DE HASH:");

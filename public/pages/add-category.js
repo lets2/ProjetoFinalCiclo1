@@ -31,10 +31,14 @@ export function AddCategory() {
 
                     <input id="new-name-category" type="text" placeholder="Nome da categoria">
                     <input id="new-color-category" type="text" placeholder="Cor da categoria">
-                    <label>
-                           Arquivo:
-                           <input type="file" name="file" accept="image/png, image/jpeg, image/jpg">
-                     </label>
+
+                    <div>
+                        <img id="preview-img-god" src="../assets/images/exampleTemple.png" alt="">
+                    </div>
+                    
+                    <input id="insert-file-btn" type="file" name="file" accept="image/png, image/jpeg, image/jpg">
+                    <label for="insert-file-btn" class="custom-file-upload">Escolha um arquivo</label>
+                    <p id="message-input-file"></p>
 
                 </div>
 
