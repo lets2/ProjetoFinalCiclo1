@@ -31,6 +31,10 @@ export function EditCategory() {
 
                     <input id="input-cat-edit-name" type="text" placeholder="Nome da categoria">
                     <input id="input-cat-edit-color" type="text" placeholder="Cor da categoria">
+                    <label>
+                           Arquivo:
+                           <input type="file" name="file" accept="image/png, image/jpeg, image/jpg">
+                     </label>
 
                 </div>
 

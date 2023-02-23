@@ -341,7 +341,28 @@ exports.updateCategory = async (req, res) => {
 
     const id = req.params.id; //get index from url
     // TTRY TO GET PARAMETERS FROM REQ.BODY E VERIFY IF ARE OKAY
-    const { name, src, hexColor } = req.body;
+    ///////// const { name, src, hexColor } = req.body;
+    let filename; //declarei como variavel por conta do if else
+    //Teste de fazer EDICAO DE CATEGORIA
+    console.log("---++-+-+-+-+-+-+-+");
+    console.log(!req.file);
+
+    //console.log(res.file.filename);
+    console.log("---++-+-+-+-+-+-+-+");
+    if (!req.file) {
+        filename = null;
+    } else {
+        filename = req.file.filename;
+    }
+    //const mimetype = req.file.mimetype;
+    //const extension = path.extname(req.file.originalname);
+    // const nameWithExtension = filename + extension;
+
+    console.log("OLHA O FILENAMEVAZIO!!!!!!!!!!!1:", filename);
+    const name = req.body.name;
+    const hexColor = req.body.hexColor;
+    //const src = nameWithExtension;
+    const src = filename; //Não precisa de extensão, é so o codigo mesmo!
 
     //Standardizing the response that the frontend will receive.
     const response = {
@@ -350,7 +371,7 @@ exports.updateCategory = async (req, res) => {
         error: null,
     };
 
-    if (!id || !name || !src || !hexColor) {
+    if (!id || !name || !hexColor) {
         console.log(TAG, "ID,NAME,SRC or HEXCOLOR is UNDEFINED/NULL");
         response.message = "Request need to have {id,name,src,hexColor})";
         response.data = null;
@@ -361,7 +382,7 @@ exports.updateCategory = async (req, res) => {
         return; //If dont use return, the function  will continue
     }
 
-    if (id === "" || name === "" || src === "" || hexColor === "") {
+    if (id === "" || name === "" || hexColor === "") {
         console.log(TAG, "ID, NAME,SRC or HEXCOLOR is EMPTY");
         response.message =
             "These fields cannot be empty: id,name,src,hexColor})";
@@ -373,12 +394,7 @@ exports.updateCategory = async (req, res) => {
         return;
     }
 
-    if (
-        IsNotString(id) ||
-        IsNotString(name) ||
-        IsNotString(src) ||
-        IsNotString(hexColor)
-    ) {
+    if (IsNotString(id) || IsNotString(name)) {
         console.log(TAG, "ID,NAME,SRC or HEXCOLOR is not STRING");
         response.message =
             "These fields should be STRING TYPE:id,name,src,hexColor)";
@@ -390,18 +406,7 @@ exports.updateCategory = async (req, res) => {
         return;
     }
     //Field "name" is not in a valid format. Example of valid data: "#a00f9b"
-    if (colorIsNotHex(hexColor)) {
-        console.log(TAG, "HEXCOLOR is not a VALID FORMAT");
-        response.message =
-            "hexColor need to be #[0-9A-Fa-f]{6} format, ex: #0abf59";
-        response.data = null;
-        response.error =
-            "[400] Bad request! hexColor is not a hexadecimal string";
-
-        res.status(400).json(response);
-        console.timeEnd(`updateCategory()${milliseconds}`);
-        return;
-    }
+    console.log("OLHA O HEX FORMAT", hexColor);
 
     try {
         // Call Service method

@@ -62,6 +62,7 @@ router.post(
 router.put(
     "/categoriestable/:id",
     authenticate,
+    upload.single("file"),
     categoriesController.updateCategory
 );
 //id=req.params.id

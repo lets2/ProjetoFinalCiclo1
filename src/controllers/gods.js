@@ -208,8 +208,26 @@ exports.updateGod = async (req, res) => {
     // god Id is into url
     const id = req.params.id;
     // TTRY TO GET PARAMETERS FROM REQ.BODY E VERIFY IF ARE OKAY
-    const { name, status, categoryId, resume, src } = req.body;
+    /////const { name, status, categoryId, resume, src } = req.body;
+    let filename; //declarei como variavel por conta do if else
+    //Teste de fazer EDICAO DE CATEGORIA
+    if (!req.file) {
+        filename = null;
+    } else {
+        filename = req.file.filename;
+    }
+    //const mimetype = req.file.mimetype;
+    //const extension = path.extname(req.file.originalname);
+    // const nameWithExtension = filename + extension;
 
+    console.log("OLHA O FILENAMEVAZIO!!!!!!!!!!!1:", filename);
+    const { name, status, categoryId, resume } = req.body;
+
+    //
+    const src = filename; //Não precisa de extensão, é so o codigo mesmo!
+    /////const name = req.body.name;
+    ////// const hexColor = req.body.hexColor;
+    //const src = nameWithExtension;
     //Standardizing the response that the frontend will receive.
     const response = {
         message: "",
@@ -217,7 +235,7 @@ exports.updateGod = async (req, res) => {
         error: null,
     };
 
-    if (!name || !status || !categoryId || !resume || !src) {
+    if (!name || !status || !categoryId || !resume) {
         console.log(
             TAG,
             "NAME,STATUS,CATEGORYID,RESUME or SRC is UNDEFINED/NULL"
@@ -232,13 +250,7 @@ exports.updateGod = async (req, res) => {
         return; //If dont use return, the function  will continue
     }
 
-    if (
-        name === "" ||
-        status === "" ||
-        categoryId === "" ||
-        resume === "" ||
-        src === ""
-    ) {
+    if (name === "" || status === "" || categoryId === "" || resume === "") {
         console.log(TAG, "NAME,STATUS,CATEGORYID,RESUME or SRC is EMPTY");
         response.message =
             "These fields cannot be empty: name,status,categoryId,resume,src)";
@@ -254,8 +266,7 @@ exports.updateGod = async (req, res) => {
         IsNotString(name) ||
         IsNotString(status) ||
         IsNotString(categoryId) ||
-        IsNotString(resume) ||
-        IsNotString(src)
+        IsNotString(resume)
     ) {
         console.log(TAG, "NAME,STATUS,CATEGORYID,RESUME or SRC is not STRING");
         response.message =

@@ -7,7 +7,7 @@ exports.getAll = async () => {
     //Realiza a consulta
     try {
         const query = await pool.query(
-            "SELECT id,name,src_img as src FROM categories;"
+            "SELECT id,name,src_img as src FROM categories ORDER BY id;"
         );
         //Se a consulta deu certo existe pelo menos um row
         if (query.rows[0]) return query.rows;
@@ -40,7 +40,7 @@ exports.getAllGodsById = async (id) => {
     //Realiza a consulta
     try {
         const query = await pool.query(
-            "SELECT gods.id, gods.name, gods.status, gods.resume, gods.category_id, categories.name AS name_category, gods.src_img FROM gods JOIN categories ON categories.id = gods.category_id WHERE gods.category_id = $1;",
+            "SELECT gods.id, gods.name, gods.status, gods.resume, gods.category_id, categories.name AS name_category, gods.src_img FROM gods JOIN categories ON categories.id = gods.category_id WHERE gods.category_id = $1 ORDER BY gods.category_id;",
             [id]
         );
         if (query.rows[0]) return query.rows;
@@ -77,7 +77,7 @@ exports.getTable = async () => {
     //Realiza a requisição
     try {
         const query = await pool.query(
-            "SELECT id,name,src_img as src, hex_color FROM categories;"
+            "SELECT id,name,src_img as src, hex_color FROM categories ORDER BY id;"
         );
 
         //Se a requisição deu certo existe pelo menos um row
@@ -111,7 +111,7 @@ exports.createCategory = async (_name, _src, _hexColor) => {
     // Performs the query with filtering/sorting
     try {
         const query = await pool.query(
-            "INSERT INTO categories (name, src_img,hex_color,author_id) VALUES ($1,$2,$3,'2') RETURNING *",
+            "INSERT INTO categories (name, src_img,hex_color,author_id) VALUES ($1,$2,$3,'6') RETURNING *",
             [_name, _src, _hexColor]
         );
         return query.rows;
@@ -128,7 +128,7 @@ exports.updateCategory = async (_id, _name, _src, _hexColor) => {
     // Performs the query with filtering/sorting
     try {
         const query = await pool.query(
-            "UPDATE categories set name=$2, src_img=$3,hex_color=$4,author_id='3',updated_at=now() WHERE id=$1 RETURNING *",
+            "UPDATE categories set name=$2, src_img=COALESCE ($3, src_img),hex_color=$4,author_id='6',updated_at=now() WHERE id=$1 RETURNING *",
             [_id, _name, _src, _hexColor]
         );
         return query.rows;
