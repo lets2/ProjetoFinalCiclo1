@@ -94,6 +94,7 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
             categoriesList = respostaIndex.dataCategories;
             addSelectWithCategories(respostaIndex.dataCategories);
             addLinesGodTable(respostaIndex.dataGods);
+            console.log(categoriesList, "categoreis")
             break;
         case "/godInfo/g1":
             testAddElements(respostaIndex);
@@ -370,9 +371,9 @@ async function deleteGodFromDatabase(godId) {
 
 function testInserirElementosNaEditCategoryPage(catInformation) {
     const inputCatEditName = document.querySelector("#input-cat-edit-name");
-    const inputCatEditColor = document.querySelector("#input-cat-edit-color");
+    // const inputCatEditColor = document.querySelector("#input-cat-edit-color");
     inputCatEditName.value = catInformation.name;
-    inputCatEditColor.value = catInformation.hex_color;
+    // inputCatEditColor.value = catInformation.hex_color;
     //
     const containerEditCategory = document.querySelector(
         "#container-edit-category"
@@ -875,7 +876,7 @@ function getGodInputInformations(godId) {
     // Add image to FormData
     formData.append("file", fileInput.files[0]);
 
-    const categoryId = "78"; //por enquanto considera cateogry fixada
+    const categoryId = document.querySelector("#select-filter-category").value; 
 
     // Add strings to FormData
     formData.append("name", inputNameUpdate);

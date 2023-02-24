@@ -343,11 +343,11 @@ relacionada aquele elemento
  }
 
  .p2-background{	
-     width: 48.6875rem;
-     height: 58.0625rem;
-     border-radius:2.5rem;
-     background-color: var(--color-bg-backInput);
-     gap:3rem;
+    width: 90rem;
+    height: 48rem;
+    border-radius:2.5rem;
+    background-color: var(--color-bg-backInput);
+    gap:3rem;
  }
  .nome-categoria{
     gap:3rem;
