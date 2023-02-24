@@ -1,5 +1,5 @@
 # ignorar as bibliotecas do node
 node_modules
 
-#ignorar o arquivo com variáveis de ambiente
+# ignorar o arquivo com variáveis de ambiente
 .env

@@ -3,7 +3,7 @@ const router = express.Router();
 const godsController = require("../controllers/gods.js");
 const upload = require("./multer.js");
 
-//IMportando a função responsável
+//Import function to authenticate user
 const authenticate = require("../middlewares/authentication.js");
 
 //-------------------------------------------------------------------
@@ -19,11 +19,8 @@ router.get("/godstable", godsController.getAll);
 router.get("/godstable/:id", godsController.getById);
 router.delete("/godstable/:id", authenticate, godsController.deleteGodById);
 //----------------------
-//Routes with req.body for gods
-//usando o multer
 
-//procurar saber se o authenticate vem antes do upload
-//router.post('/gods/table/create/')
+//Routes with req.body for gods
 router.post(
     "/godstable/",
     authenticate,
@@ -32,11 +29,11 @@ router.post(
 );
 //req.body:
 // {
-//     name: String,
-//      status: String, (ex: "Deus do Milho")
-//      category_id: String
-//      resume: String
-//      src:String, (ex: "god.jpg")
+//      name: String,
+//      status: String,
+//      category_id: String,
+//      resume: String,
+//      src:String
 // }
 
 //router.put("/gods/table/Edit/:id"
@@ -49,11 +46,11 @@ router.put(
 //id=req.params.id
 //req.body:
 // {
-//     name: String,
-//      status: String, (ex: "Deus do Milho")
-//      category_id: String
-//      resume: String
-//      src:String, (ex: "god.jpg")
+//      name: String,
+//      status: String,
+//      category_id: String,
+//      resume: String,
+//      src:String,
 // }
 
 module.exports = router;

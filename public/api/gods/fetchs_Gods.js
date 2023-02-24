@@ -4,15 +4,13 @@ export async function addResourcesToGodChoosed(godId) {
         const response = await fetch(
             `http://localhost:8080/godstable/${godId}/`
         );
-        console.log("STATUS:", response.status);
+
         if (response.status !== 200 && response.status !== 201)
             throw "[erro] Houve um problema na requisicao!";
 
         const objContent = await response.json();
-        console.log("Resultado da requisição VER GOD DETAILS:", objContent);
         const godInformation = objContent.data[0];
 
-        //INSERIR OS DADOS DO DEUS NA PÁGINA
         const container_data = document.querySelector("#container-god-img");
         container_data.innerHTML = "";
         container_data.innerHTML = `
@@ -37,12 +35,11 @@ export async function addResourcesToGodChoosed(godId) {
 
 //@author:filipe
 export async function addResourcesToTableOfGods() {
-    //
     try {
         const responseCategories = await fetch(
             `http://localhost:8080/categories/`
         );
-        console.log("STATUS:", responseCategories.status);
+
         if (
             responseCategories.status !== 200 &&
             responseCategories.status !== 201
@@ -51,41 +48,31 @@ export async function addResourcesToTableOfGods() {
 
         const objContentCateg = await responseCategories.json();
         const dataCategories = objContentCateg.data;
-
         const responseGods = await fetch(`http://localhost:8080/godstable/`);
-        console.log("STATUS:", responseGods.status);
+
         if (responseGods.status !== 200 && responseGods.status !== 201)
             throw "[erro] Houve um problema na requisicao das categorias!";
 
         const objContentGods = await responseGods.json();
         const dataGods = objContentGods.data;
-        
+
         return { dataCategories, dataGods };
     } catch (error) {
         console.log("Erro durante o fetch:", error);
     }
-
-    //There is a Select Tag above the table,
-    //need to be fill with categories
-    //the main idea is later to allow filtering the table
-    //elements by category when the change event is activated
 }
 
 //@author:filipe
 export async function addResourcesToGodInfo(godId) {
-    //CRIAR UM OBJETO COM OS DADOS DO DEUS
-    /*Fetch request*/
     try {
         const response = await fetch(
             `http://localhost:8080/godstable/${godId}/`
         );
-        console.log("STATUS:", response.status);
+
         if (response.status !== 200 && response.status !== 201)
             throw "[erro] Houve um problema na requisicao!";
 
         const objContent = await response.json();
-        console.log("Resultado da requisição VER GOD INFO:", objContent);
-
         const godInformation = objContent.data[0];
 
         const container_data = document.querySelector("#container-see-god");
@@ -129,15 +116,12 @@ export async function addResourcesToEditGodPage(godId) {
         const response = await fetch(
             `http://localhost:8080/godstable/${godId}/`
         );
-        console.log("STATUS EDIT:", response.status);
+
         if (response.status !== 200 && response.status !== 201)
             throw "[erro] Houve um problema na requisicao!";
 
         const objContent = await response.json();
-        console.log("Resultado da requisição EDIT PAGE:", objContent);
-
         const godInformation = objContent.data[0];
-        console.log(godInformation, "GOD IN=FOOOO");
 
         return godInformation;
     } catch (error) {

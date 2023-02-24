@@ -295,6 +295,10 @@ img{
 	height: var(--height-input-smaller);
 	border: none;
 }
+.search-input:focus{
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
 .search-icon{
 	height: var(--size-icon-smallest);
 }

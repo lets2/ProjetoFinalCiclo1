@@ -43,7 +43,7 @@ export function AddGod() {
 
                     <input id="new-name-god" class="input-add-god" type="text" placeholder="Nome">
                     <input id="new-status-god" class="input-add-god" type="text" placeholder="Status">
-                    <input id="new-resume-god" class="input-add-god" id="input-resume-add-god"type="text" placeholder="Resumo">
+                    <textarea id="new-resume-god" class="input-add-god" name="new-resume-god" cols="38" rows="10" placeholder="Resumo"></textarea>
                 </div>
                 <div class="flex-row-between" id="box-buttons">
                     <button class="cancel-button btns-add-god">Cancelar</button>

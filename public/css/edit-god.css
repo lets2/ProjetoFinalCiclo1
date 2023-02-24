@@ -368,8 +368,13 @@ img{
  }
  
  #edit-page-god-input-resume{
+    background-color: var(--color-bg-input);
     height: 17rem;
-    padding-bottom: 10rem;
+    line-height: 3rem;
+    border-radius: 1.5rem;
+    resize: none;
+    text-align: justify;
+    padding: 1rem 1.5rem;
  }
  
  #edit-page-god-input-resume::placeholder{
