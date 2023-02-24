@@ -458,6 +458,59 @@ relacionada aquele elemento
     font-size: 1.2rem;
 }
 
+/*Adicioanndo estilo no select/option de cores:*/
+
+#select-color-category, option{
+    width: 36.8125rem;
+    height: 4.875rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    border-radius: 0.625rem;
+    background-color: #d9d9d9;
+    color: var(--color-font-placeholder);
+}
+
+
+option[value="#140A3D"]{
+    color: #d9d9d9;
+    background-color: #ffffff;
+}
+option[value="#140A3D"]{
+    color: #0e072c;
+    background-color: #1b3ab3a3;
+}
+option[value="#0B264F"]{
+    color: #0B264F;
+    background-color: #2975e759;
+}
+option[value="#024324"]{
+    color: #024324;
+    background-color: #0ab06056;
+}
+option[value="#ff8e01"]{
+    color:#ff8e01; 
+    background-color: #ecac5e6d;
+}
+option[value="#815604"]{
+    color: #885a06;
+    background-color: #d4a040b4;
+}
+option[value="#931212"]{
+    color: #931212;
+    background-color: #bb2e2ea0;
+}
+option[value="#6C0000"]{
+    color: #6C0000;
+    background-color: #921e1e82;
+}
+option[value="#43064E"]{
+    color: #43064E;
+    background-color: #de2bfe56;
+}
+option[value="#000000"]{
+    color: #000000;
+    background-color: #00000087;
+}
 
  /************************************************
          STYLING FOOTER COMPONENTS
