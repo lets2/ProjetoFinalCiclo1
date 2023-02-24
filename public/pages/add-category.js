@@ -30,7 +30,6 @@ export function AddCategory() {
                 <div class="nome-categoria cor-categoria flex-col-center">
 
                     <input id="new-name-category" type="text" placeholder="Nome da categoria">
-                    <input id="new-color-category" type="text" placeholder="Cor da categoria">
                     <select name="select-color-category" id="select-color-category">
                         <option value="#140A3D" selected disabled>Cor:</option>
                         <option value="#140A3D">Azul escuro</option>
