@@ -342,8 +342,8 @@ relacionada aquele elemento
  }
 
  .p3-background{	
-     width: 48.6875rem;
-     height: 28.0625rem;
+     width: 90rem;
+     height: 48rem;
      border-radius:2.5rem;
      background-color: var(--color-bg-backInput);
      gap:3rem;
