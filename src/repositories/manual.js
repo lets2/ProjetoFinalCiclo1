@@ -1,7 +1,7 @@
 const pool = require("./db-pool.js");
 
 const bcrypt = require("bcrypt");
-const jwtLib = require("jsonwebtoken");
+//const jwtLib = require("jsonwebtoken");
 
 async function cadastroManual(username, plainTextPassword = "123") {
     const passwordHash = await bcrypt.hash(plainTextPassword, 10);

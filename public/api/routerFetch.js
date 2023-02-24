@@ -19,20 +19,12 @@ import {
 
 export async function addExternalResourcesTo(url, criteria) {
     switch (url) {
-        ////case "/":
-        ///   addResourcesToPrincipal();
-        ///  break;
-        // /
         case "/categories":
             return addResourcesToCategoriesPage();
-        case "principalteste":
-            //this page doesnt have dynamic features
-            break;
+
         case "/categories/:id":
-            console.log("PRECISO ADICIONAR RECURSOS NO ID", criteria.id);
             return addResourcesToCategoryChoosed(criteria.id);
         case "/login":
-            //coloquei aqui a qustão de remover o cookie
             if (criteria.releaseCookie) {
                 await removeCookieDoNavegador();
             }
@@ -66,7 +58,6 @@ async function removeCookieDoNavegador() {
         const response = fetch("http://localhost:8080/logout", {
             method: "DELETE",
         });
-        console.log("COOKIE STATUS:", response.status);
 
         if (response.status !== 200 && response.status !== 201) {
             const resJson = await response.json();
@@ -75,7 +66,6 @@ async function removeCookieDoNavegador() {
             throw `${error}`;
         }
         const resJson = await response.json();
-        console.log("DELETAR COOKIE DEU CERTO jason:", resJson);
         displayWarning(resJson.message); //deu tudo  certo
     } catch (error) {
         console.log("COOKIE, AO TENTAR REMOVER DEU ERRO", error);

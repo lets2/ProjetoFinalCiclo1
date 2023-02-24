@@ -192,6 +192,8 @@ input{
 	height: var(--height-input-smaller);
 }
 
+
+
 button{
 	height: var(--height-button);
 	width: var(--width-button);
@@ -367,8 +369,13 @@ main{
 }
 
 #new-resume-god{
-   height: 17rem;
-   padding-bottom: 10rem;
+    background-color: var(--color-bg-input);
+    height: 17rem;
+    line-height: 3.2rem;
+    border-radius: 1.5rem;
+    resize: none;
+    text-align: justify;
+    padding: 1rem 1.5rem;
 }
 
 #new-resume-god::placeholder{

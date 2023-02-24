@@ -3,8 +3,7 @@ const router = express.Router();
 const categoriesController = require("../controllers/categories.js");
 const upload = require("./multer.js");
 
-//COLOCANDO O MIDDLEWARE DE AUTENTICAÇÃO:
-
+//Import middleware to authenticate:
 const authenticate = require("../middlewares/authentication.js");
 
 //-------------------------------------------------------------------
@@ -42,23 +41,19 @@ router.delete(
 );
 //----------------------
 //Routes with req.body for Categories
-//router.post('/categories/table/create/')
-//dúvida:autheticate vem antes do upload?
 router.post(
     "/categoriestable/",
     authenticate,
     upload.single("file"),
     categoriesController.createCategory
 );
-
 //req.body:
 // {
 //     name: String,
-//      src:String, (ex: "god.jpg")
+//     src:String,
 //     hexColor: "#000000" (0-9,a-f)
 // }
 
-//router.put("/categories/table/Edit/:id"
 router.put(
     "/categoriestable/:id",
     authenticate,
@@ -69,7 +64,7 @@ router.put(
 //req.body:
 // {
 //     name: String,
-//      src:String, (ex: "god.jpg")
+//     src:String, (ex: "god.jpg")
 //     hexColor: "#000000" (0-9,a-f)
 // }
 

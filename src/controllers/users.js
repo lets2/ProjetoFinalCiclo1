@@ -3,15 +3,14 @@ const usersService = require("../services/users.js");
 
 const TAG = "users controller: ";
 
-/*POST/DO LOGIN*/
 const bcrypt = require("bcrypt");
 const jwtLib = require("jsonwebtoken");
 
-//USA O MEODO POST PARA FAZER LOGIN
+/*POST TO LOGIN*/
 exports.login = async (req, res) => {
     //determinar o IP de quem fez a requisição
     //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
-    const now = new Date(); // cria uma nova instância de Date com a data atual
+    const now = new Date(); // create a new instance Date current
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`login()${milliseconds}`);
 
@@ -27,6 +26,7 @@ exports.login = async (req, res) => {
     };
 
     if (!name || !plainTextPassword) {
+        //
         console.log(TAG, "NAME or PASSWORD is UNDEFINED/NULL");
         response.message = "Request need to have {name and passeword})";
         response.data = null;
@@ -38,6 +38,7 @@ exports.login = async (req, res) => {
     }
 
     if (name === "" || plainTextPassword === "") {
+        //
         console.log(TAG, "NAME or PASSWORD is EMPTY");
         response.message = "These fields cannot be empty: name,password})";
         response.data = null;
@@ -49,6 +50,7 @@ exports.login = async (req, res) => {
     }
 
     if (IsNotString(name) || IsNotString(plainTextPassword)) {
+        //
         console.log(TAG, "NAME or PASSWORD is not STRING");
         response.message = "These fields should be STRING TYPE:name, password)";
         response.data = null;
@@ -65,22 +67,15 @@ exports.login = async (req, res) => {
             name,
             plainTextPassword
         );
-
         //
         //ZONA DE VERIFICACAO SE ESTA OKAY E RETORNA O COOKIE
         const dbPasswordHash = serviceResponse[0].password;
-        console.log("serviceresponse:", serviceResponse);
-        console.log("dbPasswordHash:", dbPasswordHash);
 
-        const result = await bcrypt.compare(plainTextPassword, dbPasswordHash); //result isboolean
-        //const result = true;
-        //COMENTEI AQUI PQ QUEM MANIPULA O RES EH O CONTROLLER
+        const result = await bcrypt.compare(plainTextPassword, dbPasswordHash); //boolean
+
         if (result) {
-            console.log(
-                "DEU TRUE, LOGO A SENHA CONFERE, TOMA TEU COOKIE",
-                dbPasswordHash
-            );
-            const jwt = jwtLib.sign({ name }, "minha senha aqui"); // process.env.JWTSECRET
+            //
+            const jwt = jwtLib.sign({ name }, process.env.JWT_SECRET);
             res.cookie("session", jwt);
             // res.status(200).json({ controller: "GEROU cookie" });
         } else {
@@ -106,7 +101,7 @@ exports.login = async (req, res) => {
     }
 };
 
-//USA O MEODO POST PARA FAZER LOGIN
+//Use delete to logout (to delete cookie)
 exports.logout = async (req, res) => {
     //determinar o IP de quem fez a requisição
     //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
@@ -126,7 +121,6 @@ exports.logout = async (req, res) => {
         ////const serviceResponse = await usersService.login(.. );
         const serviceResponse = [{ cookieStatus: "liberado" }];
         //
-        //LIMPANDO O COOKIE
         res.clearCookie("session");
 
         // Retornar com sucesso
@@ -146,9 +140,6 @@ exports.logout = async (req, res) => {
         console.timeEnd(`login()${milliseconds}`);
     }
 };
-
-//
-//
 
 /*check if is not string type*/
 function IsNotString(_data) {

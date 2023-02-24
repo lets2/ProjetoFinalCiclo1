@@ -1,29 +1,3 @@
-/*
-TRUE DATABASE WILL BE INSERTED NEXT WEEK
-Use this code:
-const pool = require("./db-pool");
-
-const TAG = "All Repository: ";
-
-exports.getAll = async () => {
-    //Realiza a requisição
-    try {
-        const query = await pool.query("SELECT * FROM users");
-        //Se a requisição deu certo existe pelo menos um row
-        if (query.rows[0]) return query.rows;
-        throw new Error("No rows returned");
-        //se a condição anterior for falsa, implica que
-        //nenhuma coluna foi retornada, sendo que
-        //o front end esta esperado uma resposta com rows
-    } catch (error) {
-        console.log("TAG,error");
-        throw error;
-    }
-};
-
-
-*/
-
 const TAG = "Main Repository: ";
 
 exports.getAll = async () => {

@@ -44,7 +44,7 @@ export function EditGod() {
 
 					<input id="edit-page-god-input-name" class="input-edit-god" type="text" placeholder="Nome">
 					<input id="edit-page-god-input-status" class="input-edit-god" type="text" placeholder="Status">
-					<input id="edit-page-god-input-resume" class="input-edit-god" id="input-resume-edit-god"type="text" placeholder="Resumo">
+					<textarea id="edit-page-god-input-resume" class="input-edit-god" type="text"  name="edit-page-god-input-resume" cols="38" rows="10" placeholder="Resumo"></textarea>
 				</div>
 				<div class="flex-row-between" id="box-buttons">
 					<button class="cancel-button btns-edit-god" id="cancel-edit-god">Cancelar</button>

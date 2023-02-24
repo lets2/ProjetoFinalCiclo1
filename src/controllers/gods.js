@@ -1,6 +1,6 @@
 const { json } = require("express");
 const godsService = require("../services/gods.js");
-
+const path = require("path");
 const TAG = "god controller: ";
 
 //----------------------------------------
@@ -14,9 +14,6 @@ exports.getAll = async (req, res) => {
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`getAll()${milliseconds}`);
 
-    //padronizando o formato da resposta
-    //fica mais fácil para o front-end
-    //saber o que esperar
     const response = {
         message: "",
         data: null,
@@ -26,7 +23,6 @@ exports.getAll = async (req, res) => {
         const serviceResponse = await godsService.getAll();
         response.message = "Success";
         response.data = serviceResponse;
-        // console.log("CONTROLLER RECEBEU:", response);
         //response.data = serviceResponse.rows;
         res.status(200).json(response);
         console.timeEnd(`getAll()${milliseconds}`);
@@ -50,9 +46,7 @@ exports.getById = async (req, res) => {
     console.time(`getgods()${milliseconds}`);
     //precisa tratar algum parâmetro?
     const id = req.params.id; //get index from url
-    //padronizando o formato da resposta
-    //fica mais fácil para o front-end
-    //saber o que esperar
+
     const response = {
         message: "",
         data: null,
@@ -79,9 +73,6 @@ exports.getById = async (req, res) => {
     }
 };
 
-//precisei do path aqui:
-const path = require("path");
-
 /*POST/CREATE METHOD*/
 exports.createGod = async (req, res) => {
     //determinar o IP de quem fez a requisição
@@ -91,25 +82,15 @@ exports.createGod = async (req, res) => {
     console.time(`createGod()${milliseconds}`);
 
     // TTRY TO GET PARAMETERS FROM REQ.BODY E VERIFY IF ARE OKAY
-    ////////const { name, status, categoryId, resume, src } = req.body;
-
-    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    //FAZENDO O MULTER pegando os dados;
 
     const filename = req.file.filename;
-    // const mimetype = req.file.mimetype;
-    // const extension = path.extname(req.file.originalname);
-    // const nameWithExtension = filename + extension;
 
     const name = req.body.name;
     const status = req.body.status;
     const resume = req.body.resume;
     const categoryId = req.body.categoryId;
 
-    //const src = nameWithExtension;
     const src = filename; //Não precisa de extensão, é so o codigo mesmo!
-    // const fileName = nameWithExtension;
-    //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
     //Standardizing the response that the frontend will receive.
     const response = {
@@ -207,8 +188,7 @@ exports.updateGod = async (req, res) => {
 
     // god Id is into url
     const id = req.params.id;
-    // TTRY TO GET PARAMETERS FROM REQ.BODY E VERIFY IF ARE OKAY
-    /////const { name, status, categoryId, resume, src } = req.body;
+
     let filename; //declarei como variavel por conta do if else
     //Teste de fazer EDICAO DE CATEGORIA
     if (!req.file) {
@@ -216,19 +196,13 @@ exports.updateGod = async (req, res) => {
     } else {
         filename = req.file.filename;
     }
-    //const mimetype = req.file.mimetype;
-    //const extension = path.extname(req.file.originalname);
-    // const nameWithExtension = filename + extension;
 
     console.log("OLHA O FILENAMEVAZIO!!!!!!!!!!!1:", filename);
     const { name, status, categoryId, resume } = req.body;
 
     //
     const src = filename; //Não precisa de extensão, é so o codigo mesmo!
-    /////const name = req.body.name;
-    ////// const hexColor = req.body.hexColor;
-    //const src = nameWithExtension;
-    //Standardizing the response that the frontend will receive.
+
     const response = {
         message: "",
         data: null,
@@ -317,9 +291,7 @@ exports.deleteGodById = async (req, res) => {
     console.time(`deleteGodById()${milliseconds}`);
     //precisa tratar algum parâmetro?
     const id = req.params.id; //get index from url
-    //padronizando o formato da resposta
-    //fica mais fácil para o front-end
-    //saber o que esperar
+
     const response = {
         message: "",
         data: null,

@@ -8,9 +8,6 @@ exports.getAll = async (req, res) => {
     //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
     console.time("getAll()");
 
-    //padronizando o formato da resposta
-    //fica mais fácil para o front-end
-    //saber o que esperar
     const response = {
         message: "",
         data: null,
