@@ -79,8 +79,13 @@ exports.login = async (req, res) => {
             res.cookie("session", jwt);
             // res.status(200).json({ controller: "GEROU cookie" });
         } else {
-            console.log("DEU FALSE, ALGO DE ERRADO!", dbPasswordHash);
-            // res.status(403).json({});//forbidden
+            console.log("DEU FALSE, SENHA/USER ERRADO!", dbPasswordHash);
+            response.message = "Forbidden";
+            response.error = "[403] Acesso negado";
+            res.status(403).json(response); //forbidden
+            console.timeEnd(`login()${milliseconds}`);
+
+            return;
         }
 
         // Retornar com sucesso

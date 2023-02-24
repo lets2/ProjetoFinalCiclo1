@@ -46,14 +46,6 @@ export function Categories() {
 <footer></footer>
 	`;
 
-    addUniqueEventListener(document, "DOMContentLoaded", () => {
-        // console.log("entrou no evento externo da main");
-        //addExternalResourcesTo("/");
-        //addEventsToPrincipal();
-        //addExternalResourcesTo("/categories");
-        //addEventsRelatedTo("/categories");
-    });
-
     return div;
 }
 /******************************************
