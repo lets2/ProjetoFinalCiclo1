@@ -295,6 +295,7 @@ relacionada aquele elemento
      border-radius: 0.0rem;
      height: var(--height-input-smaller);
  }
+
  .search-icon{
      height: var(--size-icon-smallest);
  }
