@@ -140,6 +140,7 @@ exports.updateCategory = async (_id, _name, _src, _hexColor) => {
         if (query.rows[0]) return query.rows;
 
         throw new Error("No rows returned");
+
         //
     } catch (error) {
         console.log(TAG, "error caught");
