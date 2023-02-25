@@ -31,7 +31,7 @@ let categoriesList = [];
 let currentIndexCategory; //
 let godsOfACategory = [];
 let allGodsArray = [];
-
+let godsFilteredArrayGlobal = [];
 //------------------------------------------------------------------------
 // RENDER INITIAL PAGE (LANDING PAGE)
 //------------------------------------------------------------------------
@@ -1121,6 +1121,14 @@ async function pesquisar(texto) {
         const resJson = await response.json();
         console.log("Requisição de BARRA DE PESQUISA deu certo:", resJson);
         displayWarning(resJson.message); //deu tudo  certo
+        // CASO DÊ CERTO A REQUISIÇÃO SALVO NO VETOR DE GODS FILTRADOS
+        // E CHAMO O REDIRECT:
+        //godsFilteredArrayGlobal =
+        const arrayFiltered = resJson.data;
+        console.log("ARRAY FILTRADO:", arrayFiltered.length);
+        if (arrayFiltered.length === 0) {
+            displayWarning("Nenhum item correspondente, tente outra busca!");
+        }
     } catch (error) {
         console.log(error);
     }
