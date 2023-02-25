@@ -144,3 +144,8 @@ export function redirectToAllGods(parametroDePesquisa) {
     });
     window.dispatchEvent(eventStateChange);
 }
+/*@author:Gabriela - coauthor: Letônio*/
+export function redirectToRegisterUser(parametroDePesquisa) {
+    const eventStateChange = CriaEventStateChange("/registerUser");
+    window.dispatchEvent(eventStateChange);
+}

@@ -25,7 +25,7 @@ exports.registerNewAdm = async (_username, _dbPasswordHash, _email) => {
     try {
         const type_id = "2"; //TIPO 2 = ADM, como só vai ter adm, fixei aqui o valor
         const query = await pool.query(
-            "INSERT INTO users (name, password,email,type_id) VALUES ($1, $2,$3,$4) RETURNING *",
+            "INSERT INTO users (name, password,email,type_id, created_at) VALUES ($1, $2,$3,$4, now()) RETURNING *",
             [_username, _dbPasswordHash, _email, type_id]
         );
 

@@ -365,8 +365,14 @@ main{
     font-size: 2rem;
     border-style: none;
     box-shadow: 0.2rem 0.2rem 0.5rem 0.4rem #00000040;
-} 
+}
 
+.cancel-button-register{
+    background-color: var(--color-bg-cancel);
+}
+.cancel-button-register:hover{
+    background-color: var(--color-bg-cancel-hover);
+}
 #message-register-user{
     font-size: 1.2rem;
 }
