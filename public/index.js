@@ -31,7 +31,7 @@ let categoriesList = [];
 let currentIndexCategory; //
 let godsOfACategory = [];
 let allGodsArray = [];
-
+let godsFilteredArrayGlobal = [];
 //------------------------------------------------------------------------
 // RENDER INITIAL PAGE (LANDING PAGE)
 //------------------------------------------------------------------------
@@ -116,8 +116,16 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
             addSelectWithCategoriesInGodsPage();
             break;
         case "/allGods":
-            allGodsArray = respostaIndex.dataGods;
-            insertAllGods(allGodsArray);
+            console.log("OLHA O RESPOSTA INDEX:", respostaIndex);
+            if (Array.isArray(respostaIndex)) {
+                godsFilteredArrayGlobal = respostaIndex;
+                allGodsArray = respostaIndex; //ganbiarra, se tirar isso da erro na 1190
+                insertAllGods(godsFilteredArrayGlobal);
+            } else {
+                allGodsArray = respostaIndex.dataGods;
+                insertAllGods(allGodsArray);
+            }
+
             break;
     }
 }
@@ -1106,6 +1114,9 @@ async function pesquisar(texto) {
     const arrayWords = texto.split(/\s|,/); //regex to split blankspace or , //= ["muito", "ddd"];
     const parametro = arrayWords.join(",");
 
+    redirectToAllGods(parametro);
+
+    /*
     try {
         const response = await fetch(
             `http://localhost:8080/searchgods?strings=${parametro}`
@@ -1121,9 +1132,21 @@ async function pesquisar(texto) {
         const resJson = await response.json();
         console.log("Requisição de BARRA DE PESQUISA deu certo:", resJson);
         displayWarning(resJson.message); //deu tudo  certo
+        // CASO DÊ CERTO A REQUISIÇÃO SALVO NO VETOR DE GODS FILTRADOS
+        // E CHAMO O REDIRECT:
+        //godsFilteredArrayGlobal =
+        const arrayFiltered = resJson.data;
+        console.log("ARRAY FILTRADO:", arrayFiltered.length);
+        if (arrayFiltered.length === 0) {
+            displayWarning("Nenhum item correspondente, tente outra busca!");
+            redirectToAllGods(false); //filtered:false;
+        } else {
+            godsFilteredArrayGlobal = arrayFiltered;
+            redirectToAllGods(true); //filtered:true;
+        }
     } catch (error) {
         console.log(error);
-    }
+    }*/
 }
 
 //-+-+-++--+-

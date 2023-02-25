@@ -128,3 +128,40 @@ export async function addResourcesToEditGodPage(godId) {
         console.log("Erro durante o fetch:", error);
     }
 }
+
+/*GET GODS FILTERED BY SEARCH BAR PARAMETER*/
+
+export async function getResourcesFromGodsFiltered(_parametroDePesquisa) {
+    try {
+        const response = await fetch(
+            `http://localhost:8080/searchgods?strings=${_parametroDePesquisa}`
+        );
+        console.log("RESPOSTA DA REQUISIÇÃO SEARCH GODS:", response.status);
+
+        if (response.status !== 200 && response.status !== 201) {
+            const resJson = await response.json();
+            const { message, error } = resJson;
+            displayWarning(resJson.error);
+            throw `${error}`;
+        }
+        const resJson = await response.json();
+        console.log("Requisição de BARRA DE PESQUISA deu certo:", resJson);
+        //displayWarning(resJson.message); //deu tudo  certo
+        // CASO DÊ CERTO A REQUISIÇÃO SALVO NO VETOR DE GODS FILTRADOS
+        // E CHAMO O REDIRECT:
+        //godsFilteredArrayGlobal =
+        const arrayFiltered = resJson.data;
+
+        return arrayFiltered;
+        /// console.log("ARRAY FILTRADO:", arrayFiltered.length);
+        ///  if (arrayFiltered.length === 0) {
+        ///      displayWarning("Nenhum item correspondente, tente outra busca!");
+        ///       redirectToAllGods(false); //filtered:false;
+        ///   } else {
+        ///      godsFilteredArrayGlobal = arrayFiltered;
+        ///       redirectToAllGods(true); //filtered:true;
+        ///   }
+    } catch (error) {
+        console.log(error);
+    }
+}

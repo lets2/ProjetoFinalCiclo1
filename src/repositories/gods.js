@@ -52,8 +52,12 @@ exports.getGodsByKeywords = async (_arrayKeywords) => {
         console.log("_KEYWORDS:", _arrayKeywords);
         //return query.rows;
         if (query.rows[0]) return query.rows;
-
-        throw new Error("No rows returned");
+        console.log("ROWS", query);
+        //throw new Error("No rows returned");
+        //nessa funcao de pesquisa, decidi colocar que caso
+        //não tenha conteudo relaxionado com a pesquisa
+        //retorne um array vazio:
+        return [];
         //
     } catch (error) {
         console.log(TAG, "error caught");
