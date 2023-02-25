@@ -70,8 +70,6 @@ import {
     redirectToRegisterUser,
 } from "./pages/all-categories-page.js";
 
-import { redirectToAllCategories } from "./pages/cards_god_from_categ.js";
-
 import GeraObjComRotas from "./pages/router.js";
 
 //-------------------------------------------------------------
@@ -391,7 +389,7 @@ function debouncePesquisar(texto) {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
         pesquisar(texto);
-    }, 500);
+    }, 800);
 }
 // Função chamada após o tempo depois do último clique
 async function pesquisar(texto) {
