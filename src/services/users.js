@@ -21,6 +21,24 @@ exports.login = async (_name, _plainTextPassword) => {
     }
 };
 
+/*POST METHOD - REGISTER NEW USER*/
+
+exports.registerNewAdm = async (_username, _dbPasswordHash, _email) => {
+    try {
+        const resp = await usersRepository.registerNewAdm(
+            _username,
+            _dbPasswordHash,
+            _email
+        );
+        return resp;
+    } catch (error) {
+        console.log(TAG, "error caught");
+        throw error;
+    }
+};
+
+//não usei put ainda nem delete!!
+
 /*PUT/UPDATE METHOD*/
 
 exports.updateCategory = async (_id, _name, _src, _hexColor) => {
@@ -45,13 +63,14 @@ exports.updateCategory = async (_id, _name, _src, _hexColor) => {
     }
 };
 
-/*DELETE METHOD*/
+/*DELETE METHOD - nao tenho deletar usuario porenquanto*/
 
 exports.deleteCategoryById = async (_id) => {
     try {
         const resp = await categoriesRepository.deleteCategoryById(_id);
         return resp;
     } catch (error) {
-        console.log(TAG, "ERROR caught");
+        console.log(TAG, "error caught");
+        throw error;
     }
 };
