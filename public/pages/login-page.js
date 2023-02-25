@@ -54,7 +54,17 @@ export function Login() {
     return div;
 }
 
-export function redirectToMyPrincipal() {
-    const eventStateChange = CriaEventStateChange("/");
+/*@author: Letônio*/
+
+export function redirectToLoginAdmPage() {
+    const eventStateChange = CriaEventStateChange("/login");
+    window.dispatchEvent(eventStateChange);
+}
+
+/*@author: Letônio*/
+export function redirectToLogoutPage() {
+    const eventStateChange = CriaEventStateChange("/login", {
+        releaseCookie: true,
+    });
     window.dispatchEvent(eventStateChange);
 }

@@ -43,7 +43,9 @@ export function Menu() {
     return div;
 }
 
-export function redirectToMyPrincipal() {
-    const eventStateChange = CriaEventStateChange("/");
+/*@author:Gabriela - coauthor: Letônio*/
+
+export function redirectToMenu() {
+    const eventStateChange = CriaEventStateChange("/menu");
     window.dispatchEvent(eventStateChange);
 }

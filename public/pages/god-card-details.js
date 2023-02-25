@@ -47,7 +47,9 @@ export function GodChoosed() {
     return div;
 }
 
-export function redirectToMyPrincipal() {
-    const eventStateChange = CriaEventStateChange("/");
+export function redirectToGodDetailsPage(godId) {
+    const eventStateChange = CriaEventStateChange("/categories/d1", {
+        godId: godId,
+    });
     window.dispatchEvent(eventStateChange);
 }
