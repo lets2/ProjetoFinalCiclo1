@@ -67,7 +67,10 @@ import {
 import {
     renderCurrentCategoryOnCategoriesPage,
     addEventsToCategoriesPage,
+    redirectToRegisterUser,
 } from "./pages/all-categories-page.js";
+
+import { redirectToAllCategories } from "./pages/cards_god_from_categ.js";
 
 import GeraObjComRotas from "./pages/router.js";
 
@@ -240,6 +243,9 @@ function addEventsRelatedTo(url) {
         case "/allGods":
             addEventsToAllGodsPage();
             break;
+        case "/registerUser":
+            addEventsToRegisterUser();
+            break;
     }
 }
 
@@ -303,7 +309,7 @@ function addEventsToAdmMenuPage() {
     addEventsToHeader();
 
     const objMenuAdm = [
-        { label: "#edit-profile", handle: redirectToTableEditCategories },
+        { label: "#edit-profile", handle: redirectToRegisterUser },
         { label: "#change-password", handle: redirectToTableEditCategories },
         { label: "#edit-categories", handle: redirectToTableEditCategories },
         { label: "#edit-gods", handle: redirectToTableEditGods },
@@ -398,3 +404,54 @@ async function pesquisar(texto) {
 
     redirectToAllGods(parametro);
 }
+// author: Gabriela
+function addEventsToRegisterUser(){
+    addEventsToHeader();
+
+    const cancelButton = document.querySelector(".cancel-button-register");
+    addUniqueEventListener(cancelButton, "click", () => {
+        redirectToMenuAdmPage();
+    });
+
+    const registerBtn = document.querySelector("#add-user-button");
+    addUniqueEventListener(registerBtn, "click", async (e) => {
+        e.preventDefault();
+        try {
+            const username = document.querySelector("#new-name-user").value;
+            const email = document.querySelector("#new-email-user").value;
+            const password = document.querySelector("#new-passwd-user").value;
+            await tryRegisterUser(username, email, password);
+            console.log(username, email, password)
+            redirectToMenuAdmPage();
+        } catch (error) {
+            alert("Houve esse problema", error);
+        }
+    });
+}
+
+async function tryRegisterUser(_username, _email, _password) {
+    const objBody = {
+        username: _username,
+        password: _password,
+        email: _email,
+    };
+
+    console.log(objBody, "OBJ BODY")
+    try {
+        const response = await fetch("http://localhost:8080/registerAdm", {
+        method: "POST",
+        body: JSON.stringify(objBody),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+        });
+
+        if (response.status !== 200 && response.status !== 201) {
+            throw "[erro] ao tentar fazer login!";
+        }
+        const jsonData = await response.json();
+        console.log("CADASTRO - JSON OBTIDO:", jsonData);
+    } catch (error) {
+        console.log(error, "deu ruim");
+    }
+    
+}
+

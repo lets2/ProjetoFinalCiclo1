@@ -15,6 +15,7 @@ import { AddCategory } from "./add-category.js";
 import { EditCategory } from "./edit-cat.js";
 import { PrincipalTeste } from "./principal-teste.js";
 import { AllGodsPage } from "./all-gods-page.js";
+import { RegisterUser } from "./register-user.js";
 export default function GeraObjComRotas() {
     const objRotas = {
         /*"/": Principal(),*/
@@ -34,6 +35,7 @@ export default function GeraObjComRotas() {
         "/addCategory": AddCategory(),
         "/editCategory": EditCategory(),
         "/allGods": AllGodsPage(),
+        "/registerUser": RegisterUser(),
 
         getPage: function (url) {
             return this[url];
