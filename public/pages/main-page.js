@@ -136,10 +136,6 @@ export function redirectToGodsFiltered(arrayResults) {
     });
     window.dispatchEvent(eventStateChange);
 }
-export function redirectToAllGods(id) {
-    const eventStateChange = CriaEventStateChange("/allGods", { id: id });
-    window.dispatchEvent(eventStateChange);
-}
 
 /*@author:Gabriela - coauthor: Letônio*/
 export function redirectToAllGods(id) {
