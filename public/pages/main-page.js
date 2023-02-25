@@ -138,7 +138,9 @@ export function redirectToGodsFiltered(arrayResults) {
 }
 
 /*@author:Gabriela - coauthor: Letônio*/
-export function redirectToAllGods(id) {
-    const eventStateChange = CriaEventStateChange("/allGods", { id: id });
+export function redirectToAllGods(parametroDePesquisa) {
+    const eventStateChange = CriaEventStateChange("/allGods", {
+        parametroDePesquisa: parametroDePesquisa,
+    });
     window.dispatchEvent(eventStateChange);
 }
