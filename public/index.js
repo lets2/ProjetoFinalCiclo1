@@ -21,6 +21,7 @@ import {
     redirectToMenu,
     redirectToAddCategory,
     redirectToEditCategory,
+    redirectToAllGods,
 } from "./pages/main-page.js";
 import { redirectToAllCategories } from "./pages/cards_god_from_categ.js";
 
@@ -30,6 +31,7 @@ import GeraObjComRotas from "./pages/router.js";
 let categoriesList = [];
 let currentIndexCategory; //
 let godsOfACategory = [];
+let allGodsArray = [];
 
 //------------------------------------------------------------------------
 // RENDER INITIAL PAGE (LANDING PAGE)
@@ -94,7 +96,6 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
             categoriesList = respostaIndex.dataCategories;
             addSelectWithCategories(respostaIndex.dataCategories);
             addLinesGodTable(respostaIndex.dataGods);
-            console.log(categoriesList, "categoreis")
             break;
         case "/godInfo/g1":
             testAddElements(respostaIndex);
@@ -113,6 +114,11 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
         case "/addGod":
             insertChoosedGodImg();
             addSelectWithCategoriesInGodsPage();
+            break;
+        case "/allGods":
+            allGodsArray = respostaIndex.dataGods;
+            insertAllGods(allGodsArray);
+            break;
     }
 }
 
@@ -435,6 +441,9 @@ function addEventsRelatedTo(url) {
         case "/editCategory":
             addEventsToEditCategoryPage();
             break;
+        case "/allGods":
+            addEventsToAllGodsPage();
+            break;
     }
 }
 
@@ -520,7 +529,6 @@ function updateTempleContent(newIndex) {
 
 /*eevents related to the page of the chosen category*/
 function addEventsToCategorySelected() {
-    console.log(godsOfACategory, "GODSOF");
     addEventsToHeader();
     eventosAdicionadosEmCadaCartao(godsOfACategory);
 }
@@ -725,7 +733,8 @@ function addEventsToMenuPage() {
 
     const godIcon = document.querySelector("#gods-page");
     addUniqueEventListener(godIcon, "click", () => {
-        redirectToGodDetailsPage();
+        //redirectToGodDetailsPage();
+        redirectToAllGods("Allgods");
     });
 
     const categoriesIcon = document.querySelector("#categories-page");
@@ -1070,19 +1079,49 @@ function addEventsToHeader() {
     });
 }
 
-// TESTANDO FUNCIOONALIDADE DO SCROLL
+// // TESTANDO FUNCIOONALIDADE DO SCROLL
 
-document.addEventListener("keydown", function (event) {
-    if (
-        event.key === "ArrowDown" ||
-        event.key === "ArrowUp" ||
-        event.key === "PageDown" ||
-        event.key === "PageUp"
-    ) {
-        event.preventDefault();
-        window.scrollBy(
-            0,
-            event.key === "ArrowDown" || event.key === "PageDown" ? 100 : -100
-        );
+// document.addEventListener("keydown", function (event) {
+//     if (
+//         event.key === "ArrowDown" ||
+//         event.key === "ArrowUp" ||
+//         event.key === "PageDown" ||
+//         event.key === "PageUp"
+//     ) {
+//         event.preventDefault();
+//         window.scrollBy(
+//             0,
+//             event.key === "ArrowDown" || event.key === "PageDown" ? 100 : -100
+//         );
+//     }
+// });
+
+function insertAllGods(allGodsArray){
+    const cardsGods = document.querySelector("#box-all-gods-overflow");
+    let div = "";
+    cardsGods.innerHTML = "";
+    if (allGodsArray) {
+        for (let i = 0; i < allGodsArray.length; i++) {
+            div = `<div class="flex-center-center">
+                <img class="cards-gods" id = "god-id-${allGodsArray[i].id}" data-god-id=${allGodsArray[i].id} src = "../assets/uploads/${allGodsArray[i].src_img}"  alt="Cartão 2">
+            </div>
+            `;
+            cardsGods.innerHTML += div;
+        }
     }
-});
+}
+
+function addEventsToAllGodsPage(){
+    addEventsToHeader();   
+    if (allGodsArray) {
+        for (let i = 0; i < allGodsArray.length; i++) {
+            let godCard = document.querySelector(
+                `#god-id-${allGodsArray[i].id}`
+            );
+            console.log(godCard.id, "AAAA");
+            addUniqueEventListener(godCard, "click", () => {
+                redirectToGodDetailsPage(godCard.dataset.godId);
+            });
+        }
+    }
+}

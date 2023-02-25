@@ -13,6 +13,7 @@ import { Menu } from "./menu.js";
 import { AddCategory } from "./add-category.js";
 import { EditCategory } from "./edit-cat.js";
 import { PrincipalTeste } from "./principal-teste.js";
+import { AllGodsPage } from "./all-gods-page.js";
 export default function GeraObjComRotas() {
     const objRotas = {
         /*"/": Principal(),*/
@@ -30,6 +31,7 @@ export default function GeraObjComRotas() {
         "/menu": Menu(),
         "/addCategory": AddCategory(),
         "/editCategory": EditCategory(),
+        "/allGods": AllGodsPage(),
 
         getPage: function (url) {
             return this[url];
