@@ -322,13 +322,12 @@ relacionada aquele elemento
  .container-all-gods-page{
      width: 100%;
      height: 100%;
-     display: flex;
  } 
  /*@autor:letonio (estilizando cartoes de deuses na pagina com categoria especifica)*/
  
    /* Define o estilo da caixa de cartões e seu overflow */
    #box-all-gods {
-     width: 75%;
+     width: 85%;
      height: 100%;
      
      overflow: hidden;
@@ -361,12 +360,7 @@ relacionada aquele elemento
      transform: scale(1.1);
      filter: brightness(130%);
  }
- 
- .hidden{
-     display: none;
- } 
- 
- 
+  
  .phrase{
      background-color: var(--color-bg-category-1-dark-40p);
      padding: 3.0rem;
