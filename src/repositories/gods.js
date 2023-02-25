@@ -46,7 +46,7 @@ exports.getGodsByKeywords = async (_arrayKeywords) => {
     // Performs the query with filtering/sorting
     try {
         const query = await pool.query(
-            "SELECT gods.id, gods.name, gods.status, gods.resume, gods.category_id, categories.name AS name_category, gods.src_img FROM gods JOIN categories ON categories.id = gods.category_id WHERE LOWER(gods.name || ' ' || gods.resume) LIKE ANY (array(SELECT '%' || LOWER(x) || '%' FROM unnest($1::text[]) AS x)) ORDER BY gods.id;",
+            "SELECT gods.id, gods.name, gods.status, gods.resume, gods.category_id, categories.name AS name_category, gods.src_img FROM gods JOIN categories ON categories.id = gods.category_id WHERE LOWER(gods.name || ' ' || categories.name || ' ' || gods.resume) LIKE ANY (array(SELECT '%' || LOWER(x) || '%' FROM unnest($1::text[]) AS x)) ORDER BY gods.id;",
             [_arrayKeywords]
         );
         console.log("_KEYWORDS:", _arrayKeywords);
