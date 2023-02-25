@@ -41,6 +41,26 @@ exports.getById = async (id) => {
     }
 };
 
+/*GET GODS DATABASE BASED IN KEYWORDS*/
+exports.getGodsByKeywords = async (_arrayKeywords) => {
+    // Performs the query with filtering/sorting
+    try {
+        const query = await pool.query(
+            "SELECT gods.id, gods.name, gods.status, gods.resume, gods.category_id, categories.name AS name_category, gods.src_img FROM gods JOIN categories ON categories.id = gods.category_id WHERE LOWER(gods.name || ' ' || gods.resume) LIKE ANY (array(SELECT '%' || LOWER(x) || '%' FROM unnest($1::text[]) AS x)) ORDER BY gods.id;",
+            [_arrayKeywords]
+        );
+        console.log("_KEYWORDS:", _arrayKeywords);
+        //return query.rows;
+        if (query.rows[0]) return query.rows;
+
+        throw new Error("No rows returned");
+        //
+    } catch (error) {
+        console.log(TAG, "error caught");
+        throw error;
+    }
+};
+
 exports.createGod = async (_name, _status, _categoryId, _resume, _src) => {
     // Performs the query with filtering/sorting
     try {

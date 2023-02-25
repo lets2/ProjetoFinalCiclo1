@@ -73,6 +73,72 @@ exports.getById = async (req, res) => {
     }
 };
 
+/*GET METHOD - FILTER BY KEY WORDS*/
+exports.getGodsByKeywords = async (req, res) => {
+    const now = new Date(); // cria uma nova instância de Date com a data atual
+    const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
+    console.time(`getGodsByKeywords()${milliseconds}`);
+
+    //const arrayKeywords = req.body.arrayKeywords;
+    const arrayKeywords = req.query.strings.split(",");
+    console.log("VERIFICANDO SE MEU ARRAY EH UM ARRAY:", arrayKeywords);
+    console.log("E A DECISAO EH:", Array.isArray(arrayKeywords));
+
+    const response = {
+        message: "",
+        data: null,
+        error: null,
+    };
+    //
+    if (!arrayKeywords) {
+        console.log(TAG, "ARRAYKEYWORDS is UNDEFINED/NULL");
+
+        response.message = "Request need to have {arrayKeywords})";
+        response.data = null;
+        response.error = "[400] Bad request! arrayKeywords is UNDEFINED/NULL";
+
+        res.status(400).json(response);
+        console.timeEnd(`getGodsByKeywords()${milliseconds}`);
+        return; //If dont use return, the function  will continue
+    }
+    if (IsNotArray(arrayKeywords)) {
+        console.log(TAG, "ARRAYKEYWORDS is NOT ARRAY");
+
+        response.message =
+            "Request need to have a JSON {'arrayKeywords':['string1','string2',...]})";
+        response.data = null;
+        response.error =
+            "[400] Bad request! body need to have: {'arrayKeywords':['string1','string2',...]}";
+
+        res.status(400).json(response);
+        console.timeEnd(`getGodsByKeywords()${milliseconds}`);
+        return; //If dont use return, the function  will continue
+    }
+
+    try {
+        // Call Service method
+        const serviceResponse = await godsService.getGodsByKeywords(
+            arrayKeywords
+        );
+
+        // Retornar com sucesso
+        response.message = "Success";
+        response.data = serviceResponse;
+
+        res.status(200).json(response);
+        console.timeEnd(`getGodsByKeywords()${milliseconds}`);
+    } catch (error) {
+        console.log(TAG, error);
+
+        response.message = "Erro interno do Servidor";
+        response.data = null;
+        response.error = "Erro interno do Servidor";
+
+        res.status(500).json(response);
+        console.timeEnd(`getGodsByKeywords()${milliseconds}`);
+    }
+};
+
 /*POST/CREATE METHOD*/
 exports.createGod = async (req, res) => {
     //determinar o IP de quem fez a requisição
@@ -324,4 +390,12 @@ function IsNotString(_data) {
         return true;
     }
     return false;
+}
+
+/*check if is not array type*/
+function IsNotArray(_data) {
+    if (Array.isArray(_data)) {
+        return false;
+    }
+    return true;
 }
