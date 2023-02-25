@@ -26,7 +26,6 @@ import {
 import { redirectToAllCategories } from "./pages/cards_god_from_categ.js";
 
 import GeraObjComRotas from "./pages/router.js";
-
 //Global variables for dataset replacement and fetishes
 let categoriesList = [];
 let currentIndexCategory; //
@@ -96,6 +95,7 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
             categoriesList = respostaIndex.dataCategories;
             addSelectWithCategories(respostaIndex.dataCategories);
             addLinesGodTable(respostaIndex.dataGods);
+            console.log(categoriesList, "categoreis");
             break;
         case "/godInfo/g1":
             testAddElements(respostaIndex);
@@ -885,7 +885,7 @@ function getGodInputInformations(godId) {
     // Add image to FormData
     formData.append("file", fileInput.files[0]);
 
-    const categoryId = document.querySelector("#select-filter-category").value; 
+    const categoryId = document.querySelector("#select-filter-category").value;
 
     // Add strings to FormData
     formData.append("name", inputNameUpdate);
@@ -1055,6 +1055,9 @@ function addOptionToSelectInGodsPage(_select, _paramOption) {
 /*********************************************/
 /*events that are added to every header
 /*********************************************/
+//declarando variavl usada na barra de pesquisa para armazenar
+//o ID do último SETTIMEOUT
+let timeoutId;
 
 function addEventsToHeader() {
     /*Click on Logo GodPedia redirect to Categories Page*/
@@ -1077,7 +1080,53 @@ function addEventsToHeader() {
     addUniqueEventListener(menuIcon, "click", () => {
         redirectToMenu();
     });
+
+    //Adicionando evento na barra de pesquisa
+    const inputSearchBar = document.querySelector(".search-input");
+    addUniqueEventListener(inputSearchBar, "keyup", (event) => {
+        console.log("VALOR DO INPUT:", event.target.value);
+        debouncePesquisar(event.target.value);
+    });
 }
+//+-+-+-+
+
+function debouncePesquisar(texto) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+        pesquisar(texto);
+    }, 500);
+}
+
+// Função chamada após o tempo depois do último clique
+async function pesquisar(texto) {
+    // Enviar requisição para o servidor
+    console.log("HORA DE FAZER A REQUISIÇÃO sobre esse texto!", texto);
+    console.log("HORA DE FAZER A REQUISIÇÃO sobre esse array!", texto);
+
+    const arrayWords = texto.split(/\s|,/); //regex to split blankspace or , //= ["muito", "ddd"];
+    const parametro = arrayWords.join(",");
+
+    try {
+        const response = await fetch(
+            `http://localhost:8080/searchgods?strings=${parametro}`
+        );
+        console.log("RESPOSTA DA REQUISIÇÃO SEARCH GODS:", response.status);
+
+        if (response.status !== 200 && response.status !== 201) {
+            const resJson = await response.json();
+            const { message, error } = resJson;
+            displayWarning(resJson.error);
+            throw `${error}`;
+        }
+        const resJson = await response.json();
+        console.log("Requisição de BARRA DE PESQUISA deu certo:", resJson);
+        displayWarning(resJson.message); //deu tudo  certo
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//-+-+-++--+-
 
 // // TESTANDO FUNCIOONALIDADE DO SCROLL
 
@@ -1096,7 +1145,7 @@ function addEventsToHeader() {
 //     }
 // });
 
-function insertAllGods(allGodsArray){
+function insertAllGods(allGodsArray) {
     const cardsGods = document.querySelector("#box-all-gods-overflow");
     let div = "";
     cardsGods.innerHTML = "";
@@ -1111,8 +1160,8 @@ function insertAllGods(allGodsArray){
     }
 }
 
-function addEventsToAllGodsPage(){
-    addEventsToHeader();   
+function addEventsToAllGodsPage() {
+    addEventsToHeader();
     if (allGodsArray) {
         for (let i = 0; i < allGodsArray.length; i++) {
             let godCard = document.querySelector(

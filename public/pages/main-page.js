@@ -130,6 +130,14 @@ export function redirectToEditCategory(id) {
 }
 
 /*@author:Gabriela - coauthor: Letônio*/
+export function redirectToGodsFiltered(arrayResults) {
+    const eventStateChange = CriaEventStateChange("/godsFiltered", {
+        arrayResults: arrayResults,
+    });
+    window.dispatchEvent(eventStateChange);
+}
+
+/*@author:Gabriela - coauthor: Letônio*/
 export function redirectToAllGods(id) {
     const eventStateChange = CriaEventStateChange("/allGods", { id: id });
     window.dispatchEvent(eventStateChange);

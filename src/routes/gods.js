@@ -53,4 +53,7 @@ router.put(
 //      src:String,
 // }
 
+////Routes with req.body for for filtres gods by KEYWORDS
+router.get("/searchgods", godsController.getGodsByKeywords);
+
 module.exports = router;
