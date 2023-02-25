@@ -45,6 +45,8 @@ export async function addExternalResourcesTo(url, criteria) {
 
         case "/editCategory":
             return await addResourcesToEditCategoryPage(criteria.id);
+        case "/allGods":
+            return addResourcesToTableOfGods(criteria);
         default:
             return null;
     }
