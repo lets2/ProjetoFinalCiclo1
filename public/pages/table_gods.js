@@ -56,7 +56,90 @@ export function TableGods() {
     return div;
 }
 
-export function redirectToMyPrincipal() {
-    const eventStateChange = CriaEventStateChange("/");
+/*@author:Filipe - coauthor: Letônio*/
+export function redirectToTableEditGods() {
+    const eventStateChange = CriaEventStateChange("/tableGods");
     window.dispatchEvent(eventStateChange);
+}
+
+//ADICIONANDO FUNCAO QUE PEGA OS DADOS QUE PRECISAM SER INSERIDOS
+//NA TABELA E NO SELECT E ADICIONA!!
+
+//COMECA AQUI AS COISAS DE TABELA DE DEUSES
+// @author: Gabriela
+export function addLinesGodTable(data) {
+    const thead = document.querySelector("#thead-gods");
+    thead.innerHTML = "";
+
+    for (let i = 0; i < data.length; i++) {
+        thead.innerHTML += `<tr id="line0${i}">
+                    <td>${data[i].name}</td>
+                    <td>${data[i].status}</td>
+                    <td>${data[i].name_category}</td>
+                </tr>`;
+        const lineTable = document.querySelector(`#line0${i}`); //get line by #id
+        lineTable.dataset.godId = data[i].id;
+    }
+}
+
+export function addSelectWithCategories(dataCategories) {
+    const selectElement = document.querySelector("#filter-category");
+    selectElement.innerHTML = ""; //clear any previous content
+
+    addOptionToSelect(selectElement, {
+        value: "choose",
+        text: "Escolha uma categoria",
+    });
+
+    dataCategories.forEach((category) => {
+        addOptionToSelect(selectElement, {
+            value: category.id,
+            text: category.name,
+        });
+    });
+    addOptionToSelect(selectElement, {
+        value: "all",
+        text: "Mostrar todas as categorias",
+    });
+}
+
+function addOptionToSelect(_select, _paramOption) {
+    const option = document.createElement("option");
+    option.value = _paramOption.value; //add category id from db
+    option.innerHTML = _paramOption.text;
+    _select.appendChild(option);
+}
+
+// ADICIONANDO OS EVENTOS RELACIONADOS A TABELA DE DEUSES
+
+/*@author:filipe - coauthor: Letônio*/
+/*Adicionando eventos na página que tem uma tabela de deuses*/
+import { addEventsToHeader } from "../index.js";
+import { addUniqueEventListener } from "../utils/event-listener.js";
+import { redirectToAddGodPage } from "./add-god.js";
+import { redirectToGodInfoPage } from "./adm-god-info.js";
+
+export function addEventsToGodTablePage() {
+    addEventsToHeader();
+    //addLinesGodTable();
+    //*insere evento no botão de adicionar um novo deus
+    const buttonAddGod = document.querySelector("#create-new-god");
+    addUniqueEventListener(buttonAddGod, "click", () => {
+        redirectToAddGodPage();
+    });
+
+    /// Insere evento na tabela, caso o usuario clique numa linha da tabela
+    ///	de deuses aparece uma página para detalhamento e edicao
+    ///referente aquele elemento
+
+    const tbodyElement = document.querySelector("tbody");
+    addUniqueEventListener(tbodyElement, "click", (event) => {
+        console.log("TARGET:", event.target.parentNode);
+        const rowElement = event.target.parentNode;
+        if (event.target.parentNode.tagName === "TR") {
+            const godId = rowElement.dataset.godId;
+            console.log("LINHA664 - GODEVENT:", godId);
+            redirectToGodInfoPage(godId);
+        }
+    });
 }

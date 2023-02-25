@@ -41,3 +41,60 @@ export function redirectToAllCategories() {
     const eventStateChange = CriaEventStateChange("/categories");
     window.dispatchEvent(eventStateChange);
 }
+
+/*@author:Letônio*/
+
+export function redirectToCategoryChoosed(id) {
+    const eventStateChange = CriaEventStateChange("/categories/:id", {
+        id: id,
+    });
+    window.dispatchEvent(eventStateChange);
+}
+
+//ADICIONA IMAGENS NA PAGINA QUE FICA OS CARTOES
+
+export function insertImages(arrayGods) {
+    const cardsGods = document.querySelector("#box-cards-gods-overflow");
+    let div = "";
+    cardsGods.innerHTML = "";
+    if (arrayGods) {
+        for (let i = 0; i < arrayGods.length; i++) {
+            div = `<div class="flex-center-center">
+                <img class="cards-gods" id = "god-${arrayGods[i].id}" data-god-id=${arrayGods[i].id} src = "../assets/uploads/${arrayGods[i].src_img}"  alt="Cartão 2">
+            </div>
+            `;
+            cardsGods.innerHTML += div;
+        }
+    }
+}
+
+// INSERE NOME DA CATEGORIA OU EXPLICA QUE A CATEGORIA NAO TEM DEUSES AINDA:
+export function insertCategoryName(nameCategory) {
+    document.querySelector(".phrase").innerHTML = nameCategory;
+}
+
+//ADICIONANDO EVENTOS RELACIONADO A ESSA PAGINA QUE MOSTRA OS CARTOES:
+import { addEventsToHeader, godsOfACategory } from "../index.js";
+import { redirectToGodDetailsPage } from "./god-card-details.js";
+import { addUniqueEventListener } from "../utils/event-listener.js";
+
+export function addEventsToCategorySelected() {
+    addEventsToHeader();
+    eventosAdicionadosEmCadaCartao(godsOfACategory);
+}
+
+/*events added on the home page card of the chosen category*/
+
+function eventosAdicionadosEmCadaCartao(godsOfCategory) {
+    if (godsOfCategory) {
+        for (let i = 0; i < godsOfCategory.length; i++) {
+            let godCard = document.querySelector(
+                `#god-${godsOfCategory[i].id}`
+            );
+            ////console.log(godCard.id, "AAAA");
+            addUniqueEventListener(godCard, "click", () => {
+                redirectToGodDetailsPage(godCard.dataset.godId);
+            });
+        }
+    }
+}

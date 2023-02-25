@@ -45,7 +45,9 @@ export function MenuAdm() {
     return div;
 }
 
-export function redirectToMyPrincipal() {
-    const eventStateChange = CriaEventStateChange("/");
+/*@author:Filipe - coauthor: Letônio*/
+
+export function redirectToMenuAdmPage() {
+    const eventStateChange = CriaEventStateChange("/adm/a1");
     window.dispatchEvent(eventStateChange);
 }

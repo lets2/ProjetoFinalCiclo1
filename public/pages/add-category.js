@@ -69,7 +69,70 @@ export function AddCategory() {
 
 /*--------------------------------------------*/
 
-export function redirectToMyPrincipal() {
-    const eventStateChange = CriaEventStateChange("/");
+/*@author:Gabriela - coauthor: Letônio*/
+
+export function redirectToAddCategory() {
+    const eventStateChange = CriaEventStateChange("/addCategory");
     window.dispatchEvent(eventStateChange);
+}
+
+//Adicionando eventos na add-category
+
+/*@author:Gabriela - coauthor: Letônio*/
+// Add eventos na página de adicionar categoria
+import { addEventsToHeader, displayWarning } from "../index.js";
+import { addUniqueEventListener } from "../utils/event-listener.js";
+import { redirectToTableEditCategories } from "./table_categories.js";
+
+export function addEventsToAddCategoryPage() {
+    addEventsToHeader();
+    const btnCancel = document.querySelector("#Cancelar");
+    addUniqueEventListener(btnCancel, "click", () => {
+        redirectToTableEditCategories();
+    });
+    const btnAddCategory = document.querySelector("#Adicionar");
+    addUniqueEventListener(btnAddCategory, "click", async () => {
+        await addNewCategoryInDatabase();
+        redirectToTableEditCategories();
+    });
+}
+
+/*@author:letonio - Adiciona no Banco de dados a nova categoria criada*/
+
+async function addNewCategoryInDatabase() {
+    const newCategoryName = document.querySelector("#new-name-category").value;
+
+    const newColorHexFormat = document.querySelector(
+        "#select-color-category"
+    ).value;
+
+    const formData = new FormData();
+    const fileInput = document.querySelector('input[type="file"]');
+
+    // Add image to FormData
+    formData.append("file", fileInput.files[0]);
+
+    // Add strings to FormData
+    formData.append("name", newCategoryName);
+    formData.append("hexColor", newColorHexFormat);
+
+    try {
+        const response = await fetch("http://localhost:8080/categoriestable", {
+            method: "POST",
+            body: formData,
+        });
+
+        console.log("TESTE RESPOSTA OBTIDA AO CRIAR CATEGORIA:", response);
+
+        if (response.status !== 200 && response.status !== 201) {
+            const resJson = await response.json();
+            const { message, error } = resJson;
+            displayWarning(resJson.error);
+            throw `${error}`;
+        }
+        const resJson = await response.json();
+        displayWarning(resJson.message); //deu tudo  certo
+    } catch (error) {
+        console.log(error);
+    }
 }
