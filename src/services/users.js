@@ -74,3 +74,30 @@ exports.deleteCategoryById = async (_id) => {
         throw error;
     }
 };
+
+/*GET METHOD - GET OLD HASH PASSWORD*/
+
+exports.getHashPassword = async (_username) => {
+    try {
+        const resp = await usersRepository.getHashPassword(_username);
+        return resp;
+    } catch (error) {
+        console.log(TAG, "error caught");
+        throw error;
+    }
+};
+
+/*GET METHOD - GET OLD HASH PASSWORD*/
+
+exports.saveNewHashPassword = async (_username, _newDbPasswordHash) => {
+    try {
+        const resp = await usersRepository.saveNewHashPassword(
+            _username,
+            _newDbPasswordHash
+        );
+        return resp;
+    } catch (error) {
+        console.log(TAG, "error caught");
+        throw error;
+    }
+};

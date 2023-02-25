@@ -37,3 +37,38 @@ exports.registerNewAdm = async (_username, _dbPasswordHash, _email) => {
         throw error;
     }
 };
+
+//GET OLD HASH PASSWORD
+
+exports.getHashPassword = async (_username) => {
+    // Performs the query with filtering/sorting
+    try {
+        const query = await pool.query("SELECT * FROM users WHERE name = $1", [
+            _username,
+        ]);
+
+        //// return dbPasswordHash.rows;
+        if (query.rows[0]) return query.rows; //retorna informações do usuario criado
+        throw new Error("No rows returned");
+    } catch (error) {
+        console.log(TAG, "error caught");
+        throw error;
+    }
+};
+
+exports.saveNewHashPassword = async (_username, _newDbPasswordHash) => {
+    // Performs the query with filtering/sorting
+    try {
+        const query = await pool.query(
+            "UPDATE users set password=$2,updated_at=now() WHERE name=$1 RETURNING *",
+            [_username, _newDbPasswordHash]
+        );
+
+        //// return dbPasswordHash.rows;
+        if (query.rows[0]) return query.rows; //retorna informações do usuario criado
+        throw new Error("No rows returned");
+    } catch (error) {
+        console.log(TAG, "error caught");
+        throw error;
+    }
+};

@@ -25,4 +25,12 @@ router.post("/registerAdm", usersController.registerNewAdm);
 //  email,
 //}
 
+router.put("/changePassword", usersController.changePassword);
+//req.body
+//{
+//  username,
+//  oldPassword, //without cryptografia
+//  newPassword, //without cryptografia
+//}
+
 module.exports = router;
