@@ -58,7 +58,98 @@ export function AddGod() {
     return div;
 }
 
-export function redirectToMyPrincipal() {
-    const eventStateChange = CriaEventStateChange("/");
+/*@author:Gabriela - coauthor: Letônio*/
+
+export function redirectToAddGodPage() {
+    const eventStateChange = CriaEventStateChange("/addGod");
     window.dispatchEvent(eventStateChange);
+}
+
+//CHamando função que adiciona imagem do deus:
+
+import { addUniqueEventListener } from "../utils/event-listener.js";
+import { addEventsToHeader, displayWarning } from "../index.js";
+import { redirectToTableEditGods } from "./table_gods.js";
+export function insertChoosedGodImg() {
+    const fileBtn = document.querySelector("#insert-file-btn");
+    const previewImg = document.querySelector("#preview-img-god");
+    const message = document.querySelector("#message-input-file");
+
+    addUniqueEventListener(fileBtn, "change", (e) => {
+        if (e.target.files.length > 0) {
+            const file = e.target.files[0];
+            const url = URL.createObjectURL(file);
+            previewImg.src = url;
+            message.innerHTML = file.name;
+        } else {
+            message.innerHTML = "Nenhum arquivo escolhido";
+        }
+    });
+}
+
+//FUncoes para adicionar eventos noADD GOD PAGE
+
+/*@author:Gabriela - coauthor: Letônio*/
+/*Add eventos na página que tem a opcao de adicionar um novo deus*/
+
+export function addEventsToAddNewGodPage() {
+    addEventsToHeader();
+    //evento nos botoes de adicionar e cancelar
+    const cancelButton = document.querySelector(".cancel-button");
+    const addGodButton = document.querySelector("#add-god-button");
+    addUniqueEventListener(cancelButton, "click", () => {
+        redirectToTableEditGods();
+    });
+    addUniqueEventListener(addGodButton, "click", () => {
+        addNewGodInDatabase();
+        //Antes de redirecionar devemos adicionar o novo deus
+        redirectToTableEditGods();
+    });
+}
+
+async function addNewGodInDatabase() {
+    const newNameGod = document.querySelector("#new-name-god").value;
+    const newStatusGod = document.querySelector("#new-status-god").value;
+    const newResumeGod = document.querySelector("#new-resume-god").value;
+
+    //const srcExample = "exampleGod.png";
+    // const categoryId = "1"; //Precisamos modificar a página para receber categoria também
+    const categoryId = document.querySelector("#select-filter-category").value;
+    console.log("OLHA O ID DA CATEGORIA QUE ESCOLHI", categoryId);
+    console.log(
+        "OLHA O NOME DA CATEGORIA QUE ESCOLHI",
+        document.querySelector("#select-filter-category").innerText
+    );
+
+    //Tentando fazer a adicão de arquivo:
+    const formData = new FormData();
+    const fileInput = document.querySelector('input[type="file"]');
+
+    // Adiciona a imagem ao FormData
+    formData.append("file", fileInput.files[0]);
+
+    // Adiciona as 4 strings ao FormData
+    formData.append("name", newNameGod);
+    formData.append("status", newStatusGod);
+    formData.append("resume", newResumeGod);
+    formData.append("categoryId", categoryId);
+
+    try {
+        const response = await fetch("http://localhost:8080/godstable", {
+            method: "POST",
+            body: formData,
+            //headers: { "Content-type": "application/json; charset=UTF-8" },
+        });
+
+        if (response.status !== 200 && response.status !== 201) {
+            const resJson = await response.json();
+            const { message, error } = resJson;
+            displayWarning(resJson.error);
+            throw `${error}`;
+        }
+        const resJson = await response.json();
+        displayWarning(resJson.message); //deu tudo  certo
+    } catch (error) {
+        console.log(error);
+    }
 }

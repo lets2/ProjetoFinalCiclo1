@@ -30,8 +30,3 @@ export function GodSFilteredByKeywords() {
 
     return div;
 }
-
-export function redirectToMyPrincipal() {
-    const eventStateChange = CriaEventStateChange("/");
-    window.dispatchEvent(eventStateChange);
-}

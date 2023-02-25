@@ -51,7 +51,76 @@ export function GodInfo() {
 
     return div;
 }
-export function redirectToMyPrincipal() {
-    const eventStateChange = CriaEventStateChange("/");
+
+/*@author:Gabriela - coauthor: Letônio*/
+
+export function redirectToGodInfoPage(godId) {
+    const eventStateChange = CriaEventStateChange("/godInfo/g1", {
+        godId: godId,
+    });
     window.dispatchEvent(eventStateChange);
+}
+
+//AS FUNCOES ABAIXO ADICIONAM EVENTOS E CONTEUDO A PAGINA DE GOD INFO,
+//BASEADOS NO OBJETO QUE RECEBERAM
+
+//COMACE AQUI A GOD INFO
+import { addUniqueEventListener } from "../utils/event-listener.js";
+import { redirectToEditGodPage } from "./edit-god.js";
+import { redirectToTableEditGods } from "./table_gods.js";
+import { displayWarning, addEventsToHeader } from "../index.js";
+
+export function addElementsToGodInfoPage(godObj) {
+    //esse codigo eh o que bota o evento no botao de edicao
+    const updateGodButton = document.querySelector("#edit-god-button");
+
+    addUniqueEventListener(updateGodButton, "click", () => {
+        redirectToEditGodPage(godObj.id);
+    });
+
+    //event on back button
+    const backGodButton = document.querySelector("#back-god-button");
+
+    addUniqueEventListener(backGodButton, "click", () => {
+        redirectToTableEditGods();
+    });
+
+    // delete a god
+    const deleteGodButton = document.querySelector("#delete-god-button");
+
+    addUniqueEventListener(deleteGodButton, "click", () => {
+        deleteGodFromDatabase(godObj.id);
+        redirectToTableEditGods();
+    });
+}
+
+async function deleteGodFromDatabase(godId) {
+    try {
+        const response = await fetch(
+            `http://localhost:8080/godstable/${godId}/`,
+            {
+                method: "DELETE",
+            }
+        );
+        console.log("STATUS:", response.status);
+        if (response.status !== 200 && response.status !== 201) {
+            const resJson = await response.json();
+            const { message, error } = resJson;
+            displayWarning(resJson.error);
+            throw `${error}`;
+        }
+        const resJson = await response.json();
+        console.log("Requisição de DELETE GOD deu certo:", resJson);
+        displayWarning(resJson.message); //deu tudo  certo
+
+        const container_data = document.querySelector("#container-see-god");
+    } catch (error) {
+        console.log("Erro durante o fetch:", error);
+    }
+}
+
+//Adicionar outros eventos
+
+export function addEventsToAdmGodInfoPage() {
+    addEventsToHeader();
 }
