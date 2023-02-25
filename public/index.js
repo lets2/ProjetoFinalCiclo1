@@ -71,6 +71,7 @@ import {
 } from "./pages/all-categories-page.js";
 
 import GeraObjComRotas from "./pages/router.js";
+import { redirectToEditPasswd, addEventsToEditPasswd } from "./pages/edit-passwd.js";
 
 //-------------------------------------------------------------
 // GLOBAL VARIABLES
@@ -244,6 +245,9 @@ function addEventsRelatedTo(url) {
         case "/registerUser":
             addEventsToRegisterUser();
             break;
+        case "/editPassword":
+            addEventsToEditPasswd();
+            break;
     }
 }
 
@@ -308,7 +312,7 @@ function addEventsToAdmMenuPage() {
 
     const objMenuAdm = [
         { label: "#edit-profile", handle: redirectToRegisterUser },
-        { label: "#change-password", handle: redirectToTableEditCategories },
+        { label: "#change-password", handle: redirectToEditPasswd },
         { label: "#edit-categories", handle: redirectToTableEditCategories },
         { label: "#edit-gods", handle: redirectToTableEditGods },
         //{ label: "#logout", handle: redirectToLoginAdmPage },//vou modificar o redirect
