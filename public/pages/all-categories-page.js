@@ -186,3 +186,9 @@ function renderImgCategory(
     imagem.setAttribute("src", `./assets/uploads/${categorySrc}`);
     categoryTitle.innerText = categoryName;
 }
+
+/*@author:Gabriela - coauthor: Letônio*/
+export function redirectToRegisterUser(parametroDePesquisa) {
+    const eventStateChange = CriaEventStateChange("/registerUser");
+    window.dispatchEvent(eventStateChange);
+}
