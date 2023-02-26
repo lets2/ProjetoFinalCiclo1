@@ -352,42 +352,6 @@ main{
 	background-color: none;
 	cursor: pointer;
 }
-.container-temples{
-	width: 70%;
-	height: var(--height-img-building-smaller);
-	position: relative;
-	display: flex;
-	align-items: center;
-	margin-top: 5.0rem;
-}
-.temple{
-	position: absolute;
-	left: 0;
-}
-.temple-legend{
-	max-width: 62%; /*change this*/
-	position:absolute;
-	right: 0;
-	margin-right: 5.0rem;
-}
-/* outline: .2rem solid red; */
-
-.container-circles{
-	width: 25.0rem;
-	margin: 4.0rem .0rem;
-	
-}
-.circle{
-	height: var(--size-icon-small);
-	width:  var(--size-icon-small);
-	background-color: var(--color-white);
-	border-radius: 50%;
-	border: none;
-	pointer-events: none;
-}
-.circle-orange{
-	background-color: var(--color-bg-arrow-hover);
-}
 
 /************************************************
 		STYLING FOOTER COMPONENTS
