@@ -149,12 +149,23 @@ exports.createGod = async (req, res) => {
 
     // TTRY TO GET PARAMETERS FROM REQ.BODY E VERIFY IF ARE OKAY
 
-    const filename = req.file.filename;
+    let filename; //declarei como variavel por conta do if else
+    //Teste de fazer EDICAO DE CATEGORIA
+    if (!req.file) {
+        filename = null;
+    } else {
+        filename = req.file.filename;
+    }
 
-    const name = req.body.name;
-    const status = req.body.status;
-    const resume = req.body.resume;
-    const categoryId = req.body.categoryId;
+    console.log("OLHA O FILENAMEVAZIO!!!!!!!!!!!1:", filename);
+    const { name, status, categoryId, resume } = req.body;
+
+    ///  const filename = req.file.filename;
+
+    //// const name = req.body.name;
+    ///  const status = req.body.status;
+    //////  const resume = req.body.resume;
+    ////// const categoryId = req.body.categoryId;
 
     const src = filename; //Não precisa de extensão, é so o codigo mesmo!
 

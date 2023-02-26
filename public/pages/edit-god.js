@@ -122,6 +122,10 @@ function addOptionToSelectInGodsPage(_select, _paramOption) {
     const option = document.createElement("option");
     option.value = _paramOption.value; //add category id from db
     option.innerHTML = _paramOption.text;
+    if (_paramOption.value === "choose") {
+        option.disabled = true;
+        //option.selected = true;
+    }
     _select.appendChild(option);
 }
 

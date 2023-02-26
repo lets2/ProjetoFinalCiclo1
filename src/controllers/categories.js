@@ -226,7 +226,13 @@ exports.createCategory = async (req, res) => {
     console.time(`createCategory()${milliseconds}`);
 
     // TTRY TO GET PARAMETERS FROM REQ.BODY E VERIFY IF ARE OKAY
-    const filename = req.file.filename;
+    let filename; //declarei como variavel por conta do if else
+
+    if (!req.file) {
+        filename = null;
+    } else {
+        filename = req.file.filename;
+    }
 
     const name = req.body.name;
     const hexColor = req.body.hexColor;
