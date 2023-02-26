@@ -315,66 +315,6 @@ h4 {
 		STYLING HEADER COMPONENTS
 ************************************************/
 
-header {
-	height: var(--height-header);
-	width: var(--width-header);
-	background-color: var(--color-bg-header)
-}
-
-
-img {
-	height: var(--size-icon-medium);
-}
-
-#logo {
-	height: var(--size-icon-bigger);
-	cursor: pointer;
-}
-
-.container-search {
-	background-color: var(--color-bg-arrow-);
-	border-radius: 5.0rem;
-	height: 4.0rem;
-	border: solid .3rem var(--color-black);
-	margin-left: 3.5rem;
-	padding: 0 2.0rem 0 2.0rem;
-
-}
-
-.search-input {
-	padding: 1.0rem;
-	color: var(--color-black);
-	font-size: var(--size-font-t9);
-	width: var(--width-input-smaller);
-	/*autor@letonio: para corrigir problema que a barra de 
-	pesquisa estava azul e grande (herdou caracteristicas
-	do seletor "input" da linha 187)*/
-	background-color: var(--color-white);
-	border-radius: 0.0rem;
-	height: var(--height-input-smaller);
-	border: none;
-}
-
-.search-input:focus {
-	box-shadow: 0 0 0 0;
-	outline: 0;
-}
-
-.search-icon {
-	height: var(--size-icon-smallest);
-}
-
-#profile-icon {
-	margin-right: 2.5rem;
-	height: 4.5rem;
-	cursor: pointer;
-}
-
-#menu-icon {
-	margin-left: 2.5rem;
-	margin-right: 2.5rem;
-}
-
 /************************************************
 		STYLING MAIN COMPONENTS
 ************************************************/
