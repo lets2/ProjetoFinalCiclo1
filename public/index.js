@@ -305,10 +305,17 @@ function addEventsToGodDetailsPage() {
     addEventsToHeader();
 }
 
+import { insertMenuItems } from "./pages/adm_perfil_sidebar.js";
 /*@author:filipe - coauthor: Letônio*/
 /*Events added to the administrator menu*/
 function addEventsToAdmMenuPage() {
     addEventsToHeader();
+    insertMenuItems();
+
+    const objMenu = [
+        {label: "#gods-page", handle: redirectToAllGods},
+        {label: "#categories-page", handle: redirectToAllCategories},
+    ];
 
     const objMenuAdm = [
         {label: "#gods-page", handle: redirectToAllGods},
@@ -320,13 +327,26 @@ function addEventsToAdmMenuPage() {
         //{ label: "#logout", handle: redirectToLoginAdmPage },//vou modificar o redirect
         { label: "#logout", handle: redirectToLogoutPage },
     ];
+    if (document.cookie.indexOf("session=") !== -1) {
+        objMenuAdm.forEach((element) => {
+            console.log("caiu opt1")
+            const menuAdmOption = document.querySelector(element.label);
 
-    objMenuAdm.forEach((element) => {
-        const menuOption = document.querySelector(element.label);
-        addUniqueEventListener(menuOption, "click", () => {
-            element.handle();
+            addUniqueEventListener(menuAdmOption, "click", () => {
+                element.handle();
+            });
         });
-    });
+    } else {
+        objMenu.forEach((element) => {
+            const menuOption = document.querySelector(element.label);
+
+            addUniqueEventListener(menuOption, "click", () => {
+                element.handle();
+            });
+        });
+    }
+
+    
 }
 
 /*@author:Gabriela - coauthor: Letônio*/
@@ -380,7 +400,7 @@ export function addEventsToHeader() {
     const menuIcon = document.querySelector("#menu-icon");
 
     addUniqueEventListener(menuIcon, "click", () => {
-        redirectToMenu();
+        redirectToMenuAdmPage();
     });
 
     //Adicionando evento na barra de pesquisa

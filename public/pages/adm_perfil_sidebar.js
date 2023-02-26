@@ -26,14 +26,6 @@ export function MenuAdm() {
                     <img id="profile-adm-icon" src="../assets/icons/profile.svg" alt="profile icon">
                 </figure>
                 <ul class="sidebar-options-adm">
-                    <li id="gods-page"><img src="../assets/icons/icons8-thor.svg" alt="">Deuses</li>
-                    <li id="categories-page"><img src="../assets/icons/categories.svg" alt="">Categorias</li>
-                    <li id="edit-profile"><img src="../assets/icons/edit-profile-v1-white.svg" alt="">Editar perfil</li>
-                    <li id="change-password"><img src="../assets/icons/padlock-v2-white.svg" alt="">Mudar senha</li>
-                    <li id="edit-categories"><img src="../assets/icons/cards-bold-v1-white.svg" alt="">Editar Categorias</li>
-                    <li id="edit-gods"><img src="../assets/icons/icons8-thor.svg" alt="">Editar deuses</li>
-                    <li id="logout"><img src="../assets/icons/logout-white.svg" alt="">Sair</li>
-
                 </ul>
             </aside>
            
@@ -53,28 +45,22 @@ export function redirectToMenuAdmPage() {
     window.dispatchEvent(eventStateChange);
 }
 
-// import { addUniqueEventListener } from "../utils/event-listener.js";
-// import { addEventsToHeader } from "../index.js";
-// import { redirectToMenuAdmPage } from "./adm_perfil_sidebar.js";
+export function insertMenuItems(){
+    const div = document.querySelector(".sidebar-options-adm");
+    div.innerHTML = "";
+    if (document.cookie.indexOf("session=") !== -1) {
+        div.innerHTML = `
+            <li id="gods-page"><img src="../assets/icons/icons8-thor.svg" alt="">Deuses</li>
+            <li id="categories-page"><img src="../assets/icons/categories.svg" alt="">Categorias</li>
+            <li id="edit-profile"><img src="../assets/icons/edit-profile-v1-white.svg" alt="">Editar perfil</li>
+            <li id="change-password"><img src="../assets/icons/padlock-v2-white.svg" alt="">Mudar senha</li>
+            <li id="edit-categories"><img src="../assets/icons/cards-bold-v1-white.svg" alt="">Editar Categorias</li>
+            <li id="edit-gods"><img src="../assets/icons/icons8-thor.svg" alt="">Editar deuses</li>
+            <li id="logout"><img src="../assets/icons/logout-white.svg" alt="">Sair</li>`
+    }else{
+        div.innerHTML = `
+        <li id="gods-page"><img src="../assets/icons/icons8-thor.svg" alt="">Deuses</li>
+        <li id="categories-page"><img src="../assets/icons/categories.svg" alt="">Categorias</li>`
+    }
+}
 
-// function addEventsToMenuPage() {
-//     addEventsToHeader();
-//     const pageIcon = document.querySelector("#home-page");
-//     addUniqueEventListener(pageIcon, "click", () => {
-//         ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
-//         ///redirectToMyPrincipal();
-//         redirectToAllCategories();
-//     });
-
-//     const godIcon = document.querySelector("#gods-page");
-//     addUniqueEventListener(godIcon, "click", () => {
-//         //redirectToGodDetailsPage();
-//         redirectToAllGods("Allgods");
-//     });
-
-//     const categoriesIcon = document.querySelector("#categories-page");
-//     addUniqueEventListener(categoriesIcon, "click", () => {
-//         //redirectToMyPrincipal();
-//         redirectToAllCategories();
-//     });
-// }
