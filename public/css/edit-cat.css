@@ -326,6 +326,59 @@ relacionada aquele elemento
    /* border-radius: 2rem; */
 }
 
+ .p3-background{	
+     width: 90rem;
+     height: 48rem;
+     border-radius:2.5rem;
+     background-color: var(--color-bg-backInput);
+     gap:3rem;
+ }
+ .nome-categoria{
+    gap:3rem;
+ }
+ .nome-categoria>input{
+    width:36.8125rem ;
+    height:4.875rem ;
+    font-size: 2.5rem;
+    font-weight: bold;
+    border-radius: 0.625rem;
+    background-color: #d9d9d9;
+    color: var(--color-font-placeholder);
+ }
+ 
+ .nome-categoria>input::placeholder{
+    font-size: 2.25rem;
+    color: var(--color-font-placeholder);
+    padding-left: 2rem;
+    font-weight: bold;
+    text-justify:auto;
+ }
+ #Cancelar{
+    background-color:var(--color-bg-cancel) ;
+ }
+ #Cancelar:hover{
+    background-color: var(--color-bg-cancel-hover);
+ }
+ #Adicionar{
+    background-color: var(--color-bg-button);
+ }
+ #Adicionar:hover{
+    background-color: var(--color-bg-button-hover)  ;
+ }
+.button-cancelar, .button-adicionar{
+    width:36.8125rem ;
+    height:4.875rem ;
+    height: calc(100vh - var(--height-header));
+    width: 100%;
+}
+
+.container-edit-category{
+   width: 100%;
+   height: 100%;
+   justify-content: center;
+   /* border-radius: 2rem; */
+}
+
 .container-edit-cat{	
    width: 80rem;
    height: 45rem;
@@ -419,7 +472,7 @@ relacionada aquele elemento
     border-style: none;
     box-shadow: 0.2rem 0.2rem 0.5rem 0.4rem #00000040;
 }
- 
+ /*fazer arrows*/
 
 #insert-file-btn-cat{
     display: none;

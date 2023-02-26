@@ -46,120 +46,168 @@ relacionada aquele elemento
 @font-face {
 	font-family: "Bluu Bold";
 	src: url("../assets/fonts/bluu-next/BluuNext-Bold.otf") format("opentype");
-  }
+}
 
 @font-face {
 	font-family: "Bluu Bolditalic";
 	src: url("../assets/fonts/bluu-next/BluuNext-Bolditalic.otf") format("opentype");
-  }
+}
 
-  @font-face {
+@font-face {
 	font-family: "Bluu Titling";
 	src: url("../assets/fonts/bluu-next/BluuNext-Titling.otf") format("opentype");
-  }
+}
 
- /************************************************
+/************************************************
 		STYLING GLOBAL
 ************************************************/
 /*Mantenha aqui sempre 10px*/
 html {
 	font-size: 10px;
-  }
-
-  
+}
 
 
-:root{
+
+
+:root {
 	/**/
-	--color-white:#ffffff;
-	--color-black:#000000;
+	--color-white: #ffffff;
+	--color-black: #000000;
 	/*Background colors*/
-	--color-bg-header:#140a3db8; /*add opacity: 0.72*/
-	--color-bg-forms-emphasis:#140A3D;/*used in the forms emphasis*/
-	--color-bg-button:#140A3D; /*used in the buttons of 'atualizar','confirmar', etc*/
-	--color-bg-button-hover:#2f1a83; /*'atualizar','confirmar', etc with hover effect*/
-	
-	--color-bg-cancel:#931212;/*used in the buttons of 'cancelar'*/
-	--color-bg-cancel-hover:#b11616;/*used in the buttons of 'cancelar'*/
-	
-	--color-bg-arrow-:#ffffff;/*used in arrow categories */
-	--color-bg-arrow-hover:#ff8e01;/*used in arrow categories with hover*/
+	--color-bg-header: #140a3db8;
+	/*add opacity: 0.72*/
+	--color-bg-forms-emphasis: #140A3D;
+	/*used in the forms emphasis*/
+	--color-bg-button: #140A3D;
+	/*used in the buttons of 'atualizar','confirmar', etc*/
+	--color-bg-button-hover: #2f1a83;
+	/*'atualizar','confirmar', etc with hover effect*/
 
-	--color-bg-category-1-100p:#815604; /*nature 100% */
-	--color-bg-category-1-70p: #815604b3; /*nature 70% */
-	--color-bg-category-1-40p: #81560466; /*nature 40% */
-	
-	--color-bg-category-2-100p:#0B264F; /*technology 100% */
-	--color-bg-category-2-70p:#0b264fb3; /*technology 70% */
-	
-	--color-bg-category-3-100p:#024324 ; /*health 100% */
-	--color-bg-category-3-70p: #024324b3 ; /*health 70% */
-	
-	--color-bg-category-4-100p:#43064E; /*chaos 100 - 70% */
-	--color-bg-category-4-70p:#43064Eb3; /*chaos 70% */
-	
-	--color-bg-category-5-100p:#6C0000; /*food 100% */
-	--color-bg-category-5-70p:#6C0000b3; /*food 70% */
-	--color-bg-input:#1b0e4ee6;
-	--color-bg-backInput: #d9d9d94d ;/*backInput 30% */
-	
+	--color-bg-cancel: #931212;
+	/*used in the buttons of 'cancelar'*/
+	--color-bg-cancel-hover: #b11616;
+	/*used in the buttons of 'cancelar'*/
+
+	--color-bg-arrow-: #ffffff;
+	/*used in arrow categories */
+	--color-bg-arrow-hover: #ff8e01;
+	/*used in arrow categories with hover*/
+
+	--color-bg-category-1-100p: #815604;
+	/*nature 100% */
+	--color-bg-category-1-70p: #815604b3;
+	/*nature 70% */
+	--color-bg-category-1-40p: #81560466;
+	/*nature 40% */
+
+	--color-bg-category-2-100p: #0B264F;
+	/*technology 100% */
+	--color-bg-category-2-70p: #0b264fb3;
+	/*technology 70% */
+
+	--color-bg-category-3-100p: #024324;
+	/*health 100% */
+	--color-bg-category-3-70p: #024324b3;
+	/*health 70% */
+
+	--color-bg-category-4-100p: #43064E;
+	/*chaos 100 - 70% */
+	--color-bg-category-4-70p: #43064Eb3;
+	/*chaos 70% */
+
+	--color-bg-category-5-100p: #6C0000;
+	/*food 100% */
+	--color-bg-category-5-70p: #6C0000b3;
+	/*food 70% */
+	--color-bg-input: #1b0e4ee6;
+	--color-bg-backInput: #d9d9d94d;
+	/*backInput 30% */
+
 	/*Font colors*/
-	--color-fonts:#ffffff;
-	--color-font-placeholder:#696767;
+	--color-fonts: #ffffff;
+	--color-font-placeholder: #696767;
 
 	/*Fonts sizes*/
 	/* 1 rem = 10px */
-	--size-font-biggest:15.0rem;
-	--size-font-t1:9.0rem;
-	--size-font-t2:5.0rem; /*tittle card*/
-	--size-font-t3:4.5rem; /*subtittle card*/
-	--size-font-t4:4.0rem; /*inputs emphasis, ex. 'selecionar categoria', subsubtittle card*/
-	--size-font-t5:3.5rem; /*inputs e botoes*/
-	--size-font-t6:3.0rem; 
-	--size-font-t7:2.5rem; /*Description card*/
-	--size-font-t8:2.0rem; /*text card god's description*/
-	--size-font-t9:1.6rem; /*text card god's description*/
-	
-	
+	--size-font-biggest: 15.0rem;
+	--size-font-t1: 9.0rem;
+	--size-font-t2: 5.0rem;
+	/*tittle card*/
+	--size-font-t3: 4.5rem;
+	/*subtittle card*/
+	--size-font-t4: 4.0rem;
+	/*inputs emphasis, ex. 'selecionar categoria', subsubtittle card*/
+	--size-font-t5: 3.5rem;
+	/*inputs e botoes*/
+	--size-font-t6: 3.0rem;
+	--size-font-t7: 2.5rem;
+	/*Description card*/
+	--size-font-t8: 2.0rem;
+	/*text card god's description*/
+	--size-font-t9: 1.6rem;
+	/*text card god's description*/
+
+
 	/*Icons height*/
-	--size-icon-bigger:12.5rem;
-	--size-icon-medium:5.0rem; /*table, perfil*/
-	--size-icon-small:3.5rem; /*search*/
-	--size-icon-smallest:2.0rem; /*search*/
-	
-	
+	--size-icon-bigger: 12.5rem;
+	--size-icon-medium: 5.0rem;
+	/*table, perfil*/
+	--size-icon-small: 3.5rem;
+	/*search*/
+	--size-icon-smallest: 2.0rem;
+	/*search*/
+
+
 	/*button dimension*/
 	--height-button: 8.2rem;
-	--width-button:28.0rem;
-	--radius-button:1.5rem;
+	--width-button: 28.0rem;
+	--radius-button: 1.5rem;
 
 	/*forms dimensions*/
-	--height-form-bigger:70.0rem;/*maybe we should use % instead px*/
-	--width-form-bigger:120.0rem;/*maybe we should use % instead px*/
-	--height-form-smaller:50.0rem;/*maybe we should use % instead px*/
-	--width-form-smaller:70.0rem;/*maybe we should use % instead px*/
-	
+	--height-form-bigger: 70.0rem;
+	/*maybe we should use % instead px*/
+	--width-form-bigger: 120.0rem;
+	/*maybe we should use % instead px*/
+	--height-form-smaller: 50.0rem;
+	/*maybe we should use % instead px*/
+	--width-form-smaller: 70.0rem;
+	/*maybe we should use % instead px*/
+
 	/*@autor:letonio (esses valores de width-input estavam muito grandes, modifiquei)*/
 	/*input forms dimensions*/
-	--height-input-bigger:3.0rem;/*maybe we should use % instead px*/
-	--width-input-bigger:50.0rem;/*maybe we should use % instead px*/
-	--height-input-smaller:2.0rem;/*maybe we should use % instead px*/
-	--width-input-smaller:23.0rem;/*maybe we should use % instead px*/
-	
+	--height-input-bigger: 3.0rem;
+	/*maybe we should use % instead px*/
+	--width-input-bigger: 50.0rem;
+	/*maybe we should use % instead px*/
+	--height-input-smaller: 2.0rem;
+	/*maybe we should use % instead px*/
+	--width-input-smaller: 23.0rem;
+	/*maybe we should use % instead px*/
+
 	/*Images height*/
-	--height-img-god-bigger:50.0rem;/*cards with descriptions*/
-	--width-img-god-bigger:31.2rem;/*cards with descriptions*/
-	--height-img-god-smaller:30.0rem;/*categories page (4 images)*/
-	--width-img-god-smaller:18.5rem;/*categories page (4 images)*/
-	
-	--height-img-building-bigger:60.0rem;/*image of temple with category name*/
-	--width-img-building-bigger:54.0rem;/*image of temple with category name*/
-	--height-img-building-smaller:40.0rem;/*image of temple with category name*/
-	--width-img-building-smaller:36.0rem;/*image of temple with category name*/
-	
+	--height-img-god-bigger: 50.0rem;
+	/*cards with descriptions*/
+	--width-img-god-bigger: 31.2rem;
+	/*cards with descriptions*/
+	--height-img-god-smaller: 30.0rem;
+	/*categories page (4 images)*/
+	--width-img-god-smaller: 18.5rem;
+	/*categories page (4 images)*/
+
+	--height-img-building-bigger: 60.0rem;
+	/*image of temple with category name*/
+	--width-img-building-bigger: 54.0rem;
+	/*image of temple with category name*/
+	--height-img-building-smaller: 40.0rem;
+	/*image of temple with category name*/
+	--width-img-building-smaller: 36.0rem;
+	/*image of temple with category name*/
+
 	/*header height*/
-	--height-header:10.0rem;/**/
-	--width-header:100%;/**/
+	--height-header: 10.0rem;
+	/**/
+	--width-header: 100%;
+	/**/
 }
 
 
@@ -168,9 +216,9 @@ html {
 	padding: 0;
 	box-sizing: border-box;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
-	color:var(--color-fonts);
+	color: var(--color-fonts);
 	font-size: 1.0rem;
-	
+
 }
 
 
@@ -186,13 +234,13 @@ body {
 /************************************************
 		STYLING TAGS BY NAME
 ************************************************/
-input{
+input {
 	background-color: var(--color-bg-input);
 	border-radius: 1.5rem;
 	height: var(--height-input-smaller);
 }
 
-button{
+button {
 	height: var(--height-button);
 	width: var(--width-button);
 	border-radius: var(--radius-button);
@@ -200,57 +248,65 @@ button{
 	cursor: pointer;
 }
 
-button:hover{
+button:hover {
 	background-color: var(--color-bg-button-hover);
 }
+
 /************************************************
 		STYLING GENERAL CLASSES
 ************************************************/
-.flex-col-center{
+.flex-col-center-category {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
 }
-.flex-row-center{
+
+.flex-row-center {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 }
-.flex-row-between{
+
+.flex-row-between {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 }
-.flex-center-center{
+
+.flex-center-center {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-.cancel-button{
+
+.cancel-button {
 	background-color: var(--color-bg-cancel);
 }
-.cancel-button:hover{
+
+.cancel-button:hover {
 	background-color: var(--color-bg-cancel-hover);
 }
 
 
-h1{
+h1 {
 	font-family: 'Bluu Bold', Courier, monospace;
 	font-size: var(--size-font-t1);
-	color:var(--color-fonts);
+	color: var(--color-fonts);
 }
 
-h2{
+h2 {
 	font-family: 'Bluu Bold', Times, serif;
 	font-size: var(--size-font-t2);
 }
-h3{
+
+h3 {
 	font-family: 'Bluu Bolditalic', Times, serif;
 	font-size: var(--size-font-t3);
 }
-h4{
+
+h4 {
 	font-family: 'Bluu Titling', Times, serif;
 	font-size: var(--size-font-t4);
 }
@@ -259,32 +315,35 @@ h4{
 		STYLING HEADER COMPONENTS
 ************************************************/
 
-header{
+header {
 	height: var(--height-header);
 	width: var(--width-header);
 	background-color: var(--color-bg-header)
 }
 
 
-img{
+img {
 	height: var(--size-icon-medium);
 }
-#logo{
+
+#logo {
 	height: var(--size-icon-bigger);
 	cursor: pointer;
 }
-.container-search{
+
+.container-search {
 	background-color: var(--color-bg-arrow-);
 	border-radius: 5.0rem;
 	height: 4.0rem;
 	border: solid .3rem var(--color-black);
 	margin-left: 3.5rem;
 	padding: 0 2.0rem 0 2.0rem;
-	
+
 }
-.search-input{
+
+.search-input {
 	padding: 1.0rem;
-	color:var(--color-black);
+	color: var(--color-black);
 	font-size: var(--size-font-t9);
 	width: var(--width-input-smaller);
 	/*autor@letonio: para corrigir problema que a barra de 
@@ -295,19 +354,23 @@ img{
 	height: var(--height-input-smaller);
 	border: none;
 }
-.search-input:focus{
-    box-shadow: 0 0 0 0;
-    outline: 0;
+
+.search-input:focus {
+	box-shadow: 0 0 0 0;
+	outline: 0;
 }
-.search-icon{
+
+.search-icon {
 	height: var(--size-icon-smallest);
 }
-#profile-icon{
+
+#profile-icon {
 	margin-right: 2.5rem;
 	height: 4.5rem;
 	cursor: pointer;
 }
-#menu-icon{
+
+#menu-icon {
 	margin-left: 2.5rem;
 	margin-right: 2.5rem;
 }
@@ -315,110 +378,351 @@ img{
 /************************************************
 		STYLING MAIN COMPONENTS
 ************************************************/
-main{
+
+
+main {
 	height: calc(100vh - var(--height-header));
 	width: 100%;
 }
-#temple{
+
+.main {
+	height: calc(100vh - var(--height-header));
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#temple {
 	width: var(--width-img-building-smaller);
 	height: var(--height-img-building-smaller);
 }
-.container-carousel{
-	width: 100%;
+
+.container-carousel-category {
+	width: 98%;
 	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-flow: column;
 }
 
-.carousel{
-	width: 100%;
-}
-.container-arrow{
+.container-arrow {
 	width: 15%;
 	height: 7.0rem;
 }
-/*fazer arrows*/
-/*@autor:letonio (mudei a dimensão da seta e adicionei cursor:pointer)*/
-.category-arrow{
+
+.category-arrow {
 	height: 10.0rem;
 	cursor: pointer;
 }
-/*
-.category-arrow:hover,.category-arrow:active{
-	background-color: var(--color-bg-arrow-hover);
-	background-color: none;
-	cursor: pointer;
+
+.category-arrow-left {
+	background-image: url("../assets/icons/arrow-left-white.svg");
 }
 
-*/
-
-/*@autor:letonio precisei criar categorias separadas para cada seta*/
-.category-arrow-left{
-background-image: url("../assets/icons/arrow-left-white.svg");
-}
-.category-arrow-left:hover{
+.category-arrow-left:hover {
 	background-image: url("../assets/icons/arrow-left-orange.svg");
-	}
-	
+}
 
-.container-temples{
-	width: 70%;
+.container-temples {
+	width: 100rem;
+	max-width: 100rem;
 	height: var(--height-img-building-smaller);
 	position: relative;
 	display: flex;
 	align-items: center;
-	margin-top: 5.0rem;
+	margin: 2% 2% 2% 5%;
+	justify-content: center;
 	cursor: pointer;
+	transition: transform .4s;
 }
-.temple{
+
+.temple {
 	position: absolute;
 	left: 0;
 }
-.temple-legend{
-	max-width: 62%; /*change this*/
-	position:absolute;
+
+.container-temples:hover {
+	transform: scale(1.1);
+	filter: brightness(130%);
+}
+
+.temple-legend {
+	max-width: 62%;
+	/*change this*/
+	position: absolute;
 	right: 0;
-	margin-right: 5.0rem;
+	margin-right: -3%;
 	font-family: 'MedievalSharp', cursive;
 }
-/* outline: .2rem solid red; */
 
-.container-circles{
+.container-circles {
 	width: auto;
-	margin: 4.0rem .0rem;
-	
+	margin: 10% 35% 0rem;
 }
-.circle{
+
+.circle {
 	height: var(--size-icon-small);
-	width:  var(--size-icon-small);
+	width: var(--size-icon-small);
 	background-color: var(--color-white);
 	border-radius: 50%;
 	border: none;
 	pointer-events: none;
-	margin: 0rem 1rem; 
+	margin: 0rem 1rem;
 }
-.circle-orange{
+
+.circle-orange {
 	background-color: var(--color-bg-arrow-hover);
 }
 
-/************************************************
-		STYLING FOOTER COMPONENTS
-************************************************/
+/* Tela maior ou igual a 900px */
+@media screen and (min-width: 800px) and (max-width: 1129px) {
+	.main {
+		height: calc(100vh - var(--height-header));
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 
+	#temple {
+		width: 26rem;
+		height: 32rem;
+	}
 
-/* MEDIA QUERY*/
+	.container-carousel-category {
+		width: 90%;
+		margin: 0 auto 20%;
+	}
 
-@media (max-width:800px) {
-	html {
-		font-size: 10px;
-		/*font-size: 7px*/
-	  }
-  }
-/*
-  @media (max-width:700px) {
-	
-  }
+	.category-arrow {
+		height: 8.5rem;
+		cursor: pointer;
+	}
 
-  @media (max-width:500px) {
-	
-  }
-  */
+	.container-arrow {
+		width: 12%;
+	}
 
+	.container-temples {
+		width: 60rem;
+		height: var(--height-img-building-smaller);
+		margin: 2% 2% 2% 4%;
+	}
+
+	.temple-legend {
+		font-size: 6rem;
+		padding: 0 0 0 2%;
+	}
+
+	.container-circles {
+		margin: 8% 30% 0rem;
+	}
+
+	.circle {
+		height: 3rem;
+		width: 3rem;
+		background-color: var(--color-white);
+		border-radius: 50%;
+		border: none;
+		pointer-events: none;
+		margin: 0rem 1rem;
+	}
+
+	.circle-orange {
+		background-color: var(--color-bg-arrow-hover);
+	}
+}
+
+@media screen and (min-width: 500px) and (max-width: 799px) {
+	.main {
+		height: calc(100vh - var(--height-header));
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	#temple {
+		width: 22rem;
+		height: 30rem;
+	}
+
+	.container-carousel-category {
+		width: 90%;
+		margin: 0 auto 20%;
+	}
+
+	.category-arrow {
+		height: 7rem;
+		cursor: pointer;
+	}
+
+	.container-arrow {
+		width: 12%;
+	}
+
+	.container-temples {
+		width: 36rem;
+		height: var(--height-img-building-smaller);
+		margin: 2% 0 2% 4%;
+	}
+
+	.temple-legend {
+		font-size: 3.6rem;
+		padding: 0 0 0 15%
+	}
+
+	.container-circles {
+		margin: 8% 30% 0rem;
+	}
+
+	.circle {
+		height: 2.3rem;
+		width: 2.3rem;
+		background-color: var(--color-white);
+		border-radius: 50%;
+		border: none;
+		pointer-events: none;
+		margin: 0rem 1rem;
+	}
+
+	.circle-orange {
+		background-color: var(--color-bg-arrow-hover);
+	}
+}
+
+@media screen and (min-width: 350px) and (max-width: 499px) {
+	.main {
+		height: calc(100vh - var(--height-header));
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	#temple {
+		width: 22rem;
+    	height: 30rem;
+    	align-self: baseline;
+	}
+
+	.container-carousel-category {
+		width: 90%;
+		margin: 0 auto 20%;
+	}
+
+	.category-arrow {
+		height: 5rem;
+		cursor: pointer;
+	}
+
+	.container-arrow {
+		width: 12%;
+		margin-bottom: 25%;
+	}
+
+	.container-temples {
+		width: 22rem;
+		height: var(--height-img-building-smaller);
+		margin: 2% 0 2% 4%;
+	}
+
+	.container-temples:active {
+		transform: scale(1.1);
+		filter: brightness(130%);
+	}
+
+	.temple-legend {
+		font-size: 2.8rem;
+		align-self: end;
+		margin: 0 20% 10% 20%;
+		text-align: center;
+	}
+
+	.container-circles {
+		margin: 8% 30% 0rem;
+	}
+
+	.circle {
+		height: 1.8rem;
+		width: 1.8rem;
+		background-color: var(--color-white);
+		border-radius: 50%;
+		border: none;
+		pointer-events: none;
+		margin: 0rem 1rem;
+	}
+
+	.circle-orange {
+		background-color: var(--color-bg-arrow-hover);
+	}
+}
+
+@media screen and (min-width: 300px) and (max-width: 349px) {
+	.main {
+		height: calc(100vh - var(--height-header));
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	#temple {
+		width: 22rem;
+    	height: 30rem;
+    	align-self: baseline;
+	}
+
+	.container-carousel-category {
+		width: 90%;
+		margin: 0 auto 20%;
+	}
+
+	.category-arrow {
+		height: 5rem;
+		cursor: pointer;
+	}
+
+	.container-arrow {
+		width: 12%;
+		margin-bottom: 25%;
+	}
+
+	.container-temples {
+		width: 22rem;
+		height: var(--height-img-building-smaller);
+		margin: 2% 0 2% 4%;
+	}
+
+	.container-temples:active {
+		transform: scale(1.1);
+		filter: brightness(130%);
+	}
+
+	.temple-legend {
+		font-size: 2.8rem;
+		align-self: end;
+		margin: 0 20% 10% 20%;
+		text-align: center;
+	}
+
+	.container-circles {
+		margin: 8% 30% 0rem;
+	}
+
+	.circle {
+		height: 1.8rem;
+		width: 1.8rem;
+		background-color: var(--color-white);
+		border-radius: 50%;
+		border: none;
+		pointer-events: none;
+		margin: 0rem 1rem;
+	}
+
+	.circle-orange {
+		background-color: var(--color-bg-arrow-hover);
+	}
+}

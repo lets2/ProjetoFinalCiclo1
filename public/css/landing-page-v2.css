@@ -327,6 +327,7 @@ relacionada aquele elemento
     width: 16rem;
 	z-index: 2;/*@author:letonio - adicionei um z-index maior para poder clicar no botao*/
 }
+
  /*@author: daniel*/
 #button:hover{
 	color: var(--color-black);
@@ -383,9 +384,6 @@ relacionada aquele elemento
 
 /* @author:Daniel alterado*/
 @media only screen and (max-width: 1100px) {
-	* {
-	  font-size: 0.8rem;
-	}
 
 	.container-total {
 	  padding: 1rem;
@@ -407,10 +405,7 @@ relacionada aquele elemento
   } 
 
   @media only screen and (max-width: 900px) {
-	* {
-	  font-size: 0.8rem;
-	}
-
+	
 	.container-total {
 	  padding: 1rem;
 	}
@@ -431,10 +426,7 @@ relacionada aquele elemento
   } 
 
   @media only screen and (max-width: 800px) {
-	* {
-	  font-size: 0.8rem;
-	}
-
+	
 	.container-total {
 	  padding: 1rem;
 	}
@@ -455,9 +447,6 @@ relacionada aquele elemento
   } 
 
   @media only screen and (max-width: 700px) {
-	* {
-	  font-size: 0.8rem;
-	}
 
 	.container-total {
 	  padding: 1rem;
@@ -465,6 +454,7 @@ relacionada aquele elemento
 	
 	#main-tittle {
 	  font-size: 4rem;
+	  margin-left: 10rem;
 	}
 	
 	#subtittle {
