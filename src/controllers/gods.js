@@ -2,6 +2,7 @@ const { json } = require("express");
 const godsService = require("../services/gods.js");
 const path = require("path");
 const TAG = "god controller: ";
+const fs = require("fs"); //vou usar para deletar imagem
 
 //----------------------------------------
 //Routes related to ADM PERMISSIONS
@@ -381,6 +382,14 @@ exports.deleteGodById = async (req, res) => {
         //response.data = serviceResponse.rows;
         response.data = serviceResponse; //this return just one object {name:,url:}
 
+        // teoricamente, se deu certo, response.data possui um array
+        //com o elemento que foi deletado, vou add uma função de deletar o arquivo
+        //da umagem
+        // console.log("ESSE EH O serviceResponse:", serviceResponse);
+        if (serviceResponse) {
+            excluiArquivoDaImagemDeCategoria(serviceResponse);
+        }
+
         res.status(200).json(response);
         console.timeEnd(`deleteGodById()${milliseconds}`);
     } catch (error) {
@@ -409,4 +418,18 @@ function IsNotArray(_data) {
         return false;
     }
     return true;
+}
+
+//colocando aqui função de apagar arquivo:
+function excluiArquivoDaImagemDeCategoria(serviceResponse) {
+    console.log("Apagarei esse arquivo aqui:", serviceResponse[0].src_img);
+    const uploadDir = path.join(__dirname, "../../public", "assets", "uploads");
+    const filePath = path.join(uploadDir, serviceResponse[0].src_img);
+    console.log("OLHA O PATH:", filePath);
+    fs.unlink(filePath, (error) => {
+        if (error && error.code !== "ENOENT") {
+            // Se houver um erro que não seja o arquivo não encontrado, retorna um erro interno do servidor
+            throw "ERRO AO TENTAR DELETAR, ARQUIVO NAO ENCONTRADO";
+        }
+    });
 }
