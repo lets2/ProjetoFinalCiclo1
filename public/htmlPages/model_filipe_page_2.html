@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GODpedia</title>
-    <link rel="stylesheet" href="../css/filipe_page_two.css">
+    <link rel="stylesheet" href="../css/add-category.css">
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,26 +30,44 @@
         </div>
     </header>
     <main>
-        <div class="container-carousel flex-center-center">
+        <div class="container-add-category flex-center-center">
+            <div class="container-add-cat flex-row-center"> 
 
-            <div class="retangulo">
-            </div>
-
-            <div class="login-background flex-col-justify-center"> 
-
-                <div class="nome-categoria cor-categoria flex-col-center">
-
-                    <input type="text" placeholder="Nome da categoria">
-                    <input type="text" placeholder="Cor da categoria">
-
+                <div id="box-preview-img-cat" class="flex-col-center">
+                    <div>
+                        <img id="preview-img-cat" src="../assets/images/exampleTemple.png" alt="">
+                    </div>
+                    
+                    <input id="insert-file-btn-cat" type="file" name="file" accept="image/png, image/jpeg, image/jpg">
+                    <label for="insert-file-btn-cat" id="custom-file-upload">Escolha um arquivo</label>
+                    <p id="message-input-file-cat"></p>
                 </div>
 
-                <div class="button-cancelar button-adicionar flex-row-between">
+                <div class="form-edit-category nome-categoria cor-categoria">
 
-                    <button id="Cancelar" type="submit">Cancelar</button>
-                    <button id="Adicionar" type="submit">Adicionar</button>
+                    <input id="new-name-category" type="text" placeholder="Nome da categoria">
+                    <select name="select-color-category" id="select-color-category">
+                        <option value="#140A3D" selected disabled>Cor:</option>
+                        <option value="#140A3D">Azul escuro</option>
+                        <option value="#0B264F">Azul claro</option>
+                        <option value="#024324">Verde</option>
+                        <option value="#ff8e01">Laranja</option>
+                        <option value="#815604">Amarelo</option>
+                        <option value="#931212">Vermelho</option>   
+                        <option value="#6C0000">Vinho</option>
+                        <option value="#43064E">Roxo</option>
+                        <option value="#000000">Preto</option>
+                    </select>
 
+                    <div class=" box-btns-edit-cat flex-row-between">
+
+                        <button id="cancel-cat" class="btns-edit-cat" type="submit">Cancelar</button>
+                        <button id="add-category" class="btns-edit-cat" btype="submit">Adicionar</button>
+
+                    </div>
+                    
                 </div>
+
             </div>
         </div>
     </main>

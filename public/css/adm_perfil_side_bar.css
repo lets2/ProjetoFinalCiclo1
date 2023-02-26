@@ -225,7 +225,6 @@ button:hover{
 	align-items: center;
 	justify-content: space-between;
 }
-
 .flex-row-center{
 	display: flex;
 	flex-direction: row;
@@ -431,7 +430,7 @@ aside > figure > h2{
 .sidebar-options-adm{
 	height: 70%;
 	width: 100%;
-	padding: 2.0rem 3.0rem;
+	padding: 1.0rem 3.0rem;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
