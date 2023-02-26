@@ -435,7 +435,6 @@ aside > figure > h2{
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	justify-content: space-around;
 }
 
 .sidebar-options-adm > li{
@@ -443,6 +442,7 @@ aside > figure > h2{
 	flex-direction: row;
 	align-items: center;
 	font-size: var(--size-font-t8);
+	padding: 1rem 0rem;
 	cursor: pointer;
 }
 .sidebar-options-adm img {
