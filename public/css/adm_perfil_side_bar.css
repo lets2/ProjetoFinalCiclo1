@@ -431,19 +431,29 @@ aside > figure > h2{
 .sidebar-options-adm{
 	height: 70%;
 	width: 100%;
-	padding: 2.0rem 4.0rem;
+	padding: 2.0rem 3.0rem;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 }
 
 .sidebar-options-adm > li{
+	width: 100%;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	font-size: var(--size-font-t8);
 	padding: 1rem 0rem;
 	cursor: pointer;
+}
+
+.sidebar-options-adm > li:hover{
+	background-color:  #1f105cfe;
+	/* scale: 1.1; */
+	/* outline: 2px solid rgb(255, 255, 255);; */
+	/* border-bottom: 2px solid rgb(255, 255, 255);
+	border-top: 2px solid rgb(255, 255, 255); */
+	
 }
 .sidebar-options-adm img {
 	height: var(--size-icon-small);
