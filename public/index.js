@@ -311,6 +311,8 @@ function addEventsToAdmMenuPage() {
     addEventsToHeader();
 
     const objMenuAdm = [
+        {label: "#gods-page", handle: redirectToAllGods},
+        {label: "#categories-page", handle: redirectToAllCategories},
         { label: "#edit-profile", handle: redirectToRegisterUser },
         { label: "#change-password", handle: redirectToEditPasswd },
         { label: "#edit-categories", handle: redirectToTableEditCategories },

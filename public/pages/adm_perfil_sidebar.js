@@ -24,9 +24,10 @@ export function MenuAdm() {
             <aside class="sidebar-menu-adm flex-col-between">
                 <figure class="flex-col-center">
                     <img id="profile-adm-icon" src="../assets/icons/profile.svg" alt="profile icon">
-                    <h2 id="adm-name">Administrador</h2>
                 </figure>
-                <ul class="sidebar-options">
+                <ul class="sidebar-options-adm">
+                    <li id="gods-page"><img src="../assets/icons/icons8-thor.svg" alt="">Deuses</li>
+                    <li id="categories-page"><img src="../assets/icons/categories.svg" alt="">Categorias</li>
                     <li id="edit-profile"><img src="../assets/icons/edit-profile-v1-white.svg" alt="">Editar perfil</li>
                     <li id="change-password"><img src="../assets/icons/padlock-v2-white.svg" alt="">Mudar senha</li>
                     <li id="edit-categories"><img src="../assets/icons/cards-bold-v1-white.svg" alt="">Editar Categorias</li>
@@ -51,3 +52,29 @@ export function redirectToMenuAdmPage() {
     const eventStateChange = CriaEventStateChange("/adm/a1");
     window.dispatchEvent(eventStateChange);
 }
+
+// import { addUniqueEventListener } from "../utils/event-listener.js";
+// import { addEventsToHeader } from "../index.js";
+// import { redirectToMenuAdmPage } from "./adm_perfil_sidebar.js";
+
+// function addEventsToMenuPage() {
+//     addEventsToHeader();
+//     const pageIcon = document.querySelector("#home-page");
+//     addUniqueEventListener(pageIcon, "click", () => {
+//         ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
+//         ///redirectToMyPrincipal();
+//         redirectToAllCategories();
+//     });
+
+//     const godIcon = document.querySelector("#gods-page");
+//     addUniqueEventListener(godIcon, "click", () => {
+//         //redirectToGodDetailsPage();
+//         redirectToAllGods("Allgods");
+//     });
+
+//     const categoriesIcon = document.querySelector("#categories-page");
+//     addUniqueEventListener(categoriesIcon, "click", () => {
+//         //redirectToMyPrincipal();
+//         redirectToAllCategories();
+//     });
+// }
