@@ -409,17 +409,17 @@ o menu com uma proporção agradável)*/
 	color:var(--color-white);
 }
 aside > figure{
-	height: 35%;
-	width: 100%;
+	/* height: 35%; */
+	width: 70%;
 	padding: 2.0rem;
+	border-bottom: solid 0.5rem var(--color-white);
 }
 aside > figure > h2{
 	width: 80%;
 	padding: 2.0rem 0.0rem 2.0rem;
-	border-bottom: solid 0.5rem var(--color-white);
 }
 #profile-adm-icon{
-	height:var(--size-icon-bigger);
+	height:9rem;
 }
 
 #adm-name{
@@ -428,8 +428,8 @@ aside > figure > h2{
 	font-family:Arial, Helvetica, sans-serif;
 }
 
-.sidebar-options{
-	height: 65%;
+.sidebar-options-adm{
+	height: 70%;
 	width: 100%;
 	padding: 2.0rem 4.0rem;
 	display: flex;
@@ -437,14 +437,15 @@ aside > figure > h2{
 	align-items: flex-start;
 	justify-content: space-around;
 }
-.sidebar-options > li{
+
+.sidebar-options-adm > li{
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	font-size: var(--size-font-t8);
 	cursor: pointer;
 }
-.sidebar-options img {
+.sidebar-options-adm img {
 	height: var(--size-icon-small);
 	margin-right: 2.0rem;
 }

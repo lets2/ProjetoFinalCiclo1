@@ -412,19 +412,19 @@ relacionada aquele elemento
      justify-content: space-around;
  }
  #box-menu{
-    width: 100%;
+    width: 60%;
     padding: 7.0rem 2rem 0;
     height: revert;
     justify-content: center;
  }
- 
+
  aside > figure > h2{
      width: 80%;
      padding: 2.0rem 0.0rem 2.0rem;
-     border-bottom: solid 0.5rem var(--color-white);
+     /* border-bottom: solid 0.5rem var(--color-white); */
  }
  #profile-adm-icon{
-     height:var(--size-icon-bigger);
+     height: 9rem;
  }
  
  #adm-name{

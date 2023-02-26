@@ -49,13 +49,13 @@ export function redirectToEditPasswd() {
 }
 
 import { addUniqueEventListener } from "../utils/event-listener.js";
-import { addEventsToHeader } from "../index.js";
+import { addEventsToHeader, displayWarning } from "../index.js";
 import { redirectToMenuAdmPage } from "./adm_perfil_sidebar.js";
+
 
 export function addEventsToEditPasswd(){
     addEventsToHeader();
-    console.log("entrou")
-
+   
     const cancelButton = document.querySelector(".cancel-button-passwd");
     addUniqueEventListener(cancelButton, "click", () => {
         redirectToMenuAdmPage();
@@ -72,40 +72,39 @@ export function addEventsToEditPasswd(){
             const message = document.querySelector("#message-change-passwd");
 
             if(newPassword !== newPasswdAgain){
-                message.innerHTML = "Os campos 'Nova senha' e 'Repita a nova senha' devem ser iguais!"
+                message.innerHTML = "Os campos 'Nova senha' e 'Repita a nova senha' devem ser iguais!";
+                throw "Erro: as senhas não coincidem!"
             }
-            else{
-                redirectToMenuAdmPage();
-            }
-            // await tryRegisterUser(username, oldPassword, newPassword);
-            console.log(username, oldPassword, newPassword, newPasswdAgain)
+            message.innerHTML = "";
+            const data = await tryChangePasswd(username, oldPassword, newPassword);
+
+            displayWarning(data.message); //deu tudo  certo
+            redirectToMenuAdmPage();
         } catch (error) {
-            alert("Houve esse problema", error);
-        }
-        //redirectToMenuAdmPage();
+            console.log(error);
+        } 
     });
 }
 
-async function tryRegisterUser(_username, _password, _newPassword) {
+async function tryChangePasswd(_username, _password, _newPassword) {
     const objBody = {
         username: _username,
         oldPassword: _password,
         newPassword: _newPassword,
     };
 
-    console.log(objBody, "OBJ BODY")
     try {
         const response = await fetch("http://localhost:8080/changePassword", {
         method: "PUT",
         body: JSON.stringify(objBody),
         headers: { "Content-type": "application/json; charset=UTF-8" },
         });
-
+        
         if (response.status !== 200 && response.status !== 201) {
             throw "[erro] ao tentar fazer login!";
         }
         const jsonData = await response.json();
-        console.log("CADASTRO - JSON OBTIDO:", jsonData);
+        return jsonData;
     } catch (error) {
         console.log(error, "deu ruim");
     }
