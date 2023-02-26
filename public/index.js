@@ -71,7 +71,10 @@ import {
 } from "./pages/all-categories-page.js";
 
 import GeraObjComRotas from "./pages/router.js";
-import { redirectToEditPasswd, addEventsToEditPasswd } from "./pages/edit-passwd.js";
+import {
+    redirectToEditPasswd,
+    addEventsToEditPasswd,
+} from "./pages/edit-passwd.js";
 
 //-------------------------------------------------------------
 // GLOBAL VARIABLES
@@ -275,7 +278,7 @@ function adicionaEventoNoBotaoDeLogin() {
             await tentaFazerLogin(username, password);
             redirectToMenuAdmPage();
         } catch (error) {
-            alert("Houve esse problema", error);
+            displayWarning(error);
         }
         //redirectToMenuAdmPage();
     });
@@ -313,13 +316,13 @@ function addEventsToAdmMenuPage() {
     insertMenuItems();
 
     const objMenu = [
-        {label: "#gods-page", handle: redirectToAllGods},
-        {label: "#categories-page", handle: redirectToAllCategories},
+        { label: "#gods-page", handle: redirectToAllGods },
+        { label: "#categories-page", handle: redirectToAllCategories },
     ];
 
     const objMenuAdm = [
-        {label: "#gods-page", handle: redirectToAllGods},
-        {label: "#categories-page", handle: redirectToAllCategories},
+        { label: "#gods-page", handle: redirectToAllGods },
+        { label: "#categories-page", handle: redirectToAllCategories },
         { label: "#edit-profile", handle: redirectToRegisterUser },
         { label: "#change-password", handle: redirectToEditPasswd },
         { label: "#edit-categories", handle: redirectToTableEditCategories },
@@ -329,7 +332,7 @@ function addEventsToAdmMenuPage() {
     ];
     if (document.cookie.indexOf("session=") !== -1) {
         objMenuAdm.forEach((element) => {
-            console.log("caiu opt1")
+            console.log("caiu opt1");
             const menuAdmOption = document.querySelector(element.label);
 
             addUniqueEventListener(menuAdmOption, "click", () => {
@@ -345,8 +348,6 @@ function addEventsToAdmMenuPage() {
             });
         });
     }
-
-    
 }
 
 /*@author:Gabriela - coauthor: Letônio*/
@@ -374,7 +375,25 @@ function addEventsToMenuPage() {
 }
 
 export function displayWarning(_message) {
-    alert(_message);
+    //alert(_message);
+    const bodyTag = document.querySelector("body");
+    const createTag = document.createElement("div");
+    bodyTag.appendChild(createTag);
+    createTag.classList.add("table-modal");
+
+    const message = document.createElement("p");
+    message.classList.add("modal");
+    message.innerHTML = _message;
+
+    createTag.appendChild(message);
+
+    setTimeout(function () {
+        document.querySelector(".modal").classList.add("show"); // adiciona a classe para ampliar a largura gradualmente
+    }, 10);
+
+    addUniqueEventListener(createTag, "click", () => {
+        createTag.remove();
+    });
 }
 
 /*********************************************/
@@ -429,7 +448,7 @@ async function pesquisar(texto) {
     redirectToAllGods(parametro);
 }
 // author: Gabriela
-function addEventsToRegisterUser(){
+function addEventsToRegisterUser() {
     addEventsToHeader();
 
     const cancelButton = document.querySelector(".cancel-button-register");
@@ -445,10 +464,10 @@ function addEventsToRegisterUser(){
             const email = document.querySelector("#new-email-user").value;
             const password = document.querySelector("#new-passwd-user").value;
             await tryRegisterUser(username, email, password);
-            console.log(username, email, password)
+            console.log(username, email, password);
             redirectToMenuAdmPage();
         } catch (error) {
-            alert("Houve esse problema", error);
+            displayWarning(error);
         }
     });
 }
@@ -460,12 +479,12 @@ async function tryRegisterUser(_username, _email, _password) {
         email: _email,
     };
 
-    console.log(objBody, "OBJ BODY")
+    console.log(objBody, "OBJ BODY");
     try {
         const response = await fetch("http://localhost:8080/registerAdm", {
-        method: "POST",
-        body: JSON.stringify(objBody),
-        headers: { "Content-type": "application/json; charset=UTF-8" },
+            method: "POST",
+            body: JSON.stringify(objBody),
+            headers: { "Content-type": "application/json; charset=UTF-8" },
         });
 
         if (response.status !== 200 && response.status !== 201) {
@@ -476,6 +495,4 @@ async function tryRegisterUser(_username, _email, _password) {
     } catch (error) {
         console.log(error, "deu ruim");
     }
-    
 }
-

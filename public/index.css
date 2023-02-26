@@ -68,23 +68,38 @@ p {
 .table-modal{
 	height: 100vh;;
 	width: 100vw;
-	background-color: red;
+	background-color:rgba(255, 255, 255, 0.2);
 	z-index: 4;
 	position: fixed;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	cursor: pointer;
 }
 
 .modal{
-	min-width: 40rem;
-	min-height: 40rem;
+	min-width: 25rem;
+	max-width: 30rem;
+	min-height: 30rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: blue;
+	background-color: #140a3d;
 	border-radius: 2rem;
+	font-size: 2.5rem;
+	border: 2px solid white ;
+	color: #ffffff;
+	font-weight: bold;
+	text-align: center;
+	padding: 2rem;
+	transform:  scaleX(0); /* começa com largura zero e centralizado */
+  	transition: transform 0.1s ease-out; 
 }
+
+.modal.show{
+	transform: scaleX(1); 
+}
+
 .modal p{
 	margin: 4rem;
 }
