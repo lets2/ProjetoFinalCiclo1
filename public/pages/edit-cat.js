@@ -20,17 +20,23 @@ export function EditCategory() {
         </div>
     </header>
     <main>
-        <div class="container-carousel flex-center-center">
+        <div class="container-edit-category flex-center-center">
+            <div class="container-edit-cat flex-row-center"> 
 
-            <div class="retangulo">
-            </div>
+                <div id="box-preview-img-cat" class="flex-col-center">
+                    <div id="edit-page-cat-img">
+                        <img id="preview-img-cat" src="../assets/images/exampleTemple.png" alt="">
+                    </div>
+                    
+                    <input id="insert-file-btn-cat" type="file" name="file" accept="image/png, image/jpeg, image/jpg">
+                    <label for="insert-file-btn-cat" id="custom-file-upload">Escolha um arquivo</label>
+                    <p id="message-input-file-cat"></p>
+                </div>
 
-            <div id="container-edit-category" class="p3-background flex-col-justify-center"> 
+                <div class="form-edit-category nome-categoria-edit cor-categoria-edit">
 
-                <div class="nome-categoria cor-categoria flex-col-center">
-
-                    <input id="input-cat-edit-name" type="text" placeholder="Nome da categoria">
-                    <select name="select-color-category" id="select-color-category">
+                    <input id="new-name-category" type="text" placeholder="Nome da categoria">
+                    <select name="select-color-category-edit" id="select-color-category-edit">
                         <option value="#140A3D" selected disabled>Cor:</option>
                         <option value="#140A3D">Azul escuro</option>
                         <option value="#0B264F">Azul claro</option>
@@ -42,22 +48,16 @@ export function EditCategory() {
                         <option value="#43064E">Roxo</option>
                         <option value="#000000">Preto</option>
                     </select>
-                    <div>
-                        <img id="preview-img-god" src="../assets/images/exampleTemple.png" alt="">
+
+                    <div class=" box-btns-edit-cat flex-row-between">
+
+                        <button id="cancel-cat" class="btns-edit-cat" type="submit">Cancelar</button>
+                        <button id="edit-category" class="btns-edit-cat" type="submit">Editar</button>
+
                     </div>
                     
-                    <input id="insert-file-btn" type="file" name="file" accept="image/png, image/jpeg, image/jpg">
-                    <label for="insert-file-btn" class="custom-file-upload">Escolha um arquivo</label>
-                    <p id="message-input-file"></p>
-
                 </div>
 
-                <div class="button-cancelar button-adicionar flex-row-between">
-
-                    <button id="Cancelar" type="submit">Cancelar</button>
-                    <button id="Atualizar" type="submit">Atualizar</button>
-
-                </div>
             </div>
         </div>
     </main>
@@ -79,9 +79,11 @@ import { addUniqueEventListener } from "../utils/event-listener.js";
 
 //no index, essa funcao é usada tanto para o case /editcategory, como /addcategory
 export function insertChoosedCategoryTempleImg() {
-    const fileBtn = document.querySelector("#insert-file-btn");
-    const previewImg = document.querySelector("#preview-img-god");
-    const message = document.querySelector("#message-input-file");
+    const fileBtn = document.querySelector("#insert-file-btn-cat");
+    const previewImg = document.querySelector("#preview-img-cat");
+    const message = document.querySelector("#message-input-file-cat");
+
+    message.innerHTML= "";
 
     addUniqueEventListener(fileBtn, "change", (e) => {
         if (e.target.files.length > 0) {
@@ -97,13 +99,19 @@ export function insertChoosedCategoryTempleImg() {
 }
 
 export function testInserirElementosNaEditCategoryPage(catInformation) {
-    const inputCatEditName = document.querySelector("#input-cat-edit-name");
-    // const inputCatEditColor = document.querySelector("#input-cat-edit-color");
+    const inputCatEditName = document.querySelector("#new-name-category");
+
     inputCatEditName.value = catInformation.name;
     // inputCatEditColor.value = catInformation.hex_color;
     //
+
+    const containerImgGod = document.querySelector("#edit-page-cat-img");
+    containerImgGod.innerHTML = `
+    <img src="../assets/uploads/${catInformation.src}" alt="">
+    `;
+
     const containerEditCategory = document.querySelector(
-        "#container-edit-category"
+        ".container-edit-cat"
     );
     containerEditCategory.dataset.id = catInformation.id; //add-set
 }
@@ -117,17 +125,17 @@ import { redirectToTableEditCategories } from "./table_categories.js";
 
 export function addEventsToEditCategoryPage() {
     addEventsToHeader();
-    const btnCancel = document.querySelector("#Cancelar");
+    const btnCancel = document.querySelector("#cancel-cat");
     addUniqueEventListener(btnCancel, "click", () => {
         redirectToTableEditCategories();
     });
     //
     // #Adicionar;
-    const btnEditCategory = document.querySelector("#Atualizar");
+    const btnEditCategory = document.querySelector("#edit-category");
     addUniqueEventListener(btnEditCategory, "click", () => {
         //
         //pegar o id que está armazenado num data-set
-        const id = document.querySelector("#container-edit-category").dataset
+        const id = document.querySelector(".container-edit-cat").dataset
             .id;
         updateCategoryInformationInDatabase(id);
 
@@ -140,7 +148,6 @@ async function updateCategoryInformationInDatabase(id) {
     const formData = getCategoryInputInformations(id);
 
     //FETCH
-
     try {
         const response = await fetch(
             `http://localhost:8080/categoriestable/${id}`,
@@ -170,11 +177,11 @@ function getCategoryInputInformations(id) {
     let obj = {};
 
     const inputNameUpdate = document.querySelector(
-        "#input-cat-edit-name"
+        "#new-name-category"
     ).value;
 
     const inputColorUpdate = document.querySelector(
-        "#select-color-category"
+        "#select-color-category-edit"
     ).value;
 
     obj.src = "ExampleTemple.png";
