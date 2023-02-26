@@ -449,3 +449,7 @@ aside > figure > h2{
 	height: var(--size-icon-small);
 	margin-right: 2.0rem;
 }
+
+.hide-menu-itens{
+	display: none;
+}
