@@ -32,8 +32,3 @@ export function PrincipalTeste() {
 
     return div;
 }
-
-export function redirectToMyPrincipal() {
-    const eventStateChange = CriaEventStateChange("/");
-    window.dispatchEvent(eventStateChange);
-}

@@ -24,6 +24,25 @@ exports.getById = async (id) => {
     }
 };
 
+/*GET METHOD - FILTER BY KEYWORDS*/
+
+exports.getGodsByKeywords = async (_arrayKeywords) => {
+    // Need to calculate something with the inputs?     No
+    // Don't need to do anything
+
+    // Do you need to ask the Database for something?   Yes
+    try {
+        // Need to filter/organize?               Yes
+        const resp = await godsRepository.getGodsByKeywords(_arrayKeywords);
+        // Need to do something internally with this data?     No
+        //Don't need to do anything, just return the information
+        return resp;
+    } catch (error) {
+        console.log(TAG, "error caught");
+        throw error;
+    }
+};
+
 /*POST/CREATE METHOD*/
 
 exports.createGod = async (_name, _status, _categoryId, _resume, _src) => {

@@ -24,15 +24,8 @@ export function MenuAdm() {
             <aside class="sidebar-menu-adm flex-col-between">
                 <figure class="flex-col-center">
                     <img id="profile-adm-icon" src="../assets/icons/profile.svg" alt="profile icon">
-                    <h2 id="adm-name">Administrador</h2>
                 </figure>
-                <ul class="sidebar-options">
-                    <li id="edit-profile"><img src="../assets/icons/edit-profile-v1-white.svg" alt="">Editar perfil</li>
-                    <li id="change-password"><img src="../assets/icons/padlock-v2-white.svg" alt="">Mudar senha</li>
-                    <li id="edit-categories"><img src="../assets/icons/cards-bold-v1-white.svg" alt="">Editar Categorias</li>
-                    <li id="edit-gods"><img src="../assets/icons/icons8-thor.svg" alt="">Editar deuses</li>
-                    <li id="logout"><img src="../assets/icons/logout-white.svg" alt="">Sair</li>
-
+                <ul class="sidebar-options-adm">
                 </ul>
             </aside>
            
@@ -45,7 +38,29 @@ export function MenuAdm() {
     return div;
 }
 
-export function redirectToMyPrincipal() {
-    const eventStateChange = CriaEventStateChange("/");
+/*@author:Filipe - coauthor: Letônio*/
+
+export function redirectToMenuAdmPage() {
+    const eventStateChange = CriaEventStateChange("/adm/a1");
     window.dispatchEvent(eventStateChange);
 }
+
+export function insertMenuItems(){
+    const div = document.querySelector(".sidebar-options-adm");
+    div.innerHTML = "";
+    if (document.cookie.indexOf("session=") !== -1) {
+        div.innerHTML = `
+            <li id="gods-page"><img src="../assets/icons/icons8-thor.svg" alt="">Deuses</li>
+            <li id="categories-page"><img src="../assets/icons/categories.svg" alt="">Categorias</li>
+            <li id="edit-profile"><img src="../assets/icons/edit-profile-v1-white.svg" alt="">Editar perfil</li>
+            <li id="change-password"><img src="../assets/icons/padlock-v2-white.svg" alt="">Mudar senha</li>
+            <li id="edit-categories"><img src="../assets/icons/cards-bold-v1-white.svg" alt="">Editar Categorias</li>
+            <li id="edit-gods"><img src="../assets/icons/icons8-thor.svg" alt="">Editar deuses</li>
+            <li id="logout"><img src="../assets/icons/logout-white.svg" alt="">Sair</li>`
+    }else{
+        div.innerHTML = `
+        <li id="gods-page"><img src="../assets/icons/icons8-thor.svg" alt="">Deuses</li>
+        <li id="categories-page"><img src="../assets/icons/categories.svg" alt="">Categorias</li>`
+    }
+}
+

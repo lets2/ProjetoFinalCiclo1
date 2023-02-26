@@ -1,5 +1,6 @@
 //import { Principal } from "./main-page.js";
-import { Categories } from "./main-page.js";
+import { GodSFilteredByKeywords } from "./gods-filtered-keywords.js";
+import { Categories } from "./all-categories-page.js";
 import { Category } from "./cards_god_from_categ.js";
 import { Login } from "./login-page.js";
 import { GodChoosed } from "./god-card-details.js";
@@ -13,9 +14,13 @@ import { Menu } from "./menu.js";
 import { AddCategory } from "./add-category.js";
 import { EditCategory } from "./edit-cat.js";
 import { PrincipalTeste } from "./principal-teste.js";
+import { AllGodsPage } from "./all-gods-page.js";
+import { RegisterUser } from "./register-user.js";
+import { EditPasswd } from "./edit-passwd.js";
 export default function GeraObjComRotas() {
     const objRotas = {
         /*"/": Principal(),*/
+        "/godsFiltered": GodSFilteredByKeywords(),
         "/": PrincipalTeste(),
         "/categories": Categories(),
         "/categories/:id": Category(),
@@ -30,6 +35,9 @@ export default function GeraObjComRotas() {
         "/menu": Menu(),
         "/addCategory": AddCategory(),
         "/editCategory": EditCategory(),
+        "/allGods": AllGodsPage(),
+        "/registerUser": RegisterUser(),
+        "/editPassword": EditPasswd(),
 
         getPage: function (url) {
             return this[url];

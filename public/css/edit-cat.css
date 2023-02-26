@@ -315,28 +315,16 @@ relacionada aquele elemento
          STYLING MAIN COMPONENTS
  ************************************************/
  main{
-     height: calc(100vh - var(--height-header));
-     width: 100%;
- }
- 
- .container-carousel{
-     width: 100%;
-     height: 100%;
- }
- /* A bagaceira começa aqui*/
- .container-carousel>.retangulo{
-    position: fixed;
-    left: 0%;
- }
- .retangulo:hover{
-   background-color: var(--color-bg-category-2-100p);
- }
- .retangulo{
-    width: 2rem;
-    height:24.8125rem;
-    background-color: var(--color-bg-button);
-    border-radius: 0rem 2rem 2rem 0;
- }
+    height: calc(100vh - var(--height-header));
+    width: 100%;
+}
+
+.container-edit-category{
+   width: 100%;
+   height: 100%;
+   justify-content: center;
+   /* border-radius: 2rem; */
+}
 
  .p3-background{	
      width: 90rem;
@@ -380,97 +368,200 @@ relacionada aquele elemento
 .button-cancelar, .button-adicionar{
     width:36.8125rem ;
     height:4.875rem ;
+    height: calc(100vh - var(--height-header));
+    width: 100%;
 }
-.button-cancelar>button{
-    width:17.375rem ;
-    height:5.125rem ;
-    font-size:2.25rem ;
-    border-radius: 0.9375rem;
-    background-color: var(--color-bg-backInput);
-    box-shadow: 0.5rem 0.5rem 0 #00000035 ;
-    border-style: none;
 
+.container-edit-category{
+   width: 100%;
+   height: 100%;
+   justify-content: center;
+   /* border-radius: 2rem; */
 }
- .carousel{
-     width: 100%;
- }
- .container-arrow{
-     width: 15%;
-     height: 7.0rem;
- }
+
+.container-edit-cat{	
+   width: 80rem;
+   height: 45rem;
+   border-radius:2.5rem;
+   background-color: var(--color-bg-backInput);
+   justify-content: center;
+   gap:3rem;
+}
+
+#box-preview-img-cat{
+   width: 30%;
+   height: 90%;
+   padding-top: 2%;
+}
+
+#box-preview-img-cat div{
+   width: 19rem;
+   height: 28rem;
+   border: 1.8rem solid #d9d9d9b3;
+   border-radius: 2rem;
+   margin-bottom: 2rem;
+   overflow: hidden;    
+}
+
+#box-preview-img-cat div img{
+   width: 100%;
+   height: 100%;
+}
+.form-edit-category{
+   width: 60%;
+   height: 60%;
+   margin-top: 0rem;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-evenly;
+}
+.nome-categoria-edit>input{
+   width: 46rem;
+   height: 5rem;
+   justify-content: space-between;
+   padding-left: 1.5rem;
+   font-size: 2rem;
+   font-weight: bold;
+   border-radius: 0.625rem;
+   background-color:var(--color-bg-input);
+   color: var(--color-font-placeholder);
+}
+
+.nome-categoria-edit>input::placeholder{
+   color: var(--color-font-placeholder);
+   padding-left: 2rem;
+   font-weight: bold;
+   text-justify:auto;
+}
+
+#cancel-cat{
+   background-color:var(--color-bg-cancel) ;
+}
+#cancel-cat:hover{
+   background-color: var(--color-bg-cancel-hover);
+}
+#edit-category{
+   background-color: var(--color-bg-button);
+}
+#edit-category:hover{
+   background-color: var(--color-bg-button-hover)  ;
+}
+
+.button-cancelar>button{
+   width:17.375rem ;
+   height:5.125rem ;
+   font-size:2.25rem ;
+   border-radius: 0.9375rem;
+   background-color: var(--color-bg-backInput);
+   box-shadow: 0.5rem 0.5rem 0 #00000035 ;
+   border-style: none;
+}
+
+.box-btns-edit-cat{
+   width: 80%;
+   justify-content: space-between;
+}
+
+.btns-edit-cat{
+    height: 6.2rem;
+    width: 18rem;
+    border-radius: var(--radius-button);
+    background-color: var(--color-bg-button);
+    font-size: 2rem;
+    border-style: none;
+    box-shadow: 0.2rem 0.2rem 0.5rem 0.4rem #00000040;
+}
  /*fazer arrows*/
 
-/*ADDING STYLING TO INPUT TYPE=FILE*/
-
-#insert-file-btn{
+#insert-file-btn-cat{
     display: none;
 }
 
-.custom-file-upload{
+#custom-file-upload{
     border: 1px solid #ccc;
-    padding: 1rem 2rem;
+    padding: 1.5rem 2rem;
     cursor: pointer;
     font-size: 1.8rem;
 }
 
-#message-input-file{
+#message-input-file-cat{
     font-size: 1.2rem;
 }
 
+/*ADDING STYLING TO INPUT TYPE=FILE*/
+
+#insert-file-btn{
+   display: none;
+}
+
+.custom-file-upload{
+   border: 1px solid #ccc;
+   padding: 1rem 2rem;
+   cursor: pointer;
+   font-size: 1.8rem;
+}
+
+#message-input-file{
+   font-size: 1.2rem;
+}
+
+
 /*Adicioanndo estilo no select/option de cores:*/
 
-#select-color-category, option{
-    width: 36.8125rem;
-    height: 4.875rem;
-    font-size: 2.5rem;
-    font-weight: bold;
-    border-radius: 0.625rem;
-    background-color: #d9d9d9;
-    color: var(--color-font-placeholder);
+#select-color-category-edit, option{
+   width: 46rem;
+   height: 5rem;
+  font-size: 2rem;
+   font-weight: bold;
+   border-radius: 0.625rem;
+   background-color:var(--color-bg-input);
+   color: var(--color-font-placeholder);
 }
 
 
 option[value="#140A3D"]{
-    color: #d9d9d9;
-    background-color: #ffffff;
+   color: #d9d9d9;
+   background-color: #ffffff;
 }
 option[value="#140A3D"]{
-    color: #0e072c;
-    background-color: #1b3ab3a3;
+   color: #0e072c;
+   background-color: #1b3ab3a3;
 }
 option[value="#0B264F"]{
-    color: #0B264F;
-    background-color: #2975e759;
+   color: #0B264F;
+   background-color: #2975e759;
 }
 option[value="#024324"]{
-    color: #024324;
-    background-color: #0ab06056;
+   color: #024324;
+   background-color: #0ab06056;
 }
 option[value="#ff8e01"]{
-    color:#ff8e01; 
-    background-color: #ecac5e6d;
+   color:#ff8e01; 
+   background-color: #ecac5e6d;
 }
 option[value="#815604"]{
-    color: #885a06;
-    background-color: #d4a040b4;
+   color: #885a06;
+   background-color: #d4a040b4;
 }
 option[value="#931212"]{
-    color: #931212;
-    background-color: #bb2e2ea0;
+   color: #931212;
+   background-color: #bb2e2ea0;
 }
 option[value="#6C0000"]{
-    color: #6C0000;
-    background-color: #921e1e82;
+   color: #6C0000;
+   background-color: #921e1e82;
 }
 option[value="#43064E"]{
-    color: #43064E;
-    background-color: #de2bfe56;
+   color: #43064E;
+   background-color: #de2bfe56;
 }
 option[value="#000000"]{
-    color: #000000;
-    background-color: #00000087;
+   color: #000000;
+   background-color: #00000087;
 }
 
- /************************************************
-         STYLING FOOTER COMPONENTS
- ************************************************/
+
+/************************************************
+        STYLING FOOTER COMPONENTS
+************************************************/

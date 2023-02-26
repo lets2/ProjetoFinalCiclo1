@@ -11,6 +11,7 @@ import {
     addResourcesToTableOfGods,
     addResourcesToGodInfo,
     addResourcesToEditGodPage,
+    getResourcesFromGodsFiltered,
 } from "./gods/fetchs_Gods.js";
 
 //------------------------------------------------------------------------
@@ -45,6 +46,20 @@ export async function addExternalResourcesTo(url, criteria) {
 
         case "/editCategory":
             return await addResourcesToEditCategoryPage(criteria.id);
+        case "/allGods":
+            console.log(
+                "Aparentemente, o parametro is okay:",
+                criteria.parametroDePesquisa
+            );
+            const arrayWithGodsFiltered = await getResourcesFromGodsFiltered(
+                criteria.parametroDePesquisa
+            );
+            if (arrayWithGodsFiltered.length === 0) {
+                return await addResourcesToTableOfGods(criteria);
+            } else {
+                return arrayWithGodsFiltered;
+            }
+
         default:
             return null;
     }

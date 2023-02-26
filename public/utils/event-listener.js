@@ -12,7 +12,7 @@ export function addUniqueEventListener(element, eventName, eventHandler) {
     }
 
     const previousEventHandler = eventCache.get(element)[eventName];
-    console.log(previousEventHandler);
+    //console.log(previousEventHandler);
     if (previousEventHandler) {
         element.removeEventListener(eventName, previousEventHandler);
     }

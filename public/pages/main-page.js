@@ -126,3 +126,24 @@ export function redirectToEditCategory(id) {
     const eventStateChange = CriaEventStateChange("/editCategory", { id: id });
     window.dispatchEvent(eventStateChange);
 }
+
+/*@author:Gabriela - coauthor: Letônio*/
+export function redirectToGodsFiltered(arrayResults) {
+    const eventStateChange = CriaEventStateChange("/godsFiltered", {
+        arrayResults: arrayResults,
+    });
+    window.dispatchEvent(eventStateChange);
+}
+
+/*@author:Gabriela - coauthor: Letônio*/
+export function redirectToAllGods(parametroDePesquisa) {
+    const eventStateChange = CriaEventStateChange("/allGods", {
+        parametroDePesquisa: parametroDePesquisa,
+    });
+    window.dispatchEvent(eventStateChange);
+}
+/*@author:Gabriela - coauthor: Letônio*/
+export function redirectToRegisterUser(parametroDePesquisa) {
+    const eventStateChange = CriaEventStateChange("/registerUser");
+    window.dispatchEvent(eventStateChange);
+}

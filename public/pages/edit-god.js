@@ -59,7 +59,158 @@ export function EditGod() {
     return div;
 }
 
-export function redirectToMyPrincipal() {
-    const eventStateChange = CriaEventStateChange("/");
+export function redirectToEditGodPage(godId) {
+    const eventStateChange = CriaEventStateChange("/editGod/g1", {
+        godId: godId,
+    });
     window.dispatchEvent(eventStateChange);
+}
+
+//Adicionando funcoes que colocam informacoes no edit god page
+
+//EDIT GOD PAGE, FUNCOES COMECAM AQUI
+
+export function inserirElementosNaEditGodPage(godObj) {
+    const containerImgGod = document.querySelector("#edit-page-god-img");
+    containerImgGod.innerHTML = `
+    <img src="../assets/uploads/${godObj.src_img}" alt="">
+    `;
+
+    const inputEditGodName = document.querySelector(
+        "#edit-page-god-input-name"
+    );
+    inputEditGodName.value = godObj.name;
+
+    const inputEditGodStatus = document.querySelector(
+        "#edit-page-god-input-status"
+    );
+    inputEditGodStatus.value = godObj.status;
+
+    const inputEditGodResume = document.querySelector(
+        "#edit-page-god-input-resume"
+    );
+    inputEditGodResume.value = godObj.resume;
+
+    //add um dataset com o id do deus para usos futuros;
+    const containerEditGodInformation = document.querySelector(
+        "#container-edit-god"
+    );
+    containerEditGodInformation.dataset.godId = godObj.id;
+}
+
+//COMEÇA AQUI
+import { categoriesList, addEventsToHeader, displayWarning } from "../index.js";
+
+export function addSelectWithCategoriesInGodsPage() {
+    const selectElement = document.querySelector("#select-filter-category");
+    selectElement.innerHTML = ""; //clear any previous content
+
+    addOptionToSelectInGodsPage(selectElement, {
+        value: "choose",
+        text: "Escolha uma categoria",
+    });
+
+    categoriesList.forEach((category) => {
+        addOptionToSelectInGodsPage(selectElement, {
+            value: category.id,
+            text: category.name,
+        });
+    });
+}
+
+function addOptionToSelectInGodsPage(_select, _paramOption) {
+    const option = document.createElement("option");
+    option.value = _paramOption.value; //add category id from db
+    option.innerHTML = _paramOption.text;
+    if (_paramOption.value === "choose") {
+        option.disabled = true;
+        //option.selected = true;
+    }
+    _select.appendChild(option);
+}
+
+//ADICIONANDO EVENTOS:
+
+//COMECA AQUI A FUNCAO DE ADD EVENTO NA EDIT GOD PAGE
+
+/*@author:Gabriela - coauthor: Letônio*/
+/* Add eventos na página que mostra as informacoes para editar deuses*/
+import { redirectToTableEditGods } from "./table_gods.js";
+import { addUniqueEventListener } from "../utils/event-listener.js";
+
+export function addEventsToEditGodPages() {
+    addEventsToHeader();
+
+    const cancelGodBtn = document.querySelector("#cancel-edit-god");
+    addUniqueEventListener(cancelGodBtn, "click", () => {
+        redirectToTableEditGods();
+    });
+    const updateGodBtn = document.querySelector("#update-god-button");
+    addUniqueEventListener(updateGodBtn, "click", () => {
+        //atualizar informações de um deus;
+        const godId = document.querySelector("#container-edit-god").dataset
+            .godId;
+        updateGodInformationInDatabase(godId);
+        redirectToTableEditGods();
+    });
+}
+
+//atualiza database
+async function updateGodInformationInDatabase(godId) {
+    const formData = getGodInputInformations(godId);
+
+    try {
+        const response = await fetch(
+            `http://localhost:8080/godstable/${godId}`,
+            {
+                method: "PUT",
+                body: formData,
+            }
+        );
+
+        if (response.status !== 200 && response.status !== 201) {
+            const resJson = await response.json();
+            const { message, error } = resJson;
+            displayWarning(resJson.error);
+            throw `${error}`;
+        }
+        const resJson = await response.json();
+        console.log("Requisição de EDIT GOD deu certo:", resJson);
+        displayWarning(resJson.message); //deu tudo  certo
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+///
+function getGodInputInformations(godId) {
+    let obj = {};
+
+    const inputNameUpdate = document.querySelector(
+        "#edit-page-god-input-name"
+    ).value;
+
+    const inputStatusUpdate = document.querySelector(
+        "#edit-page-god-input-status"
+    ).value;
+
+    const inputResumeUpdate = document.querySelector(
+        "#edit-page-god-input-resume"
+    ).value;
+
+    const formData = new FormData();
+    const fileInput = document.querySelector('input[type="file"]');
+
+    // Add image to FormData
+    formData.append("file", fileInput.files[0]);
+
+    const categoryId = document.querySelector("#select-filter-category").value;
+
+    // Add strings to FormData
+    formData.append("name", inputNameUpdate);
+    formData.append("status", inputStatusUpdate);
+    formData.append("resume", inputResumeUpdate);
+    formData.append("categoryId", categoryId);
+
+    return formData;
 }

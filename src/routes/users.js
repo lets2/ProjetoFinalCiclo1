@@ -15,5 +15,22 @@ router.post("/login", usersController.login);
 //rota de logout
 router.delete("/logout", usersController.logout);
 //
+//rota paracadastrar novo adm
+
+router.post("/registerAdm", usersController.registerNewAdm);
+//req.body
+//{
+//  username,
+//  password, //without cryptografia
+//  email,
+//}
+
+router.put("/changePassword", usersController.changePassword);
+//req.body
+//{
+//  username,
+//  oldPassword, //without cryptografia
+//  newPassword, //without cryptografia
+//}
 
 module.exports = router;

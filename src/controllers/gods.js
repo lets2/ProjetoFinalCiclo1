@@ -2,6 +2,7 @@ const { json } = require("express");
 const godsService = require("../services/gods.js");
 const path = require("path");
 const TAG = "god controller: ";
+const fs = require("fs"); //vou usar para deletar imagem
 
 //----------------------------------------
 //Routes related to ADM PERMISSIONS
@@ -73,6 +74,72 @@ exports.getById = async (req, res) => {
     }
 };
 
+/*GET METHOD - FILTER BY KEY WORDS*/
+exports.getGodsByKeywords = async (req, res) => {
+    const now = new Date(); // cria uma nova instância de Date com a data atual
+    const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
+    console.time(`getGodsByKeywords()${milliseconds}`);
+
+    //const arrayKeywords = req.body.arrayKeywords;
+    const arrayKeywords = req.query.strings.split(",");
+    console.log("VERIFICANDO SE MEU ARRAY EH UM ARRAY:", arrayKeywords);
+    console.log("E A DECISAO EH:", Array.isArray(arrayKeywords));
+
+    const response = {
+        message: "",
+        data: null,
+        error: null,
+    };
+    //
+    if (!arrayKeywords) {
+        console.log(TAG, "ARRAYKEYWORDS is UNDEFINED/NULL");
+
+        response.message = "Request need to have {arrayKeywords})";
+        response.data = null;
+        response.error = "[400] Bad request! arrayKeywords is UNDEFINED/NULL";
+
+        res.status(400).json(response);
+        console.timeEnd(`getGodsByKeywords()${milliseconds}`);
+        return; //If dont use return, the function  will continue
+    }
+    if (IsNotArray(arrayKeywords)) {
+        console.log(TAG, "ARRAYKEYWORDS is NOT ARRAY");
+
+        response.message =
+            "Request need to have a JSON {'arrayKeywords':['string1','string2',...]})";
+        response.data = null;
+        response.error =
+            "[400] Bad request! body need to have: {'arrayKeywords':['string1','string2',...]}";
+
+        res.status(400).json(response);
+        console.timeEnd(`getGodsByKeywords()${milliseconds}`);
+        return; //If dont use return, the function  will continue
+    }
+
+    try {
+        // Call Service method
+        const serviceResponse = await godsService.getGodsByKeywords(
+            arrayKeywords
+        );
+
+        // Retornar com sucesso
+        response.message = "Success";
+        response.data = serviceResponse;
+
+        res.status(200).json(response);
+        console.timeEnd(`getGodsByKeywords()${milliseconds}`);
+    } catch (error) {
+        console.log(TAG, error);
+
+        response.message = "Erro interno do Servidor";
+        response.data = null;
+        response.error = "Erro interno do Servidor";
+
+        res.status(500).json(response);
+        console.timeEnd(`getGodsByKeywords()${milliseconds}`);
+    }
+};
+
 /*POST/CREATE METHOD*/
 exports.createGod = async (req, res) => {
     //determinar o IP de quem fez a requisição
@@ -83,12 +150,23 @@ exports.createGod = async (req, res) => {
 
     // TTRY TO GET PARAMETERS FROM REQ.BODY E VERIFY IF ARE OKAY
 
-    const filename = req.file.filename;
+    let filename; //declarei como variavel por conta do if else
+    //Teste de fazer EDICAO DE CATEGORIA
+    if (!req.file) {
+        filename = null;
+    } else {
+        filename = req.file.filename;
+    }
 
-    const name = req.body.name;
-    const status = req.body.status;
-    const resume = req.body.resume;
-    const categoryId = req.body.categoryId;
+    console.log("OLHA O FILENAMEVAZIO!!!!!!!!!!!1:", filename);
+    const { name, status, categoryId, resume } = req.body;
+
+    ///  const filename = req.file.filename;
+
+    //// const name = req.body.name;
+    ///  const status = req.body.status;
+    //////  const resume = req.body.resume;
+    ////// const categoryId = req.body.categoryId;
 
     const src = filename; //Não precisa de extensão, é so o codigo mesmo!
 
@@ -304,6 +382,14 @@ exports.deleteGodById = async (req, res) => {
         //response.data = serviceResponse.rows;
         response.data = serviceResponse; //this return just one object {name:,url:}
 
+        // teoricamente, se deu certo, response.data possui um array
+        //com o elemento que foi deletado, vou add uma função de deletar o arquivo
+        //da umagem
+        // console.log("ESSE EH O serviceResponse:", serviceResponse);
+        if (serviceResponse) {
+            excluiArquivoDaImagemDeCategoria(serviceResponse);
+        }
+
         res.status(200).json(response);
         console.timeEnd(`deleteGodById()${milliseconds}`);
     } catch (error) {
@@ -324,4 +410,26 @@ function IsNotString(_data) {
         return true;
     }
     return false;
+}
+
+/*check if is not array type*/
+function IsNotArray(_data) {
+    if (Array.isArray(_data)) {
+        return false;
+    }
+    return true;
+}
+
+//colocando aqui função de apagar arquivo:
+function excluiArquivoDaImagemDeCategoria(serviceResponse) {
+    console.log("Apagarei esse arquivo aqui:", serviceResponse[0].src_img);
+    const uploadDir = path.join(__dirname, "../../public", "assets", "uploads");
+    const filePath = path.join(uploadDir, serviceResponse[0].src_img);
+    console.log("OLHA O PATH:", filePath);
+    fs.unlink(filePath, (error) => {
+        if (error && error.code !== "ENOENT") {
+            // Se houver um erro que não seja o arquivo não encontrado, retorna um erro interno do servidor
+            throw "ERRO AO TENTAR DELETAR, ARQUIVO NAO ENCONTRADO";
+        }
+    });
 }
