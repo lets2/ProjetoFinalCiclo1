@@ -25,13 +25,6 @@ export function TableGods() {
 <main class="flex-center-center">
 	<div class="container-content flex-col-center">
 		<div class="container-filters flex-row-around">
-		   <select name="filter-category" id="filter-category">
-				<option value="1">Escolha uma categoria</option>
-				<option value="2">Deuses da Tecnologia</option>
-				<option value="3">Deuses da Alimentação</option>
-				<option value="4">Deuses do Caos</option>
-				<option value="5">Health</option>
-		   </select>
 		   <button id="create-new-god">Criar um novo Deus</button>
 		</div>
 		<div class="container-table">

@@ -28,7 +28,7 @@ import {
 import {
     redirectToTableEditGods,
     addLinesGodTable,
-    addSelectWithCategories,
+    // addSelectWithCategories,
     addEventsToGodTablePage,
 } from "./pages/table_gods.js";
 
@@ -152,7 +152,7 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
 
         case "/tableGods":
             categoriesList = respostaIndex.dataCategories;
-            addSelectWithCategories(respostaIndex.dataCategories);
+            // addSelectWithCategories(respostaIndex.dataCategories);
             addLinesGodTable(respostaIndex.dataGods);
             console.log(categoriesList, "categoreis");
             break;

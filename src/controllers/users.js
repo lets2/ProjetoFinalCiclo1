@@ -142,7 +142,7 @@ exports.logout = async (req, res) => {
         response.error = "Erro interno do Servidor";
 
         res.status(500).json(response);
-        console.timeEnd(`login()${milliseconds}`);
+        console.timeEnd(`logout()${milliseconds}`);
     }
 };
 
