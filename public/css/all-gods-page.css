@@ -40,301 +40,461 @@ relacionada aquele elemento
 		IMPORTS
  ***************************************************/
 
- @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
- /*font-family: 'MedievalSharp', cursive;*/
- 
- @font-face {
-     font-family: "Bluu Bold";
-     src: url("../assets/fonts/bluu-next/BluuNext-Bold.otf") format("opentype");
-   }
- 
- @font-face {
-     font-family: "Bluu Bolditalic";
-     src: url("../assets/fonts/bluu-next/BluuNext-Bolditalic.otf") format("opentype");
-   }
- 
-   @font-face {
-     font-family: "Bluu Titling";
-     src: url("../assets/fonts/bluu-next/BluuNext-Titling.otf") format("opentype");
-   }
- 
-  /************************************************
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+/*font-family: 'MedievalSharp', cursive;*/
+
+@font-face {
+    font-family: "Bluu Bold";
+    src: url("../assets/fonts/bluu-next/BluuNext-Bold.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "Bluu Bolditalic";
+    src: url("../assets/fonts/bluu-next/BluuNext-Bolditalic.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "Bluu Titling";
+    src: url("../assets/fonts/bluu-next/BluuNext-Titling.otf") format("opentype");
+}
+
+/************************************************
          STYLING GLOBAL
  ************************************************/
- /*Mantenha aqui sempre 10px*/
- html {
-     font-size: 10px;
-   }
- 
- 
- 
- :root{
-     /**/
-     --color-white:#ffffff;
-     --color-black:#000000;
-     /*Background colors*/
-     --color-bg-header:#140a3db8; /*add opacity: 0.72*/
-     --color-bg-forms-emphasis:#140A3D;/*used in the forms emphasis*/
-     --color-bg-button:#140A3D; /*used in the buttons of 'atualizar','confirmar', etc*/
-     --color-bg-button-hover:#2f1a83; /*'atualizar','confirmar', etc with hover effect*/
-     
-     --color-bg-cancel:#931212;/*used in the buttons of 'cancelar'*/
-     --color-bg-cancel-hover:#b11616;/*used in the buttons of 'cancelar'*/
-     
-     --color-bg-arrow-:#ffffff;/*used in arrow categories */
-     --color-bg-arrow-hover:#ff8e01;/*used in arrow categories with hover*/
- 
-     --color-bg-category-1-100p:#815604; /*nature 100% */
-     --color-bg-category-1-70p: #815604b3; /*nature 70% */
-     --color-bg-category-1-40p: #81560466; /*nature 40% */
-     
-     /*@autor:letonio (add another color to test about title category)*/
-     --color-bg-category-1-dark-40p:rgba(139, 102, 5, 0.4);
- 
-     --color-bg-category-2-100p:#0B264F; /*technology 100% */
-     --color-bg-category-2-70p:#0b264fb3; /*technology 70% */
-     
-     --color-bg-category-3-100p:#024324 ; /*health 100% */
-     --color-bg-category-3-70p: #024324b3 ; /*health 70% */
-     
-     --color-bg-category-4-100p:#43064E; /*chaos 100 - 70% */
-     --color-bg-category-4-70p:#43064Eb3; /*chaos 70% */
-     
-     --color-bg-category-5-100p:#6C0000; /*food 100% */
-     --color-bg-category-5-70p:#6C0000b3; /*food 70% */
-     --color-bg-input:#1b0e4ee6;
-     --color-bg-backInput: #d9d9d94d ;/*backInput 30% */
-     
-     /*Font colors*/
-     --color-fonts:#ffffff;
-     --color-font-placeholder:#696767;
- 
-     /*Fonts sizes*/
-     /* 1 rem = 10px */
-     --size-font-biggest:15.0rem;
-     --size-font-t1:9.0rem;
-     --size-font-t2:5.0rem; /*tittle card*/
-     --size-font-t3:4.5rem; /*subtittle card*/
-     --size-font-t4:4.0rem; /*inputs emphasis, ex. 'selecionar categoria', subsubtittle card*/
-     --size-font-t5:3.5rem; /*inputs e botoes*/
-     --size-font-t6:3.0rem; 
-     --size-font-t7:2.5rem; /*Description card*/
-     --size-font-t8:2.0rem; /*text card god's description*/
-     --size-font-t9:1.6rem; /*text card god's description*/
-     
-     
-     /*Icons height*/
-     --size-icon-bigger:12.5rem;
-     --size-icon-medium:5.0rem; /*table, perfil*/
-     --size-icon-small:3.5rem; /*search*/
-     --size-icon-smallest:2.0rem; /*search*/
-     
-     
-     /*button dimension*/
-     --height-button: 8.2rem;
-     --width-button:28.0rem;
-     --radius-button:1.5rem;
- 
-     /*forms dimensions*/
-     --height-form-bigger:70.0rem;/*maybe we should use % instead px*/
-     --width-form-bigger:120.0rem;/*maybe we should use % instead px*/
-     --height-form-smaller:50.0rem;/*maybe we should use % instead px*/
-     --width-form-smaller:70.0rem;/*maybe we should use % instead px*/
-     
-     /*@autor:letonio (esses valores de width-input estavam muito grandes, modifiquei)*/
-     /*input forms dimensions*/
-     --height-input-bigger:3.0rem;/*maybe we should use % instead px*/
-     --width-input-bigger:50.0rem;/*maybe we should use % instead px*/
-     --height-input-smaller:2.0rem;/*maybe we should use % instead px*/
-     --width-input-smaller:23.0rem;/*maybe we should use % instead px*/
-     
-     /*Images height*/
-     --height-img-god-bigger:50.0rem;/*cards with descriptions*/
-     --width-img-god-bigger:31.2rem;/*cards with descriptions*/
-     
-     --height-img-god-middle:25.0rem;/*@autor:letonio (add intermediate measure)*/
- 
-     --height-img-god-smaller:30.0rem;/*categories page (4 images)*/
-     --width-img-god-smaller:18.5rem;/*categories page (4 images)*/
-     
-     --height-img-building-bigger:60.0rem;/*image of temple with category name*/
-     --width-img-building-bigger:54.0rem;/*image of temple with category name*/
-     --height-img-building-smaller:40.0rem;/*image of temple with category name*/
-     --width-img-building-smaller:36.0rem;/*image of temple with category name*/
-     
-     /*header height*/
-     --height-header:10.0rem;/**/
-     --width-header:100%;/**/
- }
- 
- 
- * {
-     margin: 0;
-     padding: 0;
-     box-sizing: border-box;
-     font-family: Verdana, Geneva, Tahoma, sans-serif;
-     color:var(--color-fonts);
-     font-size: 1.0rem;
-     
- }
- 
- 
- body {
-     display: flex;
-     justify-content: center;
-     background-image: url('../assets/images/background-space.jpg');
-     width: 100%;
-     height: 100vh;
- }
- 
- 
- /************************************************
+/*Mantenha aqui sempre 10px*/
+html {
+    font-size: 10px;
+}
+
+
+
+:root {
+    /**/
+    --color-white: #ffffff;
+    --color-black: #000000;
+    /*Background colors*/
+    --color-bg-header: #140a3db8;
+    /*add opacity: 0.72*/
+    --color-bg-forms-emphasis: #140A3D;
+    /*used in the forms emphasis*/
+    --color-bg-button: #140A3D;
+    /*used in the buttons of 'atualizar','confirmar', etc*/
+    --color-bg-button-hover: #2f1a83;
+    /*'atualizar','confirmar', etc with hover effect*/
+
+    --color-bg-cancel: #931212;
+    /*used in the buttons of 'cancelar'*/
+    --color-bg-cancel-hover: #b11616;
+    /*used in the buttons of 'cancelar'*/
+
+    --color-bg-arrow-: #ffffff;
+    /*used in arrow categories */
+    --color-bg-arrow-hover: #ff8e01;
+    /*used in arrow categories with hover*/
+
+    --color-bg-category-1-100p: #815604;
+    /*nature 100% */
+    --color-bg-category-1-70p: #815604b3;
+    /*nature 70% */
+    --color-bg-category-1-40p: #81560466;
+    /*nature 40% */
+
+    /*@autor:letonio (add another color to test about title category)*/
+    --color-bg-category-1-dark-40p: rgba(139, 102, 5, 0.4);
+
+    --color-bg-category-2-100p: #0B264F;
+    /*technology 100% */
+    --color-bg-category-2-70p: #0b264fb3;
+    /*technology 70% */
+
+    --color-bg-category-3-100p: #024324;
+    /*health 100% */
+    --color-bg-category-3-70p: #024324b3;
+    /*health 70% */
+
+    --color-bg-category-4-100p: #43064E;
+    /*chaos 100 - 70% */
+    --color-bg-category-4-70p: #43064Eb3;
+    /*chaos 70% */
+
+    --color-bg-category-5-100p: #6C0000;
+    /*food 100% */
+    --color-bg-category-5-70p: #6C0000b3;
+    /*food 70% */
+    --color-bg-input: #1b0e4ee6;
+    --color-bg-backInput: #d9d9d94d;
+    /*backInput 30% */
+
+    /*Font colors*/
+    --color-fonts: #ffffff;
+    --color-font-placeholder: #696767;
+
+    /*Fonts sizes*/
+    /* 1 rem = 10px */
+    --size-font-biggest: 15.0rem;
+    --size-font-t1: 9.0rem;
+    --size-font-t2: 5.0rem;
+    /*tittle card*/
+    --size-font-t3: 4.5rem;
+    /*subtittle card*/
+    --size-font-t4: 4.0rem;
+    /*inputs emphasis, ex. 'selecionar categoria', subsubtittle card*/
+    --size-font-t5: 3.5rem;
+    /*inputs e botoes*/
+    --size-font-t6: 3.0rem;
+    --size-font-t7: 2.5rem;
+    /*Description card*/
+    --size-font-t8: 2.0rem;
+    /*text card god's description*/
+    --size-font-t9: 1.6rem;
+    /*text card god's description*/
+
+
+    /*Icons height*/
+    --size-icon-bigger: 12.5rem;
+    --size-icon-medium: 5.0rem;
+    /*table, perfil*/
+    --size-icon-small: 3.5rem;
+    /*search*/
+    --size-icon-smallest: 2.0rem;
+    /*search*/
+
+
+    /*button dimension*/
+    --height-button: 8.2rem;
+    --width-button: 28.0rem;
+    --radius-button: 1.5rem;
+
+    /*forms dimensions*/
+    --height-form-bigger: 70.0rem;
+    /*maybe we should use % instead px*/
+    --width-form-bigger: 120.0rem;
+    /*maybe we should use % instead px*/
+    --height-form-smaller: 50.0rem;
+    /*maybe we should use % instead px*/
+    --width-form-smaller: 70.0rem;
+    /*maybe we should use % instead px*/
+
+    /*@autor:letonio (esses valores de width-input estavam muito grandes, modifiquei)*/
+    /*input forms dimensions*/
+    --height-input-bigger: 3.0rem;
+    /*maybe we should use % instead px*/
+    --width-input-bigger: 50.0rem;
+    /*maybe we should use % instead px*/
+    --height-input-smaller: 2.0rem;
+    /*maybe we should use % instead px*/
+    --width-input-smaller: 23.0rem;
+    /*maybe we should use % instead px*/
+
+    /*Images height*/
+    --height-img-god-bigger: 50.0rem;
+    /*cards with descriptions*/
+    --width-img-god-bigger: 31.2rem;
+    /*cards with descriptions*/
+
+    --height-img-god-middle: 25.0rem;
+    /*@autor:letonio (add intermediate measure)*/
+
+    --height-img-god-smaller: 30.0rem;
+    /*categories page (4 images)*/
+    --width-img-god-smaller: 18.5rem;
+    /*categories page (4 images)*/
+
+    --height-img-building-bigger: 60.0rem;
+    /*image of temple with category name*/
+    --width-img-building-bigger: 54.0rem;
+    /*image of temple with category name*/
+    --height-img-building-smaller: 40.0rem;
+    /*image of temple with category name*/
+    --width-img-building-smaller: 36.0rem;
+    /*image of temple with category name*/
+
+    /*header height*/
+    --height-header: 10.0rem;
+    /**/
+    --width-header: 100%;
+    /**/
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: var(--color-fonts);
+    font-size: 1.0rem;
+
+}
+
+
+body {
+    display: flex;
+    justify-content: center;
+    background-image: url('../assets/images/background-space.jpg');
+    width: 100%;
+    height: 100vh;
+}
+
+
+/************************************************
          STYLING TAGS BY NAME
  ************************************************/
- input{
-     background-color: var(--color-bg-input);
-     border-radius: 1.5rem;
-     height: var(--height-input-smaller);
- }
- 
- button{
-     height: var(--height-button);
-     width: var(--width-button);
-     border-radius: var(--radius-button);
-     background-color: var(--color-bg-button);
- }
- 
- button:hover{
-     background-color: var(--color-bg-button-hover);
- }
- /************************************************
+input {
+    background-color: var(--color-bg-input);
+    border-radius: 1.5rem;
+    height: var(--height-input-smaller);
+}
+
+button {
+    height: var(--height-button);
+    width: var(--width-button);
+    border-radius: var(--radius-button);
+    background-color: var(--color-bg-button);
+}
+
+button:hover {
+    background-color: var(--color-bg-button-hover);
+}
+
+/************************************************
          STYLING GENERAL CLASSES
  ************************************************/
- .flex-col-center{
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: flex-start;
- }
- .flex-row-center{
-     display: flex;
-     flex-direction: row;
-     align-items: center;
- }
- .flex-row-between{
-     display: flex;
-     flex-direction: row;
-     justify-content: space-between;
-     align-items: center;
- }
- .flex-center-center{
-     display: flex;
-     justify-content: center;
-     align-items: center;
- }
- .cancel-button{
-     background-color: var(--color-bg-cancel);
- }
- .cancel-button:hover{
-     background-color: var(--color-bg-cancel-hover);
- }
- 
- 
- h1{
-     font-family: 'Bluu Bold', Courier, monospace;
-     font-size: var(--size-font-t1);
-     color:var(--color-fonts);
- }
- 
- h2{
-     font-family: 'Bluu Bold', Times, serif;
-     font-size: var(--size-font-t2);
- }
- h3{
-     font-family: 'Bluu Bolditalic', Times, serif;
-     font-size: var(--size-font-t3);
- }
- h4{
-     font-family: 'Bluu Titling', Times, serif;
-     font-size: var(--size-font-t4);
- }
- 
- /************************************************
+.flex-col-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.flex-row-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.flex-row-between {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-center-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancel-button {
+    background-color: var(--color-bg-cancel);
+}
+
+.cancel-button:hover {
+    background-color: var(--color-bg-cancel-hover);
+}
+
+
+h1 {
+    font-family: 'Bluu Bold', Courier, monospace;
+    font-size: var(--size-font-t1);
+    color: var(--color-fonts);
+}
+
+h2 {
+    font-family: 'Bluu Bold', Times, serif;
+    font-size: var(--size-font-t2);
+}
+
+h3 {
+    font-family: 'Bluu Bolditalic', Times, serif;
+    font-size: var(--size-font-t3);
+}
+
+h4 {
+    font-family: 'Bluu Titling', Times, serif;
+    font-size: var(--size-font-t4);
+}
+
+/************************************************
          STYLING HEADER COMPONENTS
  ************************************************/
  
  /************************************************
          STYLING MAIN COMPONENTS
  ************************************************/
- main{
-     height: calc(100vh - var(--height-header));
-     width: 100%;
- }
- /********************************************
+main {
+    height: calc(100vh - var(--height-header));
+    width: 100%;
+}
+
+/********************************************
          STYLING BY Gabriela
  ************************************************/
- .container-all-gods-page{
-     width: 100%;
-     height: 100%;
- } 
- /*@autor:letonio (estilizando cartoes de deuses na pagina com categoria especifica)*/
- 
-   /* Define o estilo da caixa de cartões e seu overflow */
-   #box-all-gods {
-     width: 85%;
-     height: 100%;
-     
-     overflow: hidden;
-   }
-   
-   /* Define o estilo da div de overflow dos cartões */
-   #box-all-gods-overflow {
-     height:100%;
-     display: grid;
-     grid-template-columns: repeat(auto-fit, 25rem);
-     grid-auto-rows: 30rem;
-     grid-gap: 2rem;
-     overflow: scroll;
-     overflow-x: hidden;
-     max-height: 100%;
-     justify-content: center;
-     align-items: center;
-   }
- 
- /* Define o tamanho dos cartões e adiciona margens */
- .cards-gods{
-     height: var(--height-img-god-middle);
-     border: solid 2.0rem var(--color-bg-category-1-dark-40p);
-     border-radius: 2.0rem;
-     transition: transform .9s;
-     cursor: pointer;
- }
- 
- .cards-gods:hover{
-     transform: scale(1.1);
-     filter: brightness(130%);
- }
-  
- .phrase{
-     background-color: var(--color-bg-category-1-dark-40p);
-     padding: 3.0rem;
-     border-radius: 2.0rem;
-     position: absolute;
-     top: 6.0rem;
-     right: 2.5rem;
-     text-align: center;
-     width: 25%;
-     font-size: var(--size-font-t5);
-     font-family: 'MedievalSharp', cursive;
-     font-weight: 400;
- }
- .phrase span{
-     display: block;
-     
- }
- 
- ::-webkit-scrollbar {
-     width: 0px;
- }
-   
-  
+.container-all-gods-page {
+    width: 100%;
+    height: 100%;
+}
+
+/*@autor:letonio (estilizando cartoes de deuses na pagina com categoria especifica)*/
+
+/* Define o estilo da caixa de cartões e seu overflow */
+#box-all-gods {
+    width: 85%;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+/* Define o estilo da div de overflow dos cartões */
+#box-all-gods-overflow {
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 25rem);
+    grid-auto-rows: 30rem;
+    grid-gap: 2rem;
+    overflow: scroll;
+    overflow-x: hidden;
+    max-height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Define o tamanho dos cartões e adiciona margens */
+.cards-gods {
+    height: var(--height-img-god-middle);
+    border: solid 2.0rem var(--color-bg-category-1-dark-40p);
+    border-radius: 2.0rem;
+    transition: transform .9s;
+    cursor: pointer;
+}
+
+.cards-gods:hover {
+    transform: scale(1.1);
+    filter: brightness(130%);
+}
+
+.phrase {
+    background-color: var(--color-bg-category-1-dark-40p);
+    padding: 3.0rem;
+    border-radius: 2.0rem;
+    position: absolute;
+    top: 6.0rem;
+    right: 2.5rem;
+    text-align: center;
+    width: 25%;
+    font-size: var(--size-font-t5);
+    font-family: 'MedievalSharp', cursive;
+    font-weight: 400;
+}
+
+.phrase span {
+    display: block;
+
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+
+/*@autor:daniel*/
+
+@media screen and (min-width: 800px) and (max-width: 1100px) {
+    #box-cards-gods {
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .phrase {
+        background-color: var(--color-bg-category-1-dark-40p);
+        padding: 3.0rem;
+        border-radius: 2.0rem;
+        position: absolute;
+        top: 6.0rem;
+        right: 2.5rem;
+        text-align: center;
+        width: 25%;
+        font-size: var(--size-font-t5);
+        font-family: 'MedievalSharp', cursive;
+        font-weight: 400;
+        margin-right: 25%;
+    }
+}
+
+@media screen and (min-width: 500px) and (max-width: 799px) {
+    #box-cards-gods {
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .phrase {
+        background-color: var(--color-bg-category-1-dark-40p);
+        padding: 3.0rem;
+        border-radius: 2.0rem;
+        position: absolute;
+        top: 6.0rem;
+        right: 2.5rem;
+        text-align: center;
+        width: 50%;
+        font-size: var(--size-font-t5);
+        font-family: 'MedievalSharp', cursive;
+        font-weight: 400;
+    }
+}
+
+@media screen and (min-width: 300px) and (max-width: 499px) {
+
+    .container-page-gods {
+        width: 100%;
+        height: 1000%;
+        position: relative;
+    }
+
+    #box-cards-gods {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .cards-gods {
+        border: solid 2.0rem var(--color-bg-category-1-dark-40p);
+        height: 30rem;
+        border-radius: 2.0rem;
+        transition: transform .3s;
+        cursor: pointer;
+    }
+
+    #box-cards-gods-overflow {
+        height: auto;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 25rem);
+        grid-auto-rows: 30rem;
+        grid-gap: 2rem;
+        overflow: scroll;
+        overflow-x: hidden;
+        max-height: 100%;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20rem;
+    }
+
+    .phrase {
+        background-color: var(--color-bg-category-1-dark-40p);
+        padding: 3.0rem;
+        border-radius: 2.0rem;
+        position: absolute;
+        top: 6.0rem;
+        text-align: center;
+        width: 80%;
+        font-size: var(--size-font-t5);
+        font-family: 'MedievalSharp', cursive;
+        font-weight: 400;
+        margin: 0 7%;
+    }
+
+
+}

@@ -416,7 +416,8 @@ main {
 	background-color: var(--color-bg-arrow-hover);
 }
 
-/* Tela maior ou igual a 900px */
+/*@autor:daniel*/
+
 @media screen and (min-width: 800px) and (max-width: 1129px) {
 	.main {
 		height: calc(100vh - var(--height-header));
