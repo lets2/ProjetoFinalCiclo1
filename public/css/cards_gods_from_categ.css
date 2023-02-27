@@ -398,14 +398,14 @@ main{
 
 	.container-page-gods {
 		width: 100%;
-		height: 1000%;
+		height: 1000%;/*aqui é 1000% mesmo?*/
 		position: relative;
 	}
 
 	#box-cards-gods {
 		width: 100%;
 		height: 100%;
-		overflow: hidden;
+		/*overflow: hidden;/*mas isso não vai acabar com o scroll??*/
 	  }
 
 	  .cards-gods {

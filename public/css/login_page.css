@@ -280,6 +280,7 @@ relacionada aquele elemento
  #user-icon{
     position: relative;
     top: -6.375rem;
+    height: 10rem;/*author:letonio*/
  }
 #Vector-user,#cadeado{
     width: 1.75rem;

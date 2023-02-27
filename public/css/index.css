@@ -336,6 +336,7 @@ main {
 #temple {
 	width: var(--width-img-building-smaller);
 	height: var(--height-img-building-smaller);
+	border-radius: 4rem;
 }
 
 .container-carousel-category {
@@ -399,7 +400,7 @@ main {
 
 .container-circles {
 	width: auto;
-	margin: 10% 35% 0rem;
+	margin: 0% 35% 0rem;
 }
 
 .circle {
@@ -434,7 +435,7 @@ main {
 
 	.container-carousel-category {
 		width: 90%;
-		margin: 0 auto 20%;
+		margin: auto auto;
 	}
 
 	.category-arrow {
@@ -666,4 +667,30 @@ main {
 	.circle-orange {
 		background-color: var(--color-bg-arrow-hover);
 	}
+}
+
+/*tentando mudanças*/
+
+body{
+	width: 100vw;
+	height: 100vh;
+
+}
+#root{
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+
+#root > div{
+	width: 100vw;
+	height: 100vh;
+}
+
+header{
+	height: 10rem;
+}
+
+#all-category-main{
+	height: calc(100vh - 10rem);
 }
