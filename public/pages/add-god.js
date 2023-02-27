@@ -138,7 +138,7 @@ async function addNewGodInDatabase() {
     formData.append("categoryId", categoryId);
 
     try {
-        const response = await fetch("http://localhost:8080/godstable", {
+        const response = await fetch("http://149.28.108.117:8080/godstable", {
             method: "POST",
             body: formData,
             //headers: { "Content-type": "application/json; charset=UTF-8" },
