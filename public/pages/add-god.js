@@ -102,8 +102,9 @@ export function addEventsToAddNewGodPage() {
     addUniqueEventListener(cancelButton, "click", () => {
         redirectToTableEditGods();
     });
-    addUniqueEventListener(addGodButton, "click", () => {
-        addNewGodInDatabase();
+    addUniqueEventListener(addGodButton, "click", async (e) => {
+        e.preventDefault();
+        await addNewGodInDatabase();
         //Antes de redirecionar devemos adicionar o novo deus
         redirectToTableEditGods();
     });
