@@ -54,7 +54,7 @@ export function insertMenuItems(){
         div.innerHTML = `
             <li id="gods-page"><img src="../assets/icons/icons8-thor.svg" alt="">Deuses</li>
             <li id="categories-page"><img src="../assets/icons/categories.svg" alt="">Categorias</li>
-            <li id="edit-profile"><img src="../assets/icons/edit-profile-v1-white.svg" alt="">Editar perfil</li>
+            <li id="edit-profile"><img src="../assets/icons/edit-profile-v1-white.svg" alt="">Adicionar Administrador</li>
             <li id="change-password"><img src="../assets/icons/padlock-v2-white.svg" alt="">Mudar senha</li>
             <li id="edit-categories"><img src="../assets/icons/cards-bold-v1-white.svg" alt="">Editar Categorias</li>
             <li id="edit-gods"><img src="../assets/icons/icons8-thor.svg" alt="">Editar deuses</li>
