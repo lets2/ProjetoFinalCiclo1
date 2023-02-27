@@ -413,7 +413,11 @@ export function addEventsToHeader() {
     const profileIcon = document.querySelector("#profile-icon");
 
     addUniqueEventListener(profileIcon, "click", () => {
-        redirectToLoginAdmPage();
+        if (document.cookie.indexOf("session=") !== -1) {
+            redirectToMenuAdmPage();
+        } else {
+            redirectToLoginAdmPage();
+        }
     });
 
     const menuIcon = document.querySelector("#menu-icon");
