@@ -22,7 +22,7 @@ export function Category() {
         </div>
     </header>
 	<main>
-		<div class="container-page-gods flex-row-between">
+		<div class="container-page-gods">
             <div id="box-cards-gods">
                 <div id="box-cards-gods-overflow">
                                     

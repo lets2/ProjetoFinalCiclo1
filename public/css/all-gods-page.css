@@ -319,8 +319,8 @@ h4 {
 /************************************************
          STYLING HEADER COMPONENTS
  ************************************************/
- 
- /************************************************
+
+/************************************************
          STYLING MAIN COMPONENTS
  ************************************************/
 main {
@@ -342,7 +342,6 @@ main {
 #box-all-gods {
     width: 85%;
     height: 100%;
-
     overflow: hidden;
 }
 
@@ -401,7 +400,7 @@ main {
 /*@autor:daniel*/
 
 @media screen and (min-width: 800px) and (max-width: 1100px) {
-    #box-cards-gods {
+    #box-all-gods {
         width: 50%;
         height: 100%;
         overflow: hidden;
@@ -424,7 +423,7 @@ main {
 }
 
 @media screen and (min-width: 500px) and (max-width: 799px) {
-    #box-cards-gods {
+    #box-all-gods {
         width: 50%;
         height: 100%;
         overflow: hidden;
@@ -447,15 +446,19 @@ main {
 
 @media screen and (min-width: 300px) and (max-width: 499px) {
 
-    .container-page-gods {
+    .container-all-gods-page {
         width: 100%;
         height: 1000%;
         position: relative;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
     }
 
-    #box-cards-gods {
+    #box-all-gods {
         width: 100%;
         height: 100%;
+        margin-top: 3rem;
         overflow: hidden;
     }
 
@@ -467,7 +470,7 @@ main {
         cursor: pointer;
     }
 
-    #box-cards-gods-overflow {
+    #box-all-gods-overflow {
         height: auto;
         width: 100%;
         display: grid;
@@ -489,7 +492,7 @@ main {
         position: absolute;
         top: 6.0rem;
         text-align: center;
-        width: 80%;
+        width: 25rem;
         font-size: var(--size-font-t5);
         font-family: 'MedievalSharp', cursive;
         font-weight: 400;
