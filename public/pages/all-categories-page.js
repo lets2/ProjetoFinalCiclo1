@@ -21,27 +21,22 @@ export function Categories() {
 		<img id="menu-icon" src="../assets/icons/menu.svg" alt="">
 	</div>
 </header>
-<main>
-	<div class="container-carousel flex-col-center">
-		<div class="carousel flex-row-between">
-			<div class="container-arrow flex-center-center">
+<main class="main">
+	<div class="container-carousel-category">
+		<div class="flex-row-between">
+			<div class="container-arrow">
 				<img class="category-arrow category-arrow-left" src="../assets/icons/arrow-left-white.svg" alt="">
 			</div>
-			<figure class="container-temples">
+			<div class="container-temples">
 				<img class="temple" id="temple"src="../assets/uploads/templo_natureza.jpg" alt="">
 				<h1 class="temple-legend"></h1>
-			</figure>
-			<div class="container-arrow flex-center-center">
+			</div>
+			<div class="container-arrow">
 				<img class="category-arrow category-arrow-right" src="../assets/icons/arrow-right-white.svg" alt="">
 			</div>
-			
 		</div>
-		<div class="container-circles flex-row-between">
-	
-		</di>
+		<div class="container-circles flex-row-between"></div>
 	</div>
-	
-
 </main>
 <footer></footer>
 	`;
