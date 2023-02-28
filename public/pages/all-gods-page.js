@@ -62,6 +62,15 @@ export function insertAllGods(allGodsArray) {
     }
 }
 
+//Caso durante a pesquisa não tenha nenhum deus, escreve mensagem de nenhum deus encontrado
+//e sugestoes de alguns deuses:
+export function insertMessageNoGodFound() {
+    //const cardsGods = document.querySelector("#box-all-gods-overflow");
+    const cardsGods = document.querySelector("#box-all-gods");
+    cardsGods.innerHTML = "";
+    cardsGods.innerHTML = `<h4>Não há deuses correspondentes à sua pesquisa.</h4>`;
+}
+
 //eventos de click presentes na pagina que tem todos os deuses
 import { addEventsToHeader, allGodsArray } from "../index.js";
 import { addUniqueEventListener } from "../utils/event-listener.js";
@@ -81,4 +90,3 @@ export function addEventsToAllGodsPage() {
         }
     }
 }
-

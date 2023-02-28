@@ -344,8 +344,8 @@ exports.changePassword = async (req, res) => {
         } else {
             console.log("DEU FALSE, SENHA/USER ERRADO!", oldDbPasswordHash);
             response.message = "Forbidden";
-            response.error = "[400] Bad Request! Senha antiga não confere";
-            res.status(400).json(response); //errou senha antiga
+            response.error = "[401]  Unauthorized! Senha antiga não confere";
+            res.status(401).json(response); //errou senha antiga
             console.timeEnd(`changePassword()${milliseconds}`);
 
             return;

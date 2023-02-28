@@ -86,11 +86,19 @@ import { addEventsToHeader, displayWarning } from "../index.js";
 import { addUniqueEventListener } from "../utils/event-listener.js";
 import { redirectToTableEditCategories } from "./table_categories.js";
 
+//Função para limpar os inputs do formulário, para que não fique
+export function clearInputFromFormAddCategory() {
+    const inputNewNameCategory = document.querySelector("#new-name-category");
+    inputNewNameCategory.value = ""; //clear previous content
+    const selectTag = document.querySelector("#select-color-category-add");
+    selectTag.options[0].selected = true; //Deixa a opção "cor" selecionada
+}
+
 export function insertChoosedCatImg() {
     const fileBtn = document.querySelector("#insert-file-btn-cat");
     const previewImg = document.querySelector("#preview-img-cat");
     const message = document.querySelector("#message-input-file-cat");
-    
+
     addUniqueEventListener(fileBtn, "change", (e) => {
         if (e.target.files.length > 0) {
             const file = e.target.files[0];
@@ -111,8 +119,12 @@ export function addEventsToAddCategoryPage() {
     });
     const btnAddCategory = document.querySelector("#add-category");
     addUniqueEventListener(btnAddCategory, "click", async () => {
-        await addNewCategoryInDatabase();
-        redirectToTableEditCategories();
+        const addSuccess = await addNewCategoryInDatabase();
+        console.log("FLAG DE SUCESSO ADD CATEGORY:", addSuccess);
+        //Antes de redirecionar devemos adicionar o novo deus
+        if (addSuccess) {
+            redirectToTableEditCategories();
+        }
     });
 }
 
@@ -151,7 +163,10 @@ async function addNewCategoryInDatabase() {
         }
         const resJson = await response.json();
         displayWarning(resJson.message); //deu tudo  certo
+        //Se deu tudo certo, o modal acima mostra uma mensagem de sucesso e retorna true
+        return true;
     } catch (error) {
         console.log(error);
+        return false; //Não obteve sucesso ao tentar add, logo não podera ir para tabela
     }
 }

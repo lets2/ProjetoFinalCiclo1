@@ -89,6 +89,16 @@ export function insertChoosedGodImg() {
     });
 }
 
+//Função para limpar os inputs do formulário, para que não fique
+export function clearInputFromFormAddGod() {
+    const inputNewNameGod = document.querySelector("#new-name-god");
+    inputNewNameGod.value = ""; //clear previous content
+    const inputNewStatusGod = document.querySelector("#new-status-god");
+    inputNewStatusGod.value = ""; //clear previous content
+    const inputNewResumeGod = document.querySelector("#new-resume-god");
+    inputNewResumeGod.value = ""; //clear previous content
+}
+
 //FUncoes para adicionar eventos noADD GOD PAGE
 
 /*@author:Gabriela - coauthor: Letônio*/
@@ -104,9 +114,12 @@ export function addEventsToAddNewGodPage() {
     });
     addUniqueEventListener(addGodButton, "click", async (e) => {
         e.preventDefault();
-        await addNewGodInDatabase();
+        const addSuccess = await addNewGodInDatabase();
+        console.log("FLAG DE SUCESSO ADD GOD:", addSuccess);
         //Antes de redirecionar devemos adicionar o novo deus
-        redirectToTableEditGods();
+        if (addSuccess) {
+            redirectToTableEditGods();
+        }
     });
 }
 
@@ -138,7 +151,7 @@ async function addNewGodInDatabase() {
     formData.append("categoryId", categoryId);
 
     try {
-        const response = await fetch("http://149.28.108.117:8080/godstable", {
+        const response = await fetch("http://localhost:8080/godstable", {
             method: "POST",
             body: formData,
             //headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -152,7 +165,10 @@ async function addNewGodInDatabase() {
         }
         const resJson = await response.json();
         displayWarning(resJson.message); //deu tudo  certo
+        //Se deu tudo certo, o modal acima mostra uma mensagem de sucesso e retorna true
+        return true;
     } catch (error) {
         console.log(error);
+        return false; //Não obteve sucesso ao tentar add, logo não podera ir para tabela
     }
 }
