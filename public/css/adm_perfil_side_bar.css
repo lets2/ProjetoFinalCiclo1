@@ -337,7 +337,7 @@ aside > figure > h2{
 	padding: 2.0rem 0.0rem 2.0rem;
 }
 #profile-adm-icon{
-	height:9rem;
+	height:8rem;
 }
 
 #adm-name{
@@ -366,12 +366,7 @@ aside > figure > h2{
 }
 
 .sidebar-options-adm > li:hover{
-	background-color:  #1f105cfe;
-	/* scale: 1.1; */
-	/* outline: 2px solid rgb(255, 255, 255);; */
-	/* border-bottom: 2px solid rgb(255, 255, 255);
-	border-top: 2px solid rgb(255, 255, 255); */
-	
+	background-color:  #1f105cfe;	
 }
 .sidebar-options-adm img {
 	height: var(--size-icon-small);
@@ -381,3 +376,5 @@ aside > figure > h2{
 .hide-menu-itens{
 	display: none;
 }
+
+
