@@ -37,7 +37,7 @@ export function Categories() {
 				<img class="category-arrow category-arrow-right" src="../assets/icons/arrow-right-white.svg" alt="">
 			</div>
 		</div>
-		<div class="container-circles flex-row-between"></div>
+		<div class="container-circles"></div>
 	</div>
 </main>
 <footer></footer>

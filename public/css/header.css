@@ -277,7 +277,7 @@ relacionada aquele elemento
  header{
 	 height: var(--height-header);
 	 width: var(--width-header);
-	 background-color: var(--color-bg-header)
+	 background-color: var(--color-bg-header);
  }
  img{
 	 height: var(--size-icon-medium);
