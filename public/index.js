@@ -35,6 +35,7 @@ import {
 import {
     insertChoosedGodImg,
     addEventsToAddNewGodPage,
+    clearInputFromFormAddGod, //adicionei essa funcao para limpar o formulario da page
 } from "./pages/add-god.js";
 
 import {
@@ -50,7 +51,10 @@ import {
 
 import { redirectToMenu } from "./pages/menu.js";
 
-import { addEventsToAddCategoryPage } from "./pages/add-category.js";
+import {
+    addEventsToAddCategoryPage,
+    clearInputFromFormAddCategory,
+} from "./pages/add-category.js";
 
 import {
     insertChoosedCategoryTempleImg,
@@ -62,6 +66,7 @@ import {
     redirectToAllGods,
     insertAllGods,
     addEventsToAllGodsPage,
+    insertMessageNoGodFound,
 } from "./pages/all-gods-page.js";
 
 import {
@@ -121,11 +126,11 @@ addUniqueEventListener(window, "onstatechange", async (event) => {
 
     const respostaIndex = await addExternalResourcesTo(url, criteria);
 
-    chamaFuncaoEspecificaPelaUrl(url, respostaIndex);
+    chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria);
     addEventsRelatedTo(url); //call relateds events to page/url
 });
 
-function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
+function chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria) {
     switch (url) {
         case "/categories":
             categoriesList = respostaIndex; //nesse caso respostaIndex = lista de categorias
@@ -162,8 +167,13 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
             break;
 
         case "/editGod/g1":
+            //console.log("ZZZ CATEGORY ID:", respostaIndex);
             inserirElementosNaEditGodPage(respostaIndex);
-            addSelectWithCategoriesInGodsPage();
+            addSelectWithCategoriesInGodsPage(respostaIndex.category_id);
+            //a funcao acima eh usada em duas paginas (add e edit),
+            //vou colocar um parametro que caso nao seja informado por padrao
+            //sera nulo, ai na pagina de edit-god, caso nao seja nulo
+            //significa que devo fixar o valor do select
             break;
 
         case "/editCategory":
@@ -172,22 +182,35 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
             break;
 
         case "/addCategory":
+            clearInputFromFormAddCategory();
             insertChoosedCategoryTempleImg(); //function to show preview
             break;
 
         case "/addGod":
+            clearInputFromFormAddGod();
             insertChoosedGodImg();
             addSelectWithCategoriesInGodsPage();
             break;
         case "/allGods":
-            console.log("OLHA O RESPOSTA INDEX:", respostaIndex);
+            console.log("zzOLHA O RESPOSTA INDEX:", respostaIndex);
             if (Array.isArray(respostaIndex)) {
                 godsFilteredArrayGlobal = respostaIndex;
                 allGodsArray = respostaIndex; //ganbiarra, se tirar isso da erro na 1190
                 insertAllGods(godsFilteredArrayGlobal);
             } else {
-                allGodsArray = respostaIndex.dataGods;
-                insertAllGods(allGodsArray);
+                if (criteria.pesquisar) {
+                    allGodsArray = respostaIndex.dataGods;
+                    displayWarning(
+                        "Não há deuses correspondentes à sua pesquisa. Aqui está uma lista com todos os deuses."
+                    );
+                    //insertMessageNoGodFound();
+                    insertAllGods(allGodsArray);
+                } else {
+                    //implica pesquisar===false,logo mostra todos os deuses
+                    console.log("tttttELSE - ENTROU AQUI!!", allGodsArray);
+                    allGodsArray = respostaIndex.dataGods;
+                    insertAllGods(allGodsArray);
+                }
             }
 
             break;
@@ -449,7 +472,7 @@ async function pesquisar(texto) {
     const arrayWords = texto.split(/\s|,/); //regex to split blankspace or , //= ["muito", "ddd"];
     const parametro = arrayWords.join(",");
 
-    redirectToAllGods(parametro);
+    redirectToAllGods(parametro, true);
 }
 // author: Gabriela
 function addEventsToRegisterUser() {

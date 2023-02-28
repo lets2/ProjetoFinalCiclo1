@@ -12,6 +12,7 @@ exports.getAll = async () => {
         return resp;
     } catch (error) {
         console.log(TAG, "ERROR caught");
+        throw error;
     }
 };
 
@@ -21,6 +22,7 @@ exports.getById = async (id) => {
         return resp;
     } catch (error) {
         console.log(TAG, "ERROR caught");
+        throw error;
     }
 };
 
@@ -102,5 +104,6 @@ exports.deleteGodById = async (id) => {
         return resp;
     } catch (error) {
         console.log(TAG, "ERROR caught");
+        throw error;
     }
 };

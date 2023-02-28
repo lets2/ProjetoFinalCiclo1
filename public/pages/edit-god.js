@@ -103,19 +103,21 @@ export function inserirElementosNaEditGodPage(godObj) {
 //COMEÇA AQUI
 import { categoriesList, addEventsToHeader, displayWarning } from "../index.js";
 
-export function addSelectWithCategoriesInGodsPage() {
+export function addSelectWithCategoriesInGodsPage(categoryIdThisGod = false) {
     const selectElement = document.querySelector("#select-filter-category");
     selectElement.innerHTML = ""; //clear any previous content
 
     addOptionToSelectInGodsPage(selectElement, {
         value: "choose",
         text: "Escolha uma categoria",
+        currentId: categoryIdThisGod,
     });
 
     categoriesList.forEach((category) => {
         addOptionToSelectInGodsPage(selectElement, {
             value: category.id,
             text: category.name,
+            currentId: categoryIdThisGod,
         });
     });
 }
@@ -127,6 +129,10 @@ function addOptionToSelectInGodsPage(_select, _paramOption) {
     if (_paramOption.value === "choose") {
         option.disabled = true;
         //option.selected = true;
+    }
+    if (_paramOption.value === _paramOption.currentId) {
+        option.selected = true; //Para cada option, vai olhar option.value, se for
+        //igual ao deus que vais er editado, entãocoloca como selected
     }
     _select.appendChild(option);
 }
@@ -148,12 +154,15 @@ export function addEventsToEditGodPages() {
         redirectToTableEditGods();
     });
     const updateGodBtn = document.querySelector("#update-god-button");
-    addUniqueEventListener(updateGodBtn, "click", () => {
+    addUniqueEventListener(updateGodBtn, "click", async () => {
         //atualizar informações de um deus;
         const godId = document.querySelector("#container-edit-god").dataset
             .godId;
-        updateGodInformationInDatabase(godId);
-        redirectToTableEditGods();
+        const editSuccess = await updateGodInformationInDatabase(godId);
+        console.log("FLAG DE SUCESSO EDIT:", editSuccess);
+        if (editSuccess) {
+            redirectToTableEditGods();
+        }
     });
 }
 
@@ -179,8 +188,12 @@ async function updateGodInformationInDatabase(godId) {
         const resJson = await response.json();
         console.log("Requisição de EDIT GOD deu certo:", resJson);
         displayWarning(resJson.message); //deu tudo  certo
+        //Se deu tudo certo, o modal acima mostra uma mensagem de sucesso e retorna true
+        return true;
+        //
     } catch (error) {
         console.log(error);
+        return false; //Não obteve sucesso ao tentar editar, logo não podera ir para tabela
     }
 }
 

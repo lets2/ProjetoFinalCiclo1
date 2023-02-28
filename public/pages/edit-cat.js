@@ -23,7 +23,7 @@ export function EditCategory() {
     </header>
     <main>
         <div class="container-edit-category flex-center-center">
-            <div class="container-edit-cat flex-row-center"> 
+            <div id="container-edit-cat" class="container-edit-cat flex-row-center"> 
 
                 <div id="box-preview-img-cat" class="flex-col-center">
                     <div id="edit-page-cat-img">
@@ -85,7 +85,7 @@ export function insertChoosedCategoryTempleImg() {
     const previewImg = document.querySelector("#preview-img-cat");
     const message = document.querySelector("#message-input-file-cat");
 
-    message.innerHTML= "";
+    message.innerHTML = "";
 
     addUniqueEventListener(fileBtn, "change", (e) => {
         if (e.target.files.length > 0) {
@@ -112,9 +112,7 @@ export function testInserirElementosNaEditCategoryPage(catInformation) {
     <img src="../assets/uploads/${catInformation.src}" alt="">
     `;
 
-    const containerEditCategory = document.querySelector(
-        ".container-edit-cat"
-    );
+    const containerEditCategory = document.querySelector(".container-edit-cat");
     containerEditCategory.dataset.id = catInformation.id; //add-set
 }
 
@@ -134,14 +132,15 @@ export function addEventsToEditCategoryPage() {
     //
     // #Adicionar;
     const btnEditCategory = document.querySelector("#edit-category");
-    addUniqueEventListener(btnEditCategory, "click", () => {
+    addUniqueEventListener(btnEditCategory, "click", async () => {
         //
         //pegar o id que está armazenado num data-set
-        const id = document.querySelector(".container-edit-cat").dataset
-            .id;
-        updateCategoryInformationInDatabase(id);
-
-        redirectToTableEditCategories();
+        const id = document.querySelector(".container-edit-cat").dataset.id;
+        const editSuccess = await updateCategoryInformationInDatabase(id);
+        console.log("FLAG DE SUCESSO EDIT CAT:", editSuccess);
+        if (editSuccess) {
+            redirectToTableEditCategories();
+        }
     });
 }
 //
@@ -169,8 +168,12 @@ async function updateCategoryInformationInDatabase(id) {
         const resJson = await response.json();
         console.log("Requisição de EDIT CATEGORY deu certo:", resJson);
         displayWarning(resJson.message); //deu tudo  certo
+        //Se deu tudo certo, o modal acima mostra uma mensagem de sucesso e retorna true
+        return true;
+        //
     } catch (error) {
         console.log(error);
+        return false; //Não obteve sucesso ao tentar editar, logo não podera ir para tabela
     }
 }
 
@@ -178,9 +181,7 @@ function getCategoryInputInformations(id) {
     //provavelmente apagarei esse obj, já qu tudo está sendo armazenado no formdata
     let obj = {};
 
-    const inputNameUpdate = document.querySelector(
-        "#new-name-category"
-    ).value;
+    const inputNameUpdate = document.querySelector("#new-name-category").value;
 
     const inputColorUpdate = document.querySelector(
         "#select-color-category-edit"
