@@ -2,7 +2,7 @@
 export async function addResourcesToGodChoosed(godId) {
     try {
         const response = await fetch(
-            `http://localhost:8080/godstable/${godId}/`
+            `/godstable/${godId}/`
         );
 
         if (response.status !== 200 && response.status !== 201)
@@ -37,7 +37,7 @@ export async function addResourcesToGodChoosed(godId) {
 export async function addResourcesToTableOfGods() {
     try {
         const responseCategories = await fetch(
-            `http://localhost:8080/categories/`
+            `/categories/`
         );
 
         if (
@@ -48,7 +48,7 @@ export async function addResourcesToTableOfGods() {
 
         const objContentCateg = await responseCategories.json();
         const dataCategories = objContentCateg.data;
-        const responseGods = await fetch(`http://localhost:8080/godstable/`);
+        const responseGods = await fetch(`/godstable/`);
 
         if (responseGods.status !== 200 && responseGods.status !== 201)
             throw "[erro] Houve um problema na requisicao das categorias!";
@@ -66,7 +66,7 @@ export async function addResourcesToTableOfGods() {
 export async function addResourcesToGodInfo(godId) {
     try {
         const response = await fetch(
-            `http://localhost:8080/godstable/${godId}/`
+            `/godstable/${godId}/`
         );
 
         if (response.status !== 200 && response.status !== 201)
@@ -114,7 +114,7 @@ export async function addResourcesToGodInfo(godId) {
 export async function addResourcesToEditGodPage(godId) {
     try {
         const response = await fetch(
-            `http://localhost:8080/godstable/${godId}/`
+            `/godstable/${godId}/`
         );
 
         if (response.status !== 200 && response.status !== 201)
@@ -134,7 +134,7 @@ export async function addResourcesToEditGodPage(godId) {
 export async function getResourcesFromGodsFiltered(_parametroDePesquisa) {
     try {
         const response = await fetch(
-            `http://localhost:8080/searchgods?strings=${_parametroDePesquisa}`
+            `/searchgods?strings=${_parametroDePesquisa}`
         );
         console.log("RESPOSTA DA REQUISIÇÃO SEARCH GODS:", response.status);
 

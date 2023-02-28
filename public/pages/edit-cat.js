@@ -27,7 +27,7 @@ export function EditCategory() {
 
                 <div id="box-preview-img-cat" class="flex-col-center">
                     <div id="edit-page-cat-img">
-                        <img id="preview-img-cat" src="../assets/images/exampleTemple.png" alt="">
+                        <img id="preview-img-cat" src="../assets/images/JPG-PLACEHOLDER-templo.jpg" alt="">
                     </div>
                     
                     <input id="insert-file-btn-cat" type="file" name="file" accept="image/png, image/jpeg, image/jpg">
@@ -151,7 +151,7 @@ async function updateCategoryInformationInDatabase(id) {
     //FETCH
     try {
         const response = await fetch(
-            `http://localhost:8080/categoriestable/${id}`,
+            `/categoriestable/${id}`,
             {
                 method: "PUT",
                 body: formData,
@@ -187,7 +187,7 @@ function getCategoryInputInformations(id) {
         "#select-color-category-edit"
     ).value;
 
-    obj.src = "ExampleTemple.png";
+    obj.src = "JPG-PLACEHOLDER-templo.jpg";
 
     //MOntando o formData para fazer a edição de categoria:
     const formData = new FormData();

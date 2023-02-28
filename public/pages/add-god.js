@@ -26,7 +26,7 @@ export function AddGod() {
         <div class="flex-row-center" id="container-edit-god">
             <div class="flex-col-center" id="box-img-god">
                 <div>
-                    <img id="preview-img-god" src="../assets/images/games-god.jpg" alt="">
+                    <img id="preview-img-god" src="../assets/images/JPG-PLACEHOLDER-DEUS.jpg" alt="">
                 </div>
                 <input id="insert-file-btn" type="file" name="file" accept="image/png, image/jpeg, image/jpg">
                 <label for="insert-file-btn" class="custom-file-upload">Escolha um arquivo</label>
@@ -151,7 +151,7 @@ async function addNewGodInDatabase() {
     formData.append("categoryId", categoryId);
 
     try {
-        const response = await fetch("http://localhost:8080/godstable", {
+        const response = await fetch("/godstable", {
             method: "POST",
             body: formData,
             //headers: { "Content-type": "application/json; charset=UTF-8" },

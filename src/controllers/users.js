@@ -179,7 +179,7 @@ exports.registerNewAdm = async (req, res) => {
     if (!username || !plainTextPassword || !email) {
         //
         console.log(TAG, "NAME,EMAIL or PASSWORD is UNDEFINED/NULL");
-        response.message = "Request need to have {name,email,password})";
+        response.message = "Request need to have {name, email, password})";
         response.data = null;
         response.error = "[400] Bad request! Some fields are UNDEFINED/NULL";
 
@@ -192,7 +192,7 @@ exports.registerNewAdm = async (req, res) => {
         //
         console.log(TAG, "NAME,EMAIL or PASSWORD is EMPTY");
         response.message =
-            "These fields cannot be empty: name,email,password})";
+            "These fields cannot be empty: name, email, password})";
         response.data = null;
         response.error = "[400] Bad request! Some fields are EMPTY";
 
@@ -209,9 +209,22 @@ exports.registerNewAdm = async (req, res) => {
         //
         console.log(TAG, "USERNAME or PASSWORD is not STRING");
         response.message =
-            "These fields should be STRING TYPE:username, password)";
+            "These fields should be STRING TYPE: username, password)";
         response.data = null;
         response.error = "[400] Bad request! Some fields are not STRING";
+
+        res.status(400).json(response);
+        console.timeEnd(`registerNewAdm()${milliseconds}`);
+        return;
+    }
+    if (
+        !isEmailValid(email)
+    ) {
+        console.log(TAG, "Email inválido!");
+        response.message =
+            "É necessário informar um email válido!";
+        response.data = null;
+        response.error = "[401] Unauthorized! Email is not valid!";
 
         res.status(400).json(response);
         console.timeEnd(`registerNewAdm()${milliseconds}`);
@@ -377,3 +390,10 @@ function IsNotString(_data) {
     }
     return false;
 }
+
+
+function isEmailValid(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+  

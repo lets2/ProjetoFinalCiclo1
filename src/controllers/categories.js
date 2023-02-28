@@ -285,7 +285,7 @@ exports.createCategory = async (req, res) => {
 
     if (!name || !src || !hexColor) {
         console.log(TAG, "NAME,SRC or HEXCOLOR is UNDEFINED/NULL");
-        response.message = "Request need to have {name,src,hexColor})";
+        response.message = "Request need to have {name, src, hexColor})";
         response.data = null;
         response.error = "[400] Bad request! Some fields are UNDEFINED/NULL";
 
@@ -295,8 +295,8 @@ exports.createCategory = async (req, res) => {
     }
 
     if (name === "" || src === "" || hexColor === "") {
-        console.log(TAG, "NAME,SRC or HEXCOLOR is EMPTY");
-        response.message = "These fields cannot be empty: name,src,hexColor})";
+        console.log(TAG, "NAME, SRC or HEXCOLOR is EMPTY");
+        response.message = "These fields cannot be empty: name, src, hexColor})";
         response.data = null;
         response.error = "[400] Bad request! Some fields are EMPTY";
 
@@ -306,9 +306,9 @@ exports.createCategory = async (req, res) => {
     }
 
     if (IsNotString(name) || IsNotString(src) || IsNotString(hexColor)) {
-        console.log(TAG, "NAME,SRC or HEXCOLOR is not STRING");
+        console.log(TAG, "NAME, SRC or HEXCOLOR is not STRING");
         response.message =
-            "These fields should be STRING TYPE:name,src,hexColor)";
+            "These fields should be STRING TYPE:name, src, hexColor)";
         response.data = null;
         response.error = "[400] Bad request! Some fields are not STRING";
 
@@ -385,8 +385,8 @@ exports.updateCategory = async (req, res) => {
     };
 
     if (!id || !name || !hexColor) {
-        console.log(TAG, "ID,NAME,SRC or HEXCOLOR is UNDEFINED/NULL");
-        response.message = "Request need to have {id,name,src,hexColor})";
+        console.log(TAG, "ID, NAME, SRC or HEXCOLOR is UNDEFINED/NULL");
+        response.message = "Request need to have {id, name, src, hexColor})";
         response.data = null;
         response.error = "[400] Bad request! Some fields are UNDEFINED/NULL";
 
@@ -396,9 +396,9 @@ exports.updateCategory = async (req, res) => {
     }
 
     if (id === "" || name === "" || hexColor === "") {
-        console.log(TAG, "ID, NAME,SRC or HEXCOLOR is EMPTY");
+        console.log(TAG, "ID, NAME, SRC or HEXCOLOR is EMPTY");
         response.message =
-            "These fields cannot be empty: id,name,src,hexColor})";
+            "These fields cannot be empty: id, name, src, hexColor})";
         response.data = null;
         response.error = "[400] Bad request! Some fields are EMPTY";
 
@@ -408,9 +408,9 @@ exports.updateCategory = async (req, res) => {
     }
 
     if (IsNotString(id) || IsNotString(name)) {
-        console.log(TAG, "ID,NAME,SRC or HEXCOLOR is not STRING");
+        console.log(TAG, "ID, NAME, SRC or HEXCOLOR is not STRING");
         response.message =
-            "These fields should be STRING TYPE:id,name,src,hexColor)";
+            "These fields should be STRING TYPE:id, name, src, hexColor)";
         response.data = null;
         response.error = "[400] Bad request! Some fields are not STRING";
 

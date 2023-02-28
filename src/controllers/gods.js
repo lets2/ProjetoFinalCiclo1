@@ -198,10 +198,10 @@ exports.createGod = async (req, res) => {
     if (!name || !status || !categoryId || !resume || !src) {
         console.log(
             TAG,
-            "NAME,STATUS,CATEGORYID,RESUME or SRC is UNDEFINED/NULL"
+            "NAME, STATUS, CATEGORYID, RESUME or SRC is UNDEFINED/NULL"
         );
         response.message =
-            "Request need to have {name,status,caregoryId,resume,src})";
+            "Request need to have {name, status, caregoryId, resume, src})";
         response.data = null;
         response.error = "[400] Bad request! Some fields are UNDEFINED/NULL";
 
@@ -217,9 +217,9 @@ exports.createGod = async (req, res) => {
         resume === "" ||
         src === ""
     ) {
-        console.log(TAG, "NAME,STATUS,CATEGORYID,RESUME or SRC is EMPTY");
+        console.log(TAG, "NAME, STATUS, CATEGORYID, RESUME or SRC is EMPTY");
         response.message =
-            "These fields cannot be empty: name,status,caregoryId,resume,src)";
+            "These fields cannot be empty: name, status, caregoryId, resume, src)";
         response.data = null;
         response.error = "[400] Bad request! Some fields are EMPTY";
 
@@ -235,9 +235,9 @@ exports.createGod = async (req, res) => {
         IsNotString(resume) ||
         IsNotString(src)
     ) {
-        console.log(TAG, "NAME,STATUS,CATEGORYID,RESUME or SRC is not STRING");
+        console.log(TAG, "NAME, STATUS, CATEGORYID, RESUME or SRC is not STRING");
         response.message =
-            "These fields should be STRING TYPE:name,status,categoryId,resume,src)";
+            "These fields should be STRING TYPE:name, status, categoryId, resume, src)";
         response.data = null;
         response.error = "[400] Bad request! Some fields are not STRING";
 
@@ -308,10 +308,10 @@ exports.updateGod = async (req, res) => {
     if (!name || !status || !categoryId || !resume) {
         console.log(
             TAG,
-            "NAME,STATUS,CATEGORYID,RESUME or SRC is UNDEFINED/NULL"
+            "NAME, STATUS, CATEGORYID, RESUME or SRC is UNDEFINED/NULL"
         );
         response.message =
-            "Request need to have {name,status,categoryId,resume,src})";
+            "Request need to have {name, status, categoryId, resume, src})";
         response.data = null;
         response.error = "[400] Bad request! Some fields are UNDEFINED/NULL";
 
@@ -321,9 +321,9 @@ exports.updateGod = async (req, res) => {
     }
 
     if (name === "" || status === "" || categoryId === "" || resume === "") {
-        console.log(TAG, "NAME,STATUS,CATEGORYID,RESUME or SRC is EMPTY");
+        console.log(TAG, "NAME, STATUS, CATEGORYID, RESUME or SRC is EMPTY");
         response.message =
-            "These fields cannot be empty: name,status,categoryId,resume,src)";
+            "These fields cannot be empty: name, status, categoryId, resume, src)";
         response.data = null;
         response.error = "[400] Bad request! Some fields are EMPTY";
 
@@ -338,9 +338,9 @@ exports.updateGod = async (req, res) => {
         IsNotString(categoryId) ||
         IsNotString(resume)
     ) {
-        console.log(TAG, "NAME,STATUS,CATEGORYID,RESUME or SRC is not STRING");
+        console.log(TAG, "NAME, STATUS, CATEGORYID, RESUME or SRC is not STRING");
         response.message =
-            "These fields should be STRING TYPE:name,status,caregoryId,resume,src)";
+            "These fields should be STRING TYPE:name, status, categoryId, resume, src)";
         response.data = null;
         response.error = "[400] Bad request! Some fields are not STRING";
 

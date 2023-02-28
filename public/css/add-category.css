@@ -295,7 +295,7 @@ relacionada aquele elemento
 #box-preview-img-cat div{
     width: 19rem;
     height: 28rem;
-    border: 1.8rem solid #d9d9d9b3;
+    border: 1rem solid var(--color-fonts);
     border-radius: 2rem;
     margin-bottom: 2rem;
     overflow: hidden;    
@@ -508,7 +508,7 @@ option[value="#000000"]{
     #box-preview-img-cat div{
         width: 100%;
         height: 28rem;
-        border: 1.8rem solid #d9d9d9b3;
+        border: 1rem solid var(--color-fonts);
         border-radius: 2rem;
         margin-bottom: 2rem;
         overflow: hidden;    
@@ -586,7 +586,7 @@ option[value="#000000"]{
     #box-preview-img-cat div{
         width: 100%;
         height: auto;/*28rem*/
-        border: 1.8rem solid #d9d9d9b3;
+        border: 1rem solid var(--color-fonts);
         border-radius: 2rem;
         overflow: hidden;    
     }

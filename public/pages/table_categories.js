@@ -109,7 +109,7 @@ function adicionaEventosNosLapis() {
 async function deleteCategoryFromDatabase(id) {
     try {
         const response = await fetch(
-            `http://localhost:8080/categoriestable/${id}/`,
+            `/categoriestable/${id}/`,
             {
                 method: "DELETE",
             }

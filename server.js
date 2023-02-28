@@ -8,7 +8,7 @@ const cookieParser = require("cookie-parser");
 //Import router file/module from backend
 const router = require("./src/router.js");
 
-const PORT = process.env.PG_PORT | 8080;
+const PORT = process.env.PG_PORT | 80;
 const HOSTNAME = process.env.PG_HOST;
 
 const app = express();
