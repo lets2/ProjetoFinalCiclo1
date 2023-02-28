@@ -339,7 +339,7 @@ relacionada aquele elemento
      /* border-bottom: solid 0.5rem var(--color-white); */
  }
  #profile-adm-icon{
-     height: 9rem;
+     height: 8rem;
  }
  
  #adm-name{
@@ -369,3 +369,4 @@ relacionada aquele elemento
      height: var(--size-icon-small);
      margin-right: 2.0rem;
  }
+

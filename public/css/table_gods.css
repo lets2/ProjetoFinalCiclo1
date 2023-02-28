@@ -277,20 +277,6 @@ relacionada aquele elemento
 	 width: 100%;
  }
  
- .container-carousel{
-	 width: 100%;
-	 height: 100%;
- }
- 
- .carousel{
-	 width: 100%;
- }
- .container-arrow{
-	 width: 15%;
-	 height: 7.0rem;
- }
- /*fazer arrows*/
- 
  /************************************************
 		 STYLING FOOTER COMPONENTS
  ************************************************/
@@ -300,7 +286,7 @@ relacionada aquele elemento
 		 STYLING BY LETONIO
  ************************************************/
 
-.container-content{
+.container-content-gods{
 	width: 63.5%; /* Gabriela alterei aqui*/
 	height: 89.4%; /* Gabriela alterei aqui ambos eram 90%*/
 	background-color: var(--color-bg-backInput);
@@ -375,5 +361,26 @@ td {
 	padding-top: 1.5rem;
 	padding-bottom: 1.5rem;
 	font-size: var(--size-font-t8);
+}
+
+/* author: Gabriela */
+@media (min-width:320px ) and (max-width:767px ){
+	.container-content-gods{
+		width: 100%; 
+		height: 100%; 
+		border-radius: 0rem;
+		padding: 2rem;
+	}
+	.container-table{
+		overflow-x: auto;
+	}
+}
+
+@media screen and (min-width:768px ) and (max-width:1440px ){
+	.container-content-gods{
+		width: 92%; 
+		height: 92%; 
+		padding: 4rem;
+	}
 }
 

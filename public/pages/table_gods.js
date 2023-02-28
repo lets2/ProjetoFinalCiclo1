@@ -23,7 +23,7 @@ export function TableGods() {
     </header>
     
 <main class="flex-center-center">
-	<div class="container-content flex-col-center">
+	<div class="container-content-gods flex-col-center">
 		<div class="container-filters flex-row-around">
 		   <button id="create-new-god">Criar um novo Deus</button>
 		</div>
