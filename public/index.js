@@ -148,6 +148,7 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria) {
             break;
 
         case "/categories/d1":
+            RenderButtonBack(criteria.categoryId);
             break;
 
         case "/tableCategories":
@@ -220,7 +221,8 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria) {
 //------------------------------------------------------------------------
 // ADDS EVENTS TO THE PAGE THAT WAS RENDERED ACCORDING URL
 //-----------------------------------------------------------------------
-
+import { currentIndexCategory } from "./pages/all-categories-page.js";
+import { RenderButtonBack } from "./utils/btn-back-cards.js";
 function addEventsRelatedTo(url) {
     switch (url) {
         case "/":

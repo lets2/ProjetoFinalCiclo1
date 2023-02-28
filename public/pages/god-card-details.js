@@ -49,9 +49,9 @@ export function GodChoosed() {
     return div;
 }
 
-export function redirectToGodDetailsPage(godId) {
+export function redirectToGodDetailsPage(godId, categoryId) {
     const eventStateChange = CriaEventStateChange("/categories/d1", {
-        godId: godId,
+        godId: godId, categoryId: categoryId
     });
     window.dispatchEvent(eventStateChange);
 }

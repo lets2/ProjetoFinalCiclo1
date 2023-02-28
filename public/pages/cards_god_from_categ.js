@@ -95,7 +95,7 @@ function eventosAdicionadosEmCadaCartao(godsOfCategory) {
             );
             ////console.log(godCard.id, "AAAA");
             addUniqueEventListener(godCard, "click", () => {
-                redirectToGodDetailsPage(godCard.dataset.godId);
+                redirectToGodDetailsPage(godCard.dataset.godId, godsOfCategory[i].category_id);
             });
         }
     }
