@@ -62,6 +62,16 @@ exports.getById = async (req, res) => {
         console.timeEnd(`getgods()${milliseconds}`);
     } catch (error) {
         console.log(TAG, error);
+        if (error.message === "No rows returned") {
+            console.log("[404] NOT FOUND");
+            response.message = "Nenhuma categoria corresponde ao ID informado";
+            response.data = null;
+            response.error = "[404] Not Found!";
+
+            res.status(404).json(response);
+            console.timeEnd(`getgods()${milliseconds}`);
+            return;
+        }
 
         response.message = "Erro interno do servidor";
         response.data = null;
@@ -98,7 +108,16 @@ exports.getAllGodsById = async (req, res) => {
         console.timeEnd(`getAllGodsgods()${milliseconds}`);
     } catch (error) {
         console.log(TAG, error);
+        if (error.message === "No rows returned") {
+            console.log("[404] NOT FOUND");
+            response.message = "Nenhuma categoria corresponde ao ID informado";
+            response.data = null;
+            response.error = "[404] Not Found!";
 
+            res.status(404).json(response);
+            console.timeEnd(`getAllGodsgods()${milliseconds}`);
+            return;
+        }
         response.message = "Erro interno do servidor";
         response.data = null;
         response.error = "Erro interno do servidor";
@@ -133,7 +152,16 @@ exports.getGodById = async (req, res) => {
         console.timeEnd(`getGodById()${milliseconds}`);
     } catch (error) {
         console.log(TAG, error);
+        if (error.message === "No rows returned") {
+            console.log("[404] NOT FOUND");
+            response.message = "Nenhum deus corresponde ao ID informado";
+            response.data = null;
+            response.error = "[404] Not Found!";
 
+            res.status(404).json(response);
+            console.timeEnd(`getGodById()${milliseconds}`);
+            return;
+        }
         response.message = "Erro interno do servidor";
         response.data = null;
         response.error = "Erro interno do servidor";
@@ -208,7 +236,16 @@ exports.getFromTableById = async (req, res) => {
         console.timeEnd(`getFromTableById()${milliseconds}`);
     } catch (error) {
         console.log(TAG, error);
+        if (error.message === "No rows returned") {
+            console.log("[404] NOT FOUND");
+            response.message = "Nenhuma categoria corresponde ao ID informado";
+            response.data = null;
+            response.error = "[404] Not Found!";
 
+            res.status(404).json(response);
+            console.timeEnd(`getFromTableById()${milliseconds}`);
+            return;
+        }
         response.message = "Erro interno do servidor";
         response.data = null;
         response.error = "Erro interno do servidor";
@@ -302,7 +339,7 @@ exports.createCategory = async (req, res) => {
         );
 
         // Retornar com sucesso
-        response.message = "Success";
+        response.message = "Categoria criada com sucesso!";
         response.data = serviceResponse;
 
         res.status(200).json(response);
@@ -394,14 +431,23 @@ exports.updateCategory = async (req, res) => {
         );
 
         // Retornar com sucesso
-        response.message = "Success";
+        response.message = "Categoria atualizada com sucesso!";
         response.data = serviceResponse;
 
         res.status(200).json(response);
         console.timeEnd(`updateCategory()${milliseconds}`);
     } catch (error) {
         console.log(TAG, error);
+        if (error.message === "No rows returned") {
+            console.log("[404] NOT FOUND");
+            response.message = "Nenhuma categoria corresponde ao ID informado";
+            response.data = null;
+            response.error = "[404] Not Found!";
 
+            res.status(404).json(response);
+            console.timeEnd(`updateCategory()${milliseconds}`);
+            return;
+        }
         response.message = "Erro interno do Servidor";
         response.data = null;
         response.error = "Erro interno do Servidor";
@@ -432,7 +478,7 @@ exports.deleteCategoryById = async (req, res) => {
     try {
         const serviceResponse = await categoriesService.deleteCategoryById(id);
         console.log("Olha o que vem:", serviceResponse);
-        response.message = "Success";
+        response.message = "Categoria excluída com sucesso!";
         //response.data = serviceResponse.rows;
         response.data = serviceResponse; //this return just one object {name:,url:}
 
@@ -448,7 +494,16 @@ exports.deleteCategoryById = async (req, res) => {
         console.timeEnd(`deleteCategoryById()${milliseconds}`);
     } catch (error) {
         console.log(TAG, error);
+        if (error.message === "No rows returned") {
+            console.log("[404] NOT FOUND");
+            response.message = "Nenhuma categoria corresponde ao ID informado";
+            response.data = null;
+            response.error = "[404] Not Found!";
 
+            res.status(404).json(response);
+            console.timeEnd(`deleteCategoryById()${milliseconds}`);
+            return;
+        }
         response.message = "Erro interno do servidor";
         response.data = null;
         response.error = "Erro interno do servidor";

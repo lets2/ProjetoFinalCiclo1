@@ -80,8 +80,8 @@ exports.login = async (req, res) => {
             // res.status(200).json({ controller: "GEROU cookie" });
         } else {
             console.log("DEU FALSE, SENHA/USER ERRADO!", dbPasswordHash);
-            response.message = "Forbidden";
-            response.error = "[403] Acesso negado";
+            response.message = "[403] Acesso negado!";
+            response.error = "[403] Acesso negado!";
             res.status(403).json(response); //forbidden
             console.timeEnd(`login()${milliseconds}`);
 
@@ -96,7 +96,15 @@ exports.login = async (req, res) => {
         console.timeEnd(`login()${milliseconds}`);
     } catch (error) {
         console.log(TAG, error);
+        if (error.message === "No rows returned") {
+            response.message = "Acesso negado!";
+            response.data = null;
+            response.error = "[403] Acesso negado!";
 
+            res.status(403).json(response);
+            console.timeEnd(`login()${milliseconds}`);
+            return;
+        }
         response.message = "Erro interno do Servidor";
         response.data = null;
         response.error = "Erro interno do Servidor";
@@ -358,7 +366,7 @@ exports.changePassword = async (req, res) => {
         response.error = "Erro interno do Servidor";
 
         res.status(500).json(response);
-        console.timeEnd(`registerNewAdm()${milliseconds}`);
+        console.timeEnd(`changePassword()${milliseconds}`);
     }
 };
 

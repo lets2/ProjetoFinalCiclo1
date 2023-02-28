@@ -23,7 +23,7 @@ export function EditCategory() {
     </header>
     <main>
         <div class="container-edit-category flex-center-center">
-            <div class="container-edit-cat flex-row-center"> 
+            <div id="container-edit-cat" class="container-edit-cat flex-row-center"> 
 
                 <div id="box-preview-img-cat" class="flex-col-center">
                     <div id="edit-page-cat-img">

@@ -8,6 +8,7 @@ exports.getAll = async () => {
         return resp;
     } catch (error) {
         console.log(TAG, "ERROR caught");
+        throw error;
     }
 };
 
@@ -17,6 +18,7 @@ exports.getById = async (id) => {
         return resp;
     } catch (error) {
         console.log(TAG, "ERROR caught");
+        throw error;
     }
 };
 
@@ -26,6 +28,7 @@ exports.getAllGodsById = async (index) => {
         return resp;
     } catch (error) {
         console.log(TAG, "ERROR caught");
+        throw error;
     }
 };
 
@@ -35,6 +38,7 @@ exports.getGodById = async (godId) => {
         return resp;
     } catch (error) {
         console.log(TAG, "ERROR caught");
+        throw error;
     }
 };
 
@@ -48,6 +52,7 @@ exports.getTable = async () => {
         return resp;
     } catch (error) {
         console.log(TAG, "ERROR caught");
+        throw error;
     }
 };
 
@@ -57,6 +62,7 @@ exports.getFromTableById = async (id) => {
         return resp;
     } catch (error) {
         console.log(TAG, "ERROR caught");
+        throw error;
     }
 };
 
@@ -115,5 +121,6 @@ exports.deleteCategoryById = async (_id) => {
         return resp;
     } catch (error) {
         console.log(TAG, "ERROR caught");
+        throw error;
     }
 };

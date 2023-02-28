@@ -23,7 +23,7 @@ export function AddCategory() {
     </header>
     <main>
         <div class="container-add-category flex-center-center">
-            <div class="container-add-cat flex-row-center"> 
+            <div id="container-add-cat" class="container-add-cat flex-row-center"> 
 
                 <div id="box-preview-img-cat" class="flex-col-center">
                     <div>

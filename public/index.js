@@ -126,11 +126,11 @@ addUniqueEventListener(window, "onstatechange", async (event) => {
 
     const respostaIndex = await addExternalResourcesTo(url, criteria);
 
-    chamaFuncaoEspecificaPelaUrl(url, respostaIndex);
+    chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria);
     addEventsRelatedTo(url); //call relateds events to page/url
 });
 
-function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
+function chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria) {
     switch (url) {
         case "/categories":
             categoriesList = respostaIndex; //nesse caso respostaIndex = lista de categorias
@@ -192,17 +192,25 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
             addSelectWithCategoriesInGodsPage();
             break;
         case "/allGods":
-            console.log("OLHA O RESPOSTA INDEX:", respostaIndex);
+            console.log("zzOLHA O RESPOSTA INDEX:", respostaIndex);
             if (Array.isArray(respostaIndex)) {
                 godsFilteredArrayGlobal = respostaIndex;
                 allGodsArray = respostaIndex; //ganbiarra, se tirar isso da erro na 1190
                 insertAllGods(godsFilteredArrayGlobal);
             } else {
-                allGodsArray = respostaIndex.dataGods;
-                displayWarning("Não há deuses correspondentes à sua pesquisa");
-                insertMessageNoGodFound();
-
-                //insertAllGods(allGodsArray);
+                if (criteria.pesquisar) {
+                    allGodsArray = respostaIndex.dataGods;
+                    displayWarning(
+                        "Não há deuses correspondentes à sua pesquisa. Aqui está uma lista com todos os deuses."
+                    );
+                    //insertMessageNoGodFound();
+                    insertAllGods(allGodsArray);
+                } else {
+                    //implica pesquisar===false,logo mostra todos os deuses
+                    console.log("tttttELSE - ENTROU AQUI!!", allGodsArray);
+                    allGodsArray = respostaIndex.dataGods;
+                    insertAllGods(allGodsArray);
+                }
             }
 
             break;
@@ -464,7 +472,7 @@ async function pesquisar(texto) {
     const arrayWords = texto.split(/\s|,/); //regex to split blankspace or , //= ["muito", "ddd"];
     const parametro = arrayWords.join(",");
 
-    redirectToAllGods(parametro);
+    redirectToAllGods(parametro, true);
 }
 // author: Gabriela
 function addEventsToRegisterUser() {
