@@ -21,7 +21,7 @@ export function AllGodsPage() {
             <img id="menu-icon" src="../assets/icons/menu.svg" alt="">
         </div>
     </header>
-	<main>
+	<main class="main-all-gods">
 		<div class="container-all-gods-page flex-center-center">
             <div id="box-all-gods">
                 <div id="box-all-gods-overflow">

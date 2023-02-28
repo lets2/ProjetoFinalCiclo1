@@ -353,6 +353,7 @@ main {
 /* Define o estilo da div de overflow dos cartões */
 #box-cards-gods-overflow {
 	height: 100%;
+	width: 90%;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, 25rem);
 	grid-auto-rows: 30rem;
@@ -362,6 +363,7 @@ main {
 	max-height: 100%;
 	justify-content: center;
 	align-items: center;
+	margin-right: 0;
 }
 
 /* Define o tamanho dos cartões e adiciona margens */
@@ -383,6 +385,7 @@ main {
 	padding: 3.0rem;
 	border-radius: 2.0rem;
 	position: absolute;
+	top: 12.5rem;
 	right: 2.5rem;
 	text-align: center;
 	width: 25%;
@@ -404,160 +407,163 @@ main {
 /*@autor:daniel*/
 
 @media screen and (min-width: 800px) and (max-width: 1100px) {
-    #box-cards-gods {
-        width: 50%;
-        height: 100%;
-        overflow: hidden;
-    }
+	#box-cards-gods {
+		width: 75%;
+		height: 100%;
+		overflow: hidden;
+	}
 
-    .phrase {
-        background-color: var(--color-bg-category-1-dark-40p);
-        padding: 3.0rem;
-        border-radius: 2.0rem;
-        position: absolute;
-        right: 2.5rem;
-        text-align: center;
-        width: 25%;
-        font-size: var(--size-font-t5);
-        font-family: 'MedievalSharp', cursive;
-        font-weight: 400;
-        margin-right: 25%;
-    }
+	.phrase {
+		background-color: var(--color-bg-category-1-dark-40p);
+		padding: 3.0rem;
+		border-radius: 2.0rem;
+		position: absolute;
+		right: 2.5rem;
+		top: 12.5rem;
+		text-align: center;
+		width: 25%;
+		font-size: var(--size-font-t5);
+		font-family: 'MedievalSharp', cursive;
+		font-weight: 400;
+	}
 }
 
 @media screen and (min-width: 500px) and (max-width: 799px) {
-    #box-cards-gods {
-        width: 50%;
-        height: 100%;
-        overflow: hidden;
-    }
+	#box-cards-gods {
+		width: 50%;
+		height: 100%;
+		overflow: hidden;
+	}
 
-    .phrase {
-        background-color: var(--color-bg-category-1-dark-40p);
-        padding: 3.0rem;
-        border-radius: 2.0rem;
-        position: absolute;
-        right: 2.5rem;
-        text-align: center;
-        width: 50%;
-        font-size: var(--size-font-t5);
-        font-family: 'MedievalSharp', cursive;
-        font-weight: 400;
-    }
+	.phrase {
+		background-color: var(--color-bg-category-1-dark-40p);
+		padding: 3.0rem;
+		border-radius: 2.0rem;
+		position: absolute;
+		right: 2.5rem;
+		top: 12.5rem;
+		text-align: center;
+		width: 50%;
+		font-size: var(--size-font-t5);
+		font-family: 'MedievalSharp', cursive;
+		font-weight: 400;
+	}
 }
 
 @media screen and (min-width: 400px) and (max-width: 499px) {
 
-	.flex-row-between{
-		z-index: 1;
+	.main-cards-gods {
+		margin-top: -10rem;
 	}
 
-    .container-page-gods {
-        width: 100%;
-        height: 1000%;
-        position: relative;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-		padding-top: 8rem;
-    }
+	.container-page-gods {
+		width: 100%;
+		height: 1000%;
+		position: relative;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+	}
 
-    #box-cards-gods {
-        width: 100%;
-        height: 100%;
-        margin-top: 3rem;
-        overflow: hidden;
-    }
+	#box-cards-gods {
+		width: 100%;
+		height: 100%;
+		margin-top: 3rem;
+		overflow: hidden;
+	}
 
-    .cards-gods {
-        border: solid 2.0rem var(--color-bg-category-1-dark-40p);
-        height: 30rem;
-        border-radius: 2.0rem;
-        transition: transform .3s;
-        cursor: pointer;
-    }
+	.cards-gods {
+		border: solid 2.0rem var(--color-bg-category-1-dark-40p);
+		height: 30rem;
+		border-radius: 2.0rem;
+		transition: transform .3s;
+		cursor: pointer;
+	}
 
-    #box-cards-gods-overflow {
-        height: auto;
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, 25rem);
-        grid-auto-rows: 30rem;
-        grid-gap: 2rem;
-        overflow: scroll;
-        overflow-x: hidden;
-        max-height: 100%;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20rem;
-    }
+	#box-cards-gods-overflow {
+		height: auto;
+		width: 100%;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, 25rem);
+		grid-auto-rows: 30rem;
+		grid-gap: 2rem;
+		overflow: scroll;
+		overflow-x: hidden;
+		max-height: 100%;
+		justify-content: center;
+		align-items: center;
+		margin-top: 25rem;
+	}
 
-    .phrase {
-        background-color: var(--color-bg-category-1-dark-40p);
-        padding: 3.0rem;
-        border-radius: 2.0rem;
-        position: absolute;
-        text-align: center;
-        width: 25rem;
-        font-size: var(--size-font-t5);
-        font-family: 'MedievalSharp', cursive;
-        font-weight: 400;
-        margin: 0 7%;
-    }
+	.phrase {
+		background-color: var(--color-bg-category-1-dark-40p);
+		padding: 3.0rem;
+		border-radius: 2.0rem;
+		position: absolute;
+		text-align: center;
+		width: 70%;
+		font-size: var(--size-font-t5);
+		font-family: 'MedievalSharp', cursive;
+		font-weight: 400;
+		margin: 0 10%;
+	}
 }
 
+@media screen and (min-width: 280px) and (max-width: 399px) {
 
-@media screen and (min-width: 320px) and (max-width: 399px) {
+	.main-cards-gods {
+		margin-top: -10rem;
+	}
 
-    .container-page-gods {
-        width: 100%;
-        height: 1000%;
-        position: relative;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-    }
+	.container-page-gods {
+		width: 100%;
+		height: 1000%;
+		position: relative;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+	}
 
-    #box-cards-gods {
-        width: 100%;
-        height: 100%;
-        margin-top: 3rem;
-        overflow: hidden;
-    }
+	#box-cards-gods {
+		width: 100%;
+		height: 100%;
+		margin-top: 3rem;
+		overflow: hidden;
+	}
 
-    .cards-gods {
-        border: solid 2.0rem var(--color-bg-category-1-dark-40p);
-        height: 30rem;
-        border-radius: 2.0rem;
-        transition: transform .3s;
-        cursor: pointer;
-    }
+	.cards-gods {
+		border: solid 2.0rem var(--color-bg-category-1-dark-40p);
+		height: 30rem;
+		border-radius: 2.0rem;
+		transition: transform .3s;
+		cursor: pointer;
+	}
 
-    #box-cards-gods-overflow {
-        height: auto;
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, 25rem);
-        grid-auto-rows: 30rem;
-        grid-gap: 2rem;
-        overflow: scroll;
-        overflow-x: hidden;
-        max-height: 100%;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20rem;
-    }
+	#box-cards-gods-overflow {
+		height: auto;
+		width: 100%;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, 25rem);
+		grid-auto-rows: 30rem;
+		grid-gap: 2rem;
+		overflow: scroll;
+		overflow-x: hidden;
+		max-height: 100%;
+		justify-content: center;
+		align-items: center;
+		margin-top: 25rem;
+	}
 
-    .phrase {
-        background-color: var(--color-bg-category-1-dark-40p);
-        padding: 3.0rem;
-        border-radius: 2.0rem;
-        position: absolute;
-        text-align: center;
-        width: 25rem;
-        font-size: var(--size-font-t5);
-        font-family: 'MedievalSharp', cursive;
-        font-weight: 400;
-        margin: 0 7%;
-    }
+	.phrase {
+		background-color: var(--color-bg-category-1-dark-40p);
+		padding: 3.0rem;
+		border-radius: 2.0rem;
+		position: absolute;
+		text-align: center;
+		width: 70%;
+		font-size: 3.4rem;
+		font-family: 'MedievalSharp', cursive;
+		font-weight: 400;
+		margin: 0 8%;
+	}
 }

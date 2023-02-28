@@ -21,7 +21,7 @@ export function Category() {
             <img id="menu-icon" src="../assets/icons/menu.svg" alt="">
         </div>
     </header>
-	<main>
+	<main class="main-cards-gods">
 		<div class="container-page-gods">
             <div id="box-cards-gods">
                 <div id="box-cards-gods-overflow">
