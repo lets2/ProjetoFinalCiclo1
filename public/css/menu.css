@@ -369,4 +369,80 @@ relacionada aquele elemento
      height: var(--size-icon-small);
      margin-right: 2.0rem;
  }
+ @media (min-width: 300px) and (max-width: 425px){
+	.sidebar-menu-adm{
+		width: 100%;
+	}
+    #profile-adm-icon{
+        height: 7rem;
+    }
+    .sidebar-options-adm > li{
+        font-size: var(--size-font-t9);
+		padding: 0.5rem 0rem;
+	}
+    .sidebar-options img {
+        height: 2.5;
+        margin-right: 2.0rem;
+    }
+}
+@media (min-width: 425px) and (max-width: 782px){
+	.sidebar-menu-adm{
+		width: 100%;
+	}
+    aside > figure{
+        /* height: 35%; */
+        width: 30%;
+        padding: 2.0rem;
+        border-bottom: solid 0.5rem var(--color-white);
+    }
+
+ 	li{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center ;
+	}
+    #profile-adm-icon{
+        height: 7rem;
+    }
+    .sidebar-options-adm > li{
+        font-size: var(--size-font-t9);
+		padding: 0.5rem 0rem;
+	}
+    .sidebar-options img {
+        height: 3rem;
+        margin-right: 2.0rem;
+    }
+}
+@media (min-width: 783px) and (max-width: 1440px){
+	.sidebar-menu-adm{
+		width: 35%;
+	}
+    #profile-adm-icon{
+        height: 7rem;
+    }
+    .sidebar-options-adm > li{
+        font-size: var(--size-font-t9);
+		padding: 0.5rem 0rem;
+	}
+    .sidebar-options img {
+        height: 3rem;
+        margin-right: 2.0rem;
+    }
+}
+
+@media (min-width: 1921px) and (max-width: 2500px){
+	.sidebar-menu-adm{
+		width: 25%;
+	}
+	.sidebar-options-adm > li{
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		font-size: var(--size-font-t8);
+		padding: 1.5rem 0rem 1.5rem 5rem;
+		cursor: pointer;
+	}
+}
 
