@@ -35,6 +35,7 @@ import {
 import {
     insertChoosedGodImg,
     addEventsToAddNewGodPage,
+    clearInputFromFormAddGod, //adicionei essa funcao para limpar o formulario da page
 } from "./pages/add-god.js";
 
 import {
@@ -50,7 +51,10 @@ import {
 
 import { redirectToMenu } from "./pages/menu.js";
 
-import { addEventsToAddCategoryPage } from "./pages/add-category.js";
+import {
+    addEventsToAddCategoryPage,
+    clearInputFromFormAddCategory,
+} from "./pages/add-category.js";
 
 import {
     insertChoosedCategoryTempleImg,
@@ -62,6 +66,7 @@ import {
     redirectToAllGods,
     insertAllGods,
     addEventsToAllGodsPage,
+    insertMessageNoGodFound,
 } from "./pages/all-gods-page.js";
 
 import {
@@ -162,8 +167,13 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
             break;
 
         case "/editGod/g1":
+            //console.log("ZZZ CATEGORY ID:", respostaIndex);
             inserirElementosNaEditGodPage(respostaIndex);
-            addSelectWithCategoriesInGodsPage();
+            addSelectWithCategoriesInGodsPage(respostaIndex.category_id);
+            //a funcao acima eh usada em duas paginas (add e edit),
+            //vou colocar um parametro que caso nao seja informado por padrao
+            //sera nulo, ai na pagina de edit-god, caso nao seja nulo
+            //significa que devo fixar o valor do select
             break;
 
         case "/editCategory":
@@ -172,10 +182,12 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
             break;
 
         case "/addCategory":
+            clearInputFromFormAddCategory();
             insertChoosedCategoryTempleImg(); //function to show preview
             break;
 
         case "/addGod":
+            clearInputFromFormAddGod();
             insertChoosedGodImg();
             addSelectWithCategoriesInGodsPage();
             break;
@@ -187,7 +199,10 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex) {
                 insertAllGods(godsFilteredArrayGlobal);
             } else {
                 allGodsArray = respostaIndex.dataGods;
-                insertAllGods(allGodsArray);
+                displayWarning("Não há deuses correspondentes à sua pesquisa");
+                insertMessageNoGodFound();
+
+                //insertAllGods(allGodsArray);
             }
 
             break;
