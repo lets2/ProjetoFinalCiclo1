@@ -392,7 +392,7 @@ aside > figure > h2{
         margin-right: 2.0rem;
     }
 }
-@media (min-width: 425px) and (max-width: 782px){
+@media (min-width: 425px) and (max-width: 768px){
 	.sidebar-menu-adm{
 		width: 100%;
 	}
@@ -421,24 +421,15 @@ aside > figure > h2{
         margin-right: 2.0rem;
     }
 }
-@media (min-width: 783px) and (max-width: 1440px){
+@media (min-width: 769px) and (max-width: 1440px){
 	.sidebar-menu-adm{
 		width: 35%;
 	}
     #profile-adm-icon{
         height: 7rem;
     }
-    .sidebar-options-adm > li{
-        font-size: var(--size-font-t9);
-		padding: 0.5rem 0rem;
-	}
-    .sidebar-options img {
-        height: 3rem;
-        margin-right: 2.0rem;
-    }
 }
-
-@media (min-width: 1921px) and (max-width: 2500px){
+@media (min-width: 1700px) and (max-width: 1920px){
 	.sidebar-menu-adm{
 		width: 25%;
 	}
@@ -448,7 +439,21 @@ aside > figure > h2{
 		flex-direction: row;
 		align-items: center;
 		font-size: var(--size-font-t8);
-		padding: 1.5rem 0rem 1.5rem 5rem;
+		padding: 1.9rem 0rem 1.9rem 4rem;
+		cursor: pointer;
+	}
+}
+@media (min-width: 1921px) and (max-width: 2500px){
+	.sidebar-menu-adm{
+		width: 25%;
+	}
+	.sidebar-options-adm > li{
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		font-size: var(--size-font-t7);
+		padding: 2rem 0rem 2rem 4rem;
 		cursor: pointer;
 	}
 }

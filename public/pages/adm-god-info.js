@@ -40,9 +40,9 @@ export function GodInfo() {
 					<h2>Fulano</h2>
 					<h4>Deus dos jogos</h4>
 				</div>
-				<div>
+				<div id="box-description-info">
 					<h5 id="tittle-description">Resumo</h5>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam eius minima eum non, soluta a beatae qui libero molestiae fugit. Voluptatem explicabo vel quaerat iusto? Praesentium aperiam officiis voluptates. Ut!</p>
+					<p id="description-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam eius minima eum non, soluta a beatae qui libero molestiae fugit. Voluptatem explicabo vel quaerat iusto? Praesentium aperiam officiis voluptates. Ut!</p>
 				</div>
 			</div>
 		</form>
