@@ -58,7 +58,7 @@ export function redirectToGodsFiltered(arrayResults) {
 //RENDERIZAR CATEGORIA ATUAL NA PAGINA DE CATEGORIAS
 //FUNCOES DE RENDERIZAÇÃO, RENDERIZAR IMAGEM DO TEMPLO, NOME E BOLINHAS!
 
-let currentIndexCategory; //armazena a categoria atual que está na tela
+export let currentIndexCategory; //armazena a categoria atual que está na tela
 
 export function renderCurrentCategoryOnCategoriesPage(categories) {
     let index;

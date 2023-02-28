@@ -68,19 +68,27 @@
     padding-right: 1rem;
 }
 
-.god-text-description::-webkit-scrollbar {
-  width: 12px;               /* width of the entire scrollbar */
+/* .god-text-description::-webkit-scrollbar {
+  width: 12px;               
 }
 
 .god-text-description::-webkit-scrollbar-track {
-  background: orange;        /* color of the tracking area */
+  background: orange;        
 }
 
 .god-text-description::-webkit-scrollbar-thumb {
-  background-color: blue;    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px solid orange;  /* creates padding around scroll thumb */
-}
+  background-color: blue;    
+  border-radius: 20px;       
+  border: 3px solid orange;  
+} */
+
+/* width of the entire scrollbar */
+
+/* color of the tracking area */
+
+/* color of the scroll thumb */
+/* roundness of the scroll thumb */
+/* creates padding around scroll thumb */
 
 @media screen and (min-width: 1100px) and (max-width: 1439px) {
   #div-img-god div img {
