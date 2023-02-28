@@ -21,9 +21,8 @@ export function TableCategories() {
             <img id="menu-icon" src="../assets/icons/menu.svg" alt="">
         </div>
     </header>
-    
     <main class="flex-center-center">
-        <div class="container-content flex-col-center">
+        <div class="container-content-categories flex-col-center">
                
             <button id="create-new-category">Criar categoria</button>
 
@@ -40,8 +39,7 @@ export function TableCategories() {
                         
                     </tbody>
                 </table>
-            </div>
-          
+            </div>        
         </div>
         
 
