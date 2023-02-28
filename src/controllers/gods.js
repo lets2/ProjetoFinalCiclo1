@@ -64,7 +64,16 @@ exports.getById = async (req, res) => {
         console.timeEnd(`getgods()${milliseconds}`);
     } catch (error) {
         console.log(TAG, error);
+        if (error.message === "No rows returned") {
+            console.log("[404] NOT FOUND");
+            response.message = "Nenhum deus corresponde ao ID informado";
+            response.data = null;
+            response.error = "[404] Not Found!";
 
+            res.status(404).json(response);
+            console.timeEnd(`getgods()${milliseconds}`);
+            return;
+        }
         response.message = "Erro interno do servidor";
         response.data = null;
         response.error = "Erro interno do servidor";
@@ -130,7 +139,16 @@ exports.getGodsByKeywords = async (req, res) => {
         console.timeEnd(`getGodsByKeywords()${milliseconds}`);
     } catch (error) {
         console.log(TAG, error);
+        if (error.message === "No rows returned") {
+            console.log("[404] NOT FOUND");
+            response.message = "Nenhum deus corresponde à pesquisa";
+            response.data = null;
+            response.error = "[404] Not Found!";
 
+            res.status(404).json(response);
+            console.timeEnd(`getGodsByKeywords()${milliseconds}`);
+            return;
+        }
         response.message = "Erro interno do Servidor";
         response.data = null;
         response.error = "Erro interno do Servidor";
@@ -239,7 +257,7 @@ exports.createGod = async (req, res) => {
         );
 
         // Retornar com sucesso
-        response.message = "Success";
+        response.message = "Deus criado com sucesso!";
         response.data = serviceResponse;
 
         res.status(200).json(response);
@@ -343,14 +361,23 @@ exports.updateGod = async (req, res) => {
         );
 
         // Retornar com sucesso
-        response.message = "Success";
+        response.message = "Deus atualizado com sucesso!";
         response.data = serviceResponse;
 
         res.status(200).json(response);
         console.timeEnd(`updateGod()${milliseconds}`);
     } catch (error) {
         console.log(TAG, error);
+        if (error.message === "No rows returned") {
+            console.log("[404] NOT FOUND");
+            response.message = "Nenhum deus corresponde ao ID informado";
+            response.data = null;
+            response.error = "[404] Not Found!";
 
+            res.status(404).json(response);
+            console.timeEnd(`updateGod()${milliseconds}`);
+            return;
+        }
         response.message = "Erro interno do Servidor";
         response.data = null;
         response.error = "Erro interno do Servidor";
@@ -378,7 +405,7 @@ exports.deleteGodById = async (req, res) => {
     try {
         const serviceResponse = await godsService.deleteGodById(id);
         console.log("Olha o que vem:", serviceResponse);
-        response.message = "Success";
+        response.message = "Deus excluído com sucesso!";
         //response.data = serviceResponse.rows;
         response.data = serviceResponse; //this return just one object {name:,url:}
 
@@ -394,7 +421,16 @@ exports.deleteGodById = async (req, res) => {
         console.timeEnd(`deleteGodById()${milliseconds}`);
     } catch (error) {
         console.log(TAG, error);
+        if (error.message === "No rows returned") {
+            console.log("[404] NOT FOUND");
+            response.message = "Nenhum deus corresponde ao ID informado";
+            response.data = null;
+            response.error = "[404] Not Found!";
 
+            res.status(404).json(response);
+            console.timeEnd(`deleteGodById()${milliseconds}`);
+            return;
+        }
         response.message = "Erro interno do servidor";
         response.data = null;
         response.error = "Erro interno do servidor";

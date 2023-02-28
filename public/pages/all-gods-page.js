@@ -37,9 +37,10 @@ export function AllGodsPage() {
 }
 
 /*@author:Gabriela - coauthor: Letônio*/
-export function redirectToAllGods(parametroDePesquisa) {
+export function redirectToAllGods(parametroDePesquisa, pesquisar = false) {
     const eventStateChange = CriaEventStateChange("/allGods", {
         parametroDePesquisa: parametroDePesquisa,
+        pesquisar: pesquisar,
     });
     window.dispatchEvent(eventStateChange);
 }
