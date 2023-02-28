@@ -96,7 +96,7 @@ async function tryChangePasswd(_username, _password, _newPassword) {
     };
 
     try {
-        const response = await fetch("http://localhost:8080/changePassword", {
+        const response = await fetch("/changePassword", {
         method: "PUT",
         body: JSON.stringify(objBody),
         headers: { "Content-type": "application/json; charset=UTF-8" },

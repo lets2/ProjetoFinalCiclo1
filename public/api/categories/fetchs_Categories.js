@@ -1,6 +1,6 @@
 export async function addResourcesToCategoriesPage() {
     try {
-        const response = await fetch("http://localhost:8080/categories");
+        const response = await fetch("/categories");
         if (response.status !== 200 && response.status !== 201)
             throw "[erro] Houve um problema durante a busca das categorias!";
 
@@ -15,7 +15,7 @@ export async function addResourcesToCategoriesPage() {
 export async function addResourcesToCategoryChoosed(id) {
     try {
         const response = await fetch(
-            `http://localhost:8080/categories/${id}/all`
+            `/categories/${id}/all`
         );
 
         if (response.status !== 200 && response.status !== 201)
@@ -31,7 +31,7 @@ export async function addResourcesToCategoryChoosed(id) {
 
 export async function addResourcesToTableOfCategories() {
     try {
-        const response = await fetch(`http://localhost:8080/categories/`);
+        const response = await fetch(`/categories/`);
 
         if (response.status !== 200 && response.status !== 201)
             throw "[erro] Houve um problema na requisicao!";
@@ -47,7 +47,7 @@ export async function addResourcesToTableOfCategories() {
 export async function addResourcesToEditCategoryPage(id) {
     try {
         const response = await fetch(
-            `http://localhost:8080/categoriestable/${id}/`
+            `/categoriestable/${id}/`
         );
 
         if (response.status !== 200 && response.status !== 201)

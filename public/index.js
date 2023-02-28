@@ -313,7 +313,7 @@ async function tentaFazerLogin(_username, _password) {
         name: _username,
         password: _password,
     };
-    const response = await fetch("http://localhost:8080/login", {
+    const response = await fetch("/login", {
         method: "POST",
         body: JSON.stringify(objBody),
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -490,9 +490,12 @@ function addEventsToRegisterUser() {
             const username = document.querySelector("#new-name-user").value;
             const email = document.querySelector("#new-email-user").value;
             const password = document.querySelector("#new-passwd-user").value;
-            await tryRegisterUser(username, email, password);
-            console.log(username, email, password);
-            redirectToMenuAdmPage();
+            const success = await tryRegisterUser(username, email, password);
+
+            if(success){
+                redirectToMenuAdmPage();
+            }
+            
         } catch (error) {
             displayWarning(error);
         }
@@ -508,18 +511,23 @@ async function tryRegisterUser(_username, _email, _password) {
 
     console.log(objBody, "OBJ BODY");
     try {
-        const response = await fetch("http://localhost:8080/registerAdm", {
+        const response = await fetch("/registerAdm", {
             method: "POST",
             body: JSON.stringify(objBody),
             headers: { "Content-type": "application/json; charset=UTF-8" },
         });
 
         if (response.status !== 200 && response.status !== 201) {
-            throw "[erro] ao tentar fazer login!";
+            const obj = await response.json();
+            throw obj.message;
         }
         const jsonData = await response.json();
         console.log("CADASTRO - JSON OBTIDO:", jsonData);
+        displayWarning("Cadastrado com sucesso!")
+        return true;
     } catch (error) {
-        console.log(error, "deu ruim");
+        console.log(error, "Erro ao fazer cadastro!");
+        displayWarning(error)
+        return false;
     }
 }

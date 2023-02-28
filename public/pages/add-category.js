@@ -27,7 +27,7 @@ export function AddCategory() {
 
                 <div id="box-preview-img-cat" class="flex-col-center">
                     <div>
-                        <img id="preview-img-cat" src="../assets/images/exampleTemple.png" alt="">
+                        <img id="preview-img-cat" src="../assets/images/JPG-PLACEHOLDER-templo.jpg" alt="">
                     </div>
                     
                     <input id="insert-file-btn-cat" type="file" name="file" accept="image/png, image/jpeg, image/jpg">
@@ -148,7 +148,7 @@ async function addNewCategoryInDatabase() {
     formData.append("hexColor", newColorHexFormat);
 
     try {
-        const response = await fetch("http://localhost:8080/categoriestable", {
+        const response = await fetch("/categoriestable", {
             method: "POST",
             body: formData,
         });

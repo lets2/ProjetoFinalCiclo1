@@ -70,7 +70,7 @@ export async function addExternalResourcesTo(url, criteria) {
 //por enquanto deixarei por aqui
 async function removeCookieDoNavegador() {
     try {
-        const response = fetch("http://localhost:8080/logout", {
+        const response = fetch("/logout", {
             method: "DELETE",
         });
 
