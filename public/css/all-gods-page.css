@@ -378,7 +378,6 @@ main {
     padding: 3.0rem;
     border-radius: 2.0rem;
     position: absolute;
-    top: 6.0rem;
     right: 2.5rem;
     text-align: center;
     width: 25%;
@@ -434,7 +433,6 @@ main {
         padding: 3.0rem;
         border-radius: 2.0rem;
         position: absolute;
-        top: 6.0rem;
         right: 2.5rem;
         text-align: center;
         width: 50%;
@@ -490,7 +488,6 @@ main {
         padding: 3.0rem;
         border-radius: 2.0rem;
         position: absolute;
-        top: 6.0rem;
         text-align: center;
         width: 25rem;
         font-size: var(--size-font-t5);
