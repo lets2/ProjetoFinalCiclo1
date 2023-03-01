@@ -180,8 +180,8 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria) {
             break;
 
         case "/editCategory":
-            insertChoosedCategoryTempleImg(); //function to show preview
             testInserirElementosNaEditCategoryPage(respostaIndex);
+            insertChoosedCategoryTempleImg(); //function to show preview
             break;
 
         case "/addCategory":

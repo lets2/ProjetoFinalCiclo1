@@ -88,6 +88,7 @@ export function insertChoosedCategoryTempleImg() {
     message.innerHTML = "";
 
     addUniqueEventListener(fileBtn, "change", (e) => {
+        console.log("entrou no evento change img", e.target)
         if (e.target.files.length > 0) {
             const file = e.target.files[0];
             const url = URL.createObjectURL(file);
