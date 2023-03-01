@@ -39,7 +39,7 @@ export function AddCategory() {
 
                     <input id="new-name-category" type="text" placeholder="Nome da categoria">
                     <select name="select-color-category-add" id="select-color-category-add">
-                        <option value="#140A3D" selected disabled>Cor:</option>
+                        <option value="#140A3D" selected disabled>Selecione a cor:</option>
                         <option value="#140A3D">Azul escuro</option>
                         <option value="#0B264F">Azul claro</option>
                         <option value="#024324">Verde</option>

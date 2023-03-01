@@ -302,7 +302,7 @@ main{
 }
 
 .input-add-user::placeholder{
-    color: var(--color-white);
+    color: #979797;
     font-weight: 500;
 }
 

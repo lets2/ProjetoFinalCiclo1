@@ -25,7 +25,7 @@ export function MenuAdm() {
         <div class="container-content-page flex-row-between">
             <aside class="sidebar-menu-adm flex-col-between">
                 <figure class="flex-col-center">
-                    <img id="profile-adm-icon" src="../assets/icons/profile.svg" alt="profile icon">
+                    <img id="profile-adm-icon" src="../assets/icons/menu-casa.png" alt="profile icon">
                 </figure>
                 <ul class="sidebar-options-adm">
                 </ul>

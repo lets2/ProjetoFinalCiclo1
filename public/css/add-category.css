@@ -324,11 +324,11 @@ relacionada aquele elemento
     font-weight: bold;
     border-radius: 0.625rem;
     background-color:var(--color-bg-input);
-    color: var(--color-font-placeholder);
+    color: var(--color-white);
  }
  
  .nome-categoria-add>input::placeholder{
-    color: var(--color-font-placeholder);
+    color: #979797;
     padding-left: 2rem;
     font-weight: bold;
     text-justify:auto;
@@ -420,11 +420,13 @@ relacionada aquele elemento
 #select-color-category-add, option{
     width: 46rem;
     height: 5rem;
-   font-size: 2rem;
+    font-size: 2rem;
     font-weight: bold;
     border-radius: 0.625rem;
-    background-color:var(--color-bg-input);
-    color: var(--color-font-placeholder);
+    background-color:var(--color-bg-button);
+    color: #979797;
+    padding: 0rem 0rem 0rem 3rem;
+    text-align: left;
 }
 
 
@@ -486,7 +488,6 @@ option[value="#000000"]{
         justify-content: center;
      }
 
-
     .form-add-category{
         width: 60%;
         height: 60%;
@@ -526,8 +527,6 @@ option[value="#000000"]{
        font-size: 2rem;
         font-weight: bold;
         border-radius: 0.625rem;
-        background-color:var(--color-bg-input);
-        color: var(--color-font-placeholder);
     }
       /*container-button*/
       .box-btns-add-cat{
@@ -604,11 +603,9 @@ option[value="#000000"]{
         margin: 1rem 0rem;
         width: 100%;
         height: 5rem;
-    font-size: 2rem;
+        font-size: 2rem;
         font-weight: bold;
         border-radius: 0.625rem;
-        background-color:var(--color-bg-input);
-        color: var(--color-font-placeholder);
     }
     /*container-button*/
     .box-btns-add-cat{

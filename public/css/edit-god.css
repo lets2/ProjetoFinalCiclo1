@@ -312,11 +312,12 @@ h4{
     justify-content: space-between;
     padding-left: 1.5rem;
     font-size: 2rem;
+    color: var(--color-white);
  }
  
  .input-edit-god::placeholder{
-     color: var(--color-white);
-     font-weight: 500;
+   color: #979797;
+   font-weight: 500;
  }
  
  #edit-page-god-input-resume{
@@ -366,4 +367,108 @@ h4{
  /************************************************
          STYLING FOOTER COMPONENTS
  ************************************************/
+/* author: Gabriela */
+@media (min-width:320px ) and (max-width:440px ){
+   /* Define uma largura menor para a div pai */
+   #container-edit-god {
+       flex-direction: column;
+       width: 100%;
+       height: fit-content;
+       border-radius: 0rem;
+       margin-top: auto;
+   }
+   #box-img-god{
+       width: 100%;
+       height: auto;
+       margin-top: 4rem;
+   }
+  
+   #form-edit-god {
+      width: 100%;
+      height: 100%;
+      margin-top: 0rem;
+   }
+   .input-edit-god{
+      width: 28rem;
+      margin: 0.5rem 0rem;
+   }
+   #box-buttons {
+      width: 75%;
+      margin-top: 2rem;
+   }
+   .btns-edit-god{
+      width: 12rem
+   }
+}
 
+@media (min-width:441px ) and (max-width:767px ){
+   #container-edit-god {
+      flex-direction: column;
+      width: 100%;
+      height: fit-content;
+      border-radius: 0rem;
+      margin-top: auto;
+  }
+  #box-img-god{
+      width: 100%;
+      height: auto;
+      margin-top: 4rem;
+  }
+ 
+  #form-edit-god {
+     width: 100%;
+     height: 100%;
+     margin-top: 0rem;
+  }
+  .input-edit-god{
+     width: 41rem;
+     margin: 0.5rem 0rem;
+  }
+  #box-buttons {
+     width: 58%;
+     margin: 2rem 0rem;
+  }
+  .btns-edit-god{
+     width: 14rem;
+     height: 6rem;
+  }
+}
+
+@media (min-width:768px ) and (max-width:1020px ){
+   #container-edit-god {
+      width: 71rem;
+      height: 42rem;
+   }
+   #box-img-god{
+       width: 80%;
+       height: 90%;
+       margin-top: 4rem;
+   }
+   #box-img-god div{
+      width: 16rem;
+      height: 21rem;
+   }
+  
+   #form-edit-god {
+      width: 100%;
+      height: 90%;
+      margin-top: 0rem;
+      margin-right: 3rem;
+   }
+   .input-edit-god{
+      width: 32rem;
+      height: 5rem;
+      margin: 0.5rem 0rem;
+   }
+   #box-buttons {
+      width: 75%;
+      margin-top: 1rem;
+   }
+   .btns-edit-god{
+      width: 13rem;
+      height: 5.2rem;
+   }
+   .custom-file-upload {
+      padding: 1.2rem 1.5rem;
+  }
+} 

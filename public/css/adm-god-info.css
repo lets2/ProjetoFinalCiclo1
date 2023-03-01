@@ -261,43 +261,43 @@ h4{
          STYLING MAIN COMPONENTS
  ************************************************/
 /* @author: Gabriela */
- main{
-     height: calc(100vh - var(--height-header));
-     width: 100%;
- }
+main{
+    height: calc(100vh - var(--height-header));
+    width: 100%;
+}
 
- #container-see-god{
+#container-see-god{
     width: 95rem;
     height: 55rem;
     background-color: var(--color-bg-backInput);
     justify-content: center;
     border-radius: 2rem;
- }
+}
 
 
- #box-img-see-god{
+#box-img-see-god{
     width: 30%;
     height: 90%;
     padding-top: 2%;
- }
+}
 
- #img-god{
+#img-god{
     width: 22rem;
     height: 32rem;
     border: 1.8rem solid var(--color-bg-forms-emphasis);
     border-radius: 2rem;
     margin-bottom: 3.5rem;
     overflow: hidden;    
- }
+}
 
- #img-god img{
+#img-god img{
     width: 100%;
     height: 100%;
- }
+}
 
- #box-btns{
+#box-btns{
     width: 100%;
- }
+}
 
 .buttons{
     height: 5rem;
@@ -316,14 +316,14 @@ form{
     margin-top: 11%;
 }
 
- #box-inputs-see-god{
+#box-inputs-see-god{
     width: 90%;
     height: 70%;
     justify-content: space-between;
     border-radius: 2rem;
     background-color: var(--color-bg-forms-emphasis);
     padding: 2rem;
- }
+}
 
 #box-tittle{
     height: 33%;
@@ -338,65 +338,65 @@ p{
     font-size: var(--size-font-t9);
     line-height: 2.8rem;
     padding: 1.5rem 0rem 3rem 0rem;
- }
+}
 
- #box-tittle + div{
+#box-tittle + div{
     overflow-y: scroll;
     height: 60%;
     text-align: justify;
- }
+}
  
 
 /* author: Gabriela */
 @media (min-width:320px ) and (max-width:400px ){
      /* Define uma largura menor para a div pai */
-     #container-see-god {
+    #container-see-god {
         flex-direction: column;
         width: 100%;
         height: fit-content;
         border-radius: 0rem;
         margin-top: auto;
- 
-      }
-      #box-img-see-god {
+
+    }
+    #box-img-see-god {
         width: 100%;
         height: auto;
         margin-top: 4rem;
-      }
-      #img-god {
+    }
+    #img-god {
         width: 22rem;
         height: 30rem;
         margin-bottom: 1rem;
         border: 1rem solid var(--color-bg-forms-emphasis);
         border-radius: 1rem;
         overflow: hidden;    
-      }
-      #img-god img{
+    }
+    #img-god img{
         width: 100%;
         height: 100%;
         border-radius: 0rem;
-     }
-    
-      #box-btns {
+    }
+
+    #box-btns {
         width: 90%;
         margin-bottom: 1rem;
-      }
-      form {
+    }
+    form {
         width: 100%;
         height: auto;
-      }
-      #box-inputs-see-god{
+    }
+    #box-inputs-see-god{
         width: 92%;
         border-radius: 1.2rem;
         padding: 2rem;
         text-align: center;
-     }
-     #box-tittle{
+    }
+    #box-tittle{
         height: 12rem;
         justify-content: space-between;
         text-align: center;
     }
-     #box-tittle h2{
+    #box-tittle h2{
         font-size: 4rem;
     }
     #box-tittle h4{
@@ -413,126 +413,126 @@ p{
 @media (min-width:401px ) and (max-width:550px ){
     /* Define uma largura menor para a div pai */
     #container-see-god {
-       flex-direction: column;
-       width: 100%;
-       height: fit-content;
-       border-radius: 0rem;
-       margin-top: auto;
+        flex-direction: column;
+        width: 100%;
+        height: fit-content;
+        border-radius: 0rem;
+        margin-top: auto;
 
-     }
-     #box-img-see-god {
-       width: 100%;
-       height: auto;
-       margin-top: 4rem;
-     }
-     #img-god {
-       width: 22rem;
-       height: 30rem;
-       margin-bottom: 1rem;
-       border: 1rem solid var(--color-bg-forms-emphasis);
-       border-radius: 1rem;
-       overflow: hidden;    
-     }
-     #img-god img{
-       width: 100%;
-       height: 100%;
-       border-radius: 0rem;
     }
-   
-     #box-btns {
-       width: 70%;
-       margin-bottom: 1rem;
-     }
-     form {
-       width: 100%;
-       height: auto;
-     }
-     #box-inputs-see-god{
-       width: 80%;
-       border-radius: 1.2rem;
-       padding: 2rem;
-       text-align: center;
+    #box-img-see-god {
+        width: 100%;
+        height: auto;
+        margin-top: 4rem;
+    }
+    #img-god {
+        width: 22rem;
+        height: 30rem;
+        margin-bottom: 1rem;
+        border: 1rem solid var(--color-bg-forms-emphasis);
+        border-radius: 1rem;
+        overflow: hidden;    
+    }
+    #img-god img{
+        width: 100%;
+        height: 100%;
+        border-radius: 0rem;
+    }
+
+    #box-btns {
+        width: 70%;
+        margin-bottom: 1rem;
+    }
+    form {
+        width: 100%;
+        height: auto;
+    }
+    #box-inputs-see-god{
+        width: 80%;
+        border-radius: 1.2rem;
+        padding: 2rem;
+        text-align: center;
     }
     #box-tittle{
-       height: 12rem;
-       justify-content: space-between;
-       text-align: center;
-   }
+        height: 12rem;
+        justify-content: space-between;
+        text-align: center;
+    }
     #box-tittle h2{
-       font-size: 4rem;
-   }
-   #box-tittle h4{
-       font-size: 3rem;
-       padding-bottom: 2rem;
-   }
-   #tittle-description {
-       font-size: 2rem;
-   }
-   p{
-       font-size: 1.5rem;
-   }
+        font-size: 4rem;
+    }
+    #box-tittle h4{
+        font-size: 3rem;
+        padding-bottom: 2rem;
+    }
+    #tittle-description {
+        font-size: 2rem;
+    }
+    p{
+        font-size: 1.5rem;
+    }
 }
 @media (min-width:551px ) and (max-width:767px ){
     /* Define uma largura menor para a div pai */
     #container-see-god {
-       flex-direction: column;
-       width: 100%;
-       height: fit-content;
-       border-radius: 0rem;
-       margin-top: auto;
-
-     }
-     #box-img-see-god {
-       width: 100%;
-       height: auto;
-     }
-     #img-god {
-       width: 22rem;
-       height: 30rem;
-       margin-bottom: 1rem;
-       border: 1rem solid var(--color-bg-forms-emphasis);
-       border-radius: 1rem;
-       overflow: hidden;    
-     }
-     #img-god img{
-       width: 100%;
-       height: 100%;
-       border-radius: 0rem;
+        flex-direction: column;
+        width: 100%;
+        height: fit-content;
+        border-radius: 0rem;
+        margin-top: auto;
     }
-   
-     #box-btns {
-       width: 50%;
-       margin-bottom: 1rem;
-     }
-     form {
-       width: 100%;
-       height: auto;
-     }
-     #box-inputs-see-god{
-       width: 70%;
-       border-radius: 1.2rem;
-       padding: 2rem;
-       text-align: justify;
+
+    #box-img-see-god {
+        width: 100%;
+        height: auto;
+    }
+    #img-god {
+        width: 22rem;
+        height: 30rem;
+        margin-bottom: 1rem;
+        border: 1rem solid var(--color-bg-forms-emphasis);
+        border-radius: 1rem;
+        overflow: hidden;    
+    }
+    #img-god img{
+        width: 100%;
+        height: 100%;
+        border-radius: 0rem;
+    }
+
+    #box-btns {
+        width: 50%;
+        margin-bottom: 1rem;
+    }
+    form {
+        width: 100%;
+        height: auto;
+    }
+    #box-inputs-see-god{
+        width: 70%;
+        border-radius: 1.2rem;
+        padding: 2rem;
+        text-align: justify;
     }
     #box-tittle{
-       height: 12rem;
-       justify-content: space-between;
-       text-align: justify;
-   }
+        height: 12rem;
+        justify-content: space-between;
+        text-align: justify;
+    }
     #box-tittle h2{
-       font-size: 4rem;
-   }
-   #box-tittle h4{
-       font-size: 3rem;
-       padding-bottom: 2rem;
-   }
+        font-size: 4rem;
+    }
+    #box-tittle h4{
+        font-size: 3rem;
+        padding-bottom: 2rem;
+    }
 
-   #tittle-description {
-       font-size: 2rem;
-   }
-   p{
-       font-size: 1.5rem;
-   }
+    #tittle-description {
+        font-size: 2rem;
+    }
+    p{
+        font-size: 1.5rem;
+    }
 }
 
 @media screen and (min-width:768px ) and (max-width:1000px ){
@@ -647,9 +647,7 @@ p{
     p{
         font-size: 2.4rem;
         line-height: 4rem;
-    }
-    
-      
+    }    
 }
  /************************************************
          STYLING FOOTER COMPONENTS
