@@ -55,7 +55,6 @@ exports.getById = async (req, res) => {
     };
     try {
         const serviceResponse = await godsService.getById(id);
-        console.log("Olha o que vem:", serviceResponse);
         response.message = "Success";
         //response.data = serviceResponse.rows;
         response.data = serviceResponse; //this return just one object {name:,url:}
@@ -65,7 +64,6 @@ exports.getById = async (req, res) => {
     } catch (error) {
         console.log(TAG, error);
         if (error.message === "No rows returned") {
-            console.log("[404] NOT FOUND");
             response.message = "Nenhum deus corresponde ao ID informado";
             response.data = null;
             response.error = "[404] Not Found!";
@@ -91,8 +89,6 @@ exports.getGodsByKeywords = async (req, res) => {
 
     //const arrayKeywords = req.body.arrayKeywords;
     const arrayKeywords = req.query.strings.split(",");
-    console.log("VERIFICANDO SE MEU ARRAY EH UM ARRAY:", arrayKeywords);
-    console.log("E A DECISAO EH:", Array.isArray(arrayKeywords));
 
     const response = {
         message: "",
@@ -101,8 +97,6 @@ exports.getGodsByKeywords = async (req, res) => {
     };
     //
     if (!arrayKeywords) {
-        console.log(TAG, "ARRAYKEYWORDS is UNDEFINED/NULL");
-
         response.message = "Request need to have {arrayKeywords})";
         response.data = null;
         response.error = "[400] Bad request! arrayKeywords is UNDEFINED/NULL";
@@ -112,8 +106,6 @@ exports.getGodsByKeywords = async (req, res) => {
         return; //If dont use return, the function  will continue
     }
     if (IsNotArray(arrayKeywords)) {
-        console.log(TAG, "ARRAYKEYWORDS is NOT ARRAY");
-
         response.message =
             "Request need to have a JSON {'arrayKeywords':['string1','string2',...]})";
         response.data = null;
@@ -140,7 +132,6 @@ exports.getGodsByKeywords = async (req, res) => {
     } catch (error) {
         console.log(TAG, error);
         if (error.message === "No rows returned") {
-            console.log("[404] NOT FOUND");
             response.message = "Nenhum deus corresponde à pesquisa";
             response.data = null;
             response.error = "[404] Not Found!";
@@ -176,7 +167,6 @@ exports.createGod = async (req, res) => {
         filename = req.file.filename;
     }
 
-    console.log("OLHA O FILENAMEVAZIO!!!!!!!!!!!1:", filename);
     const { name, status, categoryId, resume } = req.body;
 
     ///  const filename = req.file.filename;
@@ -196,10 +186,6 @@ exports.createGod = async (req, res) => {
     };
 
     if (!name || !status || !categoryId || !resume || !src) {
-        console.log(
-            TAG,
-            "NAME, STATUS, CATEGORYID, RESUME or SRC is UNDEFINED/NULL"
-        );
         response.message =
             "Request need to have {name, status, caregoryId, resume, src})";
         response.data = null;
@@ -217,7 +203,6 @@ exports.createGod = async (req, res) => {
         resume === "" ||
         src === ""
     ) {
-        console.log(TAG, "NAME, STATUS, CATEGORYID, RESUME or SRC is EMPTY");
         response.message =
             "These fields cannot be empty: name, status, caregoryId, resume, src)";
         response.data = null;
@@ -235,7 +220,6 @@ exports.createGod = async (req, res) => {
         IsNotString(resume) ||
         IsNotString(src)
     ) {
-        console.log(TAG, "NAME, STATUS, CATEGORYID, RESUME or SRC is not STRING");
         response.message =
             "These fields should be STRING TYPE:name, status, categoryId, resume, src)";
         response.data = null;
@@ -263,8 +247,6 @@ exports.createGod = async (req, res) => {
         res.status(200).json(response);
         console.timeEnd(`createGod()${milliseconds}`);
     } catch (error) {
-        console.log(TAG, error);
-
         response.message = "Erro interno do Servidor";
         response.data = null;
         response.error = "Erro interno do Servidor";
@@ -293,7 +275,6 @@ exports.updateGod = async (req, res) => {
         filename = req.file.filename;
     }
 
-    console.log("OLHA O FILENAMEVAZIO!!!!!!!!!!!1:", filename);
     const { name, status, categoryId, resume } = req.body;
 
     //
@@ -306,10 +287,6 @@ exports.updateGod = async (req, res) => {
     };
 
     if (!name || !status || !categoryId || !resume) {
-        console.log(
-            TAG,
-            "NAME, STATUS, CATEGORYID, RESUME or SRC is UNDEFINED/NULL"
-        );
         response.message =
             "Request need to have {name, status, categoryId, resume, src})";
         response.data = null;
@@ -321,7 +298,6 @@ exports.updateGod = async (req, res) => {
     }
 
     if (name === "" || status === "" || categoryId === "" || resume === "") {
-        console.log(TAG, "NAME, STATUS, CATEGORYID, RESUME or SRC is EMPTY");
         response.message =
             "These fields cannot be empty: name, status, categoryId, resume, src)";
         response.data = null;
@@ -338,7 +314,6 @@ exports.updateGod = async (req, res) => {
         IsNotString(categoryId) ||
         IsNotString(resume)
     ) {
-        console.log(TAG, "NAME, STATUS, CATEGORYID, RESUME or SRC is not STRING");
         response.message =
             "These fields should be STRING TYPE:name, status, categoryId, resume, src)";
         response.data = null;
@@ -369,7 +344,6 @@ exports.updateGod = async (req, res) => {
     } catch (error) {
         console.log(TAG, error);
         if (error.message === "No rows returned") {
-            console.log("[404] NOT FOUND");
             response.message = "Nenhum deus corresponde ao ID informado";
             response.data = null;
             response.error = "[404] Not Found!";
@@ -404,7 +378,6 @@ exports.deleteGodById = async (req, res) => {
     };
     try {
         const serviceResponse = await godsService.deleteGodById(id);
-        console.log("Olha o que vem:", serviceResponse);
         response.message = "Deus excluído com sucesso!";
         //response.data = serviceResponse.rows;
         response.data = serviceResponse; //this return just one object {name:,url:}
@@ -422,7 +395,6 @@ exports.deleteGodById = async (req, res) => {
     } catch (error) {
         console.log(TAG, error);
         if (error.message === "No rows returned") {
-            console.log("[404] NOT FOUND");
             response.message = "Nenhum deus corresponde ao ID informado";
             response.data = null;
             response.error = "[404] Not Found!";
@@ -458,10 +430,8 @@ function IsNotArray(_data) {
 
 //colocando aqui função de apagar arquivo:
 function excluiArquivoDaImagemDeCategoria(serviceResponse) {
-    console.log("Apagarei esse arquivo aqui:", serviceResponse[0].src_img);
     const uploadDir = path.join(__dirname, "../../public", "assets", "uploads");
     const filePath = path.join(uploadDir, serviceResponse[0].src_img);
-    console.log("OLHA O PATH:", filePath);
     fs.unlink(filePath, (error) => {
         if (error && error.code !== "ENOENT") {
             // Se houver um erro que não seja o arquivo não encontrado, retorna um erro interno do servidor

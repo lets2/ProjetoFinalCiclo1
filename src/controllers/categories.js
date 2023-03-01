@@ -53,7 +53,6 @@ exports.getById = async (req, res) => {
     };
     try {
         const serviceResponse = await categoriesService.getById(id);
-        console.log("Olha o que vem:", serviceResponse);
         response.message = "Success";
         //response.data = serviceResponse.rows;
         response.data = serviceResponse; //this return just one object {name:,url:}
@@ -63,7 +62,6 @@ exports.getById = async (req, res) => {
     } catch (error) {
         console.log(TAG, error);
         if (error.message === "No rows returned") {
-            console.log("[404] NOT FOUND");
             response.message = "Nenhuma categoria corresponde ao ID informado";
             response.data = null;
             response.error = "[404] Not Found!";
@@ -109,7 +107,6 @@ exports.getAllGodsById = async (req, res) => {
     } catch (error) {
         console.log(TAG, error);
         if (error.message === "No rows returned") {
-            console.log("[404] NOT FOUND");
             response.message = "Nenhuma categoria corresponde ao ID informado";
             response.data = null;
             response.error = "[404] Not Found!";
@@ -153,7 +150,6 @@ exports.getGodById = async (req, res) => {
     } catch (error) {
         console.log(TAG, error);
         if (error.message === "No rows returned") {
-            console.log("[404] NOT FOUND");
             response.message = "Nenhum deus corresponde ao ID informado";
             response.data = null;
             response.error = "[404] Not Found!";
@@ -227,7 +223,6 @@ exports.getFromTableById = async (req, res) => {
     };
     try {
         const serviceResponse = await categoriesService.getFromTableById(id);
-        console.log("Olha o que vem:", serviceResponse);
         response.message = "Success";
         //response.data = serviceResponse.rows;
         response.data = serviceResponse; //this return just one object {name:,url:}
@@ -237,7 +232,6 @@ exports.getFromTableById = async (req, res) => {
     } catch (error) {
         console.log(TAG, error);
         if (error.message === "No rows returned") {
-            console.log("[404] NOT FOUND");
             response.message = "Nenhuma categoria corresponde ao ID informado";
             response.data = null;
             response.error = "[404] Not Found!";
@@ -284,7 +278,6 @@ exports.createCategory = async (req, res) => {
     };
 
     if (!name || !src || !hexColor) {
-        console.log(TAG, "NAME,SRC or HEXCOLOR is UNDEFINED/NULL");
         response.message = "Request need to have {name, src, hexColor})";
         response.data = null;
         response.error = "[400] Bad request! Some fields are UNDEFINED/NULL";
@@ -295,7 +288,6 @@ exports.createCategory = async (req, res) => {
     }
 
     if (name === "" || src === "" || hexColor === "") {
-        console.log(TAG, "NAME, SRC or HEXCOLOR is EMPTY");
         response.message = "These fields cannot be empty: name, src, hexColor})";
         response.data = null;
         response.error = "[400] Bad request! Some fields are EMPTY";
@@ -306,7 +298,6 @@ exports.createCategory = async (req, res) => {
     }
 
     if (IsNotString(name) || IsNotString(src) || IsNotString(hexColor)) {
-        console.log(TAG, "NAME, SRC or HEXCOLOR is not STRING");
         response.message =
             "These fields should be STRING TYPE:name, src, hexColor)";
         response.data = null;
@@ -318,7 +309,6 @@ exports.createCategory = async (req, res) => {
     }
     //Field "name" is not in a valid format. Example of valid data: "#a00f9b"
     if (colorIsNotHex(hexColor)) {
-        console.log(TAG, "HEXCOLOR is not a VALID FORMAT");
         response.message =
             "hexColor need to be #[0-9A-Fa-f]{6} format, ex: #0abf59";
         response.data = null;
@@ -385,7 +375,6 @@ exports.updateCategory = async (req, res) => {
     };
 
     if (!id || !name || !hexColor) {
-        console.log(TAG, "ID, NAME, SRC or HEXCOLOR is UNDEFINED/NULL");
         response.message = "Request need to have {id, name, src, hexColor})";
         response.data = null;
         response.error = "[400] Bad request! Some fields are UNDEFINED/NULL";
@@ -396,7 +385,6 @@ exports.updateCategory = async (req, res) => {
     }
 
     if (id === "" || name === "" || hexColor === "") {
-        console.log(TAG, "ID, NAME, SRC or HEXCOLOR is EMPTY");
         response.message =
             "These fields cannot be empty: id, name, src, hexColor})";
         response.data = null;
@@ -408,7 +396,6 @@ exports.updateCategory = async (req, res) => {
     }
 
     if (IsNotString(id) || IsNotString(name)) {
-        console.log(TAG, "ID, NAME, SRC or HEXCOLOR is not STRING");
         response.message =
             "These fields should be STRING TYPE:id, name, src, hexColor)";
         response.data = null;
@@ -419,7 +406,6 @@ exports.updateCategory = async (req, res) => {
         return;
     }
     //Field "name" is not in a valid format. Example of valid data: "#a00f9b"
-    console.log("OLHA O HEX FORMAT", hexColor);
 
     try {
         // Call Service method
@@ -439,7 +425,6 @@ exports.updateCategory = async (req, res) => {
     } catch (error) {
         console.log(TAG, error);
         if (error.message === "No rows returned") {
-            console.log("[404] NOT FOUND");
             response.message = "Nenhuma categoria corresponde ao ID informado";
             response.data = null;
             response.error = "[404] Not Found!";
@@ -477,7 +462,6 @@ exports.deleteCategoryById = async (req, res) => {
     };
     try {
         const serviceResponse = await categoriesService.deleteCategoryById(id);
-        console.log("Olha o que vem:", serviceResponse);
         response.message = "Categoria excluída com sucesso!";
         //response.data = serviceResponse.rows;
         response.data = serviceResponse; //this return just one object {name:,url:}
@@ -495,7 +479,6 @@ exports.deleteCategoryById = async (req, res) => {
     } catch (error) {
         console.log(TAG, error);
         if (error.message === "No rows returned") {
-            console.log("[404] NOT FOUND");
             response.message = "Nenhuma categoria corresponde ao ID informado";
             response.data = null;
             response.error = "[404] Not Found!";
@@ -534,10 +517,9 @@ function IsNotString(_data) {
 
 //colocando aqui função de apagar arquivo:
 function excluiArquivoDaImagemDeCategoria(serviceResponse) {
-    console.log("Apagarei esse arquivo aqui:", serviceResponse[0].src_img);
     const uploadDir = path.join(__dirname, "../../public", "assets", "uploads");
     const filePath = path.join(uploadDir, serviceResponse[0].src_img);
-    console.log("OLHA O PATH:", filePath);
+
     fs.unlink(filePath, (error) => {
         if (error && error.code !== "ENOENT") {
             // Se houver um erro que não seja o arquivo não encontrado, retorna um erro interno do servidor

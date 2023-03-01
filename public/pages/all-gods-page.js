@@ -86,7 +86,7 @@ export function addEventsToAllGodsPage() {
             );
             //// console.log(godCard.id, "AAAA");
             addUniqueEventListener(godCard, "click", () => {
-                redirectToGodDetailsPage(godCard.dataset.godId);
+                redirectToGodDetailsPage(godCard.dataset.godId, -1); //-1 botão de voltar leva para todos os deuses
             });
         }
     }

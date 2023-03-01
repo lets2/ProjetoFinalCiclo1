@@ -291,6 +291,9 @@ relacionada aquele elemento
 	 height: var(--size-icon-bigger);
 	 cursor: pointer;
  }
+ #logo:hover{
+	scale: 1.05;
+ }
  .container-search{
 	 background-color: var(--color-bg-arrow-);
 	 border-radius: 5.0rem;
@@ -321,8 +324,14 @@ relacionada aquele elemento
 	 margin-right: 2.5rem;
 	 height: 4.5rem;
  }
+ #profile-icon:hover{
+	scale: 1.2;
+ }
  #menu-icon{
 	 margin-right: 2rem;
+ }
+ #menu-icon:hover{
+	scale: 1.2;
  }
  .header-items{
 	background-color:#140a3db8 ;

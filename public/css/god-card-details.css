@@ -15,7 +15,7 @@
   display: flex;
   justify-content: center;
   background-color: rgba(47, 4, 61, 0.7);;
-  box-shadow: 1.5rem 1.5rem 1.5rem 0.5rem rgba(16, 77, 44, 0.25);
+  box-shadow: 1.5rem 1.5rem 1.5rem 0.5rem rgba(47 4 61 / 50%);
   border-radius: 1rem;
 }
 
