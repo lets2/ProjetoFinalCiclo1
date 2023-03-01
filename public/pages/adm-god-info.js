@@ -98,12 +98,9 @@ export function addElementsToGodInfoPage(godObj) {
 
 async function deleteGodFromDatabase(godId) {
     try {
-        const response = await fetch(
-            `/godstable/${godId}/`,
-            {
-                method: "DELETE",
-            }
-        );
+        const response = await fetch(`/godstable/${godId}/`, {
+            method: "DELETE",
+        });
         console.log("STATUS:", response.status);
         if (response.status !== 200 && response.status !== 201) {
             const resJson = await response.json();
