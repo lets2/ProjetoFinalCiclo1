@@ -389,6 +389,11 @@ h4 {
 	position: absolute;
 	right: 0;
 	font-family: 'MedievalSharp', cursive;
+	text-shadow: 
+	-1px -1px 0 black,
+	1px -1px 0 black,
+	-1px 1px 0 black,
+	1px 1px 0 black;
 }
 
 .container-circles {

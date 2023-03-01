@@ -315,6 +315,7 @@ relacionada aquele elemento
 	 background-color: var(--color-white);
 	 border-radius: 0.0rem;
 	 height: var(--height-input-smaller);
+	 text-align: left;
 	 border: none;
  }
  .search-icon{
@@ -413,7 +414,7 @@ relacionada aquele elemento
 	.search-input{
 		width:16rem;
 		border-radius: 2rem 0rem 0rem 2rem;
-		text-align: center;
+		text-align: left;
 	}
 	.search-input:focus{
 		outline: none;
@@ -437,7 +438,7 @@ relacionada aquele elemento
 	.search-input{
 		width:18rem;
 		border-radius: 2rem 2rem 2rem 2rem;
-		text-align: center;
+		text-align: left;
 		margin-left: 3rem;
 	}
 	.search-input:focus{

@@ -57,13 +57,18 @@ export function redirectToCategoryChoosed(id) {
 
 export function insertImages(arrayGods) {
     const cardsGods = document.querySelector("#box-cards-gods-overflow");
+    console.log(arrayGods, "arrayGods-category")
     let div = "";
     cardsGods.innerHTML = "";
     if (arrayGods) {
         for (let i = 0; i < arrayGods.length; i++) {
-            div = `<div class="flex-center-center">
-                <img class="cards-gods" id = "god-${arrayGods[i].id}" data-god-id=${arrayGods[i].id} src = "../assets/uploads/${arrayGods[i].src_img}"  alt="Cartão 2">
-            </div>
+            div = `<div id = "god-${arrayGods[i].id}" data-god-id=${arrayGods[i].id} class="flex-center-center box-card-info-cat">
+                        <img class="cards-gods"  src = "../assets/uploads/${arrayGods[i].src_img}"  alt="Cartão 2">
+                        <div class="card-hover-cat">
+                            <p class="card-hover-name-cat">${arrayGods[i].name}</p>
+                            <p class="card-hover-status-cat">${arrayGods[i].status}</p>
+                        </div>
+                    </div>
             `;
             cardsGods.innerHTML += div;
         }

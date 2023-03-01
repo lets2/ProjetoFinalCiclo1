@@ -284,7 +284,7 @@ h4{
  #box-img-god div{
     width: 22rem;
     height: 32rem;
-    border: 1rem solid var(--color-fonts);
+    border: 1.5rem solid var(--color-fonts);
     border-radius: 2rem;
     margin-bottom: 2rem;
     overflow: hidden;    
