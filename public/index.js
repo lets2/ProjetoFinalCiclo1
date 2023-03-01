@@ -170,6 +170,7 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria) {
 
         case "/editGod/g1":
             //console.log("ZZZ CATEGORY ID:", respostaIndex);
+            insertChoosedGodImg();
             inserirElementosNaEditGodPage(respostaIndex);
             insertChoosedGodImg();
             addSelectWithCategoriesInGodsPage(respostaIndex.category_id);
@@ -499,10 +500,9 @@ function addEventsToRegisterUser() {
             const password = document.querySelector("#new-passwd-user").value;
             const success = await tryRegisterUser(username, email, password);
 
-            if(success){
+            if (success) {
                 redirectToMenuAdmPage();
             }
-            
         } catch (error) {
             displayWarning(error);
         }
@@ -530,16 +530,16 @@ async function tryRegisterUser(_username, _email, _password) {
         }
         const jsonData = await response.json();
         console.log("CADASTRO - JSON OBTIDO:", jsonData);
-        displayWarning("Cadastrado com sucesso!")
+        displayWarning("Cadastrado com sucesso!");
         return true;
     } catch (error) {
         console.log(error, "Erro ao fazer cadastro!");
-        displayWarning(error)
+        displayWarning(error);
         return false;
     }
 }
 
-function clearSearchBar(){
+function clearSearchBar() {
     const inputSearchBar = document.querySelector(".search-input");
     inputSearchBar.value = "";
 }

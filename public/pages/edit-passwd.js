@@ -54,10 +54,9 @@ import { addUniqueEventListener } from "../utils/event-listener.js";
 import { addEventsToHeader, displayWarning } from "../index.js";
 import { redirectToMenuAdmPage } from "./adm_perfil_sidebar.js";
 
-
-export function addEventsToEditPasswd(){
+export function addEventsToEditPasswd() {
     addEventsToHeader();
-   
+
     const cancelButton = document.querySelector(".cancel-button-passwd");
     addUniqueEventListener(cancelButton, "click", () => {
         redirectToMenuAdmPage();
@@ -66,25 +65,30 @@ export function addEventsToEditPasswd(){
     const changePasswdBtn = document.querySelector("#edit-passwd-button");
     addUniqueEventListener(changePasswdBtn, "click", async (e) => {
         e.preventDefault();
-        try {
-            const username = document.querySelector("#check-name-user").value;
-            const oldPassword = document.querySelector("#old-passwd-user").value;
-            const newPassword = document.querySelector("#new-passwd-user").value;
-            const newPasswdAgain = document.querySelector("#new-passwd-repeated").value;
-            const message = document.querySelector("#message-change-passwd");
 
-            if(newPassword !== newPasswdAgain){
-                message.innerHTML = "Os campos 'Nova senha' e 'Repita a nova senha' devem ser iguais!";
-                throw "Erro: as senhas não coincidem!"
-            }
-            message.innerHTML = "";
-            const data = await tryChangePasswd(username, oldPassword, newPassword);
+        const username = document.querySelector("#check-name-user").value;
+        const oldPassword = document.querySelector("#old-passwd-user").value;
+        const newPassword = document.querySelector("#new-passwd-user").value;
+        const newPasswdAgain = document.querySelector(
+            "#new-passwd-repeated"
+        ).value;
+        const message = document.querySelector("#message-change-passwd");
 
+        if (newPassword !== newPasswdAgain) {
+            message.innerHTML =
+                "Os campos 'Nova senha' e 'Repita a nova senha' devem ser iguais!";
+            throw "Erro: as senhas não coincidem!";
+        }
+        message.innerHTML = "";
+        const data = await tryChangePasswd(username, oldPassword, newPassword);
+
+        if (data.success) {
             displayWarning(data.message); //deu tudo  certo
             redirectToMenuAdmPage();
-        } catch (error) {
-            console.log(error);
-        } 
+        } else {
+            displayWarning(data.message);
+            ///console.log(data.message, "Erro de trocar senha!");
+        }
     });
 }
 
@@ -97,17 +101,18 @@ async function tryChangePasswd(_username, _password, _newPassword) {
 
     try {
         const response = await fetch("/changePassword", {
-        method: "PUT",
-        body: JSON.stringify(objBody),
-        headers: { "Content-type": "application/json; charset=UTF-8" },
+            method: "PUT",
+            body: JSON.stringify(objBody),
+            headers: { "Content-type": "application/json; charset=UTF-8" },
         });
-        
+
         if (response.status !== 200 && response.status !== 201) {
             throw "[erro] ao tentar fazer login!";
         }
         const jsonData = await response.json();
-        return jsonData;
+        return { message: jsonData.message, success: true };
     } catch (error) {
-        console.log(error, "deu ruim");
+        //console.log(error, "deu ruim");
+        return { message: "Dados inválidos!", success: false };
     }
 }
