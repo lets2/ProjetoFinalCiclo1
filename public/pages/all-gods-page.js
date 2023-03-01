@@ -72,12 +72,17 @@ export function insertAllGods(
 
     const cardsGods = document.querySelector("#box-all-gods-overflow");
     let div = "";
+    console.log(allGodsArray, "allgods")
     cardsGods.innerHTML = "";
     if (allGodsArray) {
         for (let i = 0; i < allGodsArray.length; i++) {
-            div = `<div class="flex-center-center">
-                <img class="cards-gods" id = "god-id-${allGodsArray[i].id}" data-god-id=${allGodsArray[i].id} src = "../assets/uploads/${allGodsArray[i].src_img}"  alt="Cartão 2">
-            </div>
+            div = `<div id = "god-id-${allGodsArray[i].id}" data-god-id=${allGodsArray[i].id} class="flex-center-center box-card-info">
+                        <img class="cards-gods"  src = "../assets/uploads/${allGodsArray[i].src_img}"  alt="Cartão 2">
+                        <div class="card-hover">
+                            <p class="card-hover-name">${allGodsArray[i].name}</p>
+                            <p class="card-hover-status">${allGodsArray[i].status}</p>
+                        </div>
+                    </div>
             `;
             cardsGods.innerHTML += div;
         }
