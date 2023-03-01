@@ -101,7 +101,7 @@ async function deleteGodFromDatabase(godId) {
         const response = await fetch(`/godstable/${godId}/`, {
             method: "DELETE",
         });
-        console.log("STATUS:", response.status);
+
         if (response.status !== 200 && response.status !== 201) {
             const resJson = await response.json();
             const { message, error } = resJson;
@@ -109,7 +109,7 @@ async function deleteGodFromDatabase(godId) {
             throw `${error}`;
         }
         const resJson = await response.json();
-        console.log("Requisição de DELETE GOD deu certo:", resJson);
+
         displayWarning(resJson.message); //deu tudo  certo
 
         const container_data = document.querySelector("#container-see-god");

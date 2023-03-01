@@ -8,15 +8,14 @@ export async function addResourcesToCategoriesPage() {
         return objContent.data;
     } catch (error) {
         console.log("Erro durante o fetch:", error);
+        return ""; //retunrn empty string
     }
 }
 
 /*add resource as páginas escolhdas*/
 export async function addResourcesToCategoryChoosed(id) {
     try {
-        const response = await fetch(
-            `/categories/${id}/all`
-        );
+        const response = await fetch(`/categories/${id}/all`);
 
         if (response.status !== 200 && response.status !== 201)
             throw "[erro] Houve um problema durante a busca das categorias!";
@@ -26,6 +25,7 @@ export async function addResourcesToCategoryChoosed(id) {
         return objContent.data;
     } catch (error) {
         console.log("Erro durante o fetch:", error);
+        return ""; //return empty string
     }
 }
 
@@ -41,14 +41,13 @@ export async function addResourcesToTableOfCategories() {
         return objContent.data; //talvez seja .data[0]
     } catch (error) {
         console.log("Erro durante o fetch:", error);
+        return ""; //return empty string
     }
 }
 //#input-cat-edit-name//cat
 export async function addResourcesToEditCategoryPage(id) {
     try {
-        const response = await fetch(
-            `/categoriestable/${id}/`
-        );
+        const response = await fetch(`/categoriestable/${id}/`);
 
         if (response.status !== 200 && response.status !== 201)
             throw "[erro] Problema ao tentar pegar ocategoria ppelo ID!";
@@ -59,5 +58,6 @@ export async function addResourcesToEditCategoryPage(id) {
         return catInformation;
     } catch (error) {
         console.log("Erro durante o fetch:", error);
+        return ""; //return empty string
     }
 }

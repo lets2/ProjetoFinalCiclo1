@@ -186,7 +186,7 @@ async function updateGodInformationInDatabase(godId) {
             throw `${error}`;
         }
         const resJson = await response.json();
-        console.log("Requisição de EDIT GOD deu certo:", resJson);
+
         displayWarning(resJson.message); //deu tudo  certo
         //Se deu tudo certo, o modal acima mostra uma mensagem de sucesso e retorna true
         return true;

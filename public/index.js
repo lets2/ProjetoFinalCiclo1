@@ -122,7 +122,7 @@ addUniqueEventListener(window, "onstatechange", async (event) => {
     history.pushState({}, "", url);
     root.innerHTML = "";
     root.appendChild(page);
-    console.log("URL:", url, "Criteria:", criteria);
+    //console.log("URL:", url, "Criteria:", criteria);
 
     const respostaIndex = await addExternalResourcesTo(url, criteria);
 
@@ -161,7 +161,6 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria) {
             categoriesList = respostaIndex.dataCategories;
             // addSelectWithCategories(respostaIndex.dataCategories);
             addLinesGodTable(respostaIndex.dataGods);
-            console.log(categoriesList, "categoreis");
             break;
 
         case "/godInfo/g1":
@@ -169,7 +168,6 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria) {
             break;
 
         case "/editGod/g1":
-            //console.log("ZZZ CATEGORY ID:", respostaIndex);
             insertChoosedGodImg();
             inserirElementosNaEditGodPage(respostaIndex);
             insertChoosedGodImg();
@@ -196,7 +194,6 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria) {
             addSelectWithCategoriesInGodsPage();
             break;
         case "/allGods":
-            console.log("zzOLHA O RESPOSTA INDEX:", respostaIndex);
             if (Array.isArray(respostaIndex)) {
                 godsFilteredArrayGlobal = respostaIndex;
                 allGodsArray = respostaIndex; //ganbiarra, se tirar isso da erro na 1190
@@ -217,7 +214,7 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria) {
                     });
                 } else {
                     //implica pesquisar===false,logo mostra todos os deuses
-                    console.log("tttttELSE - ENTROU AQUI!!", allGodsArray);
+
                     allGodsArray = respostaIndex.dataGods;
                     insertAllGods(allGodsArray, { pesquisou: false });
                 }
@@ -333,7 +330,6 @@ async function tentaFazerLogin(_username, _password) {
         throw "[erro] ao tentar fazer login!";
     }
     const jsonData = await response.json();
-    console.log("LOGIN - JSON OBTIDO:", jsonData);
 }
 
 /*@author:filipe - coauthor: Letônio*/
@@ -366,7 +362,6 @@ function addEventsToAdmMenuPage() {
     ];
     if (document.cookie.indexOf("session=") !== -1) {
         objMenuAdm.forEach((element) => {
-            console.log("caiu opt1");
             const menuAdmOption = document.querySelector(element.label);
 
             addUniqueEventListener(menuAdmOption, "click", () => {
@@ -390,7 +385,6 @@ function addEventsToMenuPage() {
     addEventsToHeader();
     const pageIcon = document.querySelector("#home-page");
     addUniqueEventListener(pageIcon, "click", () => {
-        ////////console.log("ATIVOU EVENTO E VA RENDERIZAR O LOGIN");
         ///redirectToMyPrincipal();
         redirectToAllCategories();
     });
@@ -463,7 +457,6 @@ export function addEventsToHeader() {
     //Adicionando evento na barra de pesquisa
     const inputSearchBar = document.querySelector(".search-input");
     addUniqueEventListener(inputSearchBar, "keyup", (event) => {
-        console.log("VALOR DO INPUT:", event.target.value);
         debouncePesquisar(event.target.value);
     });
 }
@@ -477,9 +470,6 @@ function debouncePesquisar(texto) {
 // Função chamada após o tempo depois do último clique
 async function pesquisar(texto) {
     // Enviar requisição para o servidor
-    console.log("HORA DE FAZER A REQUISIÇÃO sobre esse texto!", texto);
-    console.log("HORA DE FAZER A REQUISIÇÃO sobre esse array!", texto);
-
     const arrayWords = texto.split(/\s|,/); //regex to split blankspace or , //= ["muito", "ddd"];
     const parametro = arrayWords.join(",");
 
@@ -519,7 +509,6 @@ async function tryRegisterUser(_username, _email, _password) {
         email: _email,
     };
 
-    console.log(objBody, "OBJ BODY");
     try {
         const response = await fetch("/registerAdm", {
             method: "POST",
@@ -532,11 +521,10 @@ async function tryRegisterUser(_username, _email, _password) {
             throw obj.message;
         }
         const jsonData = await response.json();
-        console.log("CADASTRO - JSON OBTIDO:", jsonData);
+
         displayWarning("Cadastrado com sucesso!");
         return true;
     } catch (error) {
-        console.log(error, "Erro ao fazer cadastro!");
         displayWarning(error);
         return false;
     }

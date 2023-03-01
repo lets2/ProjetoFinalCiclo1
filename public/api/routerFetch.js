@@ -47,10 +47,6 @@ export async function addExternalResourcesTo(url, criteria) {
         case "/editCategory":
             return await addResourcesToEditCategoryPage(criteria.id);
         case "/allGods":
-            console.log(
-                "Aparentemente, o parametro is okay:",
-                criteria.parametroDePesquisa
-            );
             const arrayWithGodsFiltered = await getResourcesFromGodsFiltered(
                 criteria.parametroDePesquisa
             );

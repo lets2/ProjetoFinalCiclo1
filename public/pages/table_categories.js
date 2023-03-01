@@ -108,12 +108,9 @@ function adicionaEventosNosLapis() {
 
 async function deleteCategoryFromDatabase(id) {
     try {
-        const response = await fetch(
-            `/categoriestable/${id}/`,
-            {
-                method: "DELETE",
-            }
-        );
+        const response = await fetch(`/categoriestable/${id}/`, {
+            method: "DELETE",
+        });
 
         if (response.status !== 200 && response.status !== 201) {
             const resJson = await response.json();
@@ -122,7 +119,7 @@ async function deleteCategoryFromDatabase(id) {
             throw `${error}`;
         }
         const resJson = await response.json();
-        console.log("DELETE CATEGORY deu certo:", resJson);
+
         displayWarning(resJson.message); //deu tudo  certo
 
         const container_data = document.querySelector("#container-see-god");

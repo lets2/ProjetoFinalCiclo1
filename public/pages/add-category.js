@@ -120,7 +120,7 @@ export function addEventsToAddCategoryPage() {
     const btnAddCategory = document.querySelector("#add-category");
     addUniqueEventListener(btnAddCategory, "click", async () => {
         const addSuccess = await addNewCategoryInDatabase();
-        console.log("FLAG DE SUCESSO ADD CATEGORY:", addSuccess);
+
         //Antes de redirecionar devemos adicionar o novo deus
         if (addSuccess) {
             redirectToTableEditCategories();
@@ -152,8 +152,6 @@ async function addNewCategoryInDatabase() {
             method: "POST",
             body: formData,
         });
-
-        console.log("TESTE RESPOSTA OBTIDA AO CRIAR CATEGORIA:", response);
 
         if (response.status !== 200 && response.status !== 201) {
             const resJson = await response.json();
