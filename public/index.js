@@ -200,23 +200,26 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria) {
             if (Array.isArray(respostaIndex)) {
                 godsFilteredArrayGlobal = respostaIndex;
                 allGodsArray = respostaIndex; //ganbiarra, se tirar isso da erro na 1190
-                displayWarning(
-                    `Resultados correspondentes à sua pesquisa: ${godsFilteredArrayGlobal.length}`
-                );
-                insertAllGods(godsFilteredArrayGlobal);
+
+                insertAllGods(godsFilteredArrayGlobal, {
+                    message: `Resultados correspondentes à sua pesquisa: ${godsFilteredArrayGlobal.length}`,
+                    pesquisou: true,
+                });
             } else {
                 if (criteria.pesquisar) {
                     allGodsArray = respostaIndex.dataGods;
-                    displayWarning(
-                        "Não há deuses correspondentes à sua pesquisa. Aqui está uma lista com todos os deuses."
-                    );
+
                     //insertMessageNoGodFound();
-                    insertAllGods(allGodsArray);
+                    insertAllGods(allGodsArray, {
+                        message:
+                            "Não há deuses correspondentes à sua pesquisa. Aqui está uma lista com todos os deuses",
+                        pesquisou: true,
+                    });
                 } else {
                     //implica pesquisar===false,logo mostra todos os deuses
                     console.log("tttttELSE - ENTROU AQUI!!", allGodsArray);
                     allGodsArray = respostaIndex.dataGods;
-                    insertAllGods(allGodsArray);
+                    insertAllGods(allGodsArray, { pesquisou: false });
                 }
             }
 
