@@ -78,7 +78,7 @@ export function insertChoosedGodImg() {
     const message = document.querySelector("#message-input-file");
 
     message.innerHTML = "";
-    
+
     addUniqueEventListener(fileBtn, "change", (e) => {
         if (e.target.files.length > 0) {
             const file = e.target.files[0];
@@ -117,7 +117,7 @@ export function addEventsToAddNewGodPage() {
     addUniqueEventListener(addGodButton, "click", async (e) => {
         e.preventDefault();
         const addSuccess = await addNewGodInDatabase();
-        console.log("FLAG DE SUCESSO ADD GOD:", addSuccess);
+
         //Antes de redirecionar devemos adicionar o novo deus
         if (addSuccess) {
             redirectToTableEditGods();
@@ -133,11 +133,6 @@ async function addNewGodInDatabase() {
     //const srcExample = "exampleGod.png";
     // const categoryId = "1"; //Precisamos modificar a página para receber categoria também
     const categoryId = document.querySelector("#select-filter-category").value;
-    console.log("OLHA O ID DA CATEGORIA QUE ESCOLHI", categoryId);
-    console.log(
-        "OLHA O NOME DA CATEGORIA QUE ESCOLHI",
-        document.querySelector("#select-filter-category").innerText
-    );
 
     //Tentando fazer a adicão de arquivo:
     const formData = new FormData();

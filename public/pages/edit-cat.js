@@ -88,13 +88,11 @@ export function insertChoosedCategoryTempleImg() {
     message.innerHTML = "";
 
     addUniqueEventListener(fileBtn, "change", (e) => {
-        console.log("entrou no evento change img", e.target)
         if (e.target.files.length > 0) {
             const file = e.target.files[0];
             const url = URL.createObjectURL(file);
             previewImg.src = url;
             message.innerHTML = file.name;
-            console.log("fileBTN", file.name);
         } else {
             message.innerHTML = "Nenhum arquivo escolhido";
         }
@@ -138,7 +136,7 @@ export function addEventsToEditCategoryPage() {
         //pegar o id que está armazenado num data-set
         const id = document.querySelector(".container-edit-cat").dataset.id;
         const editSuccess = await updateCategoryInformationInDatabase(id);
-        console.log("FLAG DE SUCESSO EDIT CAT:", editSuccess);
+
         if (editSuccess) {
             redirectToTableEditCategories();
         }
@@ -151,14 +149,10 @@ async function updateCategoryInformationInDatabase(id) {
 
     //FETCH
     try {
-        const response = await fetch(
-            `/categoriestable/${id}`,
-            {
-                method: "PUT",
-                body: formData,
-            }
-        );
-        console.log("RESPOSTA DA REQUISIÇÃO EDIT CATEGORY:", response.status);
+        const response = await fetch(`/categoriestable/${id}`, {
+            method: "PUT",
+            body: formData,
+        });
 
         if (response.status !== 200 && response.status !== 201) {
             const resJson = await response.json();
@@ -167,7 +161,7 @@ async function updateCategoryInformationInDatabase(id) {
             throw `${error}`;
         }
         const resJson = await response.json();
-        console.log("Requisição de EDIT CATEGORY deu certo:", resJson);
+
         displayWarning(resJson.message); //deu tudo  certo
         //Se deu tudo certo, o modal acima mostra uma mensagem de sucesso e retorna true
         return true;

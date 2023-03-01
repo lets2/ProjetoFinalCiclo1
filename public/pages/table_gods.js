@@ -130,11 +130,10 @@ export function addEventsToGodTablePage() {
 
     const tbodyElement = document.querySelector("tbody");
     addUniqueEventListener(tbodyElement, "click", (event) => {
-        console.log("TARGET:", event.target.parentNode);
         const rowElement = event.target.parentNode;
         if (event.target.parentNode.tagName === "TR") {
             const godId = rowElement.dataset.godId;
-            console.log("LINHA664 - GODEVENT:", godId);
+
             redirectToGodInfoPage(godId);
         }
     });

@@ -1,9 +1,7 @@
 //@author:filipe
 export async function addResourcesToGodChoosed(godId) {
     try {
-        const response = await fetch(
-            `/godstable/${godId}/`
-        );
+        const response = await fetch(`/godstable/${godId}/`);
 
         if (response.status !== 200 && response.status !== 201)
             throw "[erro] Houve um problema na requisicao!";
@@ -30,15 +28,14 @@ export async function addResourcesToGodChoosed(godId) {
         return godInformation;
     } catch (error) {
         console.log("Erro durante o fetch:", error);
+        return ""; //return empty string
     }
 }
 
 //@author:filipe
 export async function addResourcesToTableOfGods() {
     try {
-        const responseCategories = await fetch(
-            `/categories/`
-        );
+        const responseCategories = await fetch(`/categories/`);
 
         if (
             responseCategories.status !== 200 &&
@@ -59,15 +56,14 @@ export async function addResourcesToTableOfGods() {
         return { dataCategories, dataGods };
     } catch (error) {
         console.log("Erro durante o fetch:", error);
+        return ""; //return empty string
     }
 }
 
 //@author:filipe
 export async function addResourcesToGodInfo(godId) {
     try {
-        const response = await fetch(
-            `/godstable/${godId}/`
-        );
+        const response = await fetch(`/godstable/${godId}/`);
 
         if (response.status !== 200 && response.status !== 201)
             throw "[erro] Houve um problema na requisicao!";
@@ -106,6 +102,7 @@ export async function addResourcesToGodInfo(godId) {
         return godInformation;
     } catch (error) {
         console.log("Erro durante o fetch:", error);
+        return ""; //return empty string
     }
 
     //GOD INFO IS THE PAGE WITH PENCIL AND TRASH DO EDIT AND DELETE GOD
@@ -113,9 +110,7 @@ export async function addResourcesToGodInfo(godId) {
 
 export async function addResourcesToEditGodPage(godId) {
     try {
-        const response = await fetch(
-            `/godstable/${godId}/`
-        );
+        const response = await fetch(`/godstable/${godId}/`);
 
         if (response.status !== 200 && response.status !== 201)
             throw "[erro] Houve um problema na requisicao!";
@@ -126,6 +121,7 @@ export async function addResourcesToEditGodPage(godId) {
         return godInformation;
     } catch (error) {
         console.log("Erro durante o fetch:", error);
+        return ""; //return empty string
     }
 }
 
@@ -136,7 +132,6 @@ export async function getResourcesFromGodsFiltered(_parametroDePesquisa) {
         const response = await fetch(
             `/searchgods?strings=${_parametroDePesquisa}`
         );
-        console.log("RESPOSTA DA REQUISIÇÃO SEARCH GODS:", response.status);
 
         if (response.status !== 200 && response.status !== 201) {
             const resJson = await response.json();
@@ -145,7 +140,7 @@ export async function getResourcesFromGodsFiltered(_parametroDePesquisa) {
             throw `${error}`;
         }
         const resJson = await response.json();
-        console.log("Requisição de BARRA DE PESQUISA deu certo:", resJson);
+
         //displayWarning(resJson.message); //deu tudo  certo
         // CASO DÊ CERTO A REQUISIÇÃO SALVO NO VETOR DE GODS FILTRADOS
         // E CHAMO O REDIRECT:
@@ -163,5 +158,6 @@ export async function getResourcesFromGodsFiltered(_parametroDePesquisa) {
         ///   }
     } catch (error) {
         console.log(error);
+        return []; //return empty array
     }
 }

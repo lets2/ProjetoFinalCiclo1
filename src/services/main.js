@@ -8,5 +8,6 @@ exports.getAll = async () => {
         return resp;
     } catch (error) {
         console.log(TAG, "ERROR caught");
+        return false;
     }
 };
