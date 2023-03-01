@@ -27,10 +27,10 @@ export function EditPasswd() {
             <form action="" id="form-change-passwd">
                 <p id="tittle-change-passwd">Alterar Senha</p>
                 <div class="flex-col-center" id="box-change-passwd">
-                    <input id="check-name-user" class="input-change-passwd" type="text" placeholder="Username">
-                    <input id="old-passwd-user" class="input-change-passwd" type="password" placeholder="Password">
-                    <input id="new-passwd-user" class="input-change-passwd" type="password" placeholder="New Password">
-                    <input id="new-passwd-repeated" class="input-change-passwd" type="password" placeholder="Repeat the New Password">
+                    <input id="check-name-user" class="input-change-passwd" type="text" placeholder="Nome de usuário">
+                    <input id="old-passwd-user" class="input-change-passwd" type="password" placeholder="Senha">
+                    <input id="new-passwd-user" class="input-change-passwd" type="password" placeholder="Nova senha">
+                    <input id="new-passwd-repeated" class="input-change-passwd" type="password" placeholder="Confirme a nova senha">
                 </div>
                 <div class="flex-row-between" id="box-buttons-user">
                     <button class="cancel-button-passwd btns-change-passwd">Cancelar</button>

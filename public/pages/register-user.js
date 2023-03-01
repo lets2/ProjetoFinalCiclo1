@@ -28,9 +28,9 @@ export function RegisterUser() {
             <form action="" class="flex-col-center" id="form-register-user">
                 <p id="tittle-register-user">Cadastrar</p>
                 <div class="flex-col-center" id="box-register-user">
-                    <input id="new-name-user" class="input-add-user" type="text" placeholder="Username">
+                    <input id="new-name-user" class="input-add-user" type="text" placeholder="Nome de usuário">
                     <input id="new-email-user" class="input-add-user" type="email" placeholder="Email">
-                    <input id="new-passwd-user" class="input-add-user" type="password" placeholder="Password">
+                    <input id="new-passwd-user" class="input-add-user" type="password" placeholder="Senha">
                 </div>
                 <div class="flex-row-between" id="box-buttons-user">
                     <button class="cancel-button-register btns-add-user">Cancelar</button>

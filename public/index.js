@@ -127,6 +127,7 @@ addUniqueEventListener(window, "onstatechange", async (event) => {
     const respostaIndex = await addExternalResourcesTo(url, criteria);
 
     chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria);
+    clearSearchBar();
     addEventsRelatedTo(url); //call relateds events to page/url
 });
 
@@ -197,6 +198,9 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria) {
             if (Array.isArray(respostaIndex)) {
                 godsFilteredArrayGlobal = respostaIndex;
                 allGodsArray = respostaIndex; //ganbiarra, se tirar isso da erro na 1190
+                displayWarning(
+                    `Resultados correspondentes à sua pesquisa: ${godsFilteredArrayGlobal.length}`
+                );
                 insertAllGods(godsFilteredArrayGlobal);
             } else {
                 if (criteria.pesquisar) {
@@ -532,4 +536,9 @@ async function tryRegisterUser(_username, _email, _password) {
         displayWarning(error)
         return false;
     }
+}
+
+function clearSearchBar(){
+    const inputSearchBar = document.querySelector(".search-input");
+    inputSearchBar.value = "";
 }
