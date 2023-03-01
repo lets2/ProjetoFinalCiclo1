@@ -65,21 +65,19 @@
     color: #fff;
     overflow-y: scroll;
     line-height: 4rem;
+    padding-right: 0.5rem;
 }
 
-/* .god-text-description::-webkit-scrollbar {
-  width: 12px;               
-}
-
-.god-text-description::-webkit-scrollbar-track {
-  background: orange;        
+.god-text-description::-webkit-scrollbar {
+  width: 0.6rem;
+  height: 0.5rem;             
 }
 
 .god-text-description::-webkit-scrollbar-thumb {
-  background-color: blue;    
-  border-radius: 20px;       
-  border: 3px solid orange;  
-} */
+  background-color: rgba(113, 11, 147, 0.7);
+  border-radius: 2rem;       
+  border: 0.5px solid;  
+}
 
 /* width of the entire scrollbar */
 
@@ -105,7 +103,6 @@
     align-items: center;
     border-radius: 2rem;
     overflow: hidden;
-    margin-top: 1rem;
   }
 
   .container-god-text {
@@ -126,7 +123,7 @@
   .god-text-description {
     font-size: 2rem;
     line-height: 3.7rem;
-
+    padding-right: 0.5rem;
   }
 }
 
@@ -172,6 +169,7 @@
   .god-text-description {
     font-size: 1.8rem;
     line-height: 3.4rem;
+    padding-right: 0.5rem;
   }
 }
 
@@ -220,6 +218,7 @@
   .god-text-description {
     font-size: 1.8rem;
     line-height: 3rem;
+    padding-right: 0.5rem;
   }
 }
 
@@ -268,6 +267,7 @@
   .god-text-description {
     font-size: 1.8rem;
     line-height: 2.8rem;
+    padding-right: 0.5rem;
     }
 }
 
@@ -313,5 +313,6 @@
     font-size: 1.8rem;
     margin: 1rem;
     line-height: 2.4rem;
+    padding-right: 0.5rem;
   }
 }
