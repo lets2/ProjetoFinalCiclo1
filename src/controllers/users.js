@@ -27,7 +27,6 @@ exports.login = async (req, res) => {
 
     if (!name || !plainTextPassword) {
         //
-        console.log(TAG, "NAME or PASSWORD is UNDEFINED/NULL");
         response.message = "Request need to have {name and passeword})";
         response.data = null;
         response.error = "[400] Bad request! Some fields are UNDEFINED/NULL";
@@ -39,7 +38,6 @@ exports.login = async (req, res) => {
 
     if (name === "" || plainTextPassword === "") {
         //
-        console.log(TAG, "NAME or PASSWORD is EMPTY");
         response.message = "These fields cannot be empty: name,password})";
         response.data = null;
         response.error = "[400] Bad request! Some fields are EMPTY";
@@ -51,7 +49,6 @@ exports.login = async (req, res) => {
 
     if (IsNotString(name) || IsNotString(plainTextPassword)) {
         //
-        console.log(TAG, "NAME or PASSWORD is not STRING");
         response.message = "These fields should be STRING TYPE:name, password)";
         response.data = null;
         response.error = "[400] Bad request! Some fields are not STRING";
@@ -79,7 +76,6 @@ exports.login = async (req, res) => {
             res.cookie("session", jwt);
             // res.status(200).json({ controller: "GEROU cookie" });
         } else {
-            console.log("DEU FALSE, SENHA/USER ERRADO!", dbPasswordHash);
             response.message = "[403] Acesso negado!";
             response.error = "[403] Acesso negado!";
             res.status(403).json(response); //forbidden
@@ -178,7 +174,6 @@ exports.registerNewAdm = async (req, res) => {
 
     if (!username || !plainTextPassword || !email) {
         //
-        console.log(TAG, "NAME,EMAIL or PASSWORD is UNDEFINED/NULL");
         response.message = "Request need to have {name, email, password})";
         response.data = null;
         response.error = "[400] Bad request! Some fields are UNDEFINED/NULL";
@@ -190,7 +185,6 @@ exports.registerNewAdm = async (req, res) => {
 
     if (username === "" || plainTextPassword === "" || email === "") {
         //
-        console.log(TAG, "NAME,EMAIL or PASSWORD is EMPTY");
         response.message =
             "These fields cannot be empty: name, email, password})";
         response.data = null;
@@ -207,7 +201,6 @@ exports.registerNewAdm = async (req, res) => {
         IsNotString(plainTextPassword)
     ) {
         //
-        console.log(TAG, "USERNAME or PASSWORD is not STRING");
         response.message =
             "These fields should be STRING TYPE: username, password)";
         response.data = null;
@@ -220,7 +213,6 @@ exports.registerNewAdm = async (req, res) => {
     if (
         !isEmailValid(email)
     ) {
-        console.log(TAG, "Email inválido!");
         response.message =
             "É necessário informar um email válido!";
         response.data = null;
@@ -287,10 +279,6 @@ exports.changePassword = async (req, res) => {
 
     if (!username || !oldTextPassword || !newTextPassword) {
         //
-        console.log(
-            TAG,
-            "USERNAME,OLDPASSWORD OR NEW PASSWORD is UNDEFINED/NULL"
-        );
         response.message =
             "Request need to have {username,oldPassword,newPassword})";
         response.data = null;
@@ -303,7 +291,6 @@ exports.changePassword = async (req, res) => {
 
     if (username === "" || oldTextPassword === "" || newTextPassword === "") {
         //
-        console.log(TAG, "USERNAME,OLDPASSWORD OR NEW PASSWORD is EMPTY");
         response.message =
             "These fields cannot be empty: username,oldPassword,newPassword)";
         response.data = null;
@@ -320,7 +307,6 @@ exports.changePassword = async (req, res) => {
         IsNotString(newTextPassword)
     ) {
         //
-        console.log(TAG, "USERNAME,OLDPASSWORD OR NEW PASSWORD is not STRING");
         response.message =
             "These fields should be STRING TYPE:username,oldPassword,newPassword)";
         response.data = null;
@@ -337,7 +323,6 @@ exports.changePassword = async (req, res) => {
         // Call Service method
         const serviceResponse = await usersService.getHashPassword(username);
         //
-        console.log("OLHA O SERVICE RESPONSE1:", serviceResponse);
         //Salva o hash da senha antiga
         const oldDbPasswordHash = serviceResponse[0].password;
         //compara se a senha passada gera o mesmo rash do banco de dados
@@ -353,17 +338,12 @@ exports.changePassword = async (req, res) => {
                     newDbPasswordHash
                 );
             // Retornar com sucesso
-            console.log(
-                "TENTOU POR NOVA SENHA LHA RETORNO:",
-                serviceResponseChangePassword
-            );
             response.message = "Success";
             response.data = serviceResponseChangePassword;
 
             res.status(200).json(response);
             console.timeEnd(`changePassword()${milliseconds}`);
         } else {
-            console.log("DEU FALSE, SENHA/USER ERRADO!", oldDbPasswordHash);
             response.message = "Forbidden";
             response.error = "[401]  Unauthorized! Senha antiga não confere";
             res.status(401).json(response); //errou senha antiga

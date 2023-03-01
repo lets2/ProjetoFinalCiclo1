@@ -88,6 +88,7 @@ export function insertChoosedCategoryTempleImg() {
     message.innerHTML = "";
 
     addUniqueEventListener(fileBtn, "change", (e) => {
+        console.log("entrou no evento change img", e.target)
         if (e.target.files.length > 0) {
             const file = e.target.files[0];
             const url = URL.createObjectURL(file);
@@ -109,7 +110,7 @@ export function testInserirElementosNaEditCategoryPage(catInformation) {
 
     const containerImgGod = document.querySelector("#edit-page-cat-img");
     containerImgGod.innerHTML = `
-    <img src="../assets/uploads/${catInformation.src}" alt="">
+    <img id="preview-img-cat" src="../assets/uploads/${catInformation.src}" alt="">
     `;
 
     const containerEditCategory = document.querySelector(".container-edit-cat");

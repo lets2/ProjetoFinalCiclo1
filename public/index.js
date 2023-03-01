@@ -127,6 +127,7 @@ addUniqueEventListener(window, "onstatechange", async (event) => {
     const respostaIndex = await addExternalResourcesTo(url, criteria);
 
     chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria);
+    clearSearchBar();
     addEventsRelatedTo(url); //call relateds events to page/url
 });
 
@@ -169,7 +170,9 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria) {
 
         case "/editGod/g1":
             //console.log("ZZZ CATEGORY ID:", respostaIndex);
+            insertChoosedGodImg();
             inserirElementosNaEditGodPage(respostaIndex);
+            insertChoosedGodImg();
             addSelectWithCategoriesInGodsPage(respostaIndex.category_id);
             //a funcao acima eh usada em duas paginas (add e edit),
             //vou colocar um parametro que caso nao seja informado por padrao
@@ -178,8 +181,8 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria) {
             break;
 
         case "/editCategory":
-            insertChoosedCategoryTempleImg(); //function to show preview
             testInserirElementosNaEditCategoryPage(respostaIndex);
+            insertChoosedCategoryTempleImg(); //function to show preview
             break;
 
         case "/addCategory":
@@ -197,20 +200,26 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria) {
             if (Array.isArray(respostaIndex)) {
                 godsFilteredArrayGlobal = respostaIndex;
                 allGodsArray = respostaIndex; //ganbiarra, se tirar isso da erro na 1190
-                insertAllGods(godsFilteredArrayGlobal);
+
+                insertAllGods(godsFilteredArrayGlobal, {
+                    message: `Resultados correspondentes à sua pesquisa: ${godsFilteredArrayGlobal.length}`,
+                    pesquisou: true,
+                });
             } else {
                 if (criteria.pesquisar) {
                     allGodsArray = respostaIndex.dataGods;
-                    displayWarning(
-                        "Não há deuses correspondentes à sua pesquisa. Aqui está uma lista com todos os deuses."
-                    );
+
                     //insertMessageNoGodFound();
-                    insertAllGods(allGodsArray);
+                    insertAllGods(allGodsArray, {
+                        message:
+                            "Não há deuses correspondentes à sua pesquisa. Aqui está uma lista com todos os deuses",
+                        pesquisou: true,
+                    });
                 } else {
                     //implica pesquisar===false,logo mostra todos os deuses
                     console.log("tttttELSE - ENTROU AQUI!!", allGodsArray);
                     allGodsArray = respostaIndex.dataGods;
-                    insertAllGods(allGodsArray);
+                    insertAllGods(allGodsArray, { pesquisou: false });
                 }
             }
 
@@ -494,10 +503,9 @@ function addEventsToRegisterUser() {
             const password = document.querySelector("#new-passwd-user").value;
             const success = await tryRegisterUser(username, email, password);
 
-            if(success){
+            if (success) {
                 redirectToMenuAdmPage();
             }
-            
         } catch (error) {
             displayWarning(error);
         }
@@ -525,11 +533,16 @@ async function tryRegisterUser(_username, _email, _password) {
         }
         const jsonData = await response.json();
         console.log("CADASTRO - JSON OBTIDO:", jsonData);
-        displayWarning("Cadastrado com sucesso!")
+        displayWarning("Cadastrado com sucesso!");
         return true;
     } catch (error) {
         console.log(error, "Erro ao fazer cadastro!");
-        displayWarning(error)
+        displayWarning(error);
         return false;
     }
+}
+
+function clearSearchBar() {
+    const inputSearchBar = document.querySelector(".search-input");
+    inputSearchBar.value = "";
 }

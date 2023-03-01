@@ -77,6 +77,8 @@ export function insertChoosedGodImg() {
     const previewImg = document.querySelector("#preview-img-god");
     const message = document.querySelector("#message-input-file");
 
+    message.innerHTML = "";
+    
     addUniqueEventListener(fileBtn, "change", (e) => {
         if (e.target.files.length > 0) {
             const file = e.target.files[0];

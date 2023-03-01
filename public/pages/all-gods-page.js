@@ -22,7 +22,7 @@ export function AllGodsPage() {
         </div>
     </header>
 	<main class="main-all-gods">
-		<div class="container-all-gods-page flex-center-center">
+		<div class="container-all-gods-page flex-col">
             <div id="box-all-gods">
                 <div id="box-all-gods-overflow">
                                     
@@ -48,7 +48,28 @@ export function redirectToAllGods(parametroDePesquisa, pesquisar = false) {
 //FUnção que adiciona todos os deuses ou os deuses filtrados da abrra de pesquisa
 //dependendo do if/else que existe no index.js
 
-export function insertAllGods(allGodsArray) {
+export function insertAllGods(
+    allGodsArray,
+    obj = { message: "", pesquisou: false }
+) {
+    //acessa o elemento que vem antes do grid e coloca um conteúdo nele
+    const containerPage = document.querySelector(".container-all-gods-page");
+
+    //Remover textos de pesquisas anteriores
+    const previousMessageArray = document.querySelectorAll(
+        ".text-warning-result-search"
+    );
+    if (previousMessageArray.length > 0) {
+        previousMessageArray.forEach((element) => element.remove());
+    }
+
+    if (obj.pesquisou) {
+        const h4Tag = document.createElement("h4");
+        h4Tag.innerHTML = obj.message;
+        h4Tag.classList.add("text-warning-result-search");
+        containerPage.insertBefore(h4Tag, containerPage.firstChild);
+    }
+
     const cardsGods = document.querySelector("#box-all-gods-overflow");
     let div = "";
     cardsGods.innerHTML = "";
@@ -86,7 +107,7 @@ export function addEventsToAllGodsPage() {
             );
             //// console.log(godCard.id, "AAAA");
             addUniqueEventListener(godCard, "click", () => {
-                redirectToGodDetailsPage(godCard.dataset.godId);
+                redirectToGodDetailsPage(godCard.dataset.godId, -1); //-1 botão de voltar leva para todos os deuses
             });
         }
     }

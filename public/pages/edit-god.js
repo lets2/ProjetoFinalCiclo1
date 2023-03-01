@@ -26,7 +26,7 @@ export function EditGod() {
 		<div class="flex-row-center" id="container-edit-god">
 			<div class="flex-col-center" id="box-img-god">
 				<div id="edit-page-god-img">
-					<img id="preview-img-god-edit" src="../assets/images/JPG-PLACEHOLDER-DEUS.jpg" alt="">
+					<img id="preview-img-god" src="../assets/images/games-god.jpg" alt="">
 				</div>
 				<input id="insert-file-btn" type="file" name="file" accept="image/png, image/jpeg, image/jpg">
 				<label for="insert-file-btn" class="custom-file-upload">Escolha um arquivo</label>
@@ -75,7 +75,7 @@ export function redirectToEditGodPage(godId) {
 export function inserirElementosNaEditGodPage(godObj) {
     const containerImgGod = document.querySelector("#edit-page-god-img");
     containerImgGod.innerHTML = `
-    <img src="../assets/uploads/${godObj.src_img}" alt="">
+    <img id= "preview-img-god" src="../assets/uploads/${godObj.src_img}" alt="">
     `;
 
     const inputEditGodName = document.querySelector(
@@ -172,7 +172,7 @@ async function updateGodInformationInDatabase(godId) {
 
     try {
         const response = await fetch(
-            `/godstable/${godId}`,
+            `http://localhost:8080/godstable/${godId}`,
             {
                 method: "PUT",
                 body: formData,
