@@ -109,7 +109,7 @@ export function testInserirElementosNaEditCategoryPage(catInformation) {
 
     const containerImgGod = document.querySelector("#edit-page-cat-img");
     containerImgGod.innerHTML = `
-    <img src="../assets/uploads/${catInformation.src}" alt="">
+    <img id="preview-img-cat" src="../assets/uploads/${catInformation.src}" alt="">
     `;
 
     const containerEditCategory = document.querySelector(".container-edit-cat");

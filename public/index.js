@@ -171,6 +171,7 @@ function chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria) {
         case "/editGod/g1":
             //console.log("ZZZ CATEGORY ID:", respostaIndex);
             inserirElementosNaEditGodPage(respostaIndex);
+            insertChoosedGodImg();
             addSelectWithCategoriesInGodsPage(respostaIndex.category_id);
             //a funcao acima eh usada em duas paginas (add e edit),
             //vou colocar um parametro que caso nao seja informado por padrao
