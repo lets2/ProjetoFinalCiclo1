@@ -363,6 +363,7 @@ main {
 /* Define o tamanho dos cartões e adiciona margens */
 .cards-gods {
     height: var(--height-img-god-middle);
+    width: 16.8rem;
     border: solid 2.0rem var(--color-bg-category-1-dark-40p);
     border-radius: 2.0rem;
     transition: transform .9s;
@@ -421,6 +422,7 @@ main {
 	.cards-gods {
 		border: solid 2.0rem var(--color-bg-category-1-dark-40p);
 		height: 30rem;
+        width: 20rem;
 		border-radius: 2.0rem;
 		transition: transform .3s;
 		cursor: pointer;
@@ -462,6 +464,7 @@ main {
 	.cards-gods {
 		border: solid 2.0rem var(--color-bg-category-1-dark-40p);
 		height: 30rem;
+        width: 20rem;
 		border-radius: 2.0rem;
 		transition: transform .3s;
 		cursor: pointer;

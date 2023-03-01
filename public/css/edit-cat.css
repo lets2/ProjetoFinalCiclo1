@@ -314,19 +314,19 @@ relacionada aquele elemento
    justify-content: space-evenly;
 }
 .nome-categoria-edit>input{
-   width: 46rem;
-   height: 5rem;
-   justify-content: space-between;
-   padding-left: 1.5rem;
-   font-size: 2rem;
-   font-weight: bold;
-   border-radius: 0.625rem;
-   background-color:var(--color-bg-input);
-   color: var(--color-font-placeholder);
+    width: 46rem;
+    height: 5rem;
+    justify-content: space-between;
+    padding-left: 3.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 0.625rem;
+    background-color: var(--color-bg-input);
+    color:  var(--color-white);
 }
 
 .nome-categoria-edit>input::placeholder{
-   color: var(--color-font-placeholder);
+   color: #979797;
    padding-left: 2rem;
    font-weight: bold;
    text-justify:auto;
@@ -412,8 +412,10 @@ relacionada aquele elemento
   font-size: 2rem;
    font-weight: bold;
    border-radius: 0.625rem;
-   background-color:var(--color-bg-input);
-   color: var(--color-font-placeholder);
+   background-color: var(--color-bg-button);
+   color: var(--color-white);
+   padding: 0rem 0rem 0rem 3rem;
+   text-align: left;
 }
 
 
@@ -496,7 +498,7 @@ option[value="#000000"]{
    #box-preview-img-cat div{
        width: 100%;
        height: 28rem;
-       border: 1rem solid var(--color-fonts);
+       border: 1.5rem solid var(--color-fonts);
        border-radius: 2rem;
        margin-bottom: 2rem;
        overflow: hidden;    
@@ -514,8 +516,6 @@ option[value="#000000"]{
       font-size: 2rem;
        font-weight: bold;
        border-radius: 0.625rem;
-       background-color:var(--color-bg-input);
-       color: var(--color-font-placeholder);
    }
      /*container-button*/
      .box-btns-edit-cat{
@@ -595,8 +595,6 @@ option[value="#000000"]{
    font-size: 2rem;
        font-weight: bold;
        border-radius: 0.625rem;
-       background-color:var(--color-bg-input);
-       color: var(--color-font-placeholder);
    }
    /*container-button*/
    .box-btns-edit-cat{
