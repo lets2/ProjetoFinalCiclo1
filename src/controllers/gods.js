@@ -268,6 +268,24 @@ exports.updateGod = async (req, res) => {
     // god Id is into url
     const id = req.params.id;
 
+    //deuses com id<56 eh precadastrado e userid>8 não é dono do site
+    if (req.userId > 8 && id < 56) {
+        const response = {
+            message: "",
+            data: null,
+            error: null,
+        };
+        response.message =
+            "Você só pode modificar conteúdos criados por usuários testes!";
+        response.data = null;
+        response.error =
+            "[401] Você só pode modificar conteúdos criados por usuários testes!";
+
+        res.status(401).json(response);
+        console.timeEnd(`updateGod()${milliseconds}`);
+        return;
+    }
+
     let filename; //declarei como variavel por conta do if else
     //Teste de fazer EDICAO DE CATEGORIA
     if (!req.file) {
@@ -371,6 +389,24 @@ exports.deleteGodById = async (req, res) => {
     console.time(`deleteGodById()${milliseconds}`);
     //precisa tratar algum parâmetro?
     const id = req.params.id; //get index from url
+
+    //deuses com id<56 eh precadastrado e userid>8 não é dono do site
+    if (req.userId > 8 && id < 56) {
+        const response = {
+            message: "",
+            data: null,
+            error: null,
+        };
+        response.message =
+            "Você só pode modificar conteúdos criados por usuários testes!";
+        response.data = null;
+        response.error =
+            "[401] Você só pode modificar conteúdos criados por usuários testes!";
+
+        res.status(401).json(response);
+        console.timeEnd(`deleteGodById()${milliseconds}`);
+        return;
+    }
 
     const response = {
         message: "",

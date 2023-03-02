@@ -67,12 +67,18 @@ exports.login = async (req, res) => {
         //
         //ZONA DE VERIFICACAO SE ESTA OKAY E RETORNA O COOKIE
         const dbPasswordHash = serviceResponse[0].password;
+        console.log("TTTTTTTTTTTTTTTT");
+        console.log("DADOS", serviceResponse);
+        console.log("TTTTTTTTTTTTTTTT");
 
         const result = await bcrypt.compare(plainTextPassword, dbPasswordHash); //boolean
 
         if (result) {
             //
-            const jwt = jwtLib.sign({ name }, process.env.JWT_SECRET);
+            const jwt = jwtLib.sign(
+                { name, userId: serviceResponse[0].id },
+                process.env.JWT_SECRET
+            );
             res.cookie("session", jwt);
             // res.status(200).json({ controller: "GEROU cookie" });
         } else {
@@ -210,11 +216,8 @@ exports.registerNewAdm = async (req, res) => {
         console.timeEnd(`registerNewAdm()${milliseconds}`);
         return;
     }
-    if (
-        !isEmailValid(email)
-    ) {
-        response.message =
-            "É necessário informar um email válido!";
+    if (!isEmailValid(email)) {
+        response.message = "É necessário informar um email válido!";
         response.data = null;
         response.error = "[401] Unauthorized! Email is not valid!";
 
@@ -371,9 +374,7 @@ function IsNotString(_data) {
     return false;
 }
 
-
 function isEmailValid(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
-  }
-  
+}

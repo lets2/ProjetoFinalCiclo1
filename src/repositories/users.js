@@ -9,7 +9,7 @@ exports.login = async (_username, _plainTextPassword) => {
     // Performs the query with filtering/sorting
     try {
         const dbPasswordHash = await pool.query(
-            "SELECT password FROM users WHERE name = $1",
+            "SELECT id,name,password FROM users WHERE name = $1",
             [_username]
         );
 

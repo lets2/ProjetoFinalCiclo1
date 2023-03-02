@@ -288,7 +288,8 @@ exports.createCategory = async (req, res) => {
     }
 
     if (name === "" || src === "" || hexColor === "") {
-        response.message = "These fields cannot be empty: name, src, hexColor})";
+        response.message =
+            "These fields cannot be empty: name, src, hexColor})";
         response.data = null;
         response.error = "[400] Bad request! Some fields are EMPTY";
 
@@ -354,6 +355,26 @@ exports.updateCategory = async (req, res) => {
     console.time(`updateCategory()${milliseconds}`);
 
     const id = req.params.id; //get index from url
+
+    //se for usuario de test e esta tentando alterar algo que não tem permissão
+    //de um status 401 e encerre o processo
+    //categorias com id<20 eh precadastrado e userid>8 não é dono do site
+    if (req.userId > 8 && id < 20) {
+        const response = {
+            message: "",
+            data: null,
+            error: null,
+        };
+        response.message =
+            "Você só pode modificar conteúdos criados por usuários testes!";
+        response.data = null;
+        response.error =
+            "[401] Você só pode modificar conteúdos criados por usuários testes!";
+
+        res.status(401).json(response);
+        console.timeEnd(`updateCategory()${milliseconds}`);
+        return;
+    }
 
     let filename; //declarei como variavel por conta do if else
 
@@ -446,13 +467,34 @@ exports.updateCategory = async (req, res) => {
 
 exports.deleteCategoryById = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    console.log(TAG, "deleteCategoryById() from" + req.connection.remoteAddress);
+    console.log(
+        TAG,
+        "deleteCategoryById() from" + req.connection.remoteAddress
+    );
     const now = new Date(); // cria uma nova instância de Date com a data atual
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`deleteCategoryById()${milliseconds}`);
 
     //precisa tratar algum parâmetro?
     const id = req.params.id; //get index from url
+
+    //categorias com id<20 eh precadastrado e userid>8 não é dono do site
+    if (req.userId > 8 && id < 20) {
+        const response = {
+            message: "",
+            data: null,
+            error: null,
+        };
+        response.message =
+            "Você só pode modificar conteúdos criados por usuários testes!";
+        response.data = null;
+        response.error =
+            "[401] Você só pode modificar conteúdos criados por usuários testes!";
+
+        res.status(401).json(response);
+        console.timeEnd(`deleteCategoryById()${milliseconds}`);
+        return;
+    }
 
     //Standardizing the response that the frontend will receive.
     const response = {

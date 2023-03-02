@@ -6,6 +6,8 @@ function authenticate(req, res, next) {
             req.cookies.session,
             process.env.JWT_SECRET
         );
+        req.userId = decodedJwt.userId;
+        //add verify
 
         next();
     } catch (err) {
