@@ -83,11 +83,10 @@ export function addEventsToEditPasswd() {
         const data = await tryChangePasswd(username, oldPassword, newPassword);
 
         if (data.success) {
-            displayWarning(data.message); //deu tudo  certo
+            displayWarning(data.message);
             redirectToMenuAdmPage();
         } else {
             displayWarning(data.message);
-            ///console.log(data.message, "Erro de trocar senha!");
         }
     });
 }
@@ -112,7 +111,6 @@ async function tryChangePasswd(_username, _password, _newPassword) {
         const jsonData = await response.json();
         return { message: jsonData.message, success: true };
     } catch (error) {
-        //console.log(error, "deu ruim");
         return { message: "Dados inválidos!", success: false };
     }
 }

@@ -67,8 +67,6 @@ export function redirectToAddGodPage() {
     window.dispatchEvent(eventStateChange);
 }
 
-//CHamando função que adiciona imagem do deus:
-
 import { addUniqueEventListener } from "../utils/event-listener.js";
 import { addEventsToHeader, displayWarning } from "../index.js";
 import { redirectToTableEditGods } from "./table_gods.js";
@@ -91,7 +89,6 @@ export function insertChoosedGodImg() {
     });
 }
 
-//Função para limpar os inputs do formulário, para que não fique
 export function clearInputFromFormAddGod() {
     const inputNewNameGod = document.querySelector("#new-name-god");
     inputNewNameGod.value = ""; //clear previous content
@@ -101,14 +98,11 @@ export function clearInputFromFormAddGod() {
     inputNewResumeGod.value = ""; //clear previous content
 }
 
-//FUncoes para adicionar eventos noADD GOD PAGE
-
 /*@author:Gabriela - coauthor: Letônio*/
-/*Add eventos na página que tem a opcao de adicionar um novo deus*/
 
 export function addEventsToAddNewGodPage() {
     addEventsToHeader();
-    //evento nos botoes de adicionar e cancelar
+
     const cancelButton = document.querySelector(".cancel-button");
     const addGodButton = document.querySelector("#add-god-button");
     addUniqueEventListener(cancelButton, "click", () => {
@@ -118,7 +112,6 @@ export function addEventsToAddNewGodPage() {
         e.preventDefault();
         const addSuccess = await addNewGodInDatabase();
 
-        //Antes de redirecionar devemos adicionar o novo deus
         if (addSuccess) {
             redirectToTableEditGods();
         }
@@ -130,18 +123,13 @@ async function addNewGodInDatabase() {
     const newStatusGod = document.querySelector("#new-status-god").value;
     const newResumeGod = document.querySelector("#new-resume-god").value;
 
-    //const srcExample = "exampleGod.png";
-    // const categoryId = "1"; //Precisamos modificar a página para receber categoria também
     const categoryId = document.querySelector("#select-filter-category").value;
 
-    //Tentando fazer a adicão de arquivo:
     const formData = new FormData();
     const fileInput = document.querySelector('input[type="file"]');
 
-    // Adiciona a imagem ao FormData
     formData.append("file", fileInput.files[0]);
 
-    // Adiciona as 4 strings ao FormData
     formData.append("name", newNameGod);
     formData.append("status", newStatusGod);
     formData.append("resume", newResumeGod);
@@ -151,7 +139,6 @@ async function addNewGodInDatabase() {
         const response = await fetch("/godstable", {
             method: "POST",
             body: formData,
-            //headers: { "Content-type": "application/json; charset=UTF-8" },
         });
 
         if (response.status !== 200 && response.status !== 201) {
@@ -161,11 +148,11 @@ async function addNewGodInDatabase() {
             throw `${error}`;
         }
         const resJson = await response.json();
-        displayWarning(resJson.message); //deu tudo  certo
-        //Se deu tudo certo, o modal acima mostra uma mensagem de sucesso e retorna true
+        displayWarning(resJson.message);
+
         return true;
     } catch (error) {
         console.log(error);
-        return false; //Não obteve sucesso ao tentar add, logo não podera ir para tabela
+        return false;
     }
 }

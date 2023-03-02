@@ -78,20 +78,17 @@ export function redirectToAddCategory() {
     window.dispatchEvent(eventStateChange);
 }
 
-//Adicionando eventos na add-category
-
 /*@author:Gabriela - coauthor: Letônio*/
-// Add eventos na página de adicionar categoria
+
 import { addEventsToHeader, displayWarning } from "../index.js";
 import { addUniqueEventListener } from "../utils/event-listener.js";
 import { redirectToTableEditCategories } from "./table_categories.js";
 
-//Função para limpar os inputs do formulário, para que não fique
 export function clearInputFromFormAddCategory() {
     const inputNewNameCategory = document.querySelector("#new-name-category");
     inputNewNameCategory.value = ""; //clear previous content
     const selectTag = document.querySelector("#select-color-category-add");
-    selectTag.options[0].selected = true; //Deixa a opção "cor" selecionada
+    selectTag.options[0].selected = true;
 }
 
 export function insertChoosedCatImg() {
@@ -121,14 +118,13 @@ export function addEventsToAddCategoryPage() {
     addUniqueEventListener(btnAddCategory, "click", async () => {
         const addSuccess = await addNewCategoryInDatabase();
 
-        //Antes de redirecionar devemos adicionar o novo deus
         if (addSuccess) {
             redirectToTableEditCategories();
         }
     });
 }
 
-/*@author:letonio - Adiciona no Banco de dados a nova categoria criada*/
+/*@author:letonio */
 
 async function addNewCategoryInDatabase() {
     const newCategoryName = document.querySelector("#new-name-category").value;
@@ -160,11 +156,11 @@ async function addNewCategoryInDatabase() {
             throw `${error}`;
         }
         const resJson = await response.json();
-        displayWarning(resJson.message); //deu tudo  certo
-        //Se deu tudo certo, o modal acima mostra uma mensagem de sucesso e retorna true
+        displayWarning(resJson.message);
+
         return true;
     } catch (error) {
         console.log(error);
-        return false; //Não obteve sucesso ao tentar add, logo não podera ir para tabela
+        return false;
     }
 }

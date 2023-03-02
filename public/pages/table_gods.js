@@ -58,10 +58,6 @@ export function redirectToTableEditGods() {
     window.dispatchEvent(eventStateChange);
 }
 
-//ADICIONANDO FUNCAO QUE PEGA OS DADOS QUE PRECISAM SER INSERIDOS
-//NA TABELA E NO SELECT E ADICIONA!!
-
-//COMECA AQUI AS COISAS DE TABELA DE DEUSES
 // @author: Gabriela
 export function addLinesGodTable(data) {
     const thead = document.querySelector("#thead-gods");
@@ -106,10 +102,7 @@ function addOptionToSelect(_select, _paramOption) {
     _select.appendChild(option);
 }
 
-// ADICIONANDO OS EVENTOS RELACIONADOS A TABELA DE DEUSES
-
 /*@author:filipe - coauthor: Letônio*/
-/*Adicionando eventos na página que tem uma tabela de deuses*/
 import { addEventsToHeader } from "../index.js";
 import { addUniqueEventListener } from "../utils/event-listener.js";
 import { redirectToAddGodPage } from "./add-god.js";
@@ -117,16 +110,11 @@ import { redirectToGodInfoPage } from "./adm-god-info.js";
 
 export function addEventsToGodTablePage() {
     addEventsToHeader();
-    //addLinesGodTable();
-    //*insere evento no botão de adicionar um novo deus
+
     const buttonAddGod = document.querySelector("#create-new-god");
     addUniqueEventListener(buttonAddGod, "click", () => {
         redirectToAddGodPage();
     });
-
-    /// Insere evento na tabela, caso o usuario clique numa linha da tabela
-    ///	de deuses aparece uma página para detalhamento e edicao
-    ///referente aquele elemento
 
     const tbodyElement = document.querySelector("tbody");
     addUniqueEventListener(tbodyElement, "click", (event) => {

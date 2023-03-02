@@ -79,7 +79,6 @@ export function redirectToEditCategory(id) {
 /*CATEGORY IMAGE PREVIEW */
 import { addUniqueEventListener } from "../utils/event-listener.js";
 
-//no index, essa funcao é usada tanto para o case /editcategory, como /addcategory
 export function insertChoosedCategoryTempleImg() {
     const fileBtn = document.querySelector("#insert-file-btn-cat");
     const previewImg = document.querySelector("#preview-img-cat");
@@ -118,7 +117,6 @@ export function testInserirElementosNaEditCategoryPage(catInformation) {
 //Adicionando eventos
 
 /*@author:Gabriela - coauthor: Letônio*/
-// Add eventos na página de editar categoria
 import { addEventsToHeader, displayWarning } from "../index.js";
 import { redirectToTableEditCategories } from "./table_categories.js";
 
@@ -129,11 +127,11 @@ export function addEventsToEditCategoryPage() {
         redirectToTableEditCategories();
     });
     //
-    // #Adicionar;
+
     const btnEditCategory = document.querySelector("#edit-category");
     addUniqueEventListener(btnEditCategory, "click", async () => {
         //
-        //pegar o id que está armazenado num data-set
+
         const id = document.querySelector(".container-edit-cat").dataset.id;
         const editSuccess = await updateCategoryInformationInDatabase(id);
 
@@ -162,18 +160,17 @@ async function updateCategoryInformationInDatabase(id) {
         }
         const resJson = await response.json();
 
-        displayWarning(resJson.message); //deu tudo  certo
-        //Se deu tudo certo, o modal acima mostra uma mensagem de sucesso e retorna true
+        displayWarning(resJson.message);
+
         return true;
         //
     } catch (error) {
         console.log(error);
-        return false; //Não obteve sucesso ao tentar editar, logo não podera ir para tabela
+        return false;
     }
 }
 
 function getCategoryInputInformations(id) {
-    //provavelmente apagarei esse obj, já qu tudo está sendo armazenado no formdata
     let obj = {};
 
     const inputNameUpdate = document.querySelector("#new-name-category").value;
@@ -184,14 +181,11 @@ function getCategoryInputInformations(id) {
 
     obj.src = "JPG-PLACEHOLDER-templo.jpg";
 
-    //MOntando o formData para fazer a edição de categoria:
     const formData = new FormData();
     const fileInput = document.querySelector('input[type="file"]');
 
-    // Adiciona a imagem ao FormData
     formData.append("file", fileInput.files[0]);
 
-    // Adiciona as 4 strings ao FormData
     formData.append("name", inputNameUpdate);
     formData.append("hexColor", inputColorUpdate);
 

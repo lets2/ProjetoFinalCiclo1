@@ -68,10 +68,6 @@ export function redirectToEditGodPage(godId) {
     window.dispatchEvent(eventStateChange);
 }
 
-//Adicionando funcoes que colocam informacoes no edit god page
-
-//EDIT GOD PAGE, FUNCOES COMECAM AQUI
-
 export function inserirElementosNaEditGodPage(godObj) {
     const containerImgGod = document.querySelector("#edit-page-god-img");
     containerImgGod.innerHTML = `
@@ -93,14 +89,12 @@ export function inserirElementosNaEditGodPage(godObj) {
     );
     inputEditGodResume.value = godObj.resume;
 
-    //add um dataset com o id do deus para usos futuros;
     const containerEditGodInformation = document.querySelector(
         "#container-edit-god"
     );
     containerEditGodInformation.dataset.godId = godObj.id;
 }
 
-//COMEÇA AQUI
 import { categoriesList, addEventsToHeader, displayWarning } from "../index.js";
 
 export function addSelectWithCategoriesInGodsPage(categoryIdThisGod = false) {
@@ -131,18 +125,13 @@ function addOptionToSelectInGodsPage(_select, _paramOption) {
         //option.selected = true;
     }
     if (_paramOption.value === _paramOption.currentId) {
-        option.selected = true; //Para cada option, vai olhar option.value, se for
-        //igual ao deus que vais er editado, entãocoloca como selected
+        option.selected = true;
     }
     _select.appendChild(option);
 }
 
-//ADICIONANDO EVENTOS:
-
-//COMECA AQUI A FUNCAO DE ADD EVENTO NA EDIT GOD PAGE
-
 /*@author:Gabriela - coauthor: Letônio*/
-/* Add eventos na página que mostra as informacoes para editar deuses*/
+
 import { redirectToTableEditGods } from "./table_gods.js";
 import { addUniqueEventListener } from "../utils/event-listener.js";
 
@@ -155,7 +144,6 @@ export function addEventsToEditGodPages() {
     });
     const updateGodBtn = document.querySelector("#update-god-button");
     addUniqueEventListener(updateGodBtn, "click", async () => {
-        //atualizar informações de um deus;
         const godId = document.querySelector("#container-edit-god").dataset
             .godId;
         const editSuccess = await updateGodInformationInDatabase(godId);
@@ -166,18 +154,14 @@ export function addEventsToEditGodPages() {
     });
 }
 
-//atualiza database
 async function updateGodInformationInDatabase(godId) {
     const formData = getGodInputInformations(godId);
 
     try {
-        const response = await fetch(
-            `/godstable/${godId}`,
-            {
-                method: "PUT",
-                body: formData,
-            }
-        );
+        const response = await fetch(`/godstable/${godId}`, {
+            method: "PUT",
+            body: formData,
+        });
 
         if (response.status !== 200 && response.status !== 201) {
             const resJson = await response.json();
@@ -188,12 +172,12 @@ async function updateGodInformationInDatabase(godId) {
         const resJson = await response.json();
 
         displayWarning(resJson.message); //deu tudo  certo
-        //Se deu tudo certo, o modal acima mostra uma mensagem de sucesso e retorna true
+
         return true;
         //
     } catch (error) {
         console.log(error);
-        return false; //Não obteve sucesso ao tentar editar, logo não podera ir para tabela
+        return false;
     }
 }
 

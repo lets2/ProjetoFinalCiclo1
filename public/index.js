@@ -28,14 +28,13 @@ import {
 import {
     redirectToTableEditGods,
     addLinesGodTable,
-    // addSelectWithCategories,
     addEventsToGodTablePage,
 } from "./pages/table_gods.js";
 
 import {
     insertChoosedGodImg,
     addEventsToAddNewGodPage,
-    clearInputFromFormAddGod, //adicionei essa funcao para limpar o formulario da page
+    clearInputFromFormAddGod,
 } from "./pages/add-god.js";
 
 import {
@@ -132,12 +131,12 @@ addUniqueEventListener(window, "onstatechange", async (event) => {
 function insertResourcesInCurrentPage(url, respostaIndex, criteria) {
     switch (url) {
         case "/categories":
-            categoriesList = respostaIndex; //nesse caso respostaIndex = lista de categorias
+            categoriesList = respostaIndex;
             renderCurrentCategoryOnCategoriesPage(categoriesList);
             break;
 
         case "/categories/:id":
-            godsOfACategory = respostaIndex; //nesse caso respostaIndex = lista de deuses de cat. especif.
+            godsOfACategory = respostaIndex;
             insertImages(godsOfACategory);
             if (godsOfACategory) {
                 insertCategoryName(godsOfACategory[0].name_category);
@@ -151,13 +150,12 @@ function insertResourcesInCurrentPage(url, respostaIndex, criteria) {
             break;
 
         case "/tableCategories":
-            categoriesList = respostaIndex; //respostaIndex tem a lista de categorias
+            categoriesList = respostaIndex;
             addLinesCategoryTable(categoriesList);
             break;
 
         case "/tableGods":
             categoriesList = respostaIndex.dataCategories;
-            // addSelectWithCategories(respostaIndex.dataCategories);
             addLinesGodTable(respostaIndex.dataGods);
             break;
 
@@ -170,10 +168,7 @@ function insertResourcesInCurrentPage(url, respostaIndex, criteria) {
             inserirElementosNaEditGodPage(respostaIndex);
             insertChoosedGodImg();
             addSelectWithCategoriesInGodsPage(respostaIndex.category_id);
-            //a funcao acima eh usada em duas paginas (add e edit),
-            //vou colocar um parametro que caso nao seja informado por padrao
-            //sera nulo, ai na pagina de edit-god, caso nao seja nulo
-            //significa que devo fixar o valor do select
+
             break;
 
         case "/editCategory":
@@ -194,7 +189,7 @@ function insertResourcesInCurrentPage(url, respostaIndex, criteria) {
         case "/allGods":
             if (Array.isArray(respostaIndex)) {
                 godsFilteredArrayGlobal = respostaIndex;
-                allGodsArray = respostaIndex; //ganbiarra, se tirar isso da erro na 1190
+                allGodsArray = respostaIndex;
 
                 insertAllGods(godsFilteredArrayGlobal, {
                     message: `Resultados correspondentes à sua pesquisa: ${godsFilteredArrayGlobal.length}`,
@@ -204,15 +199,12 @@ function insertResourcesInCurrentPage(url, respostaIndex, criteria) {
                 if (criteria.pesquisar) {
                     allGodsArray = respostaIndex.dataGods;
 
-                    //insertMessageNoGodFound();
                     insertAllGods(allGodsArray, {
                         message:
                             "Não há deuses correspondentes à sua pesquisa. Aqui está uma lista com todos os deuses",
                         pesquisou: true,
                     });
                 } else {
-                    //implica pesquisar===false,logo mostra todos os deuses
-
                     allGodsArray = respostaIndex.dataGods;
                     insertAllGods(allGodsArray, { pesquisou: false });
                 }
@@ -283,9 +275,9 @@ function addEventsRelatedTo(url) {
     }
 }
 
-/*@author:letonio - criando uma página principal de teste*/
+/*@author:letonio*/
 function addEventsToMainPageTest() {
-    addEventsToHeader(); //estou colocando com header para testar
+    addEventsToHeader();
     const seeMoreButton = document.querySelector(".button-see-more");
     addUniqueEventListener(seeMoreButton, "click", () => {
         redirectToAllCategories();
@@ -304,17 +296,15 @@ function adicionaEventoNoBotaoDeLogin() {
         try {
             const username = document.querySelector("#input-username").value;
             const password = document.querySelector("#input-password").value;
-            await tentaFazerLogin(username, password);
+            await tryingLogin(username, password);
             redirectToMenuAdmPage();
         } catch (error) {
             displayWarning(error);
         }
-        //redirectToMenuAdmPage();
     });
 }
 
-//change name function
-async function tentaFazerLogin(_username, _password) {
+async function tryingLogin(_username, _password) {
     const objBody = {
         name: _username,
         password: _password,
@@ -378,30 +368,26 @@ function addEventsToAdmMenuPage() {
 }
 
 /*@author:Gabriela - coauthor: Letônio*/
-// Add eventos no menu lateral
+// Add events to menu page
 function addEventsToMenuPage() {
     addEventsToHeader();
     const pageIcon = document.querySelector("#home-page");
     addUniqueEventListener(pageIcon, "click", () => {
-        ///redirectToMyPrincipal();
         redirectToAllCategories();
     });
 
     const godIcon = document.querySelector("#gods-page");
     addUniqueEventListener(godIcon, "click", () => {
-        //redirectToGodDetailsPage();
         redirectToAllGods("Allgods");
     });
 
     const categoriesIcon = document.querySelector("#categories-page");
     addUniqueEventListener(categoriesIcon, "click", () => {
-        //redirectToMyPrincipal();
         redirectToAllCategories();
     });
 }
 
 export function displayWarning(_message) {
-    //alert(_message);
     const bodyTag = document.querySelector("body");
     const createTag = document.createElement("div");
     bodyTag.appendChild(createTag);
@@ -414,7 +400,7 @@ export function displayWarning(_message) {
     createTag.appendChild(message);
 
     setTimeout(function () {
-        document.querySelector(".modal").classList.add("show"); // adiciona a classe para ampliar a largura gradualmente
+        document.querySelector(".modal").classList.add("show");
     }, 10);
 
     addUniqueEventListener(createTag, "click", () => {
@@ -425,7 +411,7 @@ export function displayWarning(_message) {
 /*********************************************/
 /*events that are added to EVERY HEADER
 /*********************************************/
-//declarando variavl usada na barra de pesquisa para armazenar, ID setTImeout
+
 let timeoutId;
 
 export function addEventsToHeader() {
@@ -452,7 +438,6 @@ export function addEventsToHeader() {
         redirectToMenuAdmPage();
     });
 
-    //Adicionando evento na barra de pesquisa
     const inputSearchBar = document.querySelector(".search-input");
     addUniqueEventListener(inputSearchBar, "keyup", (event) => {
         debouncePesquisar(event.target.value);
@@ -465,10 +450,9 @@ function debouncePesquisar(texto) {
         pesquisar(texto);
     }, 800);
 }
-// Função chamada após o tempo depois do último clique
+
 async function pesquisar(texto) {
-    // Enviar requisição para o servidor
-    const arrayWords = texto.split(/\s|,/); //regex to split blankspace or , //= ["muito", "ddd"];
+    const arrayWords = texto.split(/\s|,/);
     const parametro = arrayWords.join(",");
 
     redirectToAllGods(parametro, true);

@@ -45,8 +45,7 @@ export function Categories() {
 
     return div;
 }
-//FUNCAO QUE CRIA O EVENTO PERSONALIZADO E DISPARA PARA QUE O RESPONSAVEL OUCA
-//E MUDE O CONTEUDO DA PAGINA PARA O QUE TEMOS ACIMA
+
 /*@author:Gabriela - coauthor: Letônio*/
 export function redirectToGodsFiltered(arrayResults) {
     const eventStateChange = CriaEventStateChange("/godsFiltered", {
@@ -55,10 +54,7 @@ export function redirectToGodsFiltered(arrayResults) {
     window.dispatchEvent(eventStateChange);
 }
 
-//RENDERIZAR CATEGORIA ATUAL NA PAGINA DE CATEGORIAS
-//FUNCOES DE RENDERIZAÇÃO, RENDERIZAR IMAGEM DO TEMPLO, NOME E BOLINHAS!
-
-export let currentIndexCategory; //armazena a categoria atual que está na tela
+export let currentIndexCategory;
 
 export function renderCurrentCategoryOnCategoriesPage(categories) {
     let index;
@@ -66,8 +62,8 @@ export function renderCurrentCategoryOnCategoriesPage(categories) {
     if (quantify % 2) {
         index = Math.floor(quantify / 2);
     } else Math.floor(quantify / 2) - 1;
-    index = 2; //@author:letonio - posteriormente, retirar essa linha!!
-    currentIndexCategory = 2; //Variavel global
+    index = 2; //@author:letonio !!
+    currentIndexCategory = 2;
     renderImgCategory(
         currentIndexCategory,
         quantify,
@@ -82,7 +78,7 @@ export function renderCurrentCategoryOnCategoriesPage(categories) {
 function renderBallsBelowImg(index, quantify) {
     //create balls-based on index-position-image
     const containerCircles = document.querySelector(".container-circles");
-    containerCircles.innerHTML = ""; //Limpa o conteúdo
+    containerCircles.innerHTML = "";
     for (let i = 0; i < quantify; i++) {
         const circle = document.createElement("button");
         circle.classList.add("circle");
@@ -92,10 +88,6 @@ function renderBallsBelowImg(index, quantify) {
         containerCircles.appendChild(circle);
     }
 }
-
-//
-//FUNCOES QUE ADICIONAM EVENTOS DE CLICK NA PÁGINA DE CATEGORIAS
-//
 
 /*Events related to the categories page < [] >  */
 import { categoriesList, addEventsToHeader } from "../index.js";
