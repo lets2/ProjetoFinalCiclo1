@@ -5,7 +5,7 @@ const TAG = "Main controller: ";
 
 exports.getAll = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "getAll() from" + req.connection.remoteAddress);
     console.time("getAll()");
 
     const response = {

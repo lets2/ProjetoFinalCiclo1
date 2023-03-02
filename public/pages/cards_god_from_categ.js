@@ -57,7 +57,7 @@ export function redirectToCategoryChoosed(id) {
 
 export function insertImages(arrayGods) {
     const cardsGods = document.querySelector("#box-cards-gods-overflow");
-    console.log(arrayGods, "arrayGods-category")
+
     let div = "";
     cardsGods.innerHTML = "";
     if (arrayGods) {
@@ -98,7 +98,7 @@ function eventosAdicionadosEmCadaCartao(godsOfCategory) {
             let godCard = document.querySelector(
                 `#god-${godsOfCategory[i].id}`
             );
-            ////console.log(godCard.id, "AAAA");
+
             addUniqueEventListener(godCard, "click", () => {
                 redirectToGodDetailsPage(godCard.dataset.godId, godsOfCategory[i].category_id);
             });
