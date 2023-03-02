@@ -2,7 +2,7 @@
 // IMPORTS
 //--------------------------------------------------------------
 
-import { addExternalResourcesTo } from "./api/routerFetch.js";
+import { getExternalResourcesTo } from "./api/routerFetch.js";
 import { addUniqueEventListener } from "./utils/event-listener.js";
 
 import {
@@ -116,22 +116,20 @@ addEventsRelatedTo("/"); //call relateds events to page/url
 addUniqueEventListener(window, "onstatechange", async (event) => {
     const url = event.detail.url;
     const criteria = event.detail.criteria;
-    //o valor padrão de criteria={}, se diferente de null implia q
 
     const page = objRotas.getPage(url);
     history.pushState({}, "", url);
     root.innerHTML = "";
     root.appendChild(page);
-    //console.log("URL:", url, "Criteria:", criteria);
 
-    const respostaIndex = await addExternalResourcesTo(url, criteria);
+    const respostaIndex = await getExternalResourcesTo(url, criteria);
+    insertResourcesInCurrentPage(url, respostaIndex, criteria);
 
-    chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria);
     clearSearchBar();
-    addEventsRelatedTo(url); //call relateds events to page/url
+    addEventsRelatedTo(url);
 });
 
-function chamaFuncaoEspecificaPelaUrl(url, respostaIndex, criteria) {
+function insertResourcesInCurrentPage(url, respostaIndex, criteria) {
     switch (url) {
         case "/categories":
             categoriesList = respostaIndex; //nesse caso respostaIndex = lista de categorias
