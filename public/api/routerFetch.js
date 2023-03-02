@@ -13,7 +13,7 @@ import {
     addResourcesToEditGodPage,
     getResourcesFromGodsFiltered,
 } from "./gods/fetchs_Gods.js";
-
+import { displayWarning } from "../index.js";
 //------------------------------------------------------------------------
 // ADDS RESOURCES TO THE PAGE THA WAS RENDERED ACCORDING URL
 //-----------------------------------------------------------------------
@@ -27,7 +27,7 @@ export async function getExternalResourcesTo(url, criteria) {
             return addResourcesToCategoryChoosed(criteria.id);
         case "/login":
             if (criteria.releaseCookie) {
-                await removeCookieDoNavegador();
+                await removeCookieFromBrowser();
             }
             return;
         case "/categories/d1":
@@ -64,9 +64,9 @@ export async function getExternalResourcesTo(url, criteria) {
 //Provavelmente essa funcao de remover cookie fará parte
 //de um modulo de fetch_users, que estará relacionado com os usuários
 //por enquanto deixarei por aqui
-async function removeCookieDoNavegador() {
+async function removeCookieFromBrowser() {
     try {
-        const response = fetch("/logout", {
+        const response = await fetch("/logout", {
             method: "DELETE",
         });
 
@@ -77,8 +77,9 @@ async function removeCookieDoNavegador() {
             throw `${error}`;
         }
         const resJson = await response.json();
-        displayWarning(resJson.message); //deu tudo  certo
+
+        //displayWarning(resJson.message); //deu tudo  certo
     } catch (error) {
-        console.log("COOKIE, AO TENTAR REMOVER DEU ERRO", error);
+        console.log("COOKIE, erro ao tentar remover.", error);
     }
 }

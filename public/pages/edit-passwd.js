@@ -107,7 +107,7 @@ async function tryChangePasswd(_username, _password, _newPassword) {
         });
 
         if (response.status !== 200 && response.status !== 201) {
-            throw "[erro] ao tentar fazer login!";
+            throw "Nome de usuário ou senha inválidos!";
         }
         const jsonData = await response.json();
         return { message: jsonData.message, success: true };

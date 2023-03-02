@@ -106,7 +106,7 @@ const page = objRotas.getPage("/");
 root.innerHTML = "";
 root.appendChild(page);
 
-addExternalResourcesTo("/");
+getExternalResourcesTo("/");
 addEventsRelatedTo("/"); //call relateds events to page/url
 
 //------------------------------------------------------------------------
@@ -325,7 +325,7 @@ async function tentaFazerLogin(_username, _password) {
         headers: { "Content-type": "application/json; charset=UTF-8" },
     });
     if (response.status !== 200 && response.status !== 201) {
-        throw "[erro] ao tentar fazer login!";
+        throw "Nome de usuário ou senha inválidos!";
     }
     const jsonData = await response.json();
 }
