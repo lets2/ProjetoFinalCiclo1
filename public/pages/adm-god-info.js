@@ -63,17 +63,12 @@ export function redirectToGodInfoPage(godId) {
     window.dispatchEvent(eventStateChange);
 }
 
-//AS FUNCOES ABAIXO ADICIONAM EVENTOS E CONTEUDO A PAGINA DE GOD INFO,
-//BASEADOS NO OBJETO QUE RECEBERAM
-
-//COMACE AQUI A GOD INFO
 import { addUniqueEventListener } from "../utils/event-listener.js";
 import { redirectToEditGodPage } from "./edit-god.js";
 import { redirectToTableEditGods } from "./table_gods.js";
 import { displayWarning, addEventsToHeader } from "../index.js";
 
 export function addElementsToGodInfoPage(godObj) {
-    //esse codigo eh o que bota o evento no botao de edicao
     const updateGodButton = document.querySelector("#edit-god-button");
 
     addUniqueEventListener(updateGodButton, "click", () => {
@@ -110,15 +105,13 @@ async function deleteGodFromDatabase(godId) {
         }
         const resJson = await response.json();
 
-        displayWarning(resJson.message); //deu tudo  certo
+        displayWarning(resJson.message);
 
         const container_data = document.querySelector("#container-see-god");
     } catch (error) {
         console.log("Erro durante o fetch:", error);
     }
 }
-
-//Adicionar outros eventos
 
 export function addEventsToAdmGodInfoPage() {
     addEventsToHeader();

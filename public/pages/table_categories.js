@@ -57,9 +57,6 @@ export function redirectToTableEditCategories() {
     window.dispatchEvent(eventStateChange);
 }
 
-//EVENTOS RELACIONADOS COM A ADICAO DE LINHAS NAS TABELAS, ALÉM DOS EVENTOS
-//DE QUANDO CLICAMOS NO LAPIS OU NA LIXEIRA, REDIRECIONAR PARA A PAGINA DE EDICAO
-//OU DELETAR A CATEGORIA
 import { addEventsToHeader, displayWarning } from "../index.js";
 import { addUniqueEventListener } from "../utils/event-listener.js";
 import { redirectToEditCategory } from "./edit-cat.js";
@@ -79,12 +76,10 @@ export function addLinesCategoryTable(data) {
         lineTable.dataset.id = data[i].id;
     }
 
-    //Chama funcao para add eventos nos botoes de LAPIS/PENCIL;
     adicionaEventosNosLapis();
 }
 
 function adicionaEventosNosLapis() {
-    ///EVENTOS RELACIONADOS a EDITAR CATEGORIA BOTAO!!!!
     const listaDeImagensDeLapis = document.querySelectorAll(".edit-btn");
 
     listaDeImagensDeLapis.forEach((imgLapis) => {
@@ -93,7 +88,7 @@ function adicionaEventosNosLapis() {
             redirectToEditCategory(catId);
         });
     });
-    ///EVENTOS REALCIONADO A EXCLUIR CATEGORIA BOTAO!!!!!11
+
     const listaDeImagensDeLixeira = document.querySelectorAll(".delete-btn");
 
     listaDeImagensDeLixeira.forEach((imgLixeira) => {
@@ -120,7 +115,7 @@ async function deleteCategoryFromDatabase(id) {
         }
         const resJson = await response.json();
 
-        displayWarning(resJson.message); //deu tudo  certo
+        displayWarning(resJson.message);
 
         const container_data = document.querySelector("#container-see-god");
     } catch (error) {
@@ -129,12 +124,9 @@ async function deleteCategoryFromDatabase(id) {
 }
 
 /*@author:filipe - coauthor: gabriela*/
-/*Adicionando eventos na página que tem uma tabela de categorias*/
 
 export function addEventsToCategoryTablePage() {
     addEventsToHeader();
-    //addLinesCategoryTable();
-    //insere evento no botao de add categoria
 
     const btnAddCategory = document.querySelector("#create-new-category");
 

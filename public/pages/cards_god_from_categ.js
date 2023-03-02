@@ -1,6 +1,6 @@
 import CriaEventStateChange from "./event-url.js";
 
-/*@autor:letonio - Tentando criar o primeiro SPA*/
+/*@autor:letonio */
 
 export function Category() {
     const div = document.createElement("div");
@@ -53,8 +53,6 @@ export function redirectToCategoryChoosed(id) {
     window.dispatchEvent(eventStateChange);
 }
 
-//ADICIONA IMAGENS NA PAGINA QUE FICA OS CARTOES
-
 export function insertImages(arrayGods) {
     const cardsGods = document.querySelector("#box-cards-gods-overflow");
 
@@ -75,12 +73,10 @@ export function insertImages(arrayGods) {
     }
 }
 
-// INSERE NOME DA CATEGORIA OU EXPLICA QUE A CATEGORIA NAO TEM DEUSES AINDA:
 export function insertCategoryName(nameCategory) {
     document.querySelector(".phrase").innerHTML = nameCategory;
 }
 
-//ADICIONANDO EVENTOS RELACIONADO A ESSA PAGINA QUE MOSTRA OS CARTOES:
 import { addEventsToHeader, godsOfACategory } from "../index.js";
 import { redirectToGodDetailsPage } from "./god-card-details.js";
 import { addUniqueEventListener } from "../utils/event-listener.js";
@@ -100,7 +96,10 @@ function eventosAdicionadosEmCadaCartao(godsOfCategory) {
             );
 
             addUniqueEventListener(godCard, "click", () => {
-                redirectToGodDetailsPage(godCard.dataset.godId, godsOfCategory[i].category_id);
+                redirectToGodDetailsPage(
+                    godCard.dataset.godId,
+                    godsOfCategory[i].category_id
+                );
             });
         }
     }
