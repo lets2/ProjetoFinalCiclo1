@@ -1,3 +1,6 @@
+const https = require("https");
+const fs = require("fs");
+
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -24,7 +27,6 @@ app.use(express.static("./public"));
 //Use router.js like a "middleware"
 app.use(router);
 
-//firefox have some security problems warning,
 app.use((req, res, next) => {
     res.setHeader(
         "Content-Security-Policy",
@@ -33,7 +35,12 @@ app.use((req, res, next) => {
     next();
 });
 
-//houve as requisições na porta definida
-app.listen(PORT, () => {
-    console.log(`Server is running on http://${HOSTNAME}:${PORT}`);
+//add key/openssl
+const options = {
+    key: fs.readFileSync("ssl/chave-privada.pem"),
+    cert: fs.readFileSync("ssl/certificado.pem"),
+};
+
+https.createServer(options, app).listen(PORT, HOSTNAME, () => {
+    console.log(`Server is running on https://${HOSTNAME}:${PORT}`);
 });

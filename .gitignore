@@ -3,3 +3,6 @@ node_modules
 
 # ignorar o arquivo com variáveis de ambiente
 .env
+
+#ignorar ssl
+ssl
