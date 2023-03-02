@@ -394,6 +394,7 @@ relacionada aquele elemento
  
  #message-input-file-cat{
      font-size: 1.2rem;
+     line-height: 1rem;
  }
  
 /*ADDING STYLING TO INPUT TYPE=FILE*/
@@ -412,6 +413,7 @@ relacionada aquele elemento
 
 #message-input-file{
     font-size: 1.2rem;
+    line-height: 1rem;
 }
 
 
