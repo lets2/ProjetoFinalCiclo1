@@ -72,7 +72,6 @@ export function insertAllGods(
 
     const cardsGods = document.querySelector("#box-all-gods-overflow");
     let div = "";
-    console.log(allGodsArray, "allgods")
     cardsGods.innerHTML = "";
     if (allGodsArray) {
         for (let i = 0; i < allGodsArray.length; i++) {

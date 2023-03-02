@@ -6,7 +6,7 @@ const fs = require("fs"); //vou usar para deletar imagem
 
 exports.getAll = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "getAll() from" + req.connection.remoteAddress);
     const now = new Date(); // cria uma nova instância de Date com a data atual
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`getAll()${milliseconds}`);
@@ -38,7 +38,7 @@ exports.getAll = async (req, res) => {
 
 exports.getById = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "getgods() from" + req.connection.remoteAddress);
 
     const now = new Date(); // cria uma nova instância de Date com a data atual
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
@@ -82,7 +82,7 @@ exports.getById = async (req, res) => {
 
 exports.getAllGodsById = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "getAllGodsgods() from" + req.connection.remoteAddress);
 
     const now = new Date(); // cria uma nova instância de Date com a data atual
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
@@ -126,7 +126,7 @@ exports.getAllGodsById = async (req, res) => {
 /*@author:letonio*/
 exports.getGodById = async (req, res) => {
     //
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "getGodById() from" + req.connection.remoteAddress);
     const now = new Date(); // creta a new Date instance with current Date
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`getGodById()${milliseconds}`);
@@ -173,7 +173,7 @@ exports.getGodById = async (req, res) => {
 
 exports.getTable = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "getCategoryTable() from" + req.connection.remoteAddress);
     const now = new Date(); // cria uma nova instância de Date com a data atual
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`getCategoryTable()${milliseconds}`);
@@ -205,7 +205,7 @@ exports.getTable = async (req, res) => {
 
 exports.getFromTableById = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "getFromTableById() from" + req.connection.remoteAddress);
 
     const now = new Date(); // cria uma nova instância de Date com a data atual
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
@@ -252,7 +252,7 @@ exports.getFromTableById = async (req, res) => {
 /*POST/CREATE METHOD*/
 exports.createCategory = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "createCategory() from" + req.connection.remoteAddress);
     const now = new Date(); // cria uma nova instância de Date com a data atual
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`createCategory()${milliseconds}`);
@@ -348,7 +348,7 @@ exports.createCategory = async (req, res) => {
 /*PUT/UPDATE METHOD*/
 exports.updateCategory = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "updateCategory() from" + req.connection.remoteAddress);
     const now = new Date(); // cria uma nova instância de Date com a data atual
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`updateCategory()${milliseconds}`);
@@ -446,7 +446,7 @@ exports.updateCategory = async (req, res) => {
 
 exports.deleteCategoryById = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "deleteCategoryById() from" + req.connection.remoteAddress);
     const now = new Date(); // cria uma nova instância de Date com a data atual
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`deleteCategoryById()${milliseconds}`);

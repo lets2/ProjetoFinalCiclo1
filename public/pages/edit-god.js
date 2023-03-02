@@ -172,7 +172,7 @@ async function updateGodInformationInDatabase(godId) {
 
     try {
         const response = await fetch(
-            `http://localhost:8080/godstable/${godId}`,
+            `/godstable/${godId}`,
             {
                 method: "PUT",
                 body: formData,

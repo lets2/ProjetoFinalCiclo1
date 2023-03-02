@@ -9,7 +9,7 @@ const jwtLib = require("jsonwebtoken");
 /*POST TO LOGIN*/
 exports.login = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "login() from" + req.connection.remoteAddress);
     const now = new Date(); // create a new instance Date current
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`login()${milliseconds}`);
@@ -113,7 +113,7 @@ exports.login = async (req, res) => {
 //Use delete to logout (to delete cookie)
 exports.logout = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "logout() from" + req.connection.remoteAddress);
     const now = new Date(); // cria uma nova instância de Date com a data atual
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`logout()${milliseconds}`);
@@ -154,7 +154,7 @@ exports.logout = async (req, res) => {
 
 exports.registerNewAdm = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "registerNewAdm() from" + req.connection.remoteAddress);
     const now = new Date(); // create a new instance Date current
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`registerNewAdm()${milliseconds}`);
@@ -259,7 +259,7 @@ exports.registerNewAdm = async (req, res) => {
 
 exports.changePassword = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "changePassword() from" + req.connection.remoteAddress);
     const now = new Date(); // create a new instance Date current
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`changePassword()${milliseconds}`);

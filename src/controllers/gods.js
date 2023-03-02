@@ -10,7 +10,7 @@ const fs = require("fs"); //vou usar para deletar imagem
 
 exports.getAll = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "getAll() from" + req.connection.remoteAddress);
     const now = new Date(); // cria uma nova instância de Date com a data atual
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`getAll()${milliseconds}`);
@@ -41,7 +41,7 @@ exports.getAll = async (req, res) => {
 
 exports.getById = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "getgods() from" + req.connection.remoteAddress);
     const now = new Date(); // cria uma nova instância de Date com a data atual
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`getgods()${milliseconds}`);
@@ -83,6 +83,7 @@ exports.getById = async (req, res) => {
 
 /*GET METHOD - FILTER BY KEY WORDS*/
 exports.getGodsByKeywords = async (req, res) => {
+    console.log(TAG, "getGodsByKeywords() from" + req.connection.remoteAddress);
     const now = new Date(); // cria uma nova instância de Date com a data atual
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`getGodsByKeywords()${milliseconds}`);
@@ -152,7 +153,7 @@ exports.getGodsByKeywords = async (req, res) => {
 /*POST/CREATE METHOD*/
 exports.createGod = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "createGod() from" + req.connection.remoteAddress);
     const now = new Date(); // cria uma nova instância de Date com a data atual
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`createGod()${milliseconds}`);
@@ -259,7 +260,7 @@ exports.createGod = async (req, res) => {
 /*PUT/UPDATE METHOD*/
 exports.updateGod = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "updateGod() from" + req.connection.remoteAddress);
     const now = new Date(); // cria uma nova instância de Date com a data atual
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`updateGod()${milliseconds}`);
@@ -364,7 +365,7 @@ exports.updateGod = async (req, res) => {
 /* DELETE METHOD*/
 exports.deleteGodById = async (req, res) => {
     //determinar o IP de quem fez a requisição
-    //console.log(TAG, "getAll() from" + req.connection.remoteAddress);
+    console.log(TAG, "deleteGodById() from" + req.connection.remoteAddress);
     const now = new Date(); // cria uma nova instância de Date com a data atual
     const milliseconds = now.getMilliseconds().toString().padStart(3, "0"); //
     console.time(`deleteGodById()${milliseconds}`);
