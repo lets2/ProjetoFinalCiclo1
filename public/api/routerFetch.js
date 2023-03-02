@@ -18,7 +18,7 @@ import {
 // ADDS RESOURCES TO THE PAGE THA WAS RENDERED ACCORDING URL
 //-----------------------------------------------------------------------
 
-export async function addExternalResourcesTo(url, criteria) {
+export async function getExternalResourcesTo(url, criteria) {
     switch (url) {
         case "/categories":
             return addResourcesToCategoriesPage();

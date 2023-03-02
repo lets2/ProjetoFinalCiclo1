@@ -31,18 +31,18 @@ export function Login() {
                         <div class="back-email flex-center-center">
                             <img id="Vector-user" src="../assets/icons/Vector-user.svg" alt="">
                         </div>
-                            <input id="input-username" type="text" placeholder="username" >
+                            <input id="input-username" type="text" placeholder="Nome de usuário" >
                     </div>
                     <div class="password">
                         <div class="back-password flex-center-center">
                             <img id="cadeado" src="../assets/icons/cadeado.svg" alt="">
                         </div>
-                        <input id="input-password" type="password" placeholder="Password">
+                        <input id="input-password" type="password" placeholder="Senha">
                     </div>
                 </div>
     
                     <div class="login-logo flex-center-center">
-                        <button id="login-logo-button" type="submit">LOGIN</button>
+                        <button id="login-logo-button" type="submit">Entrar</button>
                     </div>      
             </div>
             
