@@ -79,12 +79,15 @@ export function redirectToEditCategory(id) {
 /*CATEGORY IMAGE PREVIEW */
 import { addUniqueEventListener } from "../utils/event-listener.js";
 
-export function insertChoosedCategoryTempleImg() {
+export function insertChoosedCategoryTempleImg(holder = true) {
     const fileBtn = document.querySelector("#insert-file-btn-cat");
     const previewImg = document.querySelector("#preview-img-cat");
     const message = document.querySelector("#message-input-file-cat");
 
     message.innerHTML = "";
+    if(holder){
+        previewImg.src = "../assets/images/JPG-PLACEHOLDER-templo.jpg";
+    }
 
     addUniqueEventListener(fileBtn, "change", (e) => {
         if (e.target.files.length > 0) {

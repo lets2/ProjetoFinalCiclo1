@@ -164,26 +164,26 @@ function insertResourcesInCurrentPage(url, respostaIndex, criteria) {
             break;
 
         case "/editGod/g1":
-            insertChoosedGodImg();
+            // insertChoosedGodImg(false);
             inserirElementosNaEditGodPage(respostaIndex);
-            insertChoosedGodImg();
+            insertChoosedGodImg(false);
             addSelectWithCategoriesInGodsPage(respostaIndex.category_id);
 
             break;
 
         case "/editCategory":
             testInserirElementosNaEditCategoryPage(respostaIndex);
-            insertChoosedCategoryTempleImg(); //function to show preview
+            insertChoosedCategoryTempleImg(false); //function to show preview
             break;
 
         case "/addCategory":
             clearInputFromFormAddCategory();
-            insertChoosedCategoryTempleImg(); //function to show preview
+            insertChoosedCategoryTempleImg(true); //function to show preview
             break;
 
         case "/addGod":
             clearInputFromFormAddGod();
-            insertChoosedGodImg();
+            insertChoosedGodImg(true);
             addSelectWithCategoriesInGodsPage();
             break;
         case "/allGods":

@@ -70,12 +70,15 @@ export function redirectToAddGodPage() {
 import { addUniqueEventListener } from "../utils/event-listener.js";
 import { addEventsToHeader, displayWarning } from "../index.js";
 import { redirectToTableEditGods } from "./table_gods.js";
-export function insertChoosedGodImg() {
+export function insertChoosedGodImg(holder = true) {
     const fileBtn = document.querySelector("#insert-file-btn");
     const previewImg = document.querySelector("#preview-img-god");
     const message = document.querySelector("#message-input-file");
 
     message.innerHTML = "";
+    if(holder){
+        previewImg.src = "../assets/images/JPG-PLACEHOLDER-DEUS.jpg"
+    }
 
     addUniqueEventListener(fileBtn, "change", (e) => {
         if (e.target.files.length > 0) {

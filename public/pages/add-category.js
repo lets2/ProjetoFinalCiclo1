@@ -96,6 +96,8 @@ export function insertChoosedCatImg() {
     const previewImg = document.querySelector("#preview-img-cat");
     const message = document.querySelector("#message-input-file-cat");
 
+
+
     addUniqueEventListener(fileBtn, "change", (e) => {
         if (e.target.files.length > 0) {
             const file = e.target.files[0];
