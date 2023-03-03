@@ -22,7 +22,7 @@ export function AllGodsPage() {
         </div>
     </header>
 	<main class="main-all-gods">
-		<div class="container-all-gods-page flex-col">
+		<div class="container-all-gods-page flex-col-center">
             <div id="box-all-gods">
                 <div id="box-all-gods-overflow">
                                     
